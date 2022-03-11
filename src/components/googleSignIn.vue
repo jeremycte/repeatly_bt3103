@@ -4,10 +4,41 @@
 
 <script>
 import {GoogleAuthProvider, signInWithRedirect,getAuth,getRedirectResult} from "firebase/auth";
-import firebaseApp from "../firebaseDetails";
-firebaseApp;
+import firebaseApp from "../firebaseDetails.js";
+import {doc, setDoc,getFirestore} from "firebase/firestore";
+
+const db = getFirestore(firebaseApp);
+
 const provider = new GoogleAuthProvider();
 const auth = getAuth();
+var user = null;
+async function googleRegisterFirebase() {
+  try{
+    if (user != null){
+      const eMail = user.email;
+      const userName = user.displayName;
+      const date = new Date(user.metadata.creationTime);
+      const day = (date.getDate()>=10) ? date.getDate().toString() : "0"+date.getDate().toString();
+      const month = "0" + (date.getMonth() + 1).toString();
+      const year = date.getFullYear().toString();
+      const dob = year + "/" + month + "/" + day;
+
+      const userDocRef = await setDoc(doc(db,'users',eMail),{
+        username: userName,
+        email: eMail,
+        DOB: dob,
+      })
+      console.log(userDocRef);
+      console.log("google registration Passed")
+    }
+  }catch(error){
+    console.log("google registration failed")
+    console.log(error)
+  }
+
+}
+
+
 getRedirectResult(auth)
     .then((result) => {
       // This gives you a Google Access Token. You can use it to access Google APIs.
@@ -15,7 +46,8 @@ getRedirectResult(auth)
       const token = credential.accessToken;
 
       // The signed-in user info.
-      const user = result.user;
+      user = result.user;
+      googleRegisterFirebase();
       console.log(user,token);
       console.log("login successful")
     }).catch((error) => {
@@ -28,6 +60,10 @@ getRedirectResult(auth)
   const credential = GoogleAuthProvider.credentialFromError(error);
   console.log(errorCode,errorMessage,email,credential)
 });
+
+
+
+
 
 export default {
   name: "googleSignIn",

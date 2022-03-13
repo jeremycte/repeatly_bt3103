@@ -1,16 +1,10 @@
 <template>
-  <div id="nav">
-    <router-link to="/">Home</router-link>
-    <router-link to="/registration">register</router-link>
-    <router-link to="/resetPassword">resetPassword</router-link>
-  </div>
-  <router-view/>
+  <router-view></router-view>
 </template>
 
 <script>
-
 export default {
-  name: 'App',
+  name: 'App'
 }
 </script>
 

@@ -35,6 +35,7 @@ export default {
         )
         console.log(userDetails.user);
         console.log("login pass")
+        await this.$router.push({name: "Dashboard"})
       } catch(error){
         console.log("login fail")
         console.log(error)

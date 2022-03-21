@@ -5,6 +5,9 @@ import resetPassword from "@/views/resetPassword";
 import userDashboard from "@/views/userDashboard";
 import Home from "@/screens/home";
 import overallDashboard from "@/screens/overallDashboard";
+import deckCreation from "@/views/deckCreation";
+import deckDetails from "@/views/deckDetails";
+import cardsManagement from "@/views/cardsManagement";
 const routes = [
     {
         path: '/',
@@ -42,6 +45,21 @@ const routes = [
             },
         ]
     },
+    {
+        path:'/createDeck',
+        name: 'createDeck',
+        component: deckCreation
+    },
+    {
+        path:'/viewDeck',
+        name: 'viewDeck',
+        component: deckDetails
+    },
+    {
+        path:'/editCards',
+        name: 'cardsManagement',
+        component: cardsManagement
+    }
 ]
 const router = createRouter({
     history: createWebHistory(),

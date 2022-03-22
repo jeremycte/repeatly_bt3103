@@ -1,24 +1,8 @@
-# repeatly
+# Repeatly
 
-## Project setup
-```
-npm install
-```
+## At a Glance 🔥
+This is an interactive flashcard website using the concepts of active recall and spaced repetition.
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
-
-### Compiles and minifies for production
-```
-npm run build
-```
-
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+## Setup Guide
+1. npm install
+2. npm run serve

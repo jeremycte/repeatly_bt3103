@@ -1,10 +1,6 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
 
-
-
-// Your web app's Firebase configuration
-// For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
     apiKey: "AIzaSyCTr95K5tdpgW2s5Dw1zvpTnMkSXa6jJ2A",
     authDomain: "repeatly-1c353.firebaseapp.com",
@@ -18,6 +14,4 @@ const firebaseConfig = {
 // Initialize Firebase
 const firebaseApp = initializeApp(firebaseConfig);
 
-export default {
-    firebaseApp
-};
+export default firebaseApp;

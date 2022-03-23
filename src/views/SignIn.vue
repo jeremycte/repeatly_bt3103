@@ -8,6 +8,7 @@
     <div class="header inter-bold-black-28px">Email</div>
     <div class="email-element">
       <input
+        id="email"
         class="placeholder-value-1 inter-normal-silver-chalice-28px"
         name="placeholdervalue"
         placeholder="Type your email"
@@ -19,6 +20,7 @@
       <div class="password-header inter-bold-black-28px">Password</div>
       <div class="password-rectangle">
         <input
+          id="password"
           class="placeholder-value inter-normal-silver-chalice-28px"
           name="placeholdervalue"
           placeholder="Type your password"
@@ -26,11 +28,13 @@
           required/>
       </div>
     </div>
-    <div class="flex-row">
-      <div class="forgot-password valign-text-middle inter-bold-black-16px">Forgot password?</div>
-    </div>
     
-    <div class="sign-in-btn"><div class="log-in valign-text-middle inter-bold-white-28px">Log In</div></div>
+    <div class="sign-in-btn"><button style="background-color: transparent; border: none; cursor: pointer;" 
+      type="button" v-on:click="login()" 
+      class="log-in valign-text-middle inter-bold-white-28px">
+      Log In</button>
+    </div>
+    <div class="forgot-password valign-text-middle inter-bold-black-16px">Forgot password?</div>
   </div>
         <div class="header-1">
     <h1 class="title inter-bold-black-36px">Welcome back!</h1>
@@ -50,11 +54,34 @@
 </template>
 
 <script>
+import {getAuth, signInWithEmailAndPassword} from "firebase/auth";
+import firebaseApp from "../firebaseDetails";
+firebaseApp;
 import SocialMediaLogin from "@/components/SocialMediaLogin.vue";
 export default {
-  name: "SignIn1920",
+  name: "SignIn",
   components: {
     SocialMediaLogin,
+  },
+  methods:{
+    async login(){
+      const auth = getAuth();
+      const email = document.getElementById("email").value
+      const password = document.getElementById("password").value
+      try{
+        const userDetails = await signInWithEmailAndPassword(
+            auth,
+            email,
+            password,
+        )
+        console.log(userDetails.user);
+        console.log("login pass")
+        await this.$router.push({name: "Dashboard"})
+      } catch(error){
+        console.log("login fail")
+        console.log(error)
+      }
+    }
   },
   props: ["backgroundSetup", "rectangle9521", "spanText1", "spanText2", "credentialsProps", "socialMediaLoginProps"],
 };
@@ -99,12 +126,13 @@ export default {
   letter-spacing: 0;
   position: absolute;
   text-align: center;
-  top: 876px;
+  top: 960px;
   width: 379px;
 }
 
 .span1 {
   text-decoration: underline;
+  cursor: pointer;
 }
 
 .email {
@@ -124,7 +152,7 @@ export default {
 
 .email-element {
   align-items: center;
-  background-image: url(https://anima-uploads.s3.amazonaws.com/projects/6231a346e960d27abb0c8fdd/releases/62344395490c786a6849ba07/img/rectangle-1@1x.png);
+  background-image: url("../../img/Login/rectangle1.png");
   background-size: 100% 100%;
   display: flex;
   height: 72px;
@@ -132,6 +160,8 @@ export default {
   margin-top: 15px;
   min-width: 600px;
   padding: 0 16px;
+  border-color: transparent;
+
 }
 
 .placeholder-value-1 {
@@ -154,7 +184,7 @@ export default {
   height: 92px;
   left: 1157px;
   position: absolute;
-  top: 261px;
+  top: 192px;
   width: 376px;
 }
 
@@ -178,7 +208,7 @@ export default {
   left: 1157px;
   min-height: 483px;
   position: absolute;
-  top: 393px;
+  top: 319px;
   width: 600px;
 }
 
@@ -199,7 +229,7 @@ export default {
 }
 
 .password-rectangle {
-  background-image: url(https://anima-uploads.s3.amazonaws.com/projects/6231a346e960d27abb0c8fdd/releases/6231a453c59722c0165f17f8/img/rectangle-5@1x.png);
+  background-image: url("../../img/Login/rectangle2.png");
   background-size: 100% 100%;
   height: 72px;
   margin-left: -1px;
@@ -251,30 +281,30 @@ export default {
 }
 
 .forgot-password {
-  align-self: flex-end;
-  height: 37px;
+  align-self: center;
+  height: 51px;
   letter-spacing: 0;
-  /* margin-left: 128px; */
-  text-align: left;
+  margin-top: 24px;
+  text-align: center;
   text-decoration: underline;
-  width: 151px;
+  width: 150px;
+  cursor: pointer;
 }
 
 .sign-in-btn {
   align-items: flex-start;
-  background-image: url(https://anima-uploads.s3.amazonaws.com/projects/6231a346e960d27abb0c8fdd/releases/6231a453c59722c0165f17f8/img/rectangle-4@1x.png);
+  background-image: url("../../img/Login/loginrectangle.png");
   background-size: 100% 100%;
   display: flex;
   height: 72px;
   margin-left: -1px;
-  margin-top: 21px;
+  margin-top: 49px;
   min-width: 600px;
   padding: 17px 18.2px;
 }
 
 .log-in {
   height: 37px;
-  margin-top: 5px;
   letter-spacing: 0;
   text-align: center;
   width: 564px;
@@ -301,30 +331,6 @@ export default {
   padding: 9.8px 107.9px;
 }
 
-.flat-color-iconsgoogle {
-  height: 49px;
-  width: 52px;
-}
-
-.log-in-with-google {
-  align-self: center;
-  letter-spacing: 0;
-  margin-bottom: 2.81px;
-  margin-left: 27px;
-  min-height: 32px;
-  width: 281px;
-}
-
-.button-show-password {
-  display: flex;
-  height: 32px;
-  justify-content: flex-end;
-  left: 524px;
-  position: absolute;
-  top: 20px;
-  width: 24px;
-}
-
 .login-icons {
   align-items: flex-start;
   display: flex;
@@ -334,21 +340,7 @@ export default {
   min-width: 16px;
 }
 
-.social-media-login {
-  display: flex;
-  flex-direction: column;
-  height: 121px;
-  left: 1157px;
-  position: absolute;
-  top: 734px;
-  width: 598px;
-}
 
-.other-account {
-  align-items: flex-start;
-  display: flex;
-  min-width: 600px;
-}
 
 .overlap-group-2 {
   height: 49px;

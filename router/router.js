@@ -4,6 +4,7 @@ import LandingPageDark from '@/views/LandingPageDark.vue'
 // import { data } from "./data";
 import SignIn from '@/views/SignIn.vue'
 import CardDeck from '@/components/CardDeck.vue'
+import ForgetPassword from '@/views/ForgetPassword.vue'
 
 const routes = [
     {
@@ -202,6 +203,11 @@ const routes = [
                 className: "icon-5",
             },
         }
+    },
+    {
+        path: '/forgetpassword',
+        name: 'ForgetPassword',
+        component: ForgetPassword,
     },
     {
         path: '/sign-in',

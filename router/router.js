@@ -2,6 +2,7 @@ import { createRouter, createWebHistory } from 'vue-router'
 import LandingPageLight from '@/views/LandingPageLight.vue'
 // import { data } from "./data";
 import SignIn from '@/views/SignIn.vue'
+import ForgetPassword from '@/views/ForgetPassword.vue'
 
 const routes = [
     {
@@ -97,6 +98,11 @@ const routes = [
         ,
         icon3Props: {className: "icon-5",},
         },
+    },
+    {
+        path: '/forgetpassword',
+        name: 'ForgetPassword',
+        component: ForgetPassword,
     },
     {
         path: '/sign-in',

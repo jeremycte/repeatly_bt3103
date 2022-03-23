@@ -31,15 +31,25 @@
 <script>
 import firebaseApp from "@/firebaseDetails";
 import {getAuth,onAuthStateChanged} from "firebase/auth";
-import {doc,getFirestore,collection,getDocs,deleteDoc,addDoc,updateDoc} from "firebase/firestore";
+import {
+  doc,
+  getFirestore,
+  collection,
+  getDocs,
+  deleteDoc,
+  addDoc,
+  updateDoc,
+  increment,
+  getDoc
+} from "firebase/firestore";
 
 const auth = getAuth();
 const db = getFirestore(firebaseApp);
 var currentCardID = null
 
+
 async function displayCards(userEmail){
   const deckId = sessionStorage.getItem("deckId")
-  console.log(deckId)
   const cardsObj = await getDocs(collection(db,"users",String(userEmail),"decks",String(deckId),"cards"))
   if (!cardsObj.empty){
     var cardIdList = []
@@ -71,7 +81,7 @@ async function displayCards(userEmail){
       deleteButt.id = "deletebwt"+ String(index)
       deleteButt.innerHTML = "Delete"
       deleteButt.onclick = function(){
-        deleteCard(userEmail,deckId,cardId)
+        deleteStatus(userEmail,deckId,cardId)
       }
       cell5.appendChild(deleteButt)
 
@@ -87,6 +97,32 @@ async function displayCards(userEmail){
       }
       cell4.appendChild(editButt)
     })
+  }
+}
+async function deleteStatus(email,deckID,cardID){
+  try{
+    const statusDoc = await getDoc(doc(db,"users",email,"decks",deckID,"cards",cardID));
+    console.log(statusDoc)
+    const statusRef = statusDoc.data()
+    console.log(statusRef)
+    const status = statusRef.firstAnswered
+    console.log(status)
+    const updateRef = doc(db,"users",email,"decks",deckID)
+    if (String(status) === 'false'){
+      await updateDoc(updateRef,{
+        totalCards: increment(-1),
+        estimatedTime: increment(-1.5),
+        uncertainCards:increment(-1),
+      })
+    } else {
+      await updateDoc(updateRef, {
+        totalCards: increment(-1),
+        estimatedTime: increment(-1.5),
+      })
+    }
+    deleteCard(email,deckID,cardID)
+  }catch(error){
+    console.log(error)
   }
 }
 async function deleteCard(email,deckID,cardID){
@@ -138,6 +174,12 @@ export default {
             boxType: 1,
             firstAnswered: false,
             isWrong:false
+          })
+          const updateRef = doc(db,"users",userEmail,"decks",deckId)
+          await updateDoc(updateRef,{
+            totalCards: increment(1),
+            estimatedTime: increment(1.5),
+            uncertainCards: increment(1),
           })
         } else {
           const updateRef = doc(db,"users",userEmail,"decks",deckId,"cards",currentCardID)

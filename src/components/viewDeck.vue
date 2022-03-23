@@ -28,10 +28,11 @@
 import firebaseApp from "@/firebaseDetails";
 import {getAuth,onAuthStateChanged} from "firebase/auth";
 import {doc,getDoc,getFirestore,collection,getDocs,deleteDoc} from "firebase/firestore";
+import cardClassObj from "@/cardClassObj";
 
 const auth = getAuth();
 const db = getFirestore(firebaseApp);
-
+var cardObjLists = []
 
 
 export default {
@@ -45,7 +46,6 @@ export default {
     async function displayDetails(userEmail){
       //Load deck header and statistics
       const deckId = sessionStorage.getItem("deckId")
-      console.log(deckId)
       const deckObj = await getDoc(doc(db,"users",String(userEmail),"decks",String(deckId)))
       const deckDetails = deckObj.data()
       document.getElementById("Deck Title").innerHTML = String(deckDetails.title)
@@ -63,15 +63,25 @@ export default {
         let index = 1;
         userCards.forEach((docs) =>{
           const card = docs.data()
+          const cardId = docs.id
           const table = document.getElementById("cards");
           const row = table.insertRow(index)
 
           const question = card.question
+          const answer = card.answer
+          const cardTitle = card.title
+          const boxType = card.boxType
+          const firstAnswered = card.firstAnswered
+          const isWrong = card.isWrong
+          const tempCardObj = new cardClassObj(cardId,answer,question,cardTitle,boxType,firstAnswered,isWrong)
+          cardObjLists.push(tempCardObj)
+
           const cell1 = row.insertCell(0);
           cell1.style.border = "1px solid #000";
           cell1.innerHTML = question;
           index++;
         })
+        sessionStorage.setItem("cardsObj",cardObjLists)
       }
     }
   },

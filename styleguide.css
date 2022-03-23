@@ -3,9 +3,11 @@
     --dull-lavender: #a786f3;
     --eerie-black-2: #1a191cb2;
     --eerie-black-22: #1a191c;
+    --eerie-black-42: #18181a;
     --indigo: #5454d4;
     --sauvignon: #fcf6f3;
     --white: #ffffff;
+    --white-23: #ffffffb2;
    
     --font-size-l2: 30px;
     --font-size-m2: 28px;
@@ -121,7 +123,14 @@
     font-style: normal;
     font-weight: 700;
   }
-  
+  .nunitosans-normal-white-30px {
+    color: var(--white-23);
+    font-family: var(--font-family-nunito_sans);
+    font-size: var(--font-size-l2);
+    font-style: normal;
+    font-weight: 400;
+  }
+
   .inter-bold-eerie-black-58px {
     color: var(--eerie-black-22);
     font-family: var(--font-family-inter);
@@ -164,6 +173,14 @@
   
   .border-1-2px-eerie-black {
     border: 1.2px solid var(--eerie-black-22);
+  }
+
+  .border-3px-white {
+    border: 3px solid var(--white);
+  }
+
+  .border-3-6px-white {
+    border: 3.6px solid var(--white);
   }
   
   .border-2px-white {

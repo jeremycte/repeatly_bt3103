@@ -1,41 +1,42 @@
 <template>
   <div class="container-center-horizontal">
-    <div class="landing-page-light-theme-1920 screen">
+    <div class="landing-page-dark-theme-1920 screen">
       <div class="overlap-group9">
         <div class="overlap-group7">
-          <img class="rectangle-9521" :src="rectangle9521" /><img
+          <img class="rectangle-9521" :src="rectangle9521" />
+          <img
             class="rectangle-9522"
             :src="rectangle9522"
-          /><img class="gradient-shape" :src="gradientShape" />
+          />
+          <img class="gradient-shape" :src="gradientShape" />
           <div class="content-hero-title">
             <h1
-              class="build-your-next-land-dark inter-bold-eerie-black-100px "
-            >Learn it. <br> Repeat it. <br> Repeatly.</h1>
+              class="build-your-next-land-dark inter-bold-white-100px "
+            >Learn it.<br />Repeat it.<br />Repeatly.</h1>
             <div
-              class="create-custom-landin nunitosans-normal-eerie-black-30px animate-enter">
-              {{ createCustomLandin }}
-            </div>
+              class="create-custom-landin nunitosans-normal-white-30px animate-enter">
+            With our interactive flashcards, aceing your exams will be a piece of cake. With the help of technology, learning will never be the same again.</div>
           </div>
-          <div class="repeatly inter-bold-eerie-black-40px">{{ repeatly }}</div>
+          <div class="repeatly inter-bold-white-40px">{{ repeatly }}</div>
           <img class="logo-icon-1" :src="logoIcon11" />
-          <div class="place inter-medium-eerie-black-28px" id="place">
+          <div class="place inter-medium-white-28px" id="place">
             <span
-              class="span0 inter-medium-eerie-black-28px"
+              class="span0 inter-medium-white-28px"
               >Home</span
-            >
+>
           </div>
           <a href="#group-162499">
-            <div class="about-us inter-medium-eerie-black-28px">
+            <div class="about-us inter-medium-white-28px">
               {{ aboutUs1 }}
             </div>
           </a>
           <a href="#features-1">
-          <div class="features inter-medium-eerie-black-28px">
+          <div class="features inter-medium-white-28px">
             {{ features1 }}
           </div>
           </a>
           <a href="#organize-flashcards">
-            <div class="flashcards inter-medium-eerie-black-28px">
+            <div class="flashcards inter-medium-white-28px">
               {{ flashcards1 }}
             </div>
           </a>
@@ -57,21 +58,21 @@
           </div>
           <div class="group-162499" id="group-162499">
             <div
-              class="about-us-title inter-bold-eerie-black-75px"
+              class="about-us-title inter-bold-white-75px"
               id="about-us-title"
             >
               {{ aboutUsTitle }}
             </div>
             <div
-              class="about-us-description nunitosans-normal-eerie-black-26px"
+              class="about-us-description nunitosans-normal-white-26px"
             >
               {{ aboutUsDescription }}
             </div>
           </div>
           <a href="#features-1">
           <div class="our-features">
-            <div class="frame-1-1">
-              <div class="our-features-1 inter-bold-white-25px">
+            <div class="frame-1-1dark">
+              <div class="our-features-1-dark inter-bold-white-25px">
                 Our Features
               </div>
               <img
@@ -89,13 +90,13 @@
             :src="scrigglyline"
           />
           <div class="ellipse-container">
-            <div class="ellipse-57 border-3px-eerie-black"></div>
-            <div class="ellipse-58 border-1px-eerie-black"></div>
+            <div class="ellipse-57 border-3px-white"></div>
+            <div class="ellipse-58 border-1px-white"></div>
           </div>
           <div class="balls animate-enter1" show-on-scroll>
             <div class="ellipse-container-1">
-              <div class="ellipse-57-1 border-3-6px-eerie-black"></div>
-              <div class="ellipse-58-1 border-1-2px-eerie-black"></div>
+              <div class="ellipse-57-1 border-3px-white"></div>
+              <div class="ellipse-58-1 border-1px-white"></div>
             </div>
           </div>
           <img class="add" :src="add1" /><img class="add-1" :src="add2" />
@@ -111,12 +112,12 @@
           </div>
           <div class="cta">
             <div class="flex-col">
-              <div class="save-tons-of-time-g inter-bold-eerie-black-60px">
+              <div class="save-tons-of-time-g inter-bold-white-60px">
                 {{ saveTonsOfTimeG }}
               </div>
               <div class="button">
-                <div class="get-beta-access inter-bold-white-30px">
-                  {{ getBetaAccess }}
+                <div class="get-beta-access-dark inter-bold-white-30px">
+                  Sign Up
                 </div>
               </div>
             </div>
@@ -126,13 +127,13 @@
             ></div>
           </div>
           <img class="zig-zag animate-enter2" show-on-scroll :src="zigzag" />
-          <router-link to="/dark-theme">
+          <router-link to="/">
           <div class="dark-theme-button animate-enter3" show-on-scroll>
-            <div class="frame-1">
-              <div class="dark-theme inter-bold-white-25px">
-                {{ darkTheme }}
+            <div class="frame-1dark">
+              <div class="dark-theme-1 inter-bold-white-25px">
+                Light Theme
               </div>
-              <img class="ellipse" :src="ellipse" />
+              <img class="ellipse-dark" :src="ellipse" />
             </div>
           </div>
           </router-link>
@@ -155,18 +156,18 @@
             id="organize-flashcards"
             show-on-scroll
           >
-            <div class="build-your-next-land-dark-1 inter-bold-eerie-black-58px create-custom-landin.animate-enter">
+            <div class="build-your-next-land-1 inter-bold-white-58px create-custom-landin.animate-enter">
               Find and organize flashcards.
             </div>
           </div>
-          <div class="overlap-group5">
-            <div class="group-162511-1">
-              <div class="group-162508">
+          <div class="overlap-group5-dark">
+            <div class="group-162511-1-dark">
+              <div class="group-162508-dark">
                 <div
-                  class="overlap-group-1 inter-bold-eerie-black-40px"
+                  class="overlap-group-2-dark inter-bold-white-40px"
                   :style="{ 'background-image': 'url(' + overlapGroup1 + ')' }"
                 >
-                  <img class="rectangle-9542-1" :src="rectangle95422" />
+                  <img class="rectangle-9542-1-dark" :src="rectangle95422" />
                   <div class="marketing">{{ marketing }}</div>
                   <div class="history">{{ history }}</div>
                   <div class="language">{{ language1 }}</div>
@@ -182,7 +183,7 @@
               </div>
             </div>
             <div
-              class="watch-this-1-min-vid nunitosans-normal-eerie-black-35px animate-enter5"
+              class="watch-this-1-min-vid nunitosans-normal-white-35px animate-enter5"
               show-on-scroll
             >
               {{ watchThis1MinVid }}
@@ -190,12 +191,12 @@
           </div>
           <div class="overlap-group6">
             <div class="group-162511-2">
-              <div class="group-162508-1">
+              <div class="group-162508-1-dark">
                 <div
-                  class="overlap-group-1 inter-bold-eerie-black-40px"
+                  class="overlap-group-2-dark inter-bold-white-40px"
                   :style="{ 'background-image': 'url(' + overlapGroup2 + ')' }"
                 >
-                  <img class="rectangle-9542-2" :src="rectangle95423" />
+                  <img class="rectangle-9542-2-dark" :src="rectangle95423" />
                   <div class="networks">{{ networks }}</div>
                   <div class="film-tv">{{ filmTv }}</div>
                   <div class="geography">{{ geography }}</div>
@@ -211,7 +212,7 @@
               </div>
             </div>
             <div
-              class="explore nunitosans-normal-eerie-black-35px animate-enter6"
+              class="explore nunitosans-normal-white-35px animate-enter6"
               show-on-scroll
             >
               {{ explore }}
@@ -219,7 +220,7 @@
           </div>
           <div class="features-1" id="features-1">
             <div
-              class="the-feature-we-provide-for-you inter-bold-eerie-black-60px"
+              class="the-feature-we-provide-for-you inter-bold-white-60px"
             >
               {{ theFeatureWeProvideForYou }}
             </div>
@@ -230,12 +231,12 @@
                     <!-- <icon /> -->
                     <div class="group-162491">
                       <div
-                        class="fully-responsive inter-light-eerie-black-28px"
+                        class="fully-responsive inter-light-white-28px"
                       >
                         {{ fullyResponsive1 }}
                       </div>
                       <div
-                        class="with-lots-of-unique nunitosans-normal-eerie-black-20px"
+                        class="with-lots-of-unique nunitosans-normal-white-20px"
                       >
                         {{ withLotsOfUnique1 }}
                       </div>
@@ -248,12 +249,12 @@
                     <!-- <icon :className="icon1Props.className" /> -->
                     <div class="group-162491-1">
                       <div
-                        class="fully-responsive-1 inter-light-eerie-black-28px"
+                        class="fully-responsive-1 inter-light-white-28px"
                       >
                         {{ fullyResponsive2 }}
                       </div>
                       <div
-                        class="with-lots-of-unique-1 nunitosans-normal-eerie-black-22px"
+                        class="with-lots-of-unique-1 nunitosans-normal-white-22px"
                       >
                         {{ withLotsOfUnique2 }}
                       </div>
@@ -265,12 +266,12 @@
                     <!-- <icon :className="iconProps.className" /> -->
                     <div class="group-162491-4">
                       <div
-                        class="fully-responsive-4 inter-light-eerie-black-28px"
+                        class="fully-responsive-4 inter-light-white-28px"
                       >
                         Scalability
                       </div>
                       <div
-                        class="with-lots-of-unique-3 nunitosans-normal-eerie-black-22px"
+                        class="with-lots-of-unique-3 nunitosans-normal-white-22px"
                       >
                         We provide flexibility to accomodate teachers with large
                         number of students
@@ -285,12 +286,12 @@
                     <!-- <icon :className="icon2Props2.className" /> -->
                     <div class="group-162491-2">
                       <div
-                        class="fully-responsive-2 inter-light-eerie-black-28px"
+                        class="fully-responsive-2 inter-light-white-28px"
                       >
                         {{ fullyResponsive3 }}
                       </div>
                       <div
-                        class="with-lots-of-unique nunitosans-normal-eerie-black-22px"
+                        class="with-lots-of-unique nunitosans-normal-white-22px"
                       >
                         {{ withLotsOfUnique3 }}
                       </div>
@@ -302,12 +303,12 @@
                     <!-- <icon :className="icon3Props.className" /> -->
                     <div class="group-162491-3">
                       <div
-                        class="fully-responsive-3 inter-light-eerie-black-28px"
+                        class="fully-responsive-3 inter-light-white-28px"
                       >
                         {{ fullyResponsive4 }}
                       </div>
                       <div
-                        class="with-lots-of-unique-2 nunitosans-normal-eerie-black-22px"
+                        class="with-lots-of-unique-2 nunitosans-normal-white-22px"
                       >
                         {{ withLotsOfUnique4 }}
                       </div>
@@ -319,12 +320,12 @@
                     <!-- <icon :className="iconProps.className" /> -->
                     <div class="group-162491-4">
                       <div
-                        class="fully-responsive-4 inter-light-eerie-black-28px"
+                        class="fully-responsive-4 inter-light-white-28px"
                       >
                         Analytics
                       </div>
                       <div
-                        class="with-lots-of-unique-3 nunitosans-normal-eerie-black-22px"
+                        class="with-lots-of-unique-3 nunitosans-normal-white-22px"
                       >
                         We provide analytics for teachers to track your
                         students’ progress
@@ -338,32 +339,32 @@
         </div>
         <img class="add-2" :src="add3" />
       </div>
-      <div class="overlap-group8-dark">
-        <div class="footer">
+      <div class="overlap-group8-darkfoot">
+        <div class="footer-dark">
           <a href="#place">
             <div class="group-162475">
               <img class="logo-icon-1-1" :src="logoIcon12" />
-              <div class="repeately inter-bold-eerie-black-35px">
+              <div class="repeately inter-bold-white-35px">
                 {{ repeately }}
               </div>
             </div></a>
-          <div class="x2020-ux-theme-all nunitosans-normal-eerie-black-26px">
+          <div class="x2020-ux-theme-all nunitosans-normal-white-26px-2">
             {{ x2020UxthemeAll }}
           </div>
         </div>
         <div class="group-162545">
           <a href="#about-us-title">
-            <div class="about-us-1 inter-medium-eerie-black-28px">
+            <div class="about-us-1 inter-medium-white-28px">
               {{ aboutUs2 }}
             </div>
           </a>
           <a href="#about-us-title">
-          <div class="features-2 inter-medium-eerie-black-28px">
+          <div class="features-2 inter-medium-white-28px">
             {{ features2 }}
           </div>
           </a>
           <a href="#organize-flashcards">
-            <div class="flashcards-1 inter-medium-eerie-black-28px">
+            <div class="flashcards-1 inter-medium-white-28px">
               {{ flashcards2 }}
             </div>
           </a>
@@ -458,9 +459,9 @@ export default {
 </script>
 
 <style>
-.landing-page-light-theme-1920 {
+.landing-page-dark-theme-1920 {
   align-items: flex-start;
-  background-color: var(--sauvignon);
+  background-color: var(--eerie-black-42);
   display: flex;
   flex-direction: column;
   height: 4433px;
@@ -476,12 +477,13 @@ export default {
   width: 2798px;
 }
 
-.overlap-group7 {
-  height: 4588px;
-  left: 0;
-  position: absolute;
-  top: 0;
-  width: 2798px;
+.overlap-group8-darkfoot {
+  align-self: center;
+  height: 54px;
+  margin-left: 59px;
+  margin-top: 63px;
+  position: relative;
+  width: 1681px;
 }
 
 .rectangle-9521 {
@@ -519,7 +521,6 @@ export default {
 }
 
 .build-your-next-land-dark {
-  animation: animate-enter4-frames 1s ease-in-out 0s 1 normal forwards;
   height: 309px;
   letter-spacing: 0;
   line-height: 103px;
@@ -531,15 +532,7 @@ export default {
   letter-spacing: -0.66px;
   line-height: 39px;
   margin-top: 24px;
-  opacity: 0;
-  transform: translate(-25px, 0);
   width: 721px;
-}
-
-.create-custom-landin.animate-enter {
-  animation: animate-enter-frames 0.5s ease-in-out 0s 1 normal forwards;
-  opacity: 0;
-  transform: translate(-25px, 0);
 }
 
 .repeatly {
@@ -579,19 +572,15 @@ export default {
 }
 
 .place:hover,
-.features:hover,
-.features-2:hover,
 .about-us:hover,
+.features:hover,
 .flashcards:hover,
 .button:hover,
 .dark-theme-button:hover,
-.our-features-1:hover,
-.overlap-group-2:hover,
-.overlap-group-1:hover,
-.group-162508-1:hover,
+.group-162508-dark:hover,
+.group-162508-1-dark:hover,
 .about-us-1:hover,
-.features-2:hover,
-.flashcards-1:hover {
+.features-2:hover {
   transform: scale(1.1);
 }
 
@@ -602,6 +591,7 @@ export default {
   position: absolute;
   text-align: right;
   top: 350px;
+  transition: all 0.2s ease;
   width: 129px;
 }
 
@@ -612,6 +602,7 @@ export default {
   position: absolute;
   text-align: right;
   top: 350px;
+  transition: all 0.2s ease;
   width: 120px;
 }
 
@@ -668,7 +659,6 @@ export default {
 }
 
 .scriggly-line2 {
-  transition: all 0.2s ease;
   height: 32px;
   left: 1351px;
   position: absolute;
@@ -687,8 +677,7 @@ export default {
 }
 
 .scriggly-line1:hover,
-.scriggly-line2:hover,
-.overlap-group:hover,
+.group-162532:hover,
 .zig-zag:hover {
   transform: rotate(15deg);
 }
@@ -718,6 +707,13 @@ export default {
   width: 42px;
 }
 
+.ellipse-dark {
+    height: 21px;
+    margin-left: 7.8px;
+    margin-top: 6.5px;
+    width: 21px;
+}
+
 .ellipse-58 {
   border-radius: 20.91px;
   height: 42px;
@@ -744,12 +740,11 @@ export default {
 }
 
 .overlap-group2 {
-  transition: all 0.2s ease;
-  height: 653px;
+  height: 648px;
   left: 1592px;
   position: absolute;
   top: 474px;
-  width: 658px;
+  width: 652px;
 }
 
 .rectangle-9541 {
@@ -762,16 +757,27 @@ export default {
   width: 437px;
 }
 
+.group-162532 {
+  align-items: flex-start;
+  cursor: pointer;
+  display: flex;
+  height: 570px;
+  justify-content: flex-end;
+  left: 82px;
+  min-width: 570px;
+  position: absolute;
+  top: 78px;
+  transition: all 0.2s ease;
+}
+
 .overlap-group1 {
   height: 580px;
-  left: 77px;
-  position: absolute;
-  top: 73px;
+  margin-top: -5.27px;
+  position: relative;
   width: 580px;
 }
 
 .overlap-group {
-  transition: all 0.2s ease;
   height: 580px;
   left: 0;
   position: absolute;
@@ -780,7 +786,6 @@ export default {
 }
 
 .rectangle-9541-1 {
-  transition: all 0.2s ease;
   background-color: var(--dull-lavender);
   border-radius: 22.18px;
   height: 441px;
@@ -835,12 +840,10 @@ export default {
 }
 
 .button {
-  align-items: center;
-  background-color: var(--indigo);
+  align-items: flex-start;
   border-radius: 6px;
   cursor: pointer;
   display: flex;
-  height: 83px;
   margin-right: 66.09px;
   margin-top: 36px;
   overflow: hidden;
@@ -848,7 +851,19 @@ export default {
   width: 350px;
 }
 
-.get-beta-access {
+.bg-1 {
+  background-color: var(--indigo);
+  border-radius: 5px;
+  cursor: pointer;
+  height: 83px;
+  left: 0;
+  position: absolute;
+  top: 0;
+  transition: all 0.2s ease;
+  width: 350px;
+}
+
+.get-beta-access-dark {
   flex: 1;
   height: 36px;
   letter-spacing: 0;
@@ -867,66 +882,66 @@ export default {
 
 .zig-zag {
   cursor: pointer;
-  display: block;
   height: 100px;
   left: 724px;
-  opacity: 0;
   position: absolute;
   top: 2304px;
-  transform: rotate(25deg);
   transition: all 0.2s ease;
   width: 146px;
 }
 
-.zig-zag.animate-enter2 {
-  animation: animate-enter2-frames 0.4s ease-in-out 0s 1 normal forwards;
-  display: block;
-  opacity: 0;
-  transform: rotate(25deg);
-}
-
 .dark-theme-button {
-  background-color: var(--eerie-black-22);
+  background-color: var(--dull-lavender);
   border-radius: 4px;
   cursor: pointer;
+  display: flex;
   height: 69px;
   left: 931px;
-  opacity: 0;
   position: absolute;
   top: 1063px;
   transition: all 0.2s ease;
   width: 242px;
 }
 
-.dark-theme-button.animate-enter3 {
-  animation: animate-enter3-frames 0.6s ease-in-out 0s 1 normal forwards;
-  opacity: 0;
-}
-
-.frame-1 {
+.frame-1dark {
   display: flex;
   height: 28.47px;
   margin-left: 31px;
-  margin-top: 25px;
-  width: 180.33px;
+  margin-top: 19px;
+  width: 182.33px;
 }
 
-.dark-theme {
+.dark-theme-1 {
   height: 30px;
   letter-spacing: 0;
-  margin-left: 1.2px;
-  margin-top: -0.8px;
-  width: 149px;
+  margin-left: -0.8px;
+  margin-top: 5.2px;
+  width: 153px;
 }
 
-.ellipse {
+.ellipse-59 {
   height: 21px;
   margin-left: 7.8px;
-  margin-top: 1.5px;
+  margin-top: 3.5px;
   width: 21px;
 }
 
-.overlap-group5 {
+.organize-flashcards {
+  display: flex;
+  height: 70px;
+  left: 684px;
+  position: absolute;
+  top: 3244px;
+  width: 836px;
+}
+
+.build-your-next-land-1 {
+  height: 70px;
+  letter-spacing: 0;
+  width: 834px;
+}
+
+.overlap-group5-dark {
   height: 1058px;
   left: 500px;
   position: absolute;
@@ -934,7 +949,7 @@ export default {
   width: 1699px;
 }
 
-.group-162511-1 {
+.group-162511-1-dark {
   display: flex;
   height: 1058px;
   left: 0;
@@ -943,16 +958,16 @@ export default {
   width: 1124px;
 }
 
-.group-162508 {
+.group-162508-dark {
   align-items: flex-start;
   cursor: pointer;
   display: flex;
   height: 1057.7px;
   min-width: 1146px;
-  transition: all 0.2s ease-in;
+  transition: all 0.2s ease;
 }
 
-.overlap-group-1 {
+.overlap-group-2-dark {
   background-size: 100% 100%;
   height: 1058px;
   margin-top: -0.15px;
@@ -960,7 +975,7 @@ export default {
   width: 1124px;
 }
 
-.rectangle-9542-1 {
+.rectangle-9542-1-dark {
   height: 445px;
   left: 157px;
   position: absolute;
@@ -1050,17 +1065,9 @@ export default {
   left: 1036px;
   letter-spacing: -0.66px;
   line-height: 39px;
-  opacity: 0;
   position: absolute;
   top: 435px;
-  transform: translate(25px, 0);
   width: 663px;
-}
-
-.watch-this-1-min-vid.animate-enter5 {
-  animation: animate-enter5-frames 0.5s ease-in-out 0s 1 normal forwards;
-  opacity: 0;
-  transform: translate(25px, 0);
 }
 
 .overlap-group6 {
@@ -1072,17 +1079,15 @@ export default {
 }
 
 .group-162511-2 {
-  cursor: pointer;
   display: flex;
   height: 1063px;
   left: 477px;
   position: absolute;
   top: 0;
-  transition: all 0.2s ease;
   width: 1129px;
 }
 
-.group-162508-1 {
+.group-162508-1-dark {
   align-items: flex-start;
   cursor: pointer;
   display: flex;
@@ -1091,7 +1096,7 @@ export default {
   transition: all 0.2s ease;
 }
 
-.overlap-group-2 {
+.overlap-group-3 {
   background-size: 100% 100%;
   height: 1063px;
   margin-top: -0.1px;
@@ -1099,7 +1104,7 @@ export default {
   width: 1129px;
 }
 
-.rectangle-9542-2 {
+.rectangle-9542-2-dark {
   height: 447px;
   left: 158px;
   position: absolute;
@@ -1189,18 +1194,10 @@ export default {
   left: 0;
   letter-spacing: -0.66px;
   line-height: 39px;
-  opacity: 0;
   position: absolute;
   text-align: right;
   top: 437px;
-  transform: translate(-25px, 0);
   width: 589px;
-}
-
-.explore.animate-enter6 {
-  animation: animate-enter6-frames 0.5s ease-in-out 0s 1 normal forwards;
-  opacity: 0;
-  transform: translate(-25px, 0);
 }
 
 .features-1 {
@@ -1407,23 +1404,22 @@ export default {
   width: 58px;
 }
 
-.overlap-group8-dark {
+.overlap-group7 {
   align-self: center;
   height: 54px;
   margin-left: 59px;
-  margin-top: 63px;
+  margin-top: 28px;
   position: relative;
   width: 1681px;
 }
 
-.footer {
+.footer-dark {
   align-items: center;
   display: flex;
-  height: 54px;
-  left: 0;
-  min-width: 1681px;
+  /* height: 54px; */
+  /* left: 0; */
+  /* min-width: 1681px; */
   position: absolute;
-  top: 0;
 }
 
 .group-162475 {
@@ -1495,7 +1491,6 @@ export default {
   margin-left: 64px;
   min-height: 34px;
   text-align: right;
-  transition: all 0.2s ease;
   width: 151px;
 }
 
@@ -1626,11 +1621,9 @@ export default {
   transform: translate(-25px, 0);
 }
 
-.build-your-next-land-dark-1 {
+.build-your-next-land-1,
+.build-your-next-land-dark {
   animation: animate-enter4-frames 0.5s ease-in-out 0s 1 normal forwards;
-  height: 70px;
-  letter-spacing: 0;
-  width: 834px;
 }
 
 @keyframes animate-enter4-frames {
@@ -1764,7 +1757,7 @@ export default {
   transform: scale(1.1);
 }
 
-.frame-1-1 {
+.frame-1-1dark {
   display: flex;
   height: 28.47px;
   margin-left: 27px;
@@ -1772,7 +1765,7 @@ export default {
   width: 194px;
 }
 
-.our-features-1 {
+.our-features-1-dark {
   height: 30px;
   letter-spacing: 0;
   margin-left: -3.7px;
@@ -1887,4 +1880,165 @@ export default {
 .group-162493-1.group-162492-1 .with-lots-of-unique-3 {
   height: 62.64px;
 }
+
+.inter-bold-white-40px {
+  color: var(--white);
+  font-family: var(--font-family-inter);
+  font-size: var(--font-size-xxxxl);
+  font-style: normal;
+  font-weight: 700;
+}
+
+.inter-medium-white-28px {
+  color: var(--white);
+  font-family: var(--font-family-inter);
+  font-size: var(--font-size-m2);
+  font-style: normal;
+  font-weight: 500;
+}
+
+.inter-light-white-28px {
+  color: var(--white);
+  font-family: var(--font-family-inter);
+  font-size: var(--font-size-m2);
+  font-style: normal;
+  font-weight: 300;
+}
+
+.nunitosans-normal-white-22px {
+  color: var(--white-23);
+  font-family: var(--font-family-nunito_sans);
+  font-size: var(--font-size-xl2);
+  font-style: normal;
+  font-weight: 400;
+}
+
+.inter-bold-white-25px {
+  color: var(--white);
+  font-family: var(--font-family-inter);
+  font-size: 25px;
+  font-style: normal;
+  font-weight: 700;
+}
+
+.inter-bold-white-60px {
+  color: var(--white);
+  font-family: var(--font-family-inter);
+  font-size: 60px;
+  font-style: normal;
+  font-weight: 700;
+}
+
+.inter-normal-white-20px {
+  color: var(--white);
+  font-family: var(--font-family-inter);
+  font-size: var(--font-size-s22);
+  font-style: normal;
+  font-weight: 400;
+}
+
+.nunitosans-normal-white-35px {
+  color: var(--white-23);
+  font-family: var(--font-family-nunito_sans);
+  font-size: var(--font-size-xxxl);
+  font-style: normal;
+  font-weight: 400;
+}
+
+.inter-bold-white-100px {
+  color: var(--white);
+  font-family: var(--font-family-inter);
+  font-size: 100px;
+  font-style: normal;
+  font-weight: 700;
+}
+
+.nunitosans-normal-white-30px {
+  color: var(--white-23);
+  font-family: var(--font-family-nunito_sans);
+  font-size: var(--font-size-l2);
+  font-style: normal;
+  font-weight: 400;
+}
+
+.inter-bold-white-75px {
+  color: var(--white);
+  font-family: var(--font-family-inter);
+  font-size: 75px;
+  font-style: normal;
+  font-weight: 700;
+}
+
+.nunitosans-normal-white-26px {
+  color: var(--white-23);
+  font-family: var(--font-family-nunito_sans);
+  font-size: var(--font-size-xxxxl2);
+  font-style: normal;
+  font-weight: 400;
+}
+
+.inter-bold-white-30px {
+  color: var(--white);
+  font-family: var(--font-family-inter);
+  font-size: var(--font-size-l2);
+  font-style: normal;
+  font-weight: 700;
+}
+
+.inter-bold-white-58px {
+  color: var(--white);
+  font-family: var(--font-family-inter);
+  font-size: 58px;
+  font-style: normal;
+  font-weight: 700;
+}
+
+.nunitosans-normal-white-20px {
+  color: var(--white-23);
+  font-family: var(--font-family-nunito_sans);
+  font-size: var(--font-size-s22);
+  font-style: normal;
+  font-weight: 400;
+}
+
+.inter-bold-white-35px {
+  color: var(--white);
+  font-family: var(--font-family-inter);
+  font-size: var(--font-size-xxxl);
+  font-style: normal;
+  font-weight: 700;
+}
+
+.nunitosans-normal-white-26px-2 {
+  color: var(--white);
+  font-family: var(--font-family-nunito_sans);
+  font-size: var(--font-size-xxxxl2);
+  font-style: normal;
+  font-weight: 400;
+}
+
+.border-1px-white {
+  border: 1px solid var(--white);
+}
+
+.border-3px-white {
+  border: 3px solid var(--white);
+}
+
+.border-3-6px-white {
+  border: 3.6px solid var(--white);
+}
+
+.border-1-2px-white {
+  border: 1.2px solid var(--white);
+}
+
+.border-2px-white {
+  border: 2px solid var(--white);
+}
+
+.border-4px-white {
+  border: 4px solid var(--white);
+}
+
 </style>

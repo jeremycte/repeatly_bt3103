@@ -2,7 +2,18 @@
   <div class="container-center-horizontal">
     <div class="sign-in-1920 screen">
       <div class="overlay-background">
-        <img class="background-setup" :src="backgroundSetup" />
+        <router-link to="/">
+          <div class="background-setup-group">
+            <div class="login-registration-side-header">
+              <div class="repeatly-logo-header">
+                <img class="logo-icon-login-header" :src='"https://anima-uploads.s3.amazonaws.com/projects/6231a346e960d27abb0c8fdd/releases/6231a535d957d3330e6b3b51/img/logo-icon-1@1x.png"' />
+                <div class="repeatlyLoginIcon inter-bold-black-28px" >Repeatly</div>
+              </div>
+              <img class="background-setup" draggable="false" src="../../img/Login/background.png" />
+            </div>
+            <img class="slice-1-forgetpasswordmain" :src='"https://anima-uploads.s3.amazonaws.com/projects/6231a346e960d27abb0c8fdd/releases/6231a4a9c59722c0165f17f9/img/slice-1@2x.png"' />
+          </div>
+          </router-link>
         <div class="credentials">
     <div class="email">
     <div class="header inter-bold-black-28px">Email</div>
@@ -34,7 +45,9 @@
       class="log-in valign-text-middle inter-bold-white-28px">
       Log In</button>
     </div>
+    <router-link to="/forgot-password">
     <div class="forgot-password valign-text-middle inter-bold-black-16px">Forgot password?</div>
+    </router-link>
   </div>
         <div class="header-1">
     <h1 class="title inter-bold-black-36px">Welcome back!</h1>
@@ -88,6 +101,58 @@ export default {
 </script>
 
 <style>
+/*------------------------ LOGIN & REGISTRATION HEADER DO NOT COPY TO OTHER VUE CODE, ONLY HAVE ONE*/
+.login-registration-side-header {
+  align-items: flex-start;
+  background-position: 50% 50%;
+  background-size: cover;
+  display: flex;
+  height: 1024px;
+  min-width: 736px;
+  padding: 25px 29px;
+}
+
+.repeatly-logo-header {
+  display: flex;
+  width: 217px;
+}
+
+.logo-icon-login-header {
+  height: 51px;
+  object-fit: cover;
+  width: 51px;
+  z-index: 10;
+}
+
+.repeatlyLoginIcon {
+  height: 27.96px;
+  margin-left: 15.3px;
+  margin-top: 11.4px;
+  width: 127.03px;
+  z-index: 10;
+}
+
+.background-setup {
+  height: 1024px;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 1011px;
+  
+}
+
+.background-setup-group {
+  align-items: center;
+  display: flex;
+  height: 1026px;
+  left: 0;
+  min-width: 1219px;
+  position: absolute;
+  top: 0;
+}
+
+/* -------------------------- END OF LOGIN & REGISTRATION*/
+
 .sign-in-1920 {
   background-color: var(--sauvignon);
   height: 1024px;
@@ -104,13 +169,7 @@ export default {
   width: 1757px;
 }
 
-.background-setup {
-  height: 1024px;
-  left: 0;
-  position: absolute;
-  /* top: 151px; */
-  width: 1011px;
-}
+
 
 .rectangle-9521 {
   height: 695px;

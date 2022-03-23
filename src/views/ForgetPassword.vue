@@ -1,8 +1,9 @@
 <template>
+  <div class="overlay-background">
   <div class="header-1-forgetpasswordheader">
     <h1 class="title-forgetpasswordheader inter-bold-black-36px">Reset Your Password</h1>
     <div class="description-forgetpasswordheader inter-normal-black-28px">
-      Enter your Repeatly username or the email you signed up with. We will email you a link to log in and reset your
+      Enter your Repeatly email you signed up with. We will email you a link to log in and reset your
       password.
     </div>
   </div>
@@ -10,15 +11,18 @@
     <div class="forget-password-screen-forgetpasswordmain">
       <div class="overlap-group3-forgetpasswordmain">
         <div class="overlap-group2-forgetpasswordmain">
-          <div class="background-setup-forgetpasswordmain">
-            <div class="overlap-group-forgetpasswordmain" :style="{ 'background-image': 'url(' + 'https://anima-uploads.s3.amazonaws.com/projects/6231a346e960d27abb0c8fdd/releases/6231a4a9c59722c0165f17f9/img/left-image-1@1x.png' + ')' }">
-              <div class="repeatly-logo-forgetpasswordmain">
-                <img class="logo-icon-1-forgetpasswordmain" :src='"https://anima-uploads.s3.amazonaws.com/projects/6231a346e960d27abb0c8fdd/releases/6231a535d957d3330e6b3b51/img/logo-icon-1@1x.png"' />
-                <img class="repeatly-forgetpasswordmain" :src='"https://anima-uploads.s3.amazonaws.com/projects/6231a346e960d27abb0c8fdd/releases/6231a4a9c59722c0165f17f9/img/repeatly@1x.png"' />
+          <router-link to="/">
+          <div class="background-setup-group">
+            <div class="login-registration-side-header">
+              <div class="repeatly-logo-header">
+                <img class="logo-icon-login-header" :src='"https://anima-uploads.s3.amazonaws.com/projects/6231a346e960d27abb0c8fdd/releases/6231a535d957d3330e6b3b51/img/logo-icon-1@1x.png"' />
+                <div class="repeatlyLoginIcon inter-bold-black-28px" >Repeatly</div>
               </div>
+              <img class="background-setup" draggable="false" src="../../img/Login/background.png" />
             </div>
             <img class="slice-1-forgetpasswordmain" :src='"https://anima-uploads.s3.amazonaws.com/projects/6231a346e960d27abb0c8fdd/releases/6231a4a9c59722c0165f17f9/img/slice-1@2x.png"' />
           </div>
+          </router-link>
           <div class="body-forgetpasswordmain">
             <div class="email-or-username-emailsubsection">
                 <div class="header-emailsubsection inter-bold-black-28px">Enter Your Email</div>
@@ -39,13 +43,11 @@
             </div>
           </div>
         </div>
-        <x-header222 />
         <p class="can-access-your-account-sign-in-now-forgetpasswordmain valign-text-middle inter-bold-white-16px">
-          <span
-            ><span class="inter-bold-black-16px">Can access your account? </span
-            ><span class="span-forgetpasswordmain inter-bold-dull-lavender-16px">Sign</span
-            ><span class="span-forgetpasswordmain inter-bold-dull-lavender-16px"> in now</span>
-          </span>
+            <span class="inter-bold-black-16px">Can access your account? </span>
+            <router-link to="/sign-in">
+            <span class="span-forgetpasswordmain inter-bold-dull-lavender-16px">Sign in now</span>
+            </router-link>
         </p>
         <img
           class="rectangle-9521-forgetpasswordmain"
@@ -53,6 +55,7 @@
         />
       </div>
     </div>
+  </div>
   </div>
 </template>
 
@@ -68,11 +71,12 @@ props: [
 
 <style>
 
+
 .header-1-forgetpasswordheader {
   display: flex;
   flex-direction: column;
   height: 160px;
-  left: 808px;
+  left: 1126px;
   position: absolute;
   top: 298px;
   width: 602px;
@@ -115,43 +119,11 @@ props: [
   width: 1406px;
 }
 
-.background-setup-forgetpasswordmain {
-  align-items: center;
-  display: flex;
-  height: 1026px;
-  left: 0;
-  min-width: 1219px;
-  position: absolute;
-  top: 0;
-}
 
-.overlap-group-forgetpasswordmain {
-  align-items: flex-start;
-  background-position: 50% 50%;
-  background-size: cover;
-  display: flex;
-  height: 1024px;
-  min-width: 736px;
-  padding: 25px 29px;
-}
 
-.repeatly-logo-forgetpasswordmain {
-  display: flex;
-  width: 217px;
-}
 
-.logo-icon-1-forgetpasswordmain {
-  height: 51px;
-  object-fit: cover;
-  width: 51px;
-}
 
-.repeatly-forgetpasswordmain {
-  height: 27.96px;
-  margin-left: 23.3px;
-  margin-top: 10.4px;
-  width: 127.03px;
-}
+
 
 .slice-1-forgetpasswordmain {
   height: 1px;
@@ -163,7 +135,7 @@ props: [
 .body-forgetpasswordmain {
   display: flex;
   flex-direction: column;
-  left: 808px;
+  left: 1126px;
   position: absolute;
   top: 502px;
 }
@@ -171,7 +143,8 @@ props: [
 .can-access-your-account-sign-in-now-forgetpasswordmain {
   cursor: pointer;
   height: 37px;
-  left: 947px;
+  left: 1114px;
+  width: 306px;
   letter-spacing: 0;
   position: absolute;
   text-align: center;
@@ -234,7 +207,7 @@ props: [
   align-items: flex-start;
   display: flex;
   height: 70px;
-  margin-top: 92px;
+  margin-top: 48px;
   min-width: 600px;
 }
 
@@ -247,7 +220,8 @@ props: [
   margin-left: -1px;
   margin-top: -1px;
   min-width: 600px;
-  padding: 17px 18.2px;
+  padding: 23px 18.2px;
+  cursor: pointer;
 }
 
 .send-link-forgetpasswordbutton {

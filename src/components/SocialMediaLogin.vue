@@ -7,11 +7,11 @@
         </p>
         <img
           class="vector-1"
-          src="https://anima-uploads.s3.amazonaws.com/projects/6231a346e960d27abb0c8fdd/releases/6231a453c59722c0165f17f8/img/vector-1@1x.png"
+          src="../../img/Login/vector1.png"
         />
         <img
           class="vector-3"
-          src="https://anima-uploads.s3.amazonaws.com/projects/6231a346e960d27abb0c8fdd/releases/6231a453c59722c0165f17f8/img/vector-3@1x.png"
+          src="../../img/Login/vector1.png"
         />
       </div>
     </div>

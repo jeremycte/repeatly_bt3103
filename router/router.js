@@ -3,6 +3,7 @@ import LandingPageLight from '@/views/LandingPageLight.vue'
 import LandingPageDark from '@/views/LandingPageDark.vue'
 // import { data } from "./data";
 import SignIn from '@/views/SignIn.vue'
+import ForgetPassword from '@/views/ForgetPassword.vue'
 
 const routes = [
     {
@@ -201,6 +202,11 @@ const routes = [
                 className: "icon-5",
             },
         }
+    },
+    {
+        path: '/forgetpassword',
+        name: 'ForgetPassword',
+        component: ForgetPassword,
     },
     {
         path: '/sign-in',

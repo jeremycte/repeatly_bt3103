@@ -316,7 +316,7 @@ export default {
   }
 .overlap-group-2{
   align-items: center;
-  background-image: url(https://anima-uploads.s3.amazonaws.com/projects/6231a346e960d27abb0c8fdd/releases/6237f289ec7f94c8a6fb2210/img/rectangle-1-11@1x.png);
+  background-image: url("../../img/Login/rectangle1.png");
   background-size: 100% 100%;
   display: flex;
   height: 72px;

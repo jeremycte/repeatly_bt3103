@@ -1,10 +1,10 @@
 <template>
-<Header :dashboardTitle="MyDashboard"/>
-<div class="container-center-horizontal">
-    <div class="student-dashboard-homepage screen">
+
+    <!-- <div class="student-dashboard-homepage screen"> -->
       <div class="deck-card-group">
         <div class="background-dashboard"></div>
         <div class="purple-deck">
+           <img class="illustration" src="../../img/Dashboard/history-illustrations.png" />
             <div class="overlay-deck">
                 <div v-for="(value, name) in object" :key="value.message">
                     {{ name }}: {{ value }}
@@ -25,8 +25,7 @@
           </div>
         </div>
       </div>
-    </div>
-  </div>
+    <!-- </div> -->
 </template>
 
 <script>
@@ -34,7 +33,6 @@
 
 export default {
   name: "CardDeck",
-  props: ["MyDashboard"]
 };
 </script>
 
@@ -46,8 +44,8 @@ export default {
     border-radius: 40px;
     box-shadow: 0px 2px 8px #00000022;
     display: flex;
-    height: 228px;
-    margin-top: -1px;
+    height: 210px;
+    margin-top: 30px;
     min-width: 1429px;
     padding: 19.6px 36.8px;
     position: relative;
@@ -81,12 +79,12 @@ export default {
 .deck-card-group {
   height: 1118px;
   position: relative;
-  width: 1920px;
+  /* width: 1920px; */
 }
 
 .background-dashboard {
   background-color: var(--white);
-  box-shadow: 0px 2px 8px #00000014;
+  /* box-shadow: 0px 2px 8px #00000014; */
   height: 1026px;
   left: -1px;
   position: absolute;
@@ -99,7 +97,7 @@ export default {
   align-self: flex-end;
   display: flex;
   flex-direction: column;
-  margin-left: 22px;
+  margin-left: 14em;
   min-height: 153px;
   width: 726px;
 }
@@ -160,5 +158,14 @@ export default {
   min-height: 32px;
   white-space: nowrap;
   text-transform: uppercase;
+}
+
+.illustration {
+  height: 188px;
+  left: 37px;
+  position: absolute;
+  top: 7px;
+  width: 188px;
+  z-index: 2;
 }
 </style>

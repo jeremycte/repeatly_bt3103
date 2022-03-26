@@ -1,7 +1,10 @@
 <template>
   <div class="headerDashboardTitle">
     <h1 class="dashboard-title inter-bold-heavy-metal-50px">{{dashboardTitle}}</h1>
-    <img class="icon-search" src="../../img/search.png" />
+    <!-- <button class="sync-button" @click="searchBtn()" > -->
+      <img class="icon-search" src="../../img/search.png" />
+    <!-- </button> -->
+    
     <img class="addBtnDashboard" src="../../img/add.svg" />
   </div>
 </template>
@@ -10,6 +13,11 @@
   export default {
     name: "Header",
     props: ["dashboardTitle"],
+    methods: {
+      searchBtn(){
+        window.location.reload();
+      }
+    },
   };
 </script>
 
@@ -17,12 +25,13 @@
   .headerDashboardTitle {
     display: flex;
     position: relative;
-    width: 1359px;
+    /* width: 1359px; */
+    margin-top: 25px;
   }
   .icon-search {
     height: 39px;
     width: 39px;
-    margin-left: 883px;
+    margin-left: 55em;
     margin-top: 22px;
     align-items: flex-end;
     display: flex;
@@ -40,5 +49,6 @@
     line-height: 70px;
     min-height: 70px;
     white-space: nowrap;
+    width: 500px;
   }
 </style>

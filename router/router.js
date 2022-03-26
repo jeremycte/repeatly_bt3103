@@ -4,7 +4,7 @@ import LandingPageDark from '@/views/LandingPageDark.vue'
 // import { data } from "./data";
 import SignIn from '@/views/SignIn.vue'
 import Settings from '@/views/Settings.vue'
-import CardDeck from '@/components/CardDeck.vue'
+import Home from '@/views/Home.vue'
 import ForgetPassword from '@/views/ForgetPassword.vue'
 
 const routes = [
@@ -224,19 +224,14 @@ const routes = [
     },
     {
         path: '/home',
-        name: 'Dashboard',
-        component: CardDeck,
+        name: 'Home',
+        component: Home,
         props: {
-            backgroundSetup:require("../img/Login/background.png"),
-            rectangle9521: require("../img/Login/shades.png"),
-            spanText1: "Don’t have an account? ",
-            spanText2: "Sign up now",
-            socialMediaLoginProps: SignIn.socialMediaLoginProps,
-            dashboardTitle: "My Dashboard"
+            MyDashboard: "My Dashboard"
         },
     },
     {
-        path:'/Settings',
+        path:'/settings',
         name: 'Settings',
         component: Settings,
     },

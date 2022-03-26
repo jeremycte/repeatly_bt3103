@@ -2,33 +2,33 @@
     <div class="sidebar">
         <span class="logo-name">
             <img class="logo" src="@/assets/logo.png"/>
-            <h1 class="name ">Repeatly</h1>
+            <h1 class="name">Repeatly</h1>
         </span>
 
         <div class="student-bar">
           <div class="side-row">
             <img class="icon" src="../../img/SideBarImages/mdi-home-circle@2x.png"/>
-            <SideBarLink to="/Homepage">Homepage</SideBarLink>
+            <SideBarLink to="/home">Homepage</SideBarLink>
           </div>
 
           <div class="side-row">
             <img class="icon" src="../../img/SideBarImages/groups@2x.png"/>               
-            <SideBarLink to="/Groups">Groups</SideBarLink>
+            <SideBarLink to="/groups">Groups</SideBarLink>
           </div>
 
           <div class="teacher-bar" v-if="this.role == 'Teacher'">
             <div class="side-row">
               <img class="icon" src="../../img/SideBarImages/vector-34@2x.png"/>
-              <SideBarLink to="/Students">Students</SideBarLink>
+              <SideBarLink to="/students">Students</SideBarLink>
             </div>
             <div class="side-row">
               <img class="icon" src="../../img/SideBarImages/simple-icons-googleanalytics@2x.png"/>
-              <SideBarLink to="/Analytics">Analytics</SideBarLink>
+              <SideBarLink to="/analytics">Analytics</SideBarLink>
             </div>
           </div>
           <div class="side-row">
             <img class="icon" src="../../img/SideBarImages/ci-settings-filled@2x.png"/> 
-            <SideBarLink to="/Settings">Settings</SideBarLink>
+            <SideBarLink to="/settings">Settings</SideBarLink>
           </div> 
         </div>
 
@@ -36,7 +36,7 @@
             <hr /> 
             <div class="side-row">
               <img class="icon-profile" src="../../img/SideBarImages/oval-37@2x.png"/>  
-              <SideBarLink to="/Profile">Profile</SideBarLink>
+              <SideBarLink to="/profile">Profile</SideBarLink>
             </div> 
 
               
@@ -93,6 +93,9 @@ export default {
 }
 </script>
 <style scoped>
+.student-bar {
+  margin-left: 10px;
+}
 .sidebar{
     color:white;
     background-color: #A786F3;  
@@ -113,6 +116,8 @@ export default {
 .logo-name{
     display:flex;
     margin-bottom: 50px;
+    margin-top: 2em;
+    margin-left: 10px;
 }
 .name{
     letter-spacing: 0;

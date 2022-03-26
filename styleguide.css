@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css?family=Inter:400,700,300,500,100|Nunito+Sans:400");
+
 :root { 
     --black: #000000;
     --dull-lavender: #a786f3;
@@ -289,7 +291,7 @@
 
   .inter-semi-bold-heavy-metal-25px {
     color: var(--heavy-metal);
-    font-family: var(--font-family-inter-semibold);
+    font-family: var(--font-family-inter);
     font-size: var(--font-size-xl2);
     font-style: normal;
     font-weight: 600;

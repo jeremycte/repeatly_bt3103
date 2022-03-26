@@ -2,7 +2,7 @@ import { createRouter, createWebHistory } from 'vue-router'
 import LandingPageLight from '@/views/LandingPageLight.vue'
 // import { data } from "./data";
 import SignIn from '@/views/SignIn.vue'
-
+import Settings from '@/views/Settings.vue'
 const routes = [
     {
         path: '/',
@@ -110,6 +110,11 @@ const routes = [
             credentialsProps: SignIn.credentialsProps,
             socialMediaLoginProps: SignIn.socialMediaLoginProps,
         },
+    },
+    {
+        path:'/Settings',
+        name: 'Settings',
+        component: Settings,
     },
     {
         path: '/:catchAll(.*)',

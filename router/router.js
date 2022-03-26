@@ -3,7 +3,8 @@ import LandingPageLight from '@/views/LandingPageLight.vue'
 import LandingPageDark from '@/views/LandingPageDark.vue'
 // import { data } from "./data";
 import SignIn from '@/views/SignIn.vue'
-import CardDeck from '@/components/Header.vue'
+import Settings from '@/views/Settings.vue'
+import CardDeck from '@/components/CardDeck.vue'
 import ForgetPassword from '@/views/ForgetPassword.vue'
 
 const routes = [
@@ -233,6 +234,11 @@ const routes = [
             socialMediaLoginProps: SignIn.socialMediaLoginProps,
             dashboardTitle: "My Dashboard"
         },
+    },
+    {
+        path:'/Settings',
+        name: 'Settings',
+        component: Settings,
     },
     {
         path: '/:catchAll(.*)',

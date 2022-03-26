@@ -1,6 +1,5 @@
 <template>
   <router-link :to="to" class="link" :class="{ active: isActive }">
-    <i class="icon" :class="icon" />
     <transition name="fade">
         <slot />
     </transition>
@@ -13,7 +12,6 @@ import { useRoute } from 'vue-router'
 export default {
     props: {
         to: {type: String, required: true},
-        icon:{type: String, required: true}
     },
     setup(props){
         const route = useRoute()
@@ -56,9 +54,5 @@ export default {
 .link.active {
     background-color: #cdb9fa;
 }
-.icon1 {
-    flex-shrink: 0;
-    width: 25px;
-    margin-right: 10px;
-}
+
 </style>

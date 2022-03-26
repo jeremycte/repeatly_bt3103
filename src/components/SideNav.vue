@@ -6,35 +6,89 @@
         </span>
 
         <div class="student-bar">
-            <SideBarLink to="/Homepage">Homepage</SideBarLink>                
+          <div class="side-row">
+            <img class="icon" src="../../img/SideBarImages/mdi-home-circle@2x.png"/>
+            <SideBarLink to="/Homepage">Homepage</SideBarLink>
+          </div>
+
+          <div class="side-row">
+            <img class="icon" src="../../img/SideBarImages/groups@2x.png"/>               
             <SideBarLink to="/Groups">Groups</SideBarLink>
-            <SideBarLink to="/Settings">Settings</SideBarLink> 
+          </div>
+
+          <div class="teacher-bar" v-if="this.role == 'Teacher'">
+            <div class="side-row">
+              <img class="icon" src="../../img/SideBarImages/vector-34@2x.png"/>
+              <SideBarLink to="/Students">Students</SideBarLink>
+            </div>
+            <div class="side-row">
+              <img class="icon" src="../../img/SideBarImages/simple-icons-googleanalytics@2x.png"/>
+              <SideBarLink to="/Analytics">Analytics</SideBarLink>
+            </div>
+          </div>
+          <div class="side-row">
+            <img class="icon" src="../../img/SideBarImages/ci-settings-filled@2x.png"/> 
+            <SideBarLink to="/Settings">Settings</SideBarLink>
+          </div> 
         </div>
 
         <div class="bottom-nav">
-            <hr />  
-            <SideBarLink to="/Profile">Profile</SideBarLink>
-            <SideBarLink to="/Sync">Sync</SideBarLink>
-        </div>
-        <div class= "dark-mode">
-            <h1 class="dark-label">Dark <br/> Mode</h1>
-            <label class="switch">
-                <input type="checkbox">
-                <span class="slider round"></span>
-            </label>
+            <hr /> 
+            <div class="side-row">
+              <img class="icon-profile" src="../../img/SideBarImages/oval-37@2x.png"/>  
+              <SideBarLink to="/Profile">Profile</SideBarLink>
+            </div> 
+
+              
+            <div class="sync">
+              <div class="side-row">
+                <img class="sync-icon" src="../../img/SideBarImages/sync-arrows--1--1@2x.png"/> 
+                <button class="sync-button" @click="reloadPage" >Sync</button>
+              </div>
+            </div>
             
+            <div class= "dark-mode">
+                <label class="switch">
+                    <input type="checkbox">
+                    <span class="slider round"></span>
+                </label>
+                <h1 class="dark-label">Dark <br/> Mode</h1>
+          </div>   
         </div>
     </div>
 
 </template>
 <script>
 import SideBarLink from "./SideBarLink.vue"
+import {getAuth, onAuthStateChanged } from "firebase/auth";
 
 export default {
     name:"SideNav",
 
     components: {
         SideBarLink
+    },
+    data() {
+        return {
+            user:false,
+            role:"",
+        }
+    },
+
+    mounted() {
+        const auth = getAuth();
+        onAuthStateChanged(auth,(user) => {
+            if(user) {
+                this.user = user;
+                this.role = user.role;
+            }
+        })
+    },
+
+    methods: {
+      reloadPage(){
+        window.location.reload();
+      }
     }
 }
 </script>
@@ -52,7 +106,7 @@ export default {
     transition: 0.3s ease;
     display: flex;
     flex-direction: column;
-    width:15%;
+    
     border-top-right-radius: 20px;
     border-bottom-right-radius: 20px;
 }
@@ -79,19 +133,22 @@ export default {
     color: #b49af1;
 }
 .bottom-nav{
+    width:96%;
     text-align: center;
-    margin-top:270px
+    position: absolute;
+    bottom: 0%;
+    margin-bottom: 20px;
 }
 .hr{
-    width:50%; 
     size:3;
     color:white;
 }
 .switch {
   position: relative;
-  display: inline-block;
-  width: 60px;
+  display: inline-flex;
+  width: 55px;
   height: 34px;
+  margin-left:-90px;
 }
 .switch input {
   opacity: 0;
@@ -142,15 +199,62 @@ input:checked + .slider:before {
 }
 .dark-mode{
     display: inline-flex;
-    text-align: left;
+    text-align: center;
+    text-align: left
+
 }
 .dark-label{
     font-family: Inter;
     font-weight: 600;
     font-size: 20px;
-    margin-right:20px;
-    margin-top:5px;
     margin-left: 25px;
-    text-align: center;
+
 }
+.sync{
+  display: flex;
+  text-align: left;
+  margin-left:50px;
+  margin-bottom: 20px;
+}
+.sync-button {
+    background: transparent;
+    border:none;
+    font-family: Inter;
+    color: white;
+    font-weight: 600;
+    font-size: 20px;
+    
+}
+.sync-button:hover {
+    background-color: #cdb9fa;
+    border-radius: 5px;
+    
+}
+.side-row{
+  display: flex;
+}
+
+.icon{
+  width:40px;
+  height:40px;
+  margin-top: 20px;
+  margin-right: -10px;
+
+}
+
+.sync-icon{
+  width:35px;
+  height:35px;
+  margin-top: 20px;
+  margin-left:-30px;
+  margin-right: 20px;
+}
+.icon-profile{
+  width:40px;
+  height:40px;
+  margin-top: 20px;
+  margin-left:20px;
+  margin-right: -3px;
+}
+
 </style>

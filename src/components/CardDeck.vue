@@ -1,4 +1,5 @@
 <template>
+<Header :dashboardTitle="MyDashboard"/>
 <div class="container-center-horizontal">
     <div class="student-dashboard-homepage screen">
       <div class="deck-card-group">
@@ -33,6 +34,7 @@
 
 export default {
   name: "CardDeck",
+  props: ["MyDashboard"]
 };
 </script>
 

@@ -3,7 +3,7 @@ import LandingPageLight from '@/views/LandingPageLight.vue'
 import LandingPageDark from '@/views/LandingPageDark.vue'
 // import { data } from "./data";
 import SignIn from '@/views/SignIn.vue'
-import CardDeck from '@/components/CardDeck.vue'
+import CardDeck from '@/components/Header.vue'
 import ForgetPassword from '@/views/ForgetPassword.vue'
 
 const routes = [
@@ -231,6 +231,7 @@ const routes = [
             spanText1: "Don’t have an account? ",
             spanText2: "Sign up now",
             socialMediaLoginProps: SignIn.socialMediaLoginProps,
+            dashboardTitle: "My Dashboard"
         },
     },
     {

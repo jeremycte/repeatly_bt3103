@@ -4,8 +4,8 @@
     <div class="student-study-deck-question screen">
     <div class="headerDashboardTitle">
     <h1 class="dashboard-title inter-bold-heavy-metal-50px">{{MyDashboard}}</h1>
-    <router-link to="/">
-      <img class="addBtnDashboard" src="../../img/cross-arrow.png" />
+    <router-link to="/home">
+      <img class="crossBtnDashboard" src="../../img/cross-arrow.png" />
     </router-link>
   </div>
   <div class="group-162547">
@@ -117,6 +117,12 @@ export default {
     padding: 26px 47px;
 }
 
+.crossBtnDashboard {
+    height: 60px;
+    width: 60px;
+    margin-left: 57em;
+    margin-top: 10px;
+}
 .study-deck-inner {
     display: flex;
 }

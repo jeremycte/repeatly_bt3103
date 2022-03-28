@@ -8,6 +8,8 @@ import Home from '@/views/Home.vue'
 import ForgetPassword from '@/views/ForgetPassword.vue'
 import CreateDeck from '@/views/CreateDeck.vue'
 
+import StudyDeck from '@/views/StudyDeckQuestion.vue'
+
 const routes = [
     {
         path: '/',
@@ -244,6 +246,15 @@ const routes = [
         path:'/settings',
         name: 'Settings',
         component: Settings,
+    },
+
+    {
+        path:'/study-deck',
+        name: 'StudyDeck',
+        component: StudyDeck,
+        props: {
+            MyDashboard: "Question"
+        },
     },
     {
         path: '/:catchAll(.*)',

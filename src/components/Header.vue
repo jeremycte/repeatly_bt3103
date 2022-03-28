@@ -5,7 +5,9 @@
       <img class="icon-search" src="../../img/search.png" />
     <!-- </button> -->
     
-    <img class="addBtnDashboard" src="../../img/add.svg" />
+    <router-link to="/create-deck">
+      <img class="addBtnDashboard" src="../../img/add.svg" />
+    </router-link>
   </div>
 </template>
 

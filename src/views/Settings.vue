@@ -9,13 +9,13 @@
         class="oval"
         src="../../img/Setting/oval-37@2x.png"
       />
-      <div class="header-2 valign-text-middle inter-bold-black-28px">Update<br />User Details</div>
+      <div class="header-2-settings valign-text-middle inter-bold-black-28px">Update<br />User Details</div>
     </div>
     <div class="container border-1px-alto">
       <div class="update-user-details-1">
         <div class="username">
-            <div class="overlap-group-1">  
-              <div class="overlap-group-2">
+            <div class="overlap-group-1-settings">  
+              <div class="overlap-group-2-settings">
                 <input
                     class="placeholder-value-1 inter-normal-silver-chalice-28px"
                     placeholder="UserName"
@@ -23,13 +23,13 @@
                     type="text"
                     required/>
             </div>
-            <div class="header-1 inter-bold-black-28px">User Name</div>
+            <div class="header-1-settings inter-bold-black-28px">User Name</div>
         </div>
         </div>
       
         <div class="email">        
-          <div class="overlap-group-1">
-            <div class="overlap-group-2">
+          <div class="overlap-group-1-settings">
+            <div class="overlap-group-2-settings">
                 <input
                     class="placeholder-value-1 inter-normal-silver-chalice-28px"
                     v-model="email"
@@ -37,13 +37,13 @@
                     type="text"
                     required/>
             </div>
-            <div class="header-1 inter-bold-black-28px">Email</div>
+            <div class="header-1-settings inter-bold-black-28px">Email</div>
             </div>
         </div>
         
         <div class="dob">        
-          <div class="overlap-group-1">
-            <div class="overlap-group-2">
+          <div class="overlap-group-1-settings">
+            <div class="overlap-group-2-settings">
                 <input
                     class="placeholder-value-1 inter-normal-silver-chalice-28px"
                     v-model="dob"
@@ -51,7 +51,7 @@
                     type="text"
                     required/>
             </div>
-              <div class="header-1 inter-bold-black-28px">Date Of Birth</div>
+              <div class="header-1-settings inter-bold-black-28px">Date Of Birth</div>
             </div>
 
         </div> 
@@ -61,13 +61,13 @@
      <div class="update-password">
     <div class="logo-and-title-1">
       <img class="carbonpassword" src="../../img/Setting/carbon-password-5@2x.png" />
-      <div class="header-4 valign-text-middle inter-bold-black-28px">Update Password</div>
+      <div class="header-2-settings valign-text-middle inter-bold-black-28px">Update Password</div>
     </div>
     <div class="container-1 border-1px-alto">
       <div class="update-password-1">
         <div class="password">    
-            <div class="overlap-group-1">
-              <div class="overlap-group-2">
+            <div class="overlap-group-1-settings">
+              <div class="overlap-group-2-settings">
                 <input
                 class="placeholder-value-4 inter-normal-silver-chalice-28px"
                 v-model="password"
@@ -79,8 +79,8 @@
             </div>
             </div>
           <div class="confirm-password">    
-            <div class="overlap-group-1">
-              <div class = "overlap-group-2">
+            <div class="overlap-group-1-settings">
+              <div class = "overlap-group-2-settings">
                 <input
                 class = "placeholder-value-4 inter-normal-silver-chalice-28px"
                 v-model="confirmPassword"
@@ -103,7 +103,7 @@
   
   <div class="container-2 border-1px-alto">
     <div class="description">
-      <div class="overlap-group1">
+      <div class="overlap-group1-settings">
         <div class="description-1 valign-text-middle inter-normal-black-20px">
           This will delete all your data on Repeatly. <br/> Action cannot be undone!
         </div>
@@ -111,7 +111,7 @@
       </div>
     </div>
     <div class="del">
-    <button class="del-button" v-on:click="deleteAcc()">Delete Account</button>
+      <button class="del-button" v-on:click="deleteAcc()">Delete Account</button>
     </div>
 
   </div>
@@ -229,11 +229,15 @@ export default {
     min-height: 32px;
     width: 300px;
     margin-left:100px;
+    cursor: pointer;
 
 } 
+.cancel-button {
+  cursor: pointer;
+}
 .cancel-button:hover ,.save-button:hover {
     background-color: #cdb9fa
-    }
+  }
 
 .cancel-button:active , .save-button:active {
     background-color: #cdb9fa;
@@ -268,7 +272,7 @@ export default {
   width: 186px;
 }
 
-.header-2 {
+.header-2-settings {
   height: 64px;
   letter-spacing: 0;
   margin-right: 2px;
@@ -288,7 +292,7 @@ export default {
   margin-top: -80px;
   min-width: 1058px;
   height: 320px;
-  width: 1400px;
+  width: 800px;
   padding: 19px 23px;
 }
 
@@ -297,6 +301,7 @@ export default {
   flex-direction: column;
   height: 243px;
   width: 1300px;
+  margin-left: 15px;
 }
 
 .username {
@@ -307,14 +312,14 @@ export default {
   min-width: 802px;
 
 }
-.overlap-group-1 {
+.overlap-group-1-settings {
     height: 72px;
     margin-top: -1px;
     position: relative;
     width: 801px;
     
   }
-.overlap-group-2{
+.overlap-group-2-settings{
   align-items: center;
   background-image: url("../../img/Login/rectangle1.png");
   background-size: 100% 100%;
@@ -328,7 +333,7 @@ export default {
   
 }
 
-.header-1 {
+.header-1-settings {
   left: 0;
   letter-spacing: 0;
   position: absolute;
@@ -396,6 +401,7 @@ export default {
     flex-direction: column;
     height: 243px;
     width: 1300px;
+    margin-left: 15px;
   }
 
   .container-1{
@@ -410,7 +416,7 @@ export default {
     min-width: 1058px;
     padding: 14px 23px;
     height: 280px;
-    width: 1400px;
+    width: 800px;
     padding: 19px 23px;
   }
   .password{
@@ -425,7 +431,7 @@ export default {
 .placeholder-value-4 {
   background-color: transparent;
   border: 0;
-  height: 48px;
+  height: 70px;
   letter-spacing: 0;
   line-height: 16px;
   padding: 0;
@@ -482,7 +488,7 @@ export default {
     min-width: 1058px;
     padding: 10px 23px;
     height: 200px;
-    width: 1400px;
+    width: 800px;
   }
 
   .description {
@@ -500,6 +506,7 @@ export default {
     width: 395px;
     text-align: center;
     margin-top: -10px;
+    text-align: left;
   }
 
   .header-del {
@@ -508,17 +515,20 @@ export default {
     position: absolute;
     top: 0;
     width: 460px;
-    margin-top: -40px;
+    margin-top: -17px;
     
   }
 
-  .overlap-group1 {
-    height: 300px;
+  .overlap-group1-settings {
     position: relative;
     width: 1500px;
     font-size:  20px;
     font-family: inter;
     align-content: center;
+    /* height: 580px; */
+    left: 77px;
+    top: 73px;
+    margin-left: initial;
     
   }
 
@@ -535,10 +545,11 @@ export default {
     min-width: 325px;
     padding: 19px 15.6px;
   }
+
   .del{
     margin-top: 50px;
-    margin-right: 150px ;
-
+    margin-right: 150px;
+    cursor: pointer;
   }
   .del-button {
     background-color: rgb(230, 72, 72); 
@@ -546,7 +557,7 @@ export default {
     color: white;
     font-family: inter;
     font-weight: bold;
-    font-size: 50px;
+    font-size: 25px;
     padding: 15px 32px;
     text-align: center;
     text-decoration: none;
@@ -554,13 +565,14 @@ export default {
     border-radius: 22px;
     letter-spacing: 0;
     min-height: 32px;
-    width: 500px;
-    
+    width: 265px;
+    cursor: pointer;
   }
   
   .del-button:hover {
-    background-color: rgb(243, 107, 107)
-    }
+    background-color: rgb(243, 107, 107);
+    cursor: pointer;
+  }
 
   .del-button:active {
     background-color: rgb(243, 107, 107);

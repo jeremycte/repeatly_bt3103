@@ -6,6 +6,7 @@ import SignIn from '@/views/SignIn.vue'
 import Settings from '@/views/Settings.vue'
 import Home from '@/views/Home.vue'
 import ForgetPassword from '@/views/ForgetPassword.vue'
+import CreateDeck from '@/views/CreateDeck.vue'
 
 const routes = [
     {
@@ -230,6 +231,15 @@ const routes = [
             MyDashboard: "My Dashboard"
         },
     },
+    {
+        path: '/create-deck',
+        name: 'CreateDeck',
+        component: CreateDeck,
+        props: {
+            MyDashboard: "Create Deck"
+        },
+    },
+
     {
         path:'/settings',
         name: 'Settings',

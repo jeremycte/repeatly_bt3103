@@ -11,6 +11,7 @@
     --humming-bird: #d1f5ed;
     --mexican-red: #ac2019;
     --sauvignon: #fcf6f3;
+    --shamrock: rgba(45, 205, 122, 1);
     --mustard: #fedc5a;
     --vanilla-ice: #f3d9e0;
     --white: #ffffff;
@@ -56,6 +57,14 @@
     font-size: var(--font-size-m2);
     font-style: normal;
     font-weight: 300;
+  }
+
+  .inter-semi-bold-white-28px {
+    color: var(--white);
+    font-family: var(--font-family-inter);
+    font-size: var(--font-size-xxl2);
+    font-weight: 600;
+    font-style: normal;
   }
   
   .nunitosans-normal-eerie-black-22px {

@@ -144,13 +144,13 @@
             </div>
           </div>
           </router-link>
+          <router-link to="/registration">
           <div class="register-button">
             <div class="overlap-group4 border-1px-white">
-              <div class="get-beta-access-2 inter-normal-white-20px">
-                Register
-              </div>
+              <div class="get-beta-access-2 inter-normal-white-20px">Register</div>
             </div>
           </div>
+          </router-link>
           <div
             class="organize-flashcards animate-enter4"
             id="organize-flashcards"

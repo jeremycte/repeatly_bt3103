@@ -6,9 +6,12 @@ import SignIn from '@/views/SignIn.vue'
 import Settings from '@/views/Settings.vue'
 import Home from '@/views/Home.vue'
 import ForgetPassword from '@/views/ForgetPassword.vue'
+import Registration from '@/views/Registration.vue'
+import ForgetPasswordStatus from '@/views/ForgetPasswordStatus.vue'
+/*import StudentStudyDeckStats from '@/views/StudentStudyDeckStats.vue'*/
 import CreateDeck from '@/views/CreateDeck.vue'
-
 import StudyDeck from '@/views/StudyDeckQuestion.vue'
+
 
 const routes = [
     {
@@ -213,6 +216,24 @@ const routes = [
         name: 'ForgetPassword',
         component: ForgetPassword,
     },
+    {
+        path: '/registration',
+        name: 'Registration',
+        component: Registration,
+    },
+
+    {
+        path: '/password-status',
+        name: 'ForgetPasswordStatus',
+        component: ForgetPasswordStatus,
+        props: true
+        },
+
+    /*{
+        path: '/study-student-stats',
+        name: 'StudentStudyDeckStats',
+        component: StudentStudyDeckStats,
+        },*/
     {
         path: '/sign-in',
         name: 'SignIn',

@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css?family=Inter:400,700,300,500,100|Nunito+Sans:400");
+
 :root { 
     --black: #000000;
     --dull-lavender: #a786f3;
@@ -5,10 +7,13 @@
     --eerie-black-22: #1a191c;
     --eerie-black-42: #18181a;
     --indigo: #5454d4;
+    --royal-blue: rgba(54, 84, 240, 1);
+    --navy-blue: #217BD8;
     --heavy-metal: #2c2c2c;
     --humming-bird: #d1f5ed;
     --mexican-red: #ac2019;
     --sauvignon: #fcf6f3;
+    --shamrock: rgba(45, 205, 122, 1);
     --mustard: #fedc5a;
     --vanilla-ice: #f3d9e0;
     --white: #ffffff;
@@ -62,6 +67,14 @@
     font-size: var(--font-size-m2);
     font-style: normal;
     font-weight: 300;
+  }
+
+  .inter-semi-bold-white-28px {
+    color: var(--white);
+    font-family: var(--font-family-inter);
+    font-size: var(--font-size-xxl2);
+    font-weight: 600;
+    font-style: normal;
   }
   
   .nunitosans-normal-eerie-black-22px {
@@ -297,7 +310,7 @@
 
   .inter-semi-bold-heavy-metal-25px {
     color: var(--heavy-metal);
-    font-family: var(--font-family-inter-semibold);
+    font-family: var(--font-family-inter);
     font-size: var(--font-size-xl2);
     font-style: normal;
     font-weight: 600;

@@ -3,11 +3,15 @@ import LandingPageLight from '@/views/LandingPageLight.vue'
 import LandingPageDark from '@/views/LandingPageDark.vue'
 // import { data } from "./data";
 import SignIn from '@/views/SignIn.vue'
-import CardDeck from '@/components/CardDeck.vue'
+import Settings from '@/views/Settings.vue'
+import Home from '@/views/Home.vue'
 import ForgetPassword from '@/views/ForgetPassword.vue'
 import Registration from '@/views/Registration.vue'
 import ForgetPasswordStatus from '@/views/ForgetPasswordStatus.vue'
 /*import StudentStudyDeckStats from '@/views/StudentStudyDeckStats.vue'*/
+import CreateDeck from '@/views/CreateDeck.vue'
+import StudyDeck from '@/views/StudyDeckQuestion.vue'
+
 
 const routes = [
     {
@@ -244,14 +248,33 @@ const routes = [
     },
     {
         path: '/home',
-        name: 'Dashboard',
-        component: CardDeck,
+        name: 'Home',
+        component: Home,
         props: {
-            backgroundSetup:require("../img/Login/background.png"),
-            rectangle9521: require("../img/Login/shades.png"),
-            spanText1: "Don’t have an account? ",
-            spanText2: "Sign up now",
-            socialMediaLoginProps: SignIn.socialMediaLoginProps,
+            MyDashboard: "My Dashboard"
+        },
+    },
+    {
+        path: '/create-deck',
+        name: 'CreateDeck',
+        component: CreateDeck,
+        props: {
+            MyDashboard: "Create Deck"
+        },
+    },
+
+    {
+        path:'/settings',
+        name: 'Settings',
+        component: Settings,
+    },
+
+    {
+        path:'/study-deck',
+        name: 'StudyDeck',
+        component: StudyDeck,
+        props: {
+            MyDashboard: "Question"
         },
     },
     {

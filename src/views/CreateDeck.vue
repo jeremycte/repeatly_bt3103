@@ -9,6 +9,7 @@
       <div class="overlap-group-nameUrDeck border-1px-quick-silver">
         <input
           class="createDeck inter-normal-silver-chalice-30px"
+          id="deckName"
           name="nameyourdeck"
           placeholder="Name your deck"
           type="text"
@@ -18,6 +19,7 @@
       <div class="overlap-group-createdeckTag border-1px-quick-silver">
         <input
           class="createDeck inter-normal-silver-chalice-30px"
+          id="deckTag"
           name="decktag"
           placeholder="Deck Tag e.g. Sem 1"
           type="text"
@@ -25,9 +27,9 @@
         />
       </div>
       <div class="overlap-group-txtareaCreateDeck border-1px-quick-silver">
-        <textarea class="deck-description" name="deckdescription" placeholder="Deck Description" type="text"></textarea>
+        <textarea class="deck-description" id="description" name="deckdescription" placeholder="Deck Description" type="text"></textarea>
       </div>
-      <btn class="add-student-createdeckbtn">
+      <btn class="add-student-createdeckbtn" v-on:click="save()">
         <div class="frame-1-createdeck">
           <h1 class="createdeck-titleBtn inter-semi-bold-white-28px">Create Deck</h1>
         </div>
@@ -41,7 +43,13 @@
 <script>
 import SideNav from "../components/SideNav.vue"
 import Header from "../components/Header.vue"
+import firebaseApp from "@/firebaseDetails";
+import {getAuth} from "firebase/auth";
+import {collection,addDoc,getFirestore} from "firebase/firestore";
 
+const auth = getAuth();
+const db = getFirestore(firebaseApp);
+console.log(auth.userEmail)
 export default {
     
   name: "CreateDeck",
@@ -49,6 +57,30 @@ export default {
         Header,
         SideNav
     },
+    methods: {
+      async save(){
+        try{
+          const userEmail = auth.currentUser.email;
+          await addDoc(collection(db,"users",String(userEmail),"decks"),
+            {
+              title: document.getElementById("deckName").value,
+              tag: document.getElementById("deckTag").value,
+              description: document.getElementById("description").value,
+              estimatedTime: 0,
+              needsRecapping: 0,
+              totalCards: 0,
+              uncertainCards: 0,
+            })
+          await this.$router.push({name: "Dashboard"})
+        }catch(error){
+          console.log(error)
+          console.log("create deck failed")
+        }
+      },
+      async back(){
+        await this.$router.push({name: "Dashboard"})
+      }
+  },
      props: [
         "MyDashboard"
     ]

@@ -47,6 +47,14 @@
     font-style: normal;
     font-weight: 500;
   }
+
+  .inter-normal-black-20px {
+    color: var(--eerie-black-22);
+    font-family: var(--font-family-inter);
+    font-size: var(--font-size-s22);
+    font-style: normal;
+    font-weight: 500;
+  }
   
   .inter-light-eerie-black-28px {
     color: var(--eerie-black-22);

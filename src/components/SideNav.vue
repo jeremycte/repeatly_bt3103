@@ -36,7 +36,7 @@
             <hr /> 
             <div class="side-row">
               <img class="icon-profile" src="../../img/SideBarImages/oval-37@2x.png"/>  
-              <SideBarLink to="/profile">{{username}}</SideBarLink>
+              <SideBarLink to="/settings">{{username}}</SideBarLink>
             </div> 
 
               
@@ -47,12 +47,8 @@
               </div>
             </div>
             
-            <div class= "dark-mode">
-                <label class="switch">
-                    <input type="checkbox">
-                    <span class="slider round"></span>
-                </label>
-                <h1 class="dark-label">Dark <br/> Mode</h1>
+            <div class= "sign-out">
+                <button class="sign-out-button" @click="signOut">Sign Out</button>
           </div>   
         </div>
     </div>
@@ -63,10 +59,11 @@ import SideBarLink from "./SideBarLink.vue"
 import firebaseApp from "@/firebaseDetails";
 import {getAuth, onAuthStateChanged} from "firebase/auth";
 import {doc,getDoc,getFirestore} from "firebase/firestore";
+import router from "../../router/router";
 
 const db = getFirestore(firebaseApp);
 const auth = getAuth();
-// signOut(auth)
+
 async function displayUserInfo(email){
   try{
     const docRef = doc(db,"users",email)
@@ -109,13 +106,20 @@ export default {
     methods: {
       reloadPage(){
         window.location.reload();
+      },
+
+      async signOut(){
+        auth.signOut().then(() => {
+          console.log("user has sign out")
+          router.push('/sign-in')
+        })
       }
     }
 }
 </script>
 <style scoped>
 .student-bar {
-  margin-left: 10px;
+  margin-left: 1em;
 }
 .sidebar{
     color:white;
@@ -131,29 +135,29 @@ export default {
     display: flex;
     flex-direction: column;
     
-    border-top-right-radius: 20px;
-    border-bottom-right-radius: 20px;
+    border-top-right-radius: 1.25em;
+    border-bottom-right-radius: 1.25em;
 }
 .logo-name{
     display:flex;
-    margin-bottom: 50px;
+    margin-bottom: -1.75em;
     margin-top: 2em;
-    margin-left: 10px;
+    margin-left: 0.625em;
 }
 .name{
     letter-spacing: 0;
-    line-height: 42px;
-    min-height: 51px;
-    width: 154px;
+    line-height: 0.525em;
+    min-height: 3.188em;
+    width: 4.625em;
     font-family: inter;
-    font-size: 30px;
+    font-size: 2.2em;
     font-weight: bold;
-    margin-top: 10px;
-    margin-left: 15px ;
+    margin-top: 0.625em;
+    margin-left: 0.438em ;
 }
 .logo{
-    height:60px;
-    width: 60px;
+    height:3.75em;
+    width: 3.75em;
 }
 .sidebar-item-hover{
     color: #b49af1;
@@ -163,84 +167,42 @@ export default {
     text-align: center;
     position: absolute;
     bottom: 0%;
-    margin-bottom: 20px;
+    margin-bottom: 1.25em;
 }
 .hr{
     size:3;
     color:white;
 }
-.switch {
-  position: relative;
-  display: inline-flex;
-  width: 55px;
-  height: 34px;
-  margin-left:-90px;
-}
-.switch input {
-  opacity: 0;
-  width: 0;
-  height: 0;
-}
-.slider {
-  position: absolute;
-  cursor: pointer;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: #8d61f3;
-  -webkit-transition: .4s;
-  transition: .4s;
-}
-.slider:before {
-  position: absolute;
-  content: "";
-  height: 26px;
-  width: 26px;
-  left: 4px;
-  bottom: 4px;
-  background-color: #A786F3;
-  -webkit-transition: .4s;
-  transition: .4s;
-}
-input:checked + .slider {
-  background-color: #6007f0;
-}
 
-input:focus + .slider {
-  box-shadow: 0 0 1px #6007f0;
-}
-
-input:checked + .slider:before {
-  -webkit-transform: translateX(26px);
-  -ms-transform: translateX(26px);
-  transform: translateX(26px);
-}
-.slider.round {
-  border-radius: 34px;
-}
-
-.slider.round:before {
-  border-radius: 50%;
-}
-.dark-mode{
+.sign-out{
     display: inline-flex;
     text-align: center;
     text-align: left
 
 }
-.dark-label{
+.sign-out-button{
+    display: flex;
     font-family: Inter;
     font-weight: 600;
     font-size: 20px;
-    margin-left: 25px;
+    margin-right:2em;
+    background: #8d61f3;
+    color: white;
+    border:none;
+    border-radius:5em;
+    cursor: pointer;
+    padding: 1em 2em;
+
+}
+.sign-out-button:hover{
+    background-color: #cdb9fa
 
 }
 .sync{
   display: flex;
   text-align: left;
-  margin-left:50px;
-  margin-bottom: 20px;
+  margin-left:3.125em;
+  margin-bottom: 1.25em;
 }
 .sync-button {
     background: transparent;
@@ -261,26 +223,26 @@ input:checked + .slider:before {
 }
 
 .icon{
-  width:40px;
-  height:40px;
-  margin-top: 20px;
-  margin-right: -10px;
+  width:2.5em;
+  height:2.5em;
+  margin-top: 1.25em;
+  margin-right: -0.625em;
 
 }
 
 .sync-icon{
-  width:35px;
-  height:35px;
-  margin-top: 20px;
-  margin-left:-30px;
-  margin-right: 20px;
+  width:2.5em;
+  height:2.5em;
+  margin-top: 1em;
+  margin-right: 1em;
+  margin-left:-1.875em;
 }
 .icon-profile{
-  width:40px;
-  height:40px;
-  margin-top: 20px;
-  margin-left:20px;
-  margin-right: -3px;
+  width:2.75em;
+  height:2.75em;
+  margin-top: 1em;
+  margin-right: 1em;
+  margin-left: 1.15em;
 }
 
 </style>

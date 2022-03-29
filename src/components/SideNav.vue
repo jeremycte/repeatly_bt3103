@@ -36,7 +36,7 @@
             <hr /> 
             <div class="side-row">
               <img class="icon-profile" src="../../img/SideBarImages/oval-37@2x.png"/>  
-              <SideBarLink to="/profile">Profile</SideBarLink>
+              <SideBarLink to="/profile">{{username}}</SideBarLink>
             </div> 
 
               
@@ -60,7 +60,25 @@
 </template>
 <script>
 import SideBarLink from "./SideBarLink.vue"
-import {getAuth, onAuthStateChanged } from "firebase/auth";
+import firebaseApp from "@/firebaseDetails";
+import {getAuth, onAuthStateChanged} from "firebase/auth";
+import {doc,getDoc,getFirestore} from "firebase/firestore";
+
+const db = getFirestore(firebaseApp);
+const auth = getAuth();
+// signOut(auth)
+async function displayUserInfo(email){
+  try{
+    const docRef = doc(db,"users",email)
+    const docVal = await getDoc(docRef)
+    const username = String(docVal.data().username)
+    return username
+  } catch (error){
+    console.log("Display User Info not working")
+    console.log(error)
+  }
+}
+
 
 export default {
     name:"SideNav",
@@ -72,15 +90,18 @@ export default {
         return {
             user:false,
             role:"",
+            username:"",
         }
     },
 
     mounted() {
-        const auth = getAuth();
-        onAuthStateChanged(auth,(user) => {
+        onAuthStateChanged(auth,async (user) => {
             if(user) {
+                console.log(user.email)
+                const tempUsername = await displayUserInfo(user.email)
                 this.user = user;
                 this.role = user.role;
+                this.username = tempUsername;
             }
         })
     },

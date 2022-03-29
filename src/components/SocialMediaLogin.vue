@@ -34,6 +34,9 @@ const db = getFirestore(firebaseApp);
 const provider = new GoogleAuthProvider();
 const auth = getAuth();
 var user = null;
+
+
+
 async function googleRegisterFirebase() {
   try{
     if (user != null){

@@ -23,7 +23,9 @@
             <img class="slice-1-forgetpasswordmain" :src='"https://anima-uploads.s3.amazonaws.com/projects/6231a346e960d27abb0c8fdd/releases/6231a4a9c59722c0165f17f9/img/slice-1@2x.png"' />
           </div>
           </router-link>
+
           <div class="body-forgetpasswordmain">
+            <form>
             <div class="email-or-username-emailsubsection">
                 <div class="header-emailsubsection inter-bold-black-28px">Enter Your Email</div>
                 <div class="overlap-group1-emailsubsection" :style="{ 'background-image': 'url(' + 'https://anima-uploads.s3.amazonaws.com/projects/6231a346e960d27abb0c8fdd/releases/62344395490c786a6849ba07/img/rectangle-1@1x.png' + ')' }">
@@ -32,15 +34,18 @@
                         name= "placeholdervalue"
                         placeholder="Type your email or username"
                         type="email"
+                        id="email"
+                        v-model="email" 
                         required= true
                     />
                 </div>
             </div>
             <div class="button-send-link-forgetpasswordbutton">
-                <div class="overlap-group-1-forgetpasswordbutton">
-                <div class="send-link-forgetpasswordbutton valign-text-middle inter-bold-white-28px">Send Link</div>
-                </div>
+                <button v-on:click="sendLink()" type="button" class="overlap-group-1-forgetpasswordbutton">
+                    <div class="send-link-forgetpasswordbutton valign-text-middle inter-bold-white-28px">Send Link</div>
+                </button>
             </div>
+            </form>
           </div>
         </div>
         <p class="can-access-your-account-sign-in-now-forgetpasswordmain valign-text-middle inter-bold-white-16px">
@@ -60,12 +65,45 @@
 </template>
 
 <script>
+import firebaseApp from "../firebaseDetails";
+import {getAuth,sendPasswordResetEmail} from "firebase/auth";
+import router from "../../router/router";
+firebaseApp;
+
 export default {
   name: "ForgetPassword",
+  props: [
+    // "validEmail"
+  ],
 
-props: [
+  data(){
+    return{
+      validEmail: "no",
+    }
+  },
 
-   ],
+  methods:{
+    async sendLink(){
+      try{
+        const auth = getAuth();
+        const email = document.getElementById("email").value
+        await sendPasswordResetEmail(auth,email)
+        alert("A reset password link has been sent to your email.")
+        console.log("forget password passed")
+        this.validEmail = "yes"
+        var validEmail = this.validEmail
+        router.push({ name: 'ForgetPasswordStatus', params: {validEmail} })
+      } catch(error){
+        alert("Please provide a valid email")
+        console.log("forget Password failed")
+        console.log(error)
+        validEmail = "no"
+        this.validEmail = "no"
+        router.push({ name: 'ForgetPasswordStatus', params: {validEmail} })
+      }
+    }
+  }
+
 };
 </script>
 
@@ -118,12 +156,6 @@ props: [
   top: 150px;
   width: 1406px;
 }
-
-
-
-
-
-
 
 .slice-1-forgetpasswordmain {
   height: 1px;
@@ -222,6 +254,8 @@ props: [
   min-width: 600px;
   padding: 23px 18.2px;
   cursor: pointer;
+  background-color: transparent;
+  border: transparent;
 }
 
 .send-link-forgetpasswordbutton {
@@ -230,5 +264,6 @@ props: [
   text-align: center;
   width: 564px;
 }
+
 
 </style>

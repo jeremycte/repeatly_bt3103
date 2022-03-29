@@ -60,7 +60,7 @@ export default {
     methods: {
       async save(){
         try{
-          const userEmail = auth.userEmail;
+          const userEmail = auth.currentUser.email;
           await addDoc(collection(db,"users",String(userEmail),"decks"),
             {
               title: document.getElementById("deckName").value,

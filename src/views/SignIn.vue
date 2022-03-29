@@ -56,9 +56,11 @@
         <img class="rectangle-9521" :src="rectangle9521" />
       </div>
       <p class="dont-have-an-account-sign-up-now valign-text-middle inter-bold-white-16px">
-        <span
-          ><span class="inter-bold-black-16px">Don't have an account?</span
-          ><span class="span1 inter-bold-dull-lavender-16px"> Sign Up Now</span>
+        <span>
+          <span class="inter-bold-black-16px">Don't have an account?</span>
+          <router-link to="/registration">
+          <span class="span1 inter-bold-dull-lavender-16px"> Sign Up Now</span>
+          </router-link>
         </span>
       </p>
       <social-media-login/>
@@ -107,7 +109,7 @@ export default {
   background-position: 50% 50%;
   background-size: cover;
   display: flex;
-  height: 1024px;
+  height: 1040px;
   min-width: 736px;
   padding: 25px 29px;
 }

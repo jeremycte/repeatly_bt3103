@@ -171,30 +171,28 @@ export default {
 
 .header {
   display: flex;
-  height: 56px;
-  left: 336px;
+  height: 3.5em;
+  left: 21em;
   position: absolute;
-  top: 39px;
-  width: 167px;
+  top: 2.4375em;
+  width: 10.4375em;
 }
 
 .title {
-  height: 56px;
+  height: 3.5em;
   letter-spacing: 0;
-  line-height: 56px;
+  line-height: 1em;
   white-space: nowrap;
-  width: 165px;
-  font-size: 50px;
+  width: 10.3125em;
+  font-size: 3.125em;
   font-style: normal;
   font-weight: 700;
   font-family: var(--font-family-inter);
 }
 
 .cancel-save {
-  margin:100px;
-
+  margin:6.25em;
   text-align: center;
-
 }
 .cancel-button {
     background-color: #A786F3; 
@@ -202,16 +200,17 @@ export default {
     color: white;
     font-family: inter;
     font-weight: bold;
-    font-size: 50px;
-    padding: 15px 32px;
+    font-size: 2.125em;
+    padding: 0.938em 2em;
     text-align: center;
     text-decoration: none;
     display: inline-block;
-    border-radius: 22px;
+    border-radius: 1.375em;
     letter-spacing: 0;
-    min-height: 32px;
-    width: 300px;
-    margin-left:100px;
+    min-height: 2em;
+    width: 10.75em;
+    margin-left: 5.25em;    
+    cursor: pointer;
   }
 .save-button {
     background-color: #A786F3; 
@@ -219,16 +218,16 @@ export default {
     color: white;
     font-family: inter;
     font-weight: bold;
-    font-size: 50px;
-    padding: 15px 32px;
+    font-size: 2.125em;
+    padding: 0.938em 2em;
     text-align: center;
     text-decoration: none;
     display: inline-block;
-    border-radius: 22px;
+    border-radius: 1.375em;
     letter-spacing: 0;
-    min-height: 32px;
-    width: 300px;
-    margin-left:100px;
+    min-height: 2em;
+    width: 10.75em;
+    margin-left: 5.25em;    
     cursor: pointer;
 
 } 
@@ -241,17 +240,17 @@ export default {
 
 .cancel-button:active , .save-button:active {
     background-color: #cdb9fa;
-    box-shadow: 0 5px #666;
-    transform: translateX(10px);
+    box-shadow: 0 0.313em #666;
+    transform: translateX(0.625em);
 }
 .update-user-details {
   align-items: flex-start;
   display: flex;
-  height: 280px;
-  left: 336px;
-  min-width: 1072px;
+  height: 17.5em;
+  left: 21em;
+  min-width: 67em;
   position: absolute;
-  top: 187px;
+  top: 11.688em;
 }
 
 .logo-and-title {
@@ -284,39 +283,46 @@ export default {
 .container {
   align-items: flex-start;
   background-color: var(--white);
-  border-radius: 40px;
+  border-radius: 2.5em;
   box-shadow: 0px 2px 8px #00000022;
   display: flex;
   justify-content: flex-end;
-  margin-left: 40px;
-  margin-top: -80px;
-  min-width: 1058px;
-  height: 320px;
-  width: 800px;
+  margin-left: 2.5em;
+  margin-top: -5em;
+  min-width: 66.125em;
+  height: 20em;
+  width: 50em;
   padding: 19px 23px;
 }
 
 .update-user-details-1 {
   display: flex;
   flex-direction: column;
-  height: 243px;
-  width: 1300px;
-  margin-left: 15px;
-}
+  height: 15.188em;
+  width: 81.25em;
+  margin-left: 0.938em;  
+  }
 
 .username {
   align-items: flex-end;
   display: flex;
-  height: 70px;
-  margin-top: 18px;
-  min-width: 802px;
+  height: 4.375em;
+  margin-top: 1.125em;
+  min-width: 50.125em;
 
 }
+.confirm-password{
+  align-items: flex-end;
+  display: flex;
+  height: 4.375em;
+  margin-top: 1.125em;
+  min-width: 50.125em;
+}
 .overlap-group-1-settings {
-    height: 72px;
-    margin-top: -1px;
+    height: 4.5em;
+    margin-top: -0.063em;
     position: relative;
-    width: 801px;
+    width: 50.125em;
     
   }
 .overlap-group-2-settings{
@@ -324,10 +330,11 @@ export default {
   background-image: url("../../img/Login/rectangle1.png");
   background-size: 100% 100%;
   display: flex;
-  height: 72px;
-  left: 247px;
-  min-width: 700px;
-  padding: 0 16px;
+  height: 4.5em;
+  left: 15.438em;
+  width:10em;
+  min-width: 43.75em;
+  padding: 0 1em;
   position: absolute;
   top: 0;
   
@@ -337,105 +344,104 @@ export default {
   left: 0;
   letter-spacing: 0;
   position: absolute;
-  top: 19px;
-  width: 496px;
+  top: 1.188em;
+  width: 31em;
 }
 .placeholder-value-1 {
   background-color: transparent;
   border: 0;
-  height: 48px;
+  height: 3em;
   letter-spacing: 0;
-  line-height: 16px;
+  line-height: 1em;
   padding: 0;
-  width: 546px;
+  width: 34.125em;
 }
 
 .placeholder-value-1::placeholder {
   color: #afafaf99;
 }
 
-
 .email{
   align-items: flex-start;
   display: flex;
-  height: 70px;
-  margin-top: 20px;
-  min-width: 802px;
+  height: 4.375em;
+  margin-top: 1em;
+  min-width: 50.125em;
 }
 .dob{
   align-items: flex-start;
   display: flex;
-  margin-top: -30px;
-  min-width: 802px; 
+  margin-top: 1em;
+  min-width: 50.125em; 
 }
- .update-password {
+.update-password {
     align-items: flex-start;
     display: flex;
-    height: 500px;
-    left: 336px;
-    min-width: 1072px;
+    height: 31.25em;
+    left: 21em;
+    min-width: 67em;
     position: absolute;
-    top: 360px;
+    top: 22.5em
   }
 
-  .logo-and-title-1 {
+.logo-and-title-1 {
     align-self: center;
     display: flex;
     flex-direction: column;
-    height: 186px;
-    margin-top: 0.25px;
-    width: 175px;
+    height: 11.625em;
+    margin-top: 0.016em;
+    width: 10.938em;
     text-align: center;
   }
 
-  .carbonpassword {
-    height: 113.45px;
-    margin-left: 26.9px;
+.carbonpassword {
+    height: 7.091em;
+    margin-left: 1.681em;
     margin-top: 0;
-    width: 125.82px;
-    margin-bottom: 20px;
+    width: 7.864em;
+    margin-bottom: 1.25em;
   }
 
-  .update-password-1 {
+.update-password-1 {
     display: flex;
     flex-direction: column;
-    height: 243px;
-    width: 1300px;
-    margin-left: 15px;
+    height: 15.188em;
+    width: 81.25em;
+    margin-left: 0.938em;
   }
 
-  .container-1{
+.container-1{
     align-items: flex-start;
     background-color: var(--white);
-    border-radius: 40px;
-    box-shadow: 0px 2px 8px #00000022;
+    border-radius: 2.5em;
+    box-shadow: 0px 0.125em 0.5em #00000022;
     display: flex;
     justify-content: flex-end;
-    margin-left: 70px;
-    margin-top: 90px;
-    min-width: 1058px;
-    padding: 14px 23px;
-    height: 280px;
-    width: 800px;
-    padding: 19px 23px;
+    margin-left: 4.5em;
+    margin-top: 5.625em;
+    min-width: 66.125em;
+    padding: 0.875em 1.438em;
+    height: 17.5em;
+    width: 50em;
+    padding: 1.188em 1.438em;
+    
   }
   .password{
   align-items: flex-start;
   display: flex;
-  height: 70px;
-  margin-top: 18px;
-  min-width: 802px;
-  
+  height: 4.375em;
+  margin-top: 1.125em;
+  min-width: 50.125em;  
   }
 
 .placeholder-value-4 {
   background-color: transparent;
   border: 0;
-  height: 70px;
+  height: 4.375em;
   letter-spacing: 0;
-  line-height: 16px;
+  line-height: 1em;
   padding: 0;
-  width: 546px;
+  width: 34.125em;
 }
 .placeholder-value-4::placeholder {
   color: #afafaf99;
@@ -444,18 +450,18 @@ export default {
   left: 0;
   letter-spacing: 0;
   position: absolute;
-  top: 19px;
-  width: 496px;
+  top: 1.188em;
+  width: 31em;
 }
 
   .delete-account {
     align-items: flex-start;
     display: flex;
-    height: 500px;
-    left: 336px;
-    min-width: 1072px;
+    height: 31.25em;
+    left: 21em;
+    min-width: 67em;
     position: absolute;
-    top: 620px;
+    top: 38.75em;
   }
 
   .logo-and-title-3 {
@@ -463,49 +469,49 @@ export default {
     align-self: center;
     display: flex;
     flex-direction: column;
-    height: 186px;
-    margin-top: 0.25px;
-    width: 175px;
+    height: 11.625em;
+    margin-top: 0.016em;
+    width: 10.938em;
     text-align: center;
   }
 
   .vector {
-    height: 90px;
-    margin-left: 5px;
-    width: 90px;
-    margin-bottom: 20px;
+    height: 5.625em;
+    margin-left: 0.313em;
+    width: 5.625em;
+    margin-bottom: 1.25em;
   }
 
   .container-2 {
     align-items: flex-start;
     background-color: var(--white);
-    border-radius: 40px;
+    border-radius: 2.5em;
     box-shadow: 0px 2px 8px #00000022;
     display: flex;
     justify-content: flex-end;
-    margin-left: 580px;
-    margin-top: 755px;
-    min-width: 1058px;
-    padding: 10px 23px;
-    height: 200px;
-    width: 800px;
+    margin-left: 36.25em;
+    margin-top: 47.188em;
+    min-width: 66.125em;
+    padding: 0.625em 1.438em;
+    height: 12.5em;
+    width: 50em;
   }
 
   .description {
     align-items: flex-start;
     display: flex;
-    min-width: 464px;
+    min-width: 29em;
   }
 
   .description-1{
-    height: 102px;
+    height: 6.375em;
     left: 0;
     letter-spacing: 0;
     position: absolute;
-    top: 32px;
-    width: 395px;
+    top: 2em;
+    width: 24.688em;
     text-align: center;
-    margin-top: -10px;
+    margin-top: -0.625em;
     text-align: left;
   }
 
@@ -514,8 +520,8 @@ export default {
     letter-spacing: 0;
     position: absolute;
     top: 0;
-    width: 460px;
-    margin-top: -17px;
+    width: 28.75em;
+    margin-top: -1.063em;
     
   }
 
@@ -525,7 +531,7 @@ export default {
     font-size:  20px;
     font-family: inter;
     align-content: center;
-    /* height: 580px; */
+        /* height: 580px; */
     left: 77px;
     top: 73px;
     margin-left: initial;
@@ -535,20 +541,19 @@ export default {
   .overlap-group {
     align-items: flex-start;
     background-color: var(--cinnabar-2);
-    border-radius: 25px;
-    box-shadow: 0px 4px 4px 
-#00000040;
+    border-radius: 1.563em;
+    box-shadow: 0em 0.25em 0.25em #00000040;
     display: flex;
-    height: 72px;
-    margin-bottom: 2px;
-    margin-left: 16px;
-    min-width: 325px;
-    padding: 19px 15.6px;
+    height: 4.5em;
+    margin-bottom: 0.125em;
+    margin-left: 1em;
+    min-width: 20.313em;
+    padding: 1.188em 0.975em;
   }
-
+  
   .del{
-    margin-top: 50px;
-    margin-right: 150px;
+    margin-top: 3.125em;
+    margin-right: 9.375em;
     cursor: pointer;
   }
   .del-button {
@@ -557,26 +562,27 @@ export default {
     color: white;
     font-family: inter;
     font-weight: bold;
-    font-size: 25px;
-    padding: 15px 32px;
+    font-size: 1.563em;
+    padding: 0.938em 2em;
     text-align: center;
     text-decoration: none;
     display: inline-block;
-    border-radius: 22px;
+    border-radius: 1.375em;
     letter-spacing: 0;
-    min-height: 32px;
-    width: 265px;
+    min-height: 2em;
+    width: 12.563em;
+    margin-left: 5em;
     cursor: pointer;
   }
   
   .del-button:hover {
     background-color: rgb(243, 107, 107);
     cursor: pointer;
-  }
+    }
 
   .del-button:active {
     background-color: rgb(243, 107, 107);
-    box-shadow: 0 5px #666;
-    transform: translateY(2px);
+    box-shadow: 0 0.313em #666;
+    transform: translateY(0.125em);
 }
 </style>

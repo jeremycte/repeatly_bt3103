@@ -116,7 +116,8 @@ export default {
     height: 61px;
     margin-left: 250px;
     margin-top: 14.44px;
-    padding: 14px 51.7px
+    padding: 14px 51.7px;
+    word-break: break-all;
 }
 .bar-illustration {
   align-self: center;
@@ -146,7 +147,6 @@ export default {
   left: -1px;
   position: absolute;
   top: -1px;
-  width: 1922px;
 }
 
 .deck-cards-info {
@@ -215,13 +215,14 @@ export default {
   min-height: 32px;
   white-space: nowrap;
   text-transform: uppercase;
+  word-break: break-all;
 }
 
 .illustration {
   height: 188px;
   left: 37px;
   position: absolute;
-  top: 7px;
+  /* top: 7px; */
   width: 188px;
   z-index: 2;
 }

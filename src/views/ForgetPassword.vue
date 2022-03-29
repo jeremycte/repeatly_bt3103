@@ -18,9 +18,8 @@
                 <img class="logo-icon-login-header" :src='"https://anima-uploads.s3.amazonaws.com/projects/6231a346e960d27abb0c8fdd/releases/6231a535d957d3330e6b3b51/img/logo-icon-1@1x.png"' />
                 <div class="repeatlyLoginIcon inter-bold-black-28px" >Repeatly</div>
               </div>
-              <img class="background-setup" draggable="false" src="../../img/Login/background.png" />
+              <img class="background-setup-fp" draggable="false" />
             </div>
-            <img class="slice-1-forgetpasswordmain" :src='"https://anima-uploads.s3.amazonaws.com/projects/6231a346e960d27abb0c8fdd/releases/6231a4a9c59722c0165f17f9/img/slice-1@2x.png"' />
           </div>
           </router-link>
           <div class="body-forgetpasswordmain">
@@ -70,7 +69,10 @@ props: [
 </script>
 
 <style>
-
+.login-registration-side-header, .repeatly-logo-header {
+  position: absolute;
+  display: flex;
+}
 
 .header-1-forgetpasswordheader {
   display: flex;
@@ -80,6 +82,15 @@ props: [
   position: absolute;
   top: 298px;
   width: 602px;
+}
+
+.background-setup-fp {
+  background-image: url("../../img/Login/background.png");
+  background-size: cover;
+  width: 1011px;
+  background-position-y: center;
+  background-repeat: no-repeat;
+  height: 972px;
 }
 
 .title-forgetpasswordheader {
@@ -104,32 +115,38 @@ props: [
   width: 1440px;
 }
 
+.logo-icon-login-header {
+  height: 51px;
+  object-fit: cover;
+  width: 51px;
+  z-index: 10;
+  margin-top: 3em;
+  margin-right: 13px;
+  margin-left: 2em;
+}
+
+
+.repeatlyLoginIcon {
+  height: 27.96px;
+  margin-top: 2.2em;
+  width: 127.03px;
+  z-index: 10;
+}
+
 .overlap-group3-forgetpasswordmain {
-  height: 1176px;
+  /* height: 1176px; */
   margin-top: -150.25px;
   position: relative;
   width: 1410px;
+  
 }
 
 .overlap-group2-forgetpasswordmain {
-  height: 1026px;
+  /* height: 1026px; */
   left: 0;
   position: absolute;
   top: 150px;
   width: 1406px;
-}
-
-
-
-
-
-
-
-.slice-1-forgetpasswordmain {
-  height: 1px;
-  margin-left: 482px;
-  margin-top: 229px;
-  width: 1px;
 }
 
 .body-forgetpasswordmain {

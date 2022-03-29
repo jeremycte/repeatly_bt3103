@@ -9,9 +9,8 @@
                 <img class="logo-icon-login-header" :src='"https://anima-uploads.s3.amazonaws.com/projects/6231a346e960d27abb0c8fdd/releases/6231a535d957d3330e6b3b51/img/logo-icon-1@1x.png"' />
                 <div class="repeatlyLoginIcon inter-bold-black-28px" >Repeatly</div>
               </div>
-              <img class="background-setup" draggable="false" src="../../img/Login/background.png" />
+              <img class="background-setup" draggable="false" />
             </div>
-            <img class="slice-1-forgetpasswordmain" :src='"https://anima-uploads.s3.amazonaws.com/projects/6231a346e960d27abb0c8fdd/releases/6231a4a9c59722c0165f17f9/img/slice-1@2x.png"' />
           </div>
         </router-link>
         <div class="credentials">
@@ -135,14 +134,18 @@ export default {
   object-fit: cover;
   width: 51px;
   z-index: 10;
+  margin-top: 3em;
+  margin-right: 13px;
+  margin-left: 2em;
 }
+
 
 .repeatlyLoginIcon {
   height: 27.96px;
-  margin-left: 15.3px;
-  margin-top: 11.4px;
+    /* margin-left: 0.3px; */
+  margin-top: 2.2em;
   width: 127.03px;
-  z-index: 10;
+  z-index: 10
 }
 
 .background-setup {
@@ -151,7 +154,12 @@ export default {
   position: absolute;
   top: 0;
   width: 1011px;
-
+  background-image: url("../../img/Login/background.png");
+  background-size: cover;
+  width: 1011px;
+  background-position-y: center;
+  background-repeat: no-repeat;
+  height: 1024px;
 }
 
 .background-setup-group {

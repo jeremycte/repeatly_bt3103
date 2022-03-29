@@ -23,3 +23,8 @@
 * {
   box-sizing: border-box;
 }
+
+input, textarea {
+  border: none;
+  outline: none;
+}

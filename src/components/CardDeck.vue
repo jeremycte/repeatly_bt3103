@@ -1,38 +1,95 @@
 <template>
-<div class="container-center-horizontal">
-    <div class="student-dashboard-homepage screen">
+
+    <!-- <div class="student-dashboard-homepage screen"> -->
       <div class="deck-card-group">
         <div class="background-dashboard"></div>
-        <div class="purple-deck">
-            <div class="overlay-deck">
-                <div v-for="(value, name) in object" :key="value.message">
-                    {{ name }}: {{ value }}
+<!--        <router-link to="/sign-in">-->
+        <template v-if="loading">
+          <div class="purple-deck" v-for="item in documents" :key="item">
+             <img class="illustration" :src="require(`../../img/Dashboard/history-illustrations.png`)" />
+              <div class="overlay-deck">
+                <div class="deck-cards-info">
+                    <div class="card-title inter-semi-bold-heavy-metal-36px" id="Deck Title">{{item["title"]}}</div>
+                    <div class="flex-row-cards-info">
+                        <div class="total-cards inter-semi-bold-heavy-metal-25px" id="totalCards">Total Cards: {{item["totalCards"]}}</div>
+                        <div class="needs-recaping inter-semi-bold-mustard-25px" id="needsRecapping">Needs Recapping: {{item["needsRecapping"]}}</div>
+                        <div class="uncertain-cards inter-semi-bold-mexican-red-25px" id="uncertainCards">Uncertain Cards: {{item["uncertainCards"]}}</div>
+                    </div>
+                    <div class="estimated-time inter-semi-bold-heavy-metal-25px" id="estimatedTime">Estimated Time (min): {{item["estimatedTime"]}}</div>
                 </div>
-            
-            <div class="deck-cards-info">
-                <div class="card-title inter-semi-bold-heavy-metal-36px" id="Deck Title">Deck Title</div>
-                <div class="flex-row-cards-info">
-                    <div class="total-cards inter-semi-bold-heavy-metal-25px" id="totalCards">Total Cards: NIL</div>
-                    <div class="needs-recaping inter-semi-bold-mustard-25px" id="needsRecapping">Needs Recapping: NIL</div>
-                    <div class="uncertain-cards inter-semi-bold-mexican-red-25px" id="uncertainCards">Uncertain Cards: NIL</div>
-                </div>
-                <div class="estimated-time inter-semi-bold-heavy-metal-25px" id="estimatedTime">Estimated Time (min): NIL</div>
-            </div>
-            <div class="overlay-tagName">
-              <div class="tagName inter-semi-bold-heavy-metal-23px" id="tagName">TAG</div>
+              <div class="overlay-tagName">
+                <div class="tagName inter-semi-bold-heavy-metal-23px" id="tagName">{{item["tag"]}}</div>
+              </div>
             </div>
           </div>
-        </div>
+        </template>
+<!--        </router-link>-->
       </div>
-    </div>
-  </div>
+    <!-- </div> -->
 </template>
 
 <script>
+import firebaseApp from "@/firebaseDetails";
+import {getAuth,onAuthStateChanged} from "firebase/auth";
+import {collection,getDocs,getFirestore} from "firebase/firestore";
+
+const auth = getAuth();
+const db = getFirestore(firebaseApp);
+var refDoc=[];
+
+async function getCardDetails(userEmail){
+  let userDecks = await getDocs(collection(db,"users",String(userEmail),"decks"));
+  if (!userDecks.empty){
+    userDecks.forEach((docs)=>{
+      let deck = docs.data()
+      let deckId = docs.id
+      const title = deck.title
+      const estimatedTime = deck.estimatedTime
+      const needsRecapping = deck.needsRecapping
+      const tag = deck.tag
+      const totalCards = deck.totalCards
+      const uncertainCards = deck.uncertainCards
+      const tempDeckDetails = {
+        'deckId':deckId,
+        'title':title,
+        'estimatedTime':estimatedTime,
+        'needsRecapping':needsRecapping,
+        'tag':tag,
+        'totalCards':totalCards,
+        'uncertainCards':uncertainCards,
+      }
+      refDoc.push(tempDeckDetails)
+
+    })
+  }
+}
+
+
 
 
 export default {
   name: "CardDeck",
+  methods:{
+    async getData(){
+      onAuthStateChanged(auth,async (user)=>{
+        if(user) {
+          await getCardDetails(user.email)
+          this.documents = refDoc;
+          this.loading = true;
+        }
+      })
+    }
+  },
+  mounted(){
+    refDoc = []
+    this.getData()
+  },
+  data(){
+    return{
+      loading:false,
+      documents:[],
+    }
+  }
 };
 </script>
 
@@ -44,8 +101,8 @@ export default {
     border-radius: 40px;
     box-shadow: 0px 2px 8px #00000022;
     display: flex;
-    height: 228px;
-    margin-top: -1px;
+    height: 210px;
+    margin-top: 30px;
     min-width: 1429px;
     padding: 19.6px 36.8px;
     position: relative;
@@ -59,7 +116,8 @@ export default {
     height: 61px;
     margin-left: 250px;
     margin-top: 14.44px;
-    padding: 14px 51.7px
+    padding: 14px 51.7px;
+    word-break: break-all;
 }
 .bar-illustration {
   align-self: center;
@@ -79,17 +137,16 @@ export default {
 .deck-card-group {
   height: 1118px;
   position: relative;
-  width: 1920px;
+  /* width: 1920px; */
 }
 
 .background-dashboard {
   background-color: var(--white);
-  box-shadow: 0px 2px 8px #00000014;
+  /* box-shadow: 0px 2px 8px #00000014; */
   height: 1026px;
   left: -1px;
   position: absolute;
   top: -1px;
-  width: 1922px;
 }
 
 .deck-cards-info {
@@ -97,7 +154,7 @@ export default {
   align-self: flex-end;
   display: flex;
   flex-direction: column;
-  margin-left: 22px;
+  margin-left: 14em;
   min-height: 153px;
   width: 726px;
 }
@@ -158,5 +215,15 @@ export default {
   min-height: 32px;
   white-space: nowrap;
   text-transform: uppercase;
+  word-break: break-all;
+}
+
+.illustration {
+  height: 188px;
+  left: 37px;
+  position: absolute;
+  /* top: 7px; */
+  width: 188px;
+  z-index: 2;
 }
 </style>

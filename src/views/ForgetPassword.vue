@@ -15,7 +15,7 @@
           <div class="background-setup-group">
             <div class="login-registration-side-header">
               <div class="repeatly-logo-header">
-                <img class="logo-icon-login-header" :src='"https://anima-uploads.s3.amazonaws.com/projects/6231a346e960d27abb0c8fdd/releases/6231a535d957d3330e6b3b51/img/logo-icon-1@1x.png"' />
+                <img class="logo-icon-login-header" src="../../img/repeatlyIcon.png" />
                 <div class="repeatlyLoginIcon inter-bold-black-28px" >Repeatly</div>
               </div>
               <img class="background-setup-fp" draggable="false" />
@@ -27,7 +27,7 @@
             <form>
             <div class="email-or-username-emailsubsection">
                 <div class="header-emailsubsection inter-bold-black-28px">Enter Your Email</div>
-                <div class="overlap-group1-emailsubsection" :style="{ 'background-image': 'url(' + 'https://anima-uploads.s3.amazonaws.com/projects/6231a346e960d27abb0c8fdd/releases/62344395490c786a6849ba07/img/rectangle-1@1x.png' + ')' }">
+                <div class="overlap-group1-emailsubsection">
                     <input
                         class="placeholder-value-emailsubsection inter-normal-silver-chalice-28px"
                         name= "placeholdervalue"
@@ -53,10 +53,6 @@
             <span class="span-forgetpasswordmain inter-bold-dull-lavender-16px">Sign in now</span>
             </router-link>
         </p>
-        <img
-          class="rectangle-9521-forgetpasswordmain"
-          src="https://anima-uploads.s3.amazonaws.com/projects/6231a346e960d27abb0c8fdd/releases/6237dcb521663abe445fd24c/img/rectangle-9521@2x.svg"
-        />
       </div>
     </div>
   </div>
@@ -234,6 +230,7 @@ export default {
 }
 
 .overlap-group1-emailsubsection {
+  background-image: url(../../img/Login/rectangle1.png);
   align-items: center;
   background-size: 100% 100%;
   display: flex;
@@ -268,7 +265,7 @@ export default {
 
 .overlap-group-1-forgetpasswordbutton {
   align-items: flex-start;
-  background-image: url(https://anima-uploads.s3.amazonaws.com/projects/6231a346e960d27abb0c8fdd/releases/6231a453c59722c0165f17f8/img/rectangle-4@1x.png);
+  background-image: url("../../img/Login/loginrectangle.png");
   background-size: 100% 100%;
   display: flex;
   height: 72px;

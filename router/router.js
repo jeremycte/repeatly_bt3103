@@ -8,9 +8,10 @@ import Home from '@/views/Home.vue'
 import ForgetPassword from '@/views/ForgetPassword.vue'
 import Registration from '@/views/Registration.vue'
 import ForgetPasswordStatus from '@/views/ForgetPasswordStatus.vue'
-import StudentStudyDeckStats from '@/views/StudentStudyDeckStats.vue'
+// import StudentStudyDeckStats from '@/views/StudentStudyDeckStats.vue'
 import CreateDeck from '@/views/CreateDeck.vue'
 import StudyDeck from '@/views/StudyDeckQuestion.vue'
+import ViewCardDeck from '@/views/ViewCardDeck.vue'
 import StudyDeckAnswer from '@/views/StudyDeckAnswer.vue'
 
 
@@ -274,6 +275,14 @@ const routes = [
         path:'/study-deck',
         name: 'StudyDeck',
         component: StudyDeck,
+        props: {
+            MyDashboard: "Card Deck Details"
+        },
+    },
+    {
+        path:'/view-card-deck',
+        name: 'ViewCardDeck',
+        component: ViewCardDeck,
         props: {
             MyDashboard: "Question"
         },

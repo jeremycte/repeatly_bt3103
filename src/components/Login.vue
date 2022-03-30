@@ -6,7 +6,7 @@
           <div class="background-setup-group">
             <div class="login-registration-side-header">
               <div class="repeatly-logo-header">
-                <img class="logo-icon-login-header" :src='"https://anima-uploads.s3.amazonaws.com/projects/6231a346e960d27abb0c8fdd/releases/6231a535d957d3330e6b3b51/img/logo-icon-1@1x.png"' />
+                <img class="logo-icon-login-header" src="../../img/repeatlyIcon.png" />
                 <div class="repeatlyLoginIcon inter-bold-black-28px" >Repeatly</div>
               </div>
               <img class="background-setup" draggable="false" />
@@ -70,10 +70,9 @@
 <script>
 import {getAuth, signInWithEmailAndPassword, onAuthStateChanged} from "firebase/auth";
 import firebaseApp from "../firebaseDetails";
-firebaseApp;
 import SocialMediaLogin from "@/components/SocialMediaLogin.vue";
 import router from "../../router/router";
-
+firebaseApp;
 const auth = getAuth();
 
 onAuthStateChanged(auth,(user)=>{

@@ -227,7 +227,6 @@
               <div class="group-162495">
                 <div class="group-162492">
                   <div class="x1">
-                    <!-- <icon /> -->
                     <div class="group-162491">
                       <div
                         class="fully-responsive inter-light-eerie-black-28px"
@@ -245,7 +244,6 @@
 
                 <div class="group-162494">
                   <div class="x1-1">
-                    <!-- <icon :className="icon1Props.className" /> -->
                     <div class="group-162491-1">
                       <div
                         class="fully-responsive-1 inter-light-eerie-black-28px"
@@ -262,7 +260,6 @@
                 </div>
                 <div class="group-162493-1">
                   <div class="x1-4">
-                    <!-- <icon :className="iconProps.className" /> -->
                     <div class="group-162491-4">
                       <div
                         class="fully-responsive-4 inter-light-eerie-black-28px"
@@ -282,7 +279,6 @@
               <div class="group-162496">
                 <div class="group-162494-1">
                   <div class="x1-2">
-                    <!-- <icon :className="icon2Props2.className" /> -->
                     <div class="group-162491-2">
                       <div
                         class="fully-responsive-2 inter-light-eerie-black-28px"
@@ -299,7 +295,6 @@
                 </div>
                 <div class="group-162493">
                   <div class="x1-3">
-                    <!-- <icon :className="icon3Props.className" /> -->
                     <div class="group-162491-3">
                       <div
                         class="fully-responsive-3 inter-light-eerie-black-28px"
@@ -316,7 +311,6 @@
                 </div>
                 <div class="group-162493">
                   <div class="x1-4">
-                    <!-- <icon :className="iconProps.className" /> -->
                     <div class="group-162491-4">
                       <div
                         class="fully-responsive-4 inter-light-eerie-black-28px"
@@ -465,12 +459,12 @@ export default {
   flex-direction: column;
   height: 4433px;
   overflow: hidden;
-  width: 1920px;
+  width: 1903px;
 }
 
 .overlap-group9 {
   height: 4588px;
-  margin-left: -520.33px;
+  margin-left: -580.33px;
   margin-top: -290px;
   position: relative;
   width: 2798px;

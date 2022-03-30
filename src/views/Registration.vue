@@ -6,12 +6,11 @@
           <div class="background-setup-group">
             <div class="login-registration-side-header">
               <div class="repeatly-logo-header">
-                <img class="logo-icon-login-header" :src='"https://anima-uploads.s3.amazonaws.com/projects/6231a346e960d27abb0c8fdd/releases/6231a535d957d3330e6b3b51/img/logo-icon-1@1x.png"' />
+                <img class="logo-icon-login-header" src='../../img/repeatlyIcon.png' />
                 <div class="repeatlyLoginIcon inter-bold-black-28px" >Repeatly</div>
               </div>
               <img class="background-setup" draggable="false" src="../../img/Login/background.png" />
             </div>
-            <img class="slice-1-forgetpasswordmain" :src='"https://anima-uploads.s3.amazonaws.com/projects/6231a346e960d27abb0c8fdd/releases/6231a4a9c59722c0165f17f9/img/slice-1@2x.png"' />
           </div>
         </router-link>
         <div class="body-registration">
@@ -45,7 +44,7 @@
                     <div class="header-registration inter-bold-black-28px">Username</div>
                     <img
                     class="rectangle-1-registration"
-                    src="https://anima-uploads.s3.amazonaws.com/projects/6231a346e960d27abb0c8fdd/releases/62344395490c786a6849ba07/img/rectangle-1-4@1x.png"
+                    src="../../img/Login/rectangle1.png"
                     />
                 </div>
                 <input
@@ -89,7 +88,7 @@
               <div class="dob-registration">
                 <div class="header-3-registration inter-bold-black-28px">Date of Birth</div>
                 <div class="overlap-group-container-registration">
-                <div class="overlap-group2-registration" :style="{ 'background-image': 'url(' + 'https://anima-uploads.s3.amazonaws.com/projects/6231a346e960d27abb0c8fdd/releases/6237dcb521663abe445fd24c/img/rectangle-1-2@2x.png' + ')' }">
+                <div class="overlap-group2-registration">
                     <select id = "day" name = "day">
                       <option value="" disabled selected hidden>Day</option>
                       <option value="01">01</option>
@@ -125,7 +124,7 @@
                       <option value="31">31</option>
                   </select>
                 </div>
-                <div class="overlap-group1-registration" :style="{ 'background-image': 'url(' + 'https://anima-uploads.s3.amazonaws.com/projects/6231a346e960d27abb0c8fdd/releases/6237dcb521663abe445fd24c/img/rectangle-1@2x.png' + ')' }">
+                <div class="overlap-group1-registration">
                     <select id = "month" name = "month">
                       <option value="" disabled selected hidden>Month</option>
                       <option value="01">01</option>
@@ -142,7 +141,7 @@
                       <option value="12">12</option>
                     </select>
                 </div>
-                <div class="overlap-group-2-registration" :style="{ 'background-image': 'url(' + 'https://anima-uploads.s3.amazonaws.com/projects/6231a346e960d27abb0c8fdd/releases/6237dcb521663abe445fd24c/img/rectangle-1@2x.png' + ')' }">
+                <div class="overlap-group-2-registration" >
                     <select id = "year" name="year">
                       <option value="" disabled selected hidden>Year</option>
                       <option :key="year" v-for="year in years" :value="year">{{ year }}</option>
@@ -180,14 +179,14 @@
               </div>
             </div>
             <div class="overlap-group6-registration">
-              <img class="vector-4-registration" :src="'https://anima-uploads.s3.amazonaws.com/projects/6231a346e960d27abb0c8fdd/releases/6231a4a9c59722c0165f17f9/img/vector-4@1x.png'" />
-              <img class="vector-5-registration" :src="'https://anima-uploads.s3.amazonaws.com/projects/6231a346e960d27abb0c8fdd/releases/6231a4a9c59722c0165f17f9/img/vector-4@1x.png'" />
+              <img class="vector-4-registration" src='../../img/Login/vector1.png' />
+              <img class="vector-5-registration" src='../../img/Login/vector2.png' />
               <div class="or-continue-with-email-registration valign-text-middle inter-normal-black-14px">
                 or continue with email
               </div>
             </div>
           </div>
-          <button class="overlap-group-1-registration" type="button" v-on:click="register()" :style="{ 'background-image': 'url(' + 'https://anima-uploads.s3.amazonaws.com/projects/6231a346e960d27abb0c8fdd/releases/6231a4a9c59722c0165f17f9/img/rectangle-4-1@1x.png' + ')' }">
+          <button class="overlap-group-1-registration" type="button" v-on:click="register()">
             <div class="sign-up-registration valign-text-middle inter-bold-white-28px">Sign Up</div>
           </button>
         </div>
@@ -365,14 +364,19 @@ export default {
 <style>
 
 .background-setup {
-  height: initial;
+  background-image: url("../../img/Login/background.png");
+  background-size: cover;
+  width: 1011px;
+  background-position-y: center;
+  background-repeat: no-repeat;
+  /* height: 972px; */
 }
 .registration {
   background-color: var(--sauvignon);
-  height: 1040px;
+  height: 1020px;
   overflow: hidden;
   position: relative;
-  width: 1920px;
+  width: 1903px;
 }
 
 .body-registration {
@@ -473,6 +477,7 @@ export default {
 }
 
 .overlap-group-1-registration {
+  background-image: url(../../img/Login/loginrectangle.png);
   align-items: flex-start;
   background-size: 100% 100%;
   display: flex;
@@ -614,7 +619,7 @@ export default {
 }
 
 .overlap-group3-registration {
-  background-image: url(https://anima-uploads.s3.amazonaws.com/projects/6231a346e960d27abb0c8fdd/releases/62344395490c786a6849ba07/img/rectangle-1-4@1x.png);
+  background-image: url(../../img/Login/rectangle1.png);
   background-size: 100% 100%;
   height: 72px;
   margin-left: -1px;
@@ -682,6 +687,7 @@ export default {
 }
 
 .overlap-group2-registration {
+  background-image: url(../../img/Login/rectangleSmall.png);
   background-size: 100% 100%;
   height: 72px;
   position: relative;
@@ -708,6 +714,7 @@ export default {
 }
 
 .overlap-group1-registration {
+  background-image: url(../../img/Login/rectangleSmall.png);
   background-size: 100% 100%;
   height: 72px;
   margin-left: 20px;
@@ -744,6 +751,7 @@ export default {
 }
 
 .overlap-group-2-registration {
+  background-image: url(../../img/Login/rectangleSmall.png);
   background-size: 100% 100%;
   height: 72px;
   margin-left: 20px;
@@ -898,7 +906,7 @@ select {
 
 .overlap-group4-registration {
   align-items: center;
-  background-image: url(https://anima-uploads.s3.amazonaws.com/projects/6231a346e960d27abb0c8fdd/releases/62344395490c786a6849ba07/img/rectangle-1-4@1x.png);
+  background-image: url(../../img/Login/rectangle1.png);
   background-size: 100% 100%;
   display: flex;
   height: 72px;

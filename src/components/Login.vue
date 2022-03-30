@@ -70,10 +70,9 @@
 <script>
 import {getAuth, signInWithEmailAndPassword, onAuthStateChanged} from "firebase/auth";
 import firebaseApp from "../firebaseDetails";
-firebaseApp;
 import SocialMediaLogin from "@/components/SocialMediaLogin.vue";
 import router from "../../router/router";
-
+firebaseApp;
 const auth = getAuth();
 
 onAuthStateChanged(auth,(user)=>{

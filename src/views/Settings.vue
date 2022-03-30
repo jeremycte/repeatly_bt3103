@@ -13,6 +13,22 @@
     </div>
     <div class="container border-1px-alto">
       <div class="update-user-details-1">
+        <div class="email">
+          <div class="overlap-group-1-settings">
+            <div class="overlap-group-2-settings">
+              <input
+                  class="placeholder-value-1 inter-normal-silver-chalice-28px"
+                  v-model="email"
+                  placeholder="Type your email"
+                  type="text"
+                  id="emailInput"
+                  readonly
+                  required/>
+            </div>
+            <div class="header-1-settings inter-bold-black-28px">Email</div>
+          </div>
+        </div>
+
         <div class="username">
             <div class="overlap-group-1-settings">  
               <div class="overlap-group-2-settings">
@@ -21,34 +37,22 @@
                     placeholder="UserName"
                     v-model="username"
                     type="text"
+                    id="usernameInput"
                     required/>
             </div>
             <div class="header-1-settings inter-bold-black-28px">User Name</div>
         </div>
         </div>
-      
-        <div class="email">        
-          <div class="overlap-group-1-settings">
-            <div class="overlap-group-2-settings">
-                <input
-                    class="placeholder-value-1 inter-normal-silver-chalice-28px"
-                    v-model="email"
-                    placeholder="Type your email"
-                    type="text"
-                    required/>
-            </div>
-            <div class="header-1-settings inter-bold-black-28px">Email</div>
-            </div>
-        </div>
-        
+
         <div class="dob">        
           <div class="overlap-group-1-settings">
             <div class="overlap-group-2-settings">
                 <input
                     class="placeholder-value-1 inter-normal-silver-chalice-28px"
                     v-model="dob"
-                    placeholder="DD/MM/YYYY"
+                    placeholder="YYYY/MM/DD"
                     type="text"
+                    id="dobInput"
                     required/>
             </div>
               <div class="header-1-settings inter-bold-black-28px">Date Of Birth</div>
@@ -73,6 +77,7 @@
                 v-model="password"
                 placeholder="******"
                 type="text"
+                id="passwordInput"
                 >
               </div>
             <div class="header-5 inter-bold-black-28px">Password</div>
@@ -86,6 +91,7 @@
                 v-model="confirmPassword"
                 placeholder = "******"
                 type="text"
+                id="confirmInput"
                 >
               </div>
             <div class="header-5 inter-bold-black-28px">Confirm <br> Password</div>
@@ -122,13 +128,33 @@
 </template>
 <script>
 import SideNav from '../components/SideNav.vue';
+import firebaseApp from "@/firebaseDetails";
+import {getAuth,onAuthStateChanged,updatePassword,deleteUser} from "firebase/auth";
+import {getFirestore,updateDoc,doc,deleteDoc} from "firebase/firestore";
+import moment from "moment";
+import router from "../../router/router";
+
+
+const auth = getAuth()
+const db = getFirestore(firebaseApp);
+var currentRefUser;
+
 
 export default {
   name: "Settings",
     components: {
         SideNav
     },
-    data(){
+    mounted() {
+    onAuthStateChanged(auth,(user)=>{
+      if(user){
+        currentRefUser = auth.currentUser;
+        document.getElementById("emailInput").value = String(currentRefUser.email)
+        this.email = currentRefUser.email
+      }
+    });
+    },
+  data(){
       return{
         username:"",
         dob:"",
@@ -142,22 +168,65 @@ export default {
       clear(){
         this.username = "";
         this.dob = "";
-        this.email = "";
         this.password = "";
         this.confirmPassword = "";
       },
-      save(){
-        //dummy codes
-        alert("Your infomation has been saved!");
-      },
-      deleteAcc(){
-        const ok = confirm("Are you sure you want to delete your account?");
+      async save(){
+        try{
+          emailRef = currentRefUser.email
+          const usernameVal = document.getElementById("usernameInput").value
+          const dobVal = document.getElementById("dobInput").value
+          const passwordVal = document.getElementById("passwordInput").value
+          const confirmVal = document.getElementById("confirmInput").value
+          var emailRef
+          if(usernameVal !=="") {
+            const userUpdateRef = doc(db,"users",emailRef);
+            await updateDoc(userUpdateRef,{
+              username: usernameVal,
+            })
+          }
+          if (dobVal !== ""){
+            if (moment(dobVal,"YYYY/MM/DD",true).isValid()){
+              const dobUpdateRef = doc(db,"users",emailRef);
+              await updateDoc(dobUpdateRef,{
+                DOB: dobVal,
+              })
+            } else {
+              alert("Ensure that DOB is in the correct format");
+              throw "dob Invalid";
+            }
+          }
 
-        if(ok){
-          //insert deleting firebase account code here
-          alert("Your account has been deleted");
-        } else {
-          alert("Your account has not been deleted");
+          if (passwordVal !=="" && confirmVal !=="") {
+            if (passwordVal === confirmVal) {
+              await updatePassword(currentRefUser, passwordVal)
+            } else {
+              alert("Ensure that passwords are matching");
+              throw "password invalid";
+            }
+          }
+          this.clear();
+          alert("Your infomation has been saved!");
+          location.reload();
+        } catch(error){
+          console.log("update error")
+        }
+      },
+      async deleteAcc(){
+        try{
+          const ok = confirm("Are you sure you want to delete your account?");
+
+          if(ok){
+            const tempUser = currentRefUser
+            await deleteDoc(doc(db,"users",tempUser.email));
+            await deleteUser(auth.currentUser);
+            alert("Your account has been deleted");
+            await router.push({name: 'SignIn'});
+          } else {
+            alert("Your account has not been deleted");
+          }
+        } catch(error){
+          console.log('account deletion error')
         }
       }
 
@@ -311,6 +380,7 @@ export default {
   min-width: 50.125em;
 
 }
+
 .confirm-password{
   align-items: flex-end;
   display: flex;

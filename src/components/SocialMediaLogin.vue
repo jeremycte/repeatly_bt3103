@@ -27,7 +27,7 @@
 <script>
 import {GoogleAuthProvider, signInWithRedirect,getAuth,getRedirectResult} from "firebase/auth";
 import firebaseApp from "../firebaseDetails.js";
-import {doc, setDoc,getFirestore} from "firebase/firestore";
+import {doc, setDoc,getFirestore,getDoc} from "firebase/firestore";
 
 const db = getFirestore(firebaseApp);
 
@@ -47,17 +47,22 @@ async function googleRegisterFirebase() {
       const month = "0" + (date.getMonth() + 1).toString();
       const year = date.getFullYear().toString();
       const dob = year + "/" + month + "/" + day;
+      const testRef = doc(db,"users",eMail);
+      const test = await getDoc(testRef);
 
-      const userDocRef = await setDoc(doc(db,'users',eMail),{
-        username: userName,
-        email: eMail,
-        DOB: dob,
-      })
-      console.log(userDocRef);
-      console.log("google registration Passed")
+      if (!test.exists()){
+        const userDocRef = await setDoc(doc(db,'users',eMail),{
+          username: userName,
+          email: eMail,
+          DOB: dob,
+        })
+        console.log(userDocRef);
+      }
+
+      console.log("google registration/login Passed")
     }
   }catch(error){
-    console.log("google registration failed")
+    console.log("google registration/login failed")
     console.log(error)
   }
 

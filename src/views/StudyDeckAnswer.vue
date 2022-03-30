@@ -31,7 +31,7 @@
                 <img class="icon-check_mark" src="../../img/StudyDeckAnswer/reload.png" />
             </div>
             <div class="wrong-button">
-              <div class="overlap-group-1">
+              <div class="overlap-group-deckans">
                 <div class="rectangle-6"></div>
                 <img class="icon-close" src="../../img/StudyDeckAnswer/vector-81@2x.png" />
               </div>
@@ -54,6 +54,12 @@ export default {
 </script>
 
 <style scoped>
+.overlap-group-deckans {
+    background-size: 100% 100%;
+    margin-top: -0.15px;
+    position: relative;
+    width: 1124px;
+}
 .student-study-deck-answer {
     /* align-items: flex-start; */
     /* display: flex; */

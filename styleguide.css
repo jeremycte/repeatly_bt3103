@@ -19,6 +19,7 @@
     --white: #ffffff;
     --white-23: #ffffffb2;
     --white-22: #ffffffab;
+    --light-gray: #DCDCDC;
    
     --font-size-l2: 30px;
     --font-size-l: 30px;
@@ -71,6 +72,14 @@
 
   .inter-semi-bold-white-28px {
     color: var(--white);
+    font-family: var(--font-family-inter);
+    font-size: var(--font-size-xxl2);
+    font-weight: 600;
+    font-style: normal;
+  }
+
+  .inter-semi-bold-lightgray-28px {
+    color: var(--light-gray);
     font-family: var(--font-family-inter);
     font-size: var(--font-size-xxl2);
     font-weight: 600;

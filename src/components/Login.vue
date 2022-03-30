@@ -55,9 +55,11 @@
         <img class="rectangle-9521" :src="rectangle9521" />
       </div>
       <p class="dont-have-an-account-sign-up-now valign-text-middle inter-bold-white-16px">
-        <span
-        ><span class="inter-bold-black-16px">Don't have an account?</span
-        ><span class="span1 inter-bold-dull-lavender-16px"> Sign Up Now</span>
+        <span>
+          <span class="inter-bold-black-16px">Don't have an account?</span>
+          <router-link to="/registration">
+            <span class="span1 inter-bold-dull-lavender-16px"> Sign Up Now</span>
+          </router-link>
         </span>
       </p>
       <social-media-login/>

@@ -24,7 +24,9 @@
       </div>
       <btn class="checkAnswerStudybtn">
         <div class="frame-1-checkanswers">
+          <router-link to="/study-deck-answer">
           <h1 class="studydeck-titleBtn inter-semi-bold-white-28px">Check Answers</h1>
+          </router-link>
         </div>
       </btn>
     </div>
@@ -79,7 +81,7 @@ export default {
 }
 
 .question-rectangle {
-    height: 440px;
+    height: 420px;
     width: 622px;
     background-color: var(--navy-blue);
     border-radius: 40px;
@@ -132,7 +134,7 @@ export default {
     display: flex;
     align-items: flex-start;
     margin-top: 29px;
-    margin-left: 71.2px;
+    margin-left: 68.2px;
     margin-top: 26.7px;
 }
 
@@ -172,6 +174,6 @@ export default {
     box-shadow: 0px 2px 8px #00000022;
     margin-top: 29px;
     display: flex;
-    margin-left: 33em;
+    margin-left: 32em;
   }
 </style>

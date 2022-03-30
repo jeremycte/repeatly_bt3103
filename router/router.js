@@ -8,10 +8,11 @@ import Home from '@/views/Home.vue'
 import ForgetPassword from '@/views/ForgetPassword.vue'
 import Registration from '@/views/Registration.vue'
 import ForgetPasswordStatus from '@/views/ForgetPasswordStatus.vue'
-/*import StudentStudyDeckStats from '@/views/StudentStudyDeckStats.vue'*/
+import StudentStudyDeckStats from '@/views/StudentStudyDeckStats.vue'
 import CreateDeck from '@/views/CreateDeck.vue'
 import StudyDeck from '@/views/StudyDeckQuestion.vue'
 import ViewCardDeck from '@/views/ViewCardDeck.vue'
+import StudyDeckAnswer from '@/views/StudyDeckAnswer.vue'
 
 
 const routes = [
@@ -285,6 +286,11 @@ const routes = [
         props: {
             MyDashboard: "Question"
         },
+    },
+    {
+        path:'/study-deck-answer',
+        name: 'StudyDeckAnswer',
+        component: StudyDeckAnswer,
     },
     {
         path: '/:catchAll(.*)',

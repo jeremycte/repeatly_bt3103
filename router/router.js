@@ -231,11 +231,11 @@ const routes = [
         props: true
         },
 
-    /*{
+    {
         path: '/study-student-stats',
         name: 'StudentStudyDeckStats',
         component: StudentStudyDeckStats,
-        },*/
+        },
     {
         path: '/sign-in',
         name: 'SignIn',

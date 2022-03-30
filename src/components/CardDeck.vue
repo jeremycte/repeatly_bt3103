@@ -5,7 +5,7 @@
         <div class="background-dashboard"></div>
 <!--        <router-link to="/sign-in">-->
         <template v-if="loading">
-          <div class="purple-deck" v-for="item in documents" :key="item">
+          <div class="purple-deck" v-for="item in documents" :key="item" >
              <img class="illustration" :src="require(`../../img/Dashboard/history-illustrations.png`)" />
               <div class="overlay-deck">
                 <div class="deck-cards-info">
@@ -59,7 +59,6 @@ async function getCardDetails(userEmail){
         'uncertainCards':uncertainCards,
       }
       refDoc.push(tempDeckDetails)
-
     })
   }
 }
@@ -70,14 +69,21 @@ async function getCardDetails(userEmail){
 export default {
   name: "CardDeck",
   methods:{
-    async getData(){
-      onAuthStateChanged(auth,async (user)=>{
+    async getData() {
+      onAuthStateChanged(auth, async (user)=>{
         if(user) {
           await getCardDetails(user.email)
+          await this.randomImage()
           this.documents = refDoc;
           this.loading = true;
         }
       })
+    },
+    randomImage() {
+      console.log(this.images[Math.floor(Math.random() * this.images.length)]);
+      return `url("../../img/Dashboard/${
+        this.images[Math.floor(Math.random() * this.images.length)]
+      }")`;
     }
   },
   mounted(){
@@ -85,9 +91,11 @@ export default {
     this.getData()
   },
   data(){
-    return{
-      loading:false,
+    return {
+      loading: false,
       documents:[],
+      images: ['history-illustrations.png', 'tab-illustration.png', 'security-illustration.png', 'computer-illustration.png'],
+      colors: ['rgba(209, 245, 237, 1)', 'rgba(243, 217, 224, 1)', 'rgba(167, 134, 243, 1)'],
     }
   }
 };

@@ -60,6 +60,7 @@ import firebaseApp from "@/firebaseDetails";
 import {getAuth, onAuthStateChanged} from "firebase/auth";
 import {doc,getDoc,getFirestore} from "firebase/firestore";
 import router from "../../router/router";
+import VueSimpleAlert from "vue-simple-alert";
 
 const db = getFirestore(firebaseApp);
 const auth = getAuth();
@@ -108,11 +109,14 @@ export default {
         window.location.reload();
       },
 
-      async signOut(){
-        auth.signOut().then(() => {
-          console.log("user has sign out")
-          router.push('/sign-in')
-        })
+      async signOut() {
+        VueSimpleAlert.confirm("Sign Out?").then(() => {
+          auth.signOut().then(() => {
+            console.log("user has sign out")
+            router.push('/sign-in')
+          })
+        });
+        
       }
     }
 }

@@ -3,5 +3,8 @@ import App from './App.vue'
 import router from '../router/router.js'
 import "../styleguide.css"
 import "../globals.css"
+import VueSimpleAlert from "vue-simple-alert";
 
-createApp(App).use(router).mount('#app')
+// const app = createApp({})
+createApp(App).use(router, VueSimpleAlert).mount('#app')
+// app.use(VueSimpleAlert);

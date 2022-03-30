@@ -14,13 +14,12 @@ import SideNav from "../components/SideNav.vue"
 import Header from "../components/Header.vue"
 import CardDeck from "../components/CardDeck.vue"
 
-
 export default {
     name: "Home",
     components: {
         Header,
         CardDeck,
-        SideNav
+        SideNav,
     },
     props: [
         "MyDashboard"

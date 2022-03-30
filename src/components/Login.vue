@@ -72,6 +72,7 @@ import {getAuth, signInWithEmailAndPassword, onAuthStateChanged} from "firebase/
 import firebaseApp from "../firebaseDetails";
 import SocialMediaLogin from "@/components/SocialMediaLogin.vue";
 import router from "../../router/router";
+import VueSimpleAlert from "vue-simple-alert";
 firebaseApp;
 const auth = getAuth();
 
@@ -100,10 +101,25 @@ export default {
         )
         console.log(userDetails.user);
         console.log("login pass")
-        await this.$router.push({name: "Home"})
+        VueSimpleAlert.fire({
+          type: 'success',
+          title: 'Successfully Signed In',
+          text: 'Redirecting you to your dashboard',
+          // footer: '<a href>Why do I have this issue?</a>'
+        }).then(r => {
+          console.log(r.value);
+          this.$router.push({name: "Home"})
+        });
+        
       } catch(error){
         console.log("login fail")
         console.log(error)
+        VueSimpleAlert.fire({
+          type: 'error',
+          title: 'Sign In Failed',
+          text: 'Please try again',
+          footer: '<p>' + error +'</p>'
+        })
       }
     }
   },

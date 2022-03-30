@@ -46,6 +46,7 @@ import Header from "../components/Header.vue"
 import firebaseApp from "@/firebaseDetails";
 import {getAuth} from "firebase/auth";
 import {collection,addDoc,getFirestore} from "firebase/firestore";
+import VueSimpleAlert from "vue-simple-alert";
 
 const auth = getAuth();
 const db = getFirestore(firebaseApp);
@@ -71,9 +72,21 @@ export default {
               totalCards: 0,
               uncertainCards: 0,
             })
-          await this.$router.push({name: "Dashboard"})
+          VueSimpleAlert.fire({
+              type: 'success',
+              title: 'Successfully Created '+ document.getElementById("deckName").value +' Card Deck',
+              // footer: '<a href>Why do I have this issue?</a>'
+          }).then(() => {
+            this.$router.push({name: "Home"})
+          });
         }catch(error){
           console.log(error)
+          VueSimpleAlert.fire({
+            type: 'error',
+            title: 'Create Deck Failed',
+            text: 'Refer to error message below',
+            footer: '<p>' + error +'</p>'
+          })
           console.log("create deck failed")
         }
       },

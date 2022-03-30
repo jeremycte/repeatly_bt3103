@@ -6,7 +6,7 @@
           <div class="background-setup-group">
             <div class="login-registration-side-header">
               <div class="repeatly-logo-header">
-                <img class="logo-icon-login-header" :src='"https://anima-uploads.s3.amazonaws.com/projects/6231a346e960d27abb0c8fdd/releases/6231a535d957d3330e6b3b51/img/logo-icon-1@1x.png"' />
+                <img class="logo-icon-login-header" src="../../img/repeatlyIcon.png" />
                 <div class="repeatlyLoginIcon inter-bold-black-28px" >Repeatly</div>
               </div>
               <img class="background-setup" draggable="false" />
@@ -56,8 +56,10 @@
       </div>
       <p class="dont-have-an-account-sign-up-now valign-text-middle inter-bold-white-16px">
         <span
-        ><span class="inter-bold-black-16px">Don't have an account?</span
-        ><span class="span1 inter-bold-dull-lavender-16px"> Sign Up Now</span>
+        ><span class="inter-bold-black-16px">Don't have an account?</span>
+        <router-link to="/registration">
+          <span class="span1 inter-bold-dull-lavender-16px"> Sign Up Now</span>
+        </router-link>
         </span>
       </p>
       <social-media-login/>

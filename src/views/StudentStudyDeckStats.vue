@@ -21,7 +21,7 @@
         </div>
       <btn class="checkAnswerStudybtn">
         <div class="frame-1-checkanswers">
-          <router-link to="/study-deck-answer">
+          <router-link to="/view-card-deck">
           <h1 class="studydeck-titleBtn inter-semi-bold-white-28px">Return to Deck</h1>
           </router-link>
         </div>

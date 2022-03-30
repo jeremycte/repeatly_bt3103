@@ -2,13 +2,13 @@
 <div class="container-center-horizontal">
     <SideNav />
     <div class="student-study-deck-question screen">
-    <div class="headerDashboardTitle">
-    <h1 class="dashboard-title inter-bold-heavy-metal-50px">{{MyDashboard}}</h1>
-    <router-link to="/home">
-      <img class="crossBtnDashboard" src="../../img/cross-arrow.png" />
-    </router-link>
-  </div>
-  <div class="group-162547">
+      <div class="headerDashboardTitle">
+        <h1 class="dashboard-title inter-bold-heavy-metal-50px">{{MyDashboard}}</h1>
+        <router-link to="/home">
+          <img class="crossBtnDashboard" src="../../img/cross-arrow.png" />
+        </router-link>
+      </div>
+    <div class="group-162547">
     <div class="study-deck-group">
         <div class="study-deck-inner">
             <a @click="$router.go(-1)">
@@ -154,7 +154,7 @@ export default {
     display: flex;
     height: 206px;
     margin-top: 28px;
-    margin-left: 22em;
+    margin-left: 22em;  
     width: 622px;
     padding: 13px 20.2px;
   }

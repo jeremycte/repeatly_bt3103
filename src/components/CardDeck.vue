@@ -103,6 +103,10 @@ export default {
 
 
 <style scoped>
+.purple-deck {
+  transition: all 0.3s ease;
+}
+
 .overlay-deck {
     align-items: flex-start;
     background-color: var(--dull-lavender);
@@ -114,6 +118,7 @@ export default {
     min-width: 1429px;
     padding: 19.6px 36.8px;
     position: relative;
+    transition: all 0.2s ease;
 }
 
 .overlay-tagName {

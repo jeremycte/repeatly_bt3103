@@ -460,12 +460,12 @@ export default {
   flex-direction: column;
   height: 4433px;
   overflow: hidden;
-  width: 1920px;
+  width: 1903px;
 }
 
 .overlap-group9 {
   height: 4588px;
-  margin-left: -520.33px;
+  margin-left: -580.33px;
   margin-top: -290px;
   position: relative;
   width: 2798px;

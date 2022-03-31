@@ -8,7 +8,7 @@ import Home from '@/views/Home.vue'
 import ForgetPassword from '@/views/ForgetPassword.vue'
 import Registration from '@/views/Registration.vue'
 import ForgetPasswordStatus from '@/views/ForgetPasswordStatus.vue'
-// import StudentStudyDeckStats from '@/views/StudentStudyDeckStats.vue'
+import StudentStudyDeckStats from '@/views/StudentStudyDeckStats.vue'
 import CreateDeck from '@/views/CreateDeck.vue'
 import StudyDeck from '@/views/StudyDeckQuestion.vue'
 
@@ -240,7 +240,7 @@ const routes = [
         path: '/study-student-stats',
         name: 'StudentStudyDeckStats',
         component: StudentStudyDeckStats,
-        },
+    },
     {
         path: '/sign-in',
         name: 'SignIn',
@@ -318,14 +318,14 @@ const routes = [
         name: 'students',
         component: students,
         props: {
-            MyDashboard: "My Students"
+            MyDashboard: "My Students"},
     },
     {
         path:'/add-students',
         name:'addStudent',
         component: addStudent,
         props: {
-            MyDashboard: "Add Students"
+            MyDashboard: "Add Students"},
     },
     {
         path: '/:catchAll(.*)',

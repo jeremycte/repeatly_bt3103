@@ -209,6 +209,7 @@ import { getAuth,GoogleAuthProvider,
   signInWithEmailAndPassword, signInWithRedirect,getRedirectResult, createUserWithEmailAndPassword} from "firebase/auth";
 import firebaseApp from "../firebaseDetails";
 import {doc, setDoc,getFirestore} from "firebase/firestore";
+import VueSimpleAlert from "vue-simple-alert";
 
 const db = getFirestore(firebaseApp);
 
@@ -232,12 +233,24 @@ async function googleRegisterFirebase() {
         email: eMail,
         DOB: dob,
       })
-      console.log(userDocRef);
-      console.log("google registration Passed")
+
+      VueSimpleAlert.fire({
+          type: 'success',
+          title: 'Successfully Signed Up',
+          text: 'Thanks for registering an account using Google',
+          // footer: '<a href>Why do I have this issue?</a>'
+        }).then(() => {
+          console.log(userDocRef);
+          console.log("google registration Passed")
+        });
     }
   }catch(error){
-    console.log("google registration failed")
-    console.log(error)
+    VueSimpleAlert.fire({
+          type: 'error',
+          title: 'Registration Failed',
+          text: "Error Name" + error,
+          // footer: '<a href>Why do I have this issue?</a>'
+    })
   }
 }
 
@@ -253,14 +266,14 @@ getRedirectResult(auth)
       console.log(user,token);
       console.log("login successful")
     }).catch((error) => {
-  // Handle Errors here.
-  const errorCode = error.code;
-  const errorMessage = error.message;
-  // The email of the user's account used.
-  const email = error.email;
-  // The AuthCredential type that was used.
-  const credential = GoogleAuthProvider.credentialFromError(error);
-  console.log(errorCode,errorMessage,email,credential)
+      // Handle Errors here.
+      const errorCode = error.code;
+      const errorMessage = error.message;
+      // The email of the user's account used.
+      const email = error.email;
+      // The AuthCredential type that was used.
+      const credential = GoogleAuthProvider.credentialFromError(error);
+      console.log(errorCode + errorMessage + email + credential);
 });
 //import SocialMediaLogin from "@/components/SocialMediaLogin.vue";
 
@@ -322,13 +335,26 @@ export default {
       const month = document.getElementById("month").value.toString()
       const year = document.getElementById("year").value.toString()
       const dob = year + "/" + month + "/" + day;
-      alert("registering account")
+      VueSimpleAlert.fire({
+          type: 'info',
+          title: 'Registering Your Account',
+          timer: 2000,
+          // footer: '<a href>Why do I have this issue?</a>'
+      })
       try {
 
         if (userName == "" || email == "" || password == "" || day == "" || month == "" || year == "" || this.userrole == "") {
-          alert("Please fill up all fields and try again.")
+          VueSimpleAlert.fire({
+            type: 'info',
+            text: 'Please fill up all fields and try again.'
+            // footer: '<a href>Why do I have this issue?</a>'
+          })
         } else if (password.length < 6){
-          alert("Please use a stronger password of at least 6 characters")
+            VueSimpleAlert.fire({
+              type: 'info',
+              text: 'Please use a stronger password of at least 6 characters.'
+              // footer: '<a href>Why do I have this issue?</a>'
+            })
           }
           else {
           const userDetails = await createUserWithEmailAndPassword(
@@ -345,14 +371,23 @@ export default {
         })
           console.log(userDetails.user)
           console.log(userDocRef)
-          console.log("registration pass")
-          alert("Registration succesful. Please sign in again.")
-          await this.$router.push({name: "SignIn"})
+
+          VueSimpleAlert.fire({
+            type: 'success',
+            title: 'Successfully Signed Up',
+            text: 'Thanks for registering an account',
+          // footer: '<a href>Why do I have this issue?</a>'
+          }).then(() => {
+            this.$router.push({name: "SignIn"});
+          });
+          
         }
-      }catch(error){
-        console.log("registration fail")
-        console.log(error)
-        alert("You already have an account with this email, or you have given an invalid email. Please try again.")
+      } catch(error){
+        VueSimpleAlert.fire({
+          type: 'error',
+          title: 'Registration Failed',
+          text: 'You already have an account with this email, or you have given an invalid email. Please try again.'
+        });
       }
     },
 

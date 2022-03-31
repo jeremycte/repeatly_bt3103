@@ -13,6 +13,7 @@ import CreateDeck from '@/views/CreateDeck.vue'
 import StudyDeck from '@/views/StudyDeckQuestion.vue'
 import ViewCardDeck from '@/views/ViewCardDeck.vue'
 import StudyDeckAnswer from '@/views/StudyDeckAnswer.vue'
+import EditCardDeck from '@/views/EditCardDeck.vue'
 
 
 const routes = [
@@ -291,6 +292,11 @@ const routes = [
         path:'/study-deck-answer',
         name: 'StudyDeckAnswer',
         component: StudyDeckAnswer,
+    },
+    {
+        path:'/edit-card-deck',
+        name: 'EditCardDeck',
+        component: EditCardDeck,
     },
     {
         path: '/:catchAll(.*)',

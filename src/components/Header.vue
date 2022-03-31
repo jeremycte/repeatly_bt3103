@@ -3,7 +3,8 @@
     <h1 class="dashboard-title inter-bold-heavy-metal-50px">{{dashboardTitle}}</h1>
     <div class=remaining-header>
       <div class="searchbox">
-        <input v-if="visible"
+        <ay
+        input v-if="visible"
         type="search"
         class="search-bar"
         placeholder="What are you looking for?" />

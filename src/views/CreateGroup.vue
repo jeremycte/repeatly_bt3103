@@ -1,48 +1,47 @@
 <template>
-<div class="container-center-horizontal">
-    <SideNav />
-    <div class="student-dashboard-homepage screen">
-    <Header2 :dashboardTitle="MyDashboard"/>
-  <div class="create-deck-overlap-group">
-    <div class="overlap-group-createdeck">
-      <img class="illustration" src="../../img/Dashboard/history-illustrations.png" />
-      <div class="overlap-group-nameUrDeck border-1px-quick-silver">
-        <input
-          class="createDeck inter-normal-silver-chalice-30px"
-          id="deckName"
-          name="nameyourdeck"
-          placeholder="Name your deck"
-          type="text"
-          required
-        />
-      </div>
-      <div class="overlap-group-createdeckTag border-1px-quick-silver">
-        <input
-          class="createDeck inter-normal-silver-chalice-30px"
-          id="deckTag"
-          name="decktag"
-          placeholder="Deck Tag e.g. Sem 1"
-          type="text"
-          required
-        />
-      </div>
-      <div class="overlap-group-txtareaCreateDeck border-1px-quick-silver">
-        <textarea class="deck-description" id="description" name="deckdescription" placeholder="Deck Description" type="text"></textarea>
-      </div>
-      <btn class="add-student-createdeckbtn" v-on:click="save()">
-        <div class="frame-1-createdeck">
-          <h1 class="createdeck-titleBtn inter-semi-bold-white-28px">Create Deck</h1>
+    <div class="container-center-horizontal">
+        <SideNav />
+        <div class="student-dashboard-homepage screen">
+    
+        <Header3 :dashboardTitle="MyDashboard"/>
+  
+    <div class="create-Group-overlap-group">
+        <div class="overlap-group-createGroup">
+        <img class="illustration" src="../../img/CreateGroup/createGrpImage.png" />
+        <div class="overlap-group-nameUrGroup border-1px-quick-silver">
+            <input
+            class="createGroup inter-normal-silver-chalice-30px"
+            id="groupName"
+            name="nameyourgroup"
+            placeholder="Name your Group"
+            type="text"
+            required
+            />
         </div>
-      </btn>
+        <div class="overlap-group-createGroupTag border-1px-quick-silver">
+            <input
+            class="createGroup inter-normal-silver-chalice-30px"
+            id="GroupTag"
+            name="Grouptag"
+            placeholder="Group Tag e.g. Sem 1"
+            type="text"
+            required
+            />
+        </div>
+        <btn class="add-student-createGroupbtn" v-on:click="save()">
+            <div class="frame-1-createGroup">
+            <h1 class="createGroup-titleBtn inter-semi-bold-white-28px">Create Group</h1>
+            </div>
+        </btn>
+        </div>
     </div>
-  </div>
-  </div>
-  </div>
+    </div>
+    </div>
 </template>
 
 <script>
 import SideNav from "../components/SideNav.vue"
-import Header2 from "../components/Header2.vue"
+import Header3 from "../components/Header3.vue"
 import firebaseApp from "@/firebaseDetails";
 import {getAuth} from "firebase/auth";
 import {collection,addDoc,getFirestore} from "firebase/firestore";
@@ -53,19 +52,21 @@ const db = getFirestore(firebaseApp);
 console.log(auth.userEmail)
 export default {
     
-  name: "CreateDeck",
+  name: "CreateGroup",
   components: {
-        Header2,
-        SideNav
+        SideNav,
+        Header3
+ 
     },
     methods: {
+    //Need to be replaced with create groups
       async save(){
         try{
           const userEmail = auth.currentUser.email;
-          await addDoc(collection(db,"users",String(userEmail),"decks"),
+          await addDoc(collection(db,"users",String(userEmail),"Groups"),
             {
-              title: document.getElementById("deckName").value,
-              tag: document.getElementById("deckTag").value,
+              title: document.getElementById("GroupName").value,
+              tag: document.getElementById("GroupTag").value,
               description: document.getElementById("description").value,
               estimatedTime: 0,
               needsRecapping: 0,
@@ -74,20 +75,19 @@ export default {
             })
           VueSimpleAlert.fire({
               type: 'success',
-              title: 'Successfully Created '+ document.getElementById("deckName").value +' Card Deck',
+              title: 'Successfully Created '+ document.getElementById("GroupName").value +' Group',
               // footer: '<a href>Why do I have this issue?</a>'
           }).then(() => {
-            this.$router.push({name: "Home"})
+            this.$router.push({name: "Dashboard"})
           });
         }catch(error){
           console.log(error)
           VueSimpleAlert.fire({
             type: 'error',
-            title: 'Create Deck Failed',
+            title: 'Create Group Failed',
             text: 'Refer to error message below',
             footer: '<p>' + error +'</p>'
           })
-          console.log("create deck failed")
         }
       },
       async back(){
@@ -101,15 +101,15 @@ export default {
 </script>
 
 
-<style>
-  .create-deck-overlap-group {
+<style scoped>
+  .create-Group-overlap-group {
     align-items: flex-start;
     display: flex;
     height: 856px;
     min-width: 1491px;
   }
 
-  .overlap-group-createdeck {
+  .overlap-group-createGroup {
     align-items: flex-end;
     background-color: var(--humming-bird);
     border-radius: 40px;
@@ -125,7 +125,7 @@ export default {
     width: 1487px;
   }
 
-  .overlap-group-nameUrDeck {
+  .overlap-group-nameUrGroup {
     align-items: flex-start;
     background-color: var(--white);
     border-radius: 20px;
@@ -138,7 +138,7 @@ export default {
     padding: 15px 20.2px;
   }
 
-  .createDeck {
+  .createGroup {
     background-color: transparent;
     border: 0;
     height: 42px;
@@ -151,12 +151,12 @@ export default {
     width: 418px;
   }
 
-  .createDeck::placeholder {
+  .createGroup::placeholder {
     color: 
 #afafaf99;
   }
 
-  .overlap-group-createdeckTag {
+  .overlap-group-createGroupTag {
     align-items: flex-start;
     background-color: var(--white);
 
@@ -170,7 +170,7 @@ export default {
     padding: 15px 20.2px;
   }
 
-  .overlap-group-txtareaCreateDeck {
+  .overlap-group-txtareaCreateGroup {
     align-items: flex-start;
     background-color: var(--white);
     border-radius: 20px;
@@ -183,7 +183,7 @@ export default {
     padding: 13px 20.2px;
   }
 
-  .deck-description {
+  .Group-description {
     background-color: transparent;
     border: 0;
     font-family: var(--font-family-inter);
@@ -195,11 +195,11 @@ export default {
     width: 600px;
   }
 
-  .deck-description::placeholder {
+  .Group-description::placeholder {
     color: #afafaf7a;
   }
 
-  .add-student-createdeckbtn {
+  .add-student-createGroupbtn {
     background-color: var(--shamrock);
     border-radius: 25px;
     height: 74px;
@@ -212,7 +212,7 @@ export default {
     margin-right: 12em;
   }
 
-  .frame-1-createdeck {
+  .frame-1-createGroup {
     border-radius: 25px;
     display: flex;
     align-items: flex-start;
@@ -223,7 +223,7 @@ export default {
     
   }
 
-  .createdeck-titleBtn {
+  .createGroup-titleBtn {
     height: 34px;
     letter-spacing: 0;
     /* margin-left: -5.8px;

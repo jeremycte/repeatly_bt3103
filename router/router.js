@@ -11,10 +11,15 @@ import ForgetPasswordStatus from '@/views/ForgetPasswordStatus.vue'
 import StudentStudyDeckStats from '@/views/StudentStudyDeckStats.vue'
 import CreateDeck from '@/views/CreateDeck.vue'
 import StudyDeck from '@/views/StudyDeckQuestion.vue'
+
 import ViewCardDeck from '@/views/ViewCardDeck.vue'
 import StudyDeckAnswer from '@/views/StudyDeckAnswer.vue'
 import EditCardDeck from '@/views/EditCardDeck.vue'
 
+import Groups from '@/views/Groups.vue'
+import createGroup from '@/views/CreateGroup.vue'
+import students from '@/views/Students.vue'
+import addStudent from '@/views/AddStudents.vue'
 
 const routes = [
     {
@@ -236,7 +241,7 @@ const routes = [
         path: '/study-student-stats',
         name: 'StudentStudyDeckStats',
         component: StudentStudyDeckStats,
-        },
+    },
     {
         path: '/sign-in',
         name: 'SignIn',
@@ -271,7 +276,22 @@ const routes = [
         name: 'Settings',
         component: Settings,
     },
-
+    {
+        path: '/groups',
+        name: 'Groups',
+        component: Groups,
+        props: {
+            MyDashboard: "Groups"
+        },
+    },
+    {
+        path: '/create-group',
+        name: 'createGroup',
+        component: createGroup,
+        props: {
+            MyDashboard: "Create Your Group"
+        },
+    },
     {
         path:'/study-deck',
         name: 'StudyDeck',
@@ -292,6 +312,21 @@ const routes = [
         path:'/study-deck-answer',
         name: 'StudyDeckAnswer',
         component: StudyDeckAnswer,
+
+    },
+    {
+        path:'/students',
+        name: 'students',
+        component: students,
+        props: {
+            MyDashboard: "My Students"},
+    },
+    {
+        path:'/add-students',
+        name:'addStudent',
+        component: addStudent,
+        props: {
+            MyDashboard: "Add Students"},
     },
     {
         path:'/edit-card-deck',

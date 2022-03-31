@@ -1,21 +1,19 @@
 <template>
 
-    <!-- <div class="student-dashboard-homepage screen"> -->
-      <div class="deck-card-group">
+
+      <div class="student-group">
         <div class="background-dashboard"></div>
-<!--        <router-link to="/sign-in">-->
+
         <template v-if="loading">
           <div class="purple-deck" v-for="item in documents" :key="item" >
              <img class="illustration" :src="require(`../../img/Dashboard/history-illustrations.png`)" />
-              <div class="overlay-deck">
-                <div class="deck-cards-info">
-                    <div class="card-title inter-semi-bold-heavy-metal-36px" id="Deck Title">{{item["title"]}}</div>
+              <div class="overlay-group">
+                <div class="group-info">
+                    <div class="GroupTitle inter-semi-bold-heavy-metal-36px" id="GroupTitle">{{item["title"]}}</div>
                     <div class="flex-row-cards-info">
-                        <div class="total-cards inter-semi-bold-heavy-metal-25px" id="totalCards">Total Cards: {{item["totalCards"]}}</div>
-                        <div class="needs-recaping inter-semi-bold-mustard-25px" id="needsRecapping">Needs Recapping: {{item["needsRecapping"]}}</div>
-                        <div class="uncertain-cards inter-semi-bold-mexican-red-25px" id="uncertainCards">Uncertain Cards: {{item["uncertainCards"]}}</div>
+                        <div class="CreationDate inter-semi-bold-heavy-metal-25px" id="CreationDate">Date Created: {{item["CreationDate"]}}</div>
                     </div>
-                    <div class="estimated-time inter-semi-bold-heavy-metal-25px" id="estimatedTime">Estimated Time (min): {{item["estimatedTime"]}}</div>
+                    <div class="StudentNumber inter-semi-bold-heavy-metal-25px" id="StudentNumber">No of Students {{item["StudentNumber"]}}</div>
                 </div>
               <div class="overlay-tagName">
                 <div class="tagName inter-semi-bold-heavy-metal-23px" id="tagName">{{item["tag"]}}</div>
@@ -44,18 +42,18 @@ async function getCardDetails(userEmail){
       let deck = docs.data()
       let deckId = docs.id
       const title = deck.title
-      const estimatedTime = deck.estimatedTime
+      const StudentNumber = deck.StudentNumber
       const needsRecapping = deck.needsRecapping
       const tag = deck.tag
-      const totalCards = deck.totalCards
+      const CreationDate = deck.CreationDate
       const uncertainCards = deck.uncertainCards
       const tempDeckDetails = {
         'deckId':deckId,
         'title':title,
-        'estimatedTime':estimatedTime,
+        'StudentNumber':StudentNumber,
         'needsRecapping':needsRecapping,
         'tag':tag,
-        'totalCards':totalCards,
+        'CreationDate':CreationDate,
         'uncertainCards':uncertainCards,
       }
       refDoc.push(tempDeckDetails)
@@ -67,7 +65,7 @@ async function getCardDetails(userEmail){
 
 
 export default {
-  name: "CardDeck",
+  name: "Groupings",
   methods:{
     async getData() {
       onAuthStateChanged(auth, async (user)=>{
@@ -103,11 +101,7 @@ export default {
 
 
 <style scoped>
-.purple-deck {
-  transition: all 0.3s ease;
-}
-
-.overlay-deck {
+.overlay-group{
     align-items: flex-start;
     background-color: var(--dull-lavender);
     border-radius: 40px;
@@ -118,7 +112,6 @@ export default {
     min-width: 1429px;
     padding: 19.6px 36.8px;
     position: relative;
-    transition: all 0.2s ease;
 }
 
 .overlay-tagName {
@@ -147,9 +140,8 @@ export default {
   width: 1920px;
 }
 
-.deck-card-group {
-  /* height: 1118px; */
-  margin-bottom: 28px;
+.student-group {
+  height: 1118px;
   position: relative;
   /* width: 1920px; */
 }
@@ -163,7 +155,7 @@ export default {
   top: -1px;
 }
 
-.deck-cards-info {
+.group-info {
   align-items: flex-start;
   align-self: flex-end;
   display: flex;
@@ -173,7 +165,7 @@ export default {
   width: 726px;
 }
 
-.card-title {
+.GroupTitle {
   letter-spacing: 0;
   line-height: 50.4px;
   min-height: 50px;
@@ -188,7 +180,7 @@ export default {
   min-width: 716px;
 }
 
-.total-cards {
+.CreationDate {
   letter-spacing: 0;
   line-height: 35px;
   min-height: 35px;
@@ -196,26 +188,7 @@ export default {
   white-space: nowrap;
 }
 
-.needs-recaping {
-  letter-spacing: 0;
-  line-height: 35px;
-  margin-left: 41px;
-  min-height: 35px;
-  min-width: 226px;
-  white-space: nowrap;
-}
-
-.uncertain-cards {
-  align-self: flex-end;
-  letter-spacing: 0;
-  line-height: 35px;
-  margin-left: 41px;
-  min-height: 35px;
-  min-width: 227px;
-  white-space: nowrap;
-}
-
-.estimated-time {
+.StudentNumber {
   letter-spacing: 0;
   line-height: 35px;
   margin-top: 19px;

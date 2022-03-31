@@ -115,11 +115,13 @@
               <div class="save-tons-of-time-g inter-bold-white-60px">
                 {{ saveTonsOfTimeG }}
               </div>
+              <router-link to="/registration">
               <div class="button">
                 <div class="get-beta-access-dark inter-bold-white-30px">
                   Sign Up
                 </div>
               </div>
+              </router-link>
             </div>
             <div
               class="group-162511"

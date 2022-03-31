@@ -2,7 +2,7 @@
 <div class="container-center-horizontal">
     <SideNav />
     <div class="student-dashboard-homepage screen">
-    <Header :dashboardTitle="MyDashboard"/>
+    <Header2 :dashboardTitle="MyDashboard"/>
   <div class="create-deck-overlap-group">
     <div class="overlap-group-createdeck">
       <img class="illustration" src="../../img/Dashboard/history-illustrations.png" />
@@ -42,7 +42,7 @@
 
 <script>
 import SideNav from "../components/SideNav.vue"
-import Header from "../components/Header.vue"
+import Header2 from "../components/Header2.vue"
 import firebaseApp from "@/firebaseDetails";
 import {getAuth} from "firebase/auth";
 import {collection,addDoc,getFirestore} from "firebase/firestore";
@@ -55,7 +55,7 @@ export default {
     
   name: "CreateDeck",
   components: {
-        Header,
+        Header2,
         SideNav
     },
     methods: {

@@ -5,7 +5,7 @@
       <div class="searchbox">
         <input v-if="visible"
         type="search"
-        class="search-bar"
+        class="search-bar inter-normal-silver-chalice-30px"
         placeholder="What are you looking for?" />
       </div>
       <div class="search-function">
@@ -75,22 +75,28 @@
   }
   
   .search-bar {
-    border: 3px solid var(--heavy-metal);
+    border: 1px solid var(--heavy-metal);
     padding: 6px;
-    border-radius: 5px;
+    border-radius: 20px;
     margin-top: 22px;
     margin-bottom: 8px;
     margin-right: 6px;
     height: 40px;
-    width: 230px;
+    width: 21em;
     font-size: 17px;
-    background-color: var(--dark-gray);
-    
+    font-family: var(--font-family-inter);
+    font-weight: 400;
+    background-color: var(--white);
+    transition: all 0.3s ease;
+  }
+
+  .searchbox {
+    transition: all 0.3s ease;
   }
 
   .remaining-header {
     display: flex;
-  } 
+  }
 
   .icon-search {
     height: 39px;

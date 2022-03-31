@@ -148,7 +148,8 @@ export default {
 }
 
 .deck-card-group {
-  height: 1118px;
+  /* height: 1118px; */
+  margin-bottom: 28px;
   position: relative;
   /* width: 1920px; */
 }

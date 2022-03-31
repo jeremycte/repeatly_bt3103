@@ -18,6 +18,7 @@ onAuthStateChanged(auth, (user) => {
         type: 'success',
         title: 'Successfully Signed In',
         text: 'Redirecting you to your dashboard',
+        color: '#a786f3',
         // footer: '<a href>Why do I have this issue?</a>'
     }).then(r => {
       console.log(r.value);

@@ -29,6 +29,6 @@ export default {
 
 <style>
 .student-dashboard-homepage {
-    margin-left: 200px;
+    margin-left: 290px;
 }
 </style>

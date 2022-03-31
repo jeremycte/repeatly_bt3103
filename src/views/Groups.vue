@@ -1,7 +1,7 @@
 <template>
     <div class="container-center-horizontal">
         <SideNav/>
-        <div id='groups-screen'>
+        <div id='groups-screen' class="groups-screen">
             <div v-if="role == 'teacher'">
                 <GroupHeader :dashboardTitle="MyDashboard"/>
             </div>
@@ -66,6 +66,6 @@ export default {
 
 <style>
 .groups-screen {
-    margin-left: 200px;
+    margin-left: 290px;
 }
 </style>

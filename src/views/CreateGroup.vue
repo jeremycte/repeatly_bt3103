@@ -3,7 +3,7 @@
         <SideNav />
         <div class="student-dashboard-homepage screen">
     
-        <GroupHeader :dashboardTitle="MyDashboard"/>
+        <Header3 :dashboardTitle="MyDashboard"/>
   
     <div class="create-Group-overlap-group">
         <div class="overlap-group-createGroup">
@@ -41,10 +41,11 @@
 
 <script>
 import SideNav from "../components/SideNav.vue"
-import GroupHeader from "../components/GroupHeader.vue"
+import Header3 from "../components/Header3.vue"
 import firebaseApp from "@/firebaseDetails";
 import {getAuth} from "firebase/auth";
 import {collection,addDoc,getFirestore} from "firebase/firestore";
+import VueSimpleAlert from "vue-simple-alert";
 
 const auth = getAuth();
 const db = getFirestore(firebaseApp);
@@ -53,8 +54,8 @@ export default {
     
   name: "CreateGroup",
   components: {
-        GroupHeader,
         SideNav,
+        Header3
  
     },
     methods: {
@@ -72,10 +73,21 @@ export default {
               totalCards: 0,
               uncertainCards: 0,
             })
-          await this.$router.push({name: "Dashboard"})
+          VueSimpleAlert.fire({
+              type: 'success',
+              title: 'Successfully Created '+ document.getElementById("GroupName").value +' Group',
+              // footer: '<a href>Why do I have this issue?</a>'
+          }).then(() => {
+            this.$router.push({name: "Dashboard"})
+          });
         }catch(error){
           console.log(error)
-          console.log("create Group failed")
+          VueSimpleAlert.fire({
+            type: 'error',
+            title: 'Create Group Failed',
+            text: 'Refer to error message below',
+            footer: '<p>' + error +'</p>'
+          })
         }
       },
       async back(){

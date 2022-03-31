@@ -6,7 +6,7 @@
                 <GroupHeader :dashboardTitle="MyDashboard"/>
             </div>
             <div v-else>
-                <Header :dashboardTitle="MyDashboard"/>
+                <HeaderGroup :dashboardTitle="MyDashboard"/>
             </div>
                 <Groupings/>
         </div>
@@ -18,7 +18,7 @@ import SideNav from "../components/SideNav.vue"
 import Groupings from "../components/Groupings.vue"
 import GroupHeader from '../components/GroupHeader.vue'
 import {getAuth,onAuthStateChanged} from "firebase/auth";
-import Header from '../components/Header.vue'
+import HeaderGroup from '../components/HeaderGroup.vue'
 import {doc,getDoc,getFirestore} from "firebase/firestore";
 import firebaseApp from "@/firebaseDetails";
 
@@ -41,7 +41,7 @@ export default {
         Groupings,
         SideNav,
         GroupHeader,
-        Header
+        HeaderGroup
 
     },
     data() {

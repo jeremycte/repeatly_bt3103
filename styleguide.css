@@ -22,6 +22,7 @@
     --white-22: #ffffffab;
     --light-gray: #DCDCDC;
     --dark-gray: 	#D3D3D3;
+    --granite-gray: #A9A9A9;
    
     --font-size-l2: 30px;
     --font-size-l: 30px;
@@ -62,6 +63,30 @@
     font-size: var(--font-size-s22);
     font-style: normal;
     font-weight: 500;
+  }
+
+  .inter-normal-black-20px-2 {
+    color: var(--eerie-black-22);
+    font-family: var(--font-family-inter);
+    font-size: var(--font-size-s22);
+    font-style: normal;
+    font-weight: 400;
+  }
+
+  .inter-semi-bold-black-18px {
+    color: var(--black);
+    font-family: var(--font-family-inter);
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 600;
+  }
+
+  .inter-semi-bold-black-28px {
+    color: var(--black);
+    font-family: var(--font-family-inter);
+    font-size: var(--font-size-m2);
+    font-style: normal;
+    font-weight: 600;
   }
   
   .inter-light-eerie-black-28px {

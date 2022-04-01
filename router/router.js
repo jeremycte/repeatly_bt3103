@@ -14,6 +14,7 @@ import StudyDeck from '@/views/StudyDeckQuestion.vue'
 
 import ViewCardDeck from '@/views/ViewCardDeck.vue'
 import StudyDeckAnswer from '@/views/StudyDeckAnswer.vue'
+import EditCardDeck from '@/views/EditCardDeck.vue'
 
 import Groups from '@/views/Groups.vue'
 import createGroup from '@/views/CreateGroup.vue'
@@ -326,6 +327,11 @@ const routes = [
         component: addStudent,
         props: {
             MyDashboard: "Add Students"},
+    },
+    {
+        path:'/edit-card-deck',
+        name: 'EditCardDeck',
+        component: EditCardDeck,
     },
     {
         path: '/:catchAll(.*)',

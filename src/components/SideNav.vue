@@ -98,7 +98,6 @@ export default {
     mounted() {
         onAuthStateChanged(auth,async (user) => {
             if(user) {
-                console.log(user.email)
                 const tempUsername = await displayUserInfo(user.email)
                 const tempRole= await getRole(user.email)
                 this.username = tempUsername;

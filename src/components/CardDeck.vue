@@ -3,9 +3,9 @@
     <!-- <div class="student-dashboard-homepage screen"> -->
       <div class="deck-card-group">
         <div class="background-dashboard"></div>
-<!--        <router-link to="/sign-in">-->
+        <router-link to="/view-card-deck">
         <template v-if="loading">
-          <div class="purple-deck" v-for="item in documents" :key="item" >
+          <div class="purple-deck" v-for="(item,index) in documents" :key="item" @click="displaySelectedItem(index)">
              <img class="illustration" :src="require(`../../img/Dashboard/history-illustrations.png`)" />
               <div class="overlay-deck">
                 <div class="deck-cards-info">
@@ -23,7 +23,7 @@
             </div>
           </div>
         </template>
-<!--        </router-link>-->
+        </router-link>
       </div>
     <!-- </div> -->
 </template>
@@ -80,10 +80,15 @@ export default {
       })
     },
     randomImage() {
-      console.log(this.images[Math.floor(Math.random() * this.images.length)]);
+      // console.log(this.images[Math.floor(Math.random() * this.images.length)]);
       return `url("../../img/Dashboard/${
         this.images[Math.floor(Math.random() * this.images.length)]
       }")`;
+    },
+    displaySelectedItem(selectedItemIndex){
+      // console.log(selectedItemIndex)
+      // console.log(refDoc[parseInt(selectedItemIndex)])
+      sessionStorage.setItem('deckObj',JSON.stringify(refDoc[parseInt(selectedItemIndex)]))
     }
   },
   mounted(){

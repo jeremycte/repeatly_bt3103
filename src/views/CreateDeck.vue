@@ -76,6 +76,9 @@ export default {
               totalCards: 0,
               uncertainCards: 0,
             })
+          document.getElementById("deckName").value = "";
+          document.getElementById("deckTag").value = "";
+          document.getElementById("description").value="";
           VueSimpleAlert.fire({
               type: 'success',
               title: 'Successfully Created '+ Title +' Card Deck',

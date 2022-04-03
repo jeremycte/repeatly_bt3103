@@ -3,115 +3,118 @@
     <SideNav />
     <div class="student-edit-card-deck-edit-existing-question screen">
       <Header2 :dashboardTitle="MyDashboard" />
-      <div class="confirmed-questions">
-        <div class="flex-row-2">
-          <div class="flex-col">
-            <div class="html-1">HTML</div>
-            <div class="how-is-headers-created-in-html-1 valign-text-middle inter-semi-bold-black-28px">
-              How are headers created in html?
-            </div>
-            <div class="answer-using-header-1 inter-normal-black-20px-2">Answer: Answer to question 1</div>
-          </div>
-          <div class="overlap-group-container">
-            <btn class="editdeck-delete-button">
-              <div class="delete valign-text-middle inter-semi-bold-white-20px">DELETE</div>
-            </btn>
-            <btn class="editdeck-edit-button">
-              <div class="edit valign-text-middle inter-semi-bold-white-20px">EDIT</div>
-            </btn>
-          </div>
-        </div>
-      <div class="flex-row-1">
-        <div class="flex-col">
-            <div class="html-1">HTML</div>
-            <div class="how-is-headers-created-in-html-1 valign-text-middle inter-semi-bold-black-28px">How are headers created in html?</div>
-            <div class="answer-using-header-1 inter-normal-black-20px-2">Answer: Answer to question 2</div>
-        </div>
-        <div class="overlap-group-container">
-            <btn class="editdeck-delete-button">
-                <div class="delete valign-text-middle inter-semi-bold-white-20px">DELETE</div>
-            </btn>
-            <btn class="editdeck-edit-button">
-                <div class="edit valign-text-middle inter-semi-bold-white-20px">EDIT</div>
-            </btn>
-        </div>
-      </div>
-      <div class="flex-row-1">
-        <div class="flex-col">
-            <div class="html-1">HTML</div>
-            <div class="how-is-headers-created-in-html-1 valign-text-middle inter-semi-bold-black-28px">How are headers created in html?</div>
-            <div class="answer-using-header-1 inter-normal-black-20px-2">Answer: Answer to question 2</div>
-        </div>
-        <div class="overlap-group-container">
-            <btn class="editdeck-delete-button">
-                <div class="delete valign-text-middle inter-semi-bold-white-20px">DELETE</div>
-            </btn>
-            <btn class="editdeck-edit-button">
-                <div class="edit valign-text-middle inter-semi-bold-white-20px">EDIT</div>
-            </btn>
-        </div>
-      </div>
-    </div>
-        <div class="overlap-group5">  
-          <div class="left-container-editquestion">
-            <div class="card-title">Edit Question</div>
-            <div class="title">
-                <div class="title-1 inter-semi-bold-black-18px">Title:</div>
-                <div class="title-2">
-                <div class="title-input">
-                    <input
+      <div class="overlap-group5">
+        <div class="left-container-editquestion">
+          <div class="card-title">Edit Question</div>
+          <div class="title">
+            <div class="title-1 inter-semi-bold-black-18px">Title:</div>
+            <div class="title-2">
+              <div class="title-input">
+                <input
                     class="html-2 inter-semi-bold-black-18px"
+                    id="titleInput"
                     name="html"
                     placeholder="Key in title to question here"
                     type= "text"
-                    />
-                </div>
-                </div>
+                />
+              </div>
             </div>
-            <div class="question">
-                <div class="question-1 inter-semi-bold-black-18px">Question:</div>
-                <div class="question-2">
-                <div class="overlap-group-4">
-                    <div class="rectangle-14"></div>
-                    <input
+          </div>
+          <div class="question">
+            <div class="question-1 inter-semi-bold-black-18px">Question:</div>
+            <div class="question-2">
+              <div class="overlap-group-4">
+                <div class="rectangle-14"></div>
+                <input
                     class="how-is-headers-created-in-html-2 inter-semi-bold-black-18px"
+                    id="questionInput"
                     name="howisheaderscreatedinhtml"
                     placeholder="Key in question here"
                     type= "text"
-                    />
-                </div>
-                </div>
+                />
+              </div>
             </div>
-            <div class="answer">
-                <div class="answer-1 inter-semi-bold-black-18px">Answer:</div>
-                <div class="answer-2">
-                <div class="overlap-group-5">
-                    <input
+          </div>
+          <div class="answer">
+            <div class="answer-1 inter-semi-bold-black-18px">Answer:</div>
+            <div class="answer-2">
+              <div class="overlap-group-5">
+                <input
                     class="using-header-tags-such-as-h1-h2 inter-semi-bold-black-18px"
+                    id="answerInput"
                     name="usingheadertagssuchash1h2"
                     placeholder="Key in answer here"
                     type="text"
-                    />
-                </div>
-                </div>
+                />
+              </div>
             </div>
           </div>
-          <div class="overlap-group-container">
-            <btn class="overlap-group-2">
-                <div class="save valign-text-middle inter-semi-bold-white-20px">SAVE</div>
-            </btn>
-            <btn class="overlap-group1-2">
-                <div class="cancel valign-text-middle inter-semi-bold-white-20px">CANCEL</div>
-            </btn>
+        </div>
+        <div class="overlap-group-container">
+          <button class="overlap-group-2" v-on:click="save()">
+            <div class="save valign-text-middle inter-semi-bold-white-20px">SAVE</div>
+          </button>
+          <button class="overlap-group1-2" v-on:click="cancel()">
+            <div class="cancel valign-text-middle inter-semi-bold-white-20px">CANCEL</div>
+          </button>
+        </div>
+      </div>
+      <div class="confirmed-questions">
+        <div class="questions-classification" v-for="(item,index) in documents" :key="item" @click="selectIndex(index)">
+        <div class="flex-row-2" v-if="index === this.selectedIndex">
+          <div class="flex-col">
+            <div class="html-1">{{item['title']}}</div>
+            <div class="how-is-headers-created-in-html-1 valign-text-middle inter-semi-bold-black-28px">
+              {{item['question']}}
+            </div>
+            <div class="answer-using-header-1 inter-normal-black-20px-2">Answer: {{item['answer']}}</div>
           </div>
+          <div class="overlap-group-container">
+            <button class="editdeck-delete-button" v-on:click="deleteCard(index)">
+              <div class="delete valign-text-middle inter-semi-bold-white-20px">DELETE</div>
+            </button>
+          </div>
+        </div>
+        <div class="flex-row-1" v-else>
+        <div class="flex-col">
+            <div class="html-1">{{item['title']}}</div>
+            <div class="how-is-headers-created-in-html-1 valign-text-middle inter-semi-bold-black-28px">{{item['question']}}
+            </div>
+            <div class="answer-using-header-1 inter-normal-black-20px-2">Answer: {{item['answer']}}</div>
+        </div>
+        <div class="overlap-group-container">
+            <button class="editdeck-delete-button" v-on:click="deleteCard(index)">
+                <div class="delete valign-text-middle inter-semi-bold-white-20px">DELETE</div>
+            </button>
+        </div>
+      </div>
         </div>
       </div>
     </div>
+  </div>
 </template>
 
 <script>
 import SideNav from "../components/SideNav.vue"
 import Header2 from "../components/Header2.vue"
+import firebaseApp from "@/firebaseDetails";
+import {getAuth} from "firebase/auth";
+import {
+  doc,
+  getFirestore,
+  collection,
+  // getDocs,
+  deleteDoc,
+  addDoc,
+  updateDoc,
+  increment,
+  getDoc
+} from "firebase/firestore";
+const auth = getAuth();
+const db = getFirestore(firebaseApp);
+var cardsArray = []
+
+
 
 export default {
   name: "EditCardDeck",
@@ -119,10 +122,149 @@ export default {
         SideNav,
         Header2
     },
+  mounted(){
+    document.getElementById('titleInput').value = ''
+    document.getElementById('questionInput').value = ''
+    document.getElementById('answerInput').value = ''
+    cardsArray = [];
+    cardsArray = JSON.parse(sessionStorage.getItem("cardDetails"))
+    if (cardsArray === null){
+      cardsArray = [];
+    }
+    this.displayCards(cardsArray)
+  },
+  data(){
+    return{
+      documents:[],
+      selectedIndex:null,
+    }
+  },
+  methods:{
+    displayCards(cards){
+      this.documents = cards;
+    },
+    selectIndex(index){
+      this.selectedIndex = index;
+      const cardChosen = this.documents[index]
+      const chosenTitle = cardChosen['title']
+      const chosenQuestion = cardChosen['question']
+      const chosenAnswer = cardChosen['answer']
+      document.getElementById('titleInput').value = chosenTitle
+      document.getElementById('questionInput').value = chosenQuestion
+      document.getElementById('answerInput').value = chosenAnswer
+    },
+    cancel(){
+      document.getElementById('titleInput').value = ''
+      document.getElementById('questionInput').value = ''
+      document.getElementById('answerInput').value = ''
+      this.selectedIndex = null
+    },
+    async save(){
+      try{
+        const titleInput = document.getElementById('titleInput').value
+        const questionInput = document.getElementById('questionInput').value
+        const answerInput  = document.getElementById('answerInput').value
+        const userEmail = auth.currentUser.email
+        const deckObj = JSON.parse(sessionStorage.getItem('deckObj'))
+        const deckId = deckObj["deckId"]
+        if(this.selectedIndex === null){
+          const newItem = await addDoc(collection(db,"users",String(userEmail),"decks",deckId,"cards"),{
+            question: questionInput,
+            answer: answerInput,
+            title: titleInput,
+            boxType: 1,
+            firstAnswered: false,
+            isWrong:false
+          })
+          const tempCardDetails = {
+            'answer':answerInput,
+            'boxType':1,
+            'firstAnswered':false,
+            'isWrong': false,
+            'question':questionInput,
+            'title':titleInput,
+            'id': newItem.id,
+          }
+          this.documents.push(tempCardDetails)
+          cardsArray = this.documents
+          const updateRef = doc(db,"users",userEmail,"decks",deckId)
+          await updateDoc(updateRef,{
+            totalCards: increment(1),
+            estimatedTime: increment(1.5),
+            uncertainCards: increment(1),
+          })
+        } else {
+          const currentCardID = this.documents[this.selectedIndex]['id']
+          this.documents[this.selectedIndex]['question'] = questionInput
+          this.documents[this.selectedIndex]['answer'] = answerInput
+          this.documents[this.selectedIndex]['title'] = titleInput
+          const updateRef = doc(db,"users",userEmail,"decks",deckId,"cards",currentCardID)
+          await updateDoc(updateRef,{
+            question: questionInput,
+            answer: answerInput,
+            title: titleInput,
+          })
+          cardsArray = this.documents
+        }
+        this.cancel()
+      } catch(error){
+        console.log(error)
+        console.log("card creation/edit error")
+      }
+    },
+
+    async deleteCard(index){
+      try {
+        const userEmail = auth.currentUser.email;
+        const deckObj = JSON.parse(sessionStorage.getItem('deckObj'))
+        const deckId = deckObj["deckId"]
+        const cardId = this.documents[index]['id']
+        const statusDoc = await getDoc(doc(db, "users", userEmail, "decks", deckId, "cards", cardId));
+        const statusRef = statusDoc.data()
+        const statusFirst = statusRef.firstAnswered
+        const statusWrong = statusRef.isWrong
+        const updateRef = doc(db, "users", userEmail, "decks", deckId)
+        if (String(statusFirst) === 'false') {
+          await updateDoc(updateRef, {
+            totalCards: increment(-1),
+            estimatedTime: increment(-1.5),
+            uncertainCards: increment(-1),
+          })
+        } else if (String(statusWrong) === 'true'){
+          await updateDoc(updateRef, {
+            totalCards: increment(-1),
+            estimatedTime: increment(-1.5),
+            needsRecapping: increment(-1),
+          })
+        } else {
+          await updateDoc(updateRef, {
+            totalCards: increment(-1),
+            estimatedTime: increment(-1.5),
+          })
+        }
+        await deleteDoc(doc(db,"users",userEmail,"decks",deckId,"cards",cardId))
+        if (index > -1) {
+          this.documents.splice(index, 1);
+          cardsArray = this.documents;
+          sessionStorage.setItem("cardDetails",JSON.stringify(cardsArray))
+        }
+        this.cancel();
+      } catch(error){
+        console.log("card Deletion Error")
+      }
+    },
+
+    test(index){
+      console.log(index)
+    }
+  },
   props: [
         "MyDashboard"
   ]
 };
+
+
+
 </script>
 
 <style scoped>
@@ -268,7 +410,6 @@ export default {
   min-width: 1543px;
   /* padding: 19px 38.6px; */
   position: relative;
-  margin-top: 25em;
 }
 
 .flex-col {
@@ -372,6 +513,11 @@ export default {
   padding: 0 34.7px;
   position: absolute;
   top: 14px;
+}
+
+.confirmed-questions{
+  position: relative;
+  margin-top: 25em;
 }
 
 .save,

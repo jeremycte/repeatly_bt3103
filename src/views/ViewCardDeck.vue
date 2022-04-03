@@ -20,26 +20,28 @@
                     </div>
                     <div class="estimated-time inter-semi-bold-heavy-metal-25px" id="estimatedTime">Estimated Time (min): NA</div>
                 </div>
-                <btn class="deleteCardDeckbtn">
+                <button class="deleteCardDeckbtn" v-on:click="deleteDeck()">
                     <div class="frame-1-delanswers">
                         <h1 class="studydeck-titleBtn inter-semi-bold-white-28px">Delete</h1>
                     </div>
-                </btn>
+                </button>
             </div>
-            <div class="overlap-group-txtareaViewDeck border-1px-quick-silver">
-               <p class="questions inter-bold-black-28px">Which of the following is the right networking methodology?</p>
+            <div class="overlap-group-txtareaViewDeck border-1px-quick-silver" style="overflow-y: scroll; height:500px">
+              <template v-if="loading">
+              <p class="questions inter-bold-black-28px" v-for="item in documents" :key="item">{{item}}</p>
+              </template>
             </div>
             <div class="viewCardDeckBtns">
-                <btn class="editBtn">
+                <button class="editBtn" v-on:click="editDeck()">
                     <div class="frame-1-editanswers">
                     <h1 class="studydeck-titleBtn inter-semi-bold-white-28px">Edit Deck</h1>
                     </div>
-                </btn>
-                <btn class="studyBtn">
+                </button>
+                <button class="studyBtn">
                     <div class="frame-2-study">
                     <h1 class="studydeck-titleBtn inter-semi-bold-white-28px">Study Deck</h1>
                     </div>
-                </btn>
+                </button>
             </div>
         </div>
 
@@ -48,16 +50,130 @@
 </template>
 
 <script>
-import SideNav from "../components/SideNav.vue"
+import firebaseApp from "@/firebaseDetails";
+import {getAuth,onAuthStateChanged} from "firebase/auth";
+import {getFirestore, collection, getDocs, doc, deleteDoc,getDoc} from "firebase/firestore";
+import SideNav from "../components/SideNav.vue";
+import router from "../../router/router";
+
+const auth = getAuth();
+const db = getFirestore(firebaseApp);
+var refDoc = [];
+var cardsObjArray = []
+
+
+
+async function displayDetails(userEmail,deckObj){
+  try{
+    const deckId = deckObj["deckId"]
+    const deckRef = doc(db,"users",userEmail,"decks",deckId)
+    const deckResult = await getDoc(deckRef)
+    const deckData = deckResult.data()
+    const dispTitle = deckData.title
+    const dispTotalCards = deckData.totalCards
+    const dispEstimatedTime = deckData.estimatedTime
+    const dispNeedsRecapping = deckData.needsRecapping
+    const dispUncertainCards = deckData.uncertainCards
+
+    document.getElementById("Deck Title").innerHTML = dispTitle
+    document.getElementById("totalCards").innerHTML = 'Total Cards: ' + dispTotalCards
+    document.getElementById("estimatedTime").innerHTML = 'Estimated Time (min): ' + dispEstimatedTime
+    document.getElementById("needsRecapping").innerHTML = 'Needs Recapping: ' + dispNeedsRecapping
+    document.getElementById("uncertainCards").innerHTML = 'Uncertain Cards: ' + dispUncertainCards;
+  }catch (error){
+    console.log("display deck stats error")
+  }
+
+}
+
+async function getCards(userEmail,deckObj){
+  try{
+    const deckId = deckObj["deckId"]
+    const userCards = await getDocs(collection(db,"users",String(userEmail),"decks",deckId,"cards"))
+    if(!userCards.empty) {
+      userCards.forEach((docs) => {
+        const card = docs.data()
+        const cardId = docs.id
+        const question = card.question
+        const answer = card.answer
+        const cardTitle = card.title
+        const boxType = card.boxType
+        const firstAnswered = card.firstAnswereed
+        const isWrong = card.isWrong
+        const tempCardDetails = {
+          'answer':answer,
+          'boxType':boxType,
+          'firstAnswered':firstAnswered,
+          'isWrong': isWrong,
+          'question':question,
+          'title':cardTitle,
+          'id':cardId
+        }
+        cardsObjArray.push(tempCardDetails)
+        refDoc.push(question)
+      })
+      sessionStorage.setItem("cardDetails",JSON.stringify(cardsObjArray))
+
+    }
+  }catch(error){
+    console.log(error)
+    console.log("get cards error")
+  }
+}
+
+
 
 export default {
-    name: "ViewCardDeck",
-    components: {
-        SideNav
+  name: "ViewCardDeck",
+  components: {
+      SideNav
+  },
+  props: [
+      "MyDashboard"
+  ],
+  mounted() {
+    const deckObj = JSON.parse(sessionStorage.getItem('deckObj'))
+    refDoc = [];
+    this.displayCards(deckObj)
+  },
+  data(){
+    return{
+      loading: false,
+      documents:[]
+    }
+  },
+  methods:{
+    async displayCards(deckObj){
+      onAuthStateChanged(auth,async (user) => {
+        if (user) {
+          cardsObjArray = [];
+          await displayDetails(user.email,deckObj);
+          await getCards(user.email,deckObj)
+          this.documents = refDoc
+          this.loading = true;
+        }
+      })
     },
-    props: [
-        "MyDashboard"
-    ]
+    async deleteDeck(){
+      try{
+        const deckObj = JSON.parse(sessionStorage.getItem('deckObj'))
+        const userEmail = auth.currentUser.email
+        const deckId = deckObj["deckId"]
+        await deleteDoc(doc(db,"users",String(userEmail),"decks",deckId));
+        sessionStorage.clear();
+        await router.push({name:'Home'})
+      } catch (error){
+        console.log("delete deck error")
+      }
+    },
+    async editDeck(){
+      try{
+        await router.push({name:'EditCardDeck'})
+      }catch(error){
+        console.log(error);
+      }
+    }
+  }
 }
 </script>
 

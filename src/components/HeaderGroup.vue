@@ -43,7 +43,7 @@
     };
 </script>
 
-<style>
+<style scoped>
   .headerDashboardTitle {
     display: flex;
     position: relative;

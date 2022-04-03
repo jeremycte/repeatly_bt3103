@@ -103,7 +103,6 @@ export default {
 <style scoped>
 .overlay-group{
     align-items: flex-start;
-    background-color: var(--dull-lavender);
     border-radius: 40px;
     box-shadow: 0px 2px 8px #00000022;
     display: flex;
@@ -112,6 +111,17 @@ export default {
     min-width: 1429px;
     padding: 19.6px 36.8px;
     position: relative;
+}
+
+.purple-deck:nth-child(odd){
+  background-color: var(--vanilla-ice);
+  border-radius: 40px;
+  box-shadow: 0px 2px 8px #00000022;
+}
+.purple-deck:nth-child(even){
+  background-color:  var(--humming-bird);
+  border-radius: 40px;
+  box-shadow: 0px 2px 8px #00000022;
 }
 
 .overlay-tagName {

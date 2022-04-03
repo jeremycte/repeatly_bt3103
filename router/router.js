@@ -332,6 +332,8 @@ const routes = [
         path:'/edit-card-deck',
         name: 'EditCardDeck',
         component: EditCardDeck,
+        props: {
+            MyDashboard: "Edit Study Questions"},
     },
     {
         path: '/:catchAll(.*)',

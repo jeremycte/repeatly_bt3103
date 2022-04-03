@@ -62,10 +62,14 @@ export default {
       async save(){
         try{
           const userEmail = auth.currentUser.email;
+          const title = document.getElementById("deckName").value;
+          const Title = title.charAt(0).toUpperCase() + title.slice(1);
+          const tag = document.getElementById("deckTag").value;
+          const Tag = tag.charAt(0).toUpperCase() + tag.slice(1);
           await addDoc(collection(db,"users",String(userEmail),"decks"),
             {
-              title: document.getElementById("deckName").value,
-              tag: document.getElementById("deckTag").value,
+              title: Title,
+              tag: Tag,
               description: document.getElementById("description").value,
               estimatedTime: 0,
               needsRecapping: 0,
@@ -74,7 +78,7 @@ export default {
             })
           VueSimpleAlert.fire({
               type: 'success',
-              title: 'Successfully Created '+ document.getElementById("deckName").value +' Card Deck',
+              title: 'Successfully Created '+ Title +' Card Deck',
               // footer: '<a href>Why do I have this issue?</a>'
           }).then(() => {
             this.$router.push({name: "Home"})

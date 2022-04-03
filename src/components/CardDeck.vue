@@ -105,11 +105,14 @@ export default {
 <style scoped>
 .purple-deck {
   transition: all 0.3s ease;
+   border-radius: 40px;
+   box-shadow: 0px 2px 8px #00000022;
+   
 }
 
 .overlay-deck {
     align-items: flex-start;
-    background-color: var(--dull-lavender);
+    /* background-color: var(--dull-lavender); */
     border-radius: 40px;
     box-shadow: 0px 2px 8px #00000022;
     display: flex;
@@ -120,6 +123,16 @@ export default {
     position: relative;
     transition: all 0.2s ease;
 }
+
+
+.purple-deck:nth-child(odd){
+  background-color: var(--vanilla-ice);
+}
+.purple-deck:nth-child(even){
+  background-color:  var(--dull-lavender);
+}
+
+
 
 .overlay-tagName {
     align-items: center;

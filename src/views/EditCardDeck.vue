@@ -2,11 +2,9 @@
   <div class="container-center-horizontal">
     <SideNav />
     <div class="student-edit-card-deck-edit-existing-question screen">
-      <div class="headerDashboardTitle">
-        <h1 class="dashboard-title inter-bold-heavy-metal-50px">Edit Card Deck Questions</h1>
-      </div>
+      <Header2 :dashboardTitle="MyDashboard" />
       <div class="confirmed-questions">
-        <div class="flex-row-11">
+        <div class="flex-row-2">
           <div class="flex-col">
             <div class="html-1">HTML</div>
             <div class="how-is-headers-created-in-html-1 valign-text-middle inter-semi-bold-black-28px">
@@ -23,6 +21,21 @@
             </btn>
           </div>
         </div>
+      <div class="flex-row-1">
+        <div class="flex-col">
+            <div class="html-1">HTML</div>
+            <div class="how-is-headers-created-in-html-1 valign-text-middle inter-semi-bold-black-28px">How are headers created in html?</div>
+            <div class="answer-using-header-1 inter-normal-black-20px-2">Answer: Answer to question 2</div>
+        </div>
+        <div class="overlap-group-container">
+            <btn class="editdeck-delete-button">
+                <div class="delete valign-text-middle inter-semi-bold-white-20px">DELETE</div>
+            </btn>
+            <btn class="editdeck-edit-button">
+                <div class="edit valign-text-middle inter-semi-bold-white-20px">EDIT</div>
+            </btn>
+        </div>
+      </div>
       <div class="flex-row-1">
         <div class="flex-col">
             <div class="html-1">HTML</div>
@@ -98,21 +111,28 @@
 
 <script>
 import SideNav from "../components/SideNav.vue"
+import Header2 from "../components/Header2.vue"
+
 export default {
   name: "EditCardDeck",
   components: {
-        SideNav
+        SideNav,
+        Header2
     },
+  props: [
+        "MyDashboard"
+  ]
 };
 </script>
 
-<style>
+<style scoped>
 .student-edit-card-deck-edit-existing-question {
-  align-items: flex-start;
+  /* align-items: flex-start;
   background-color: var(--white);
   display: flex;
   height: 1024px;
-  width: 1920px;
+  width: 1920px; */
+  margin-left: 290px;
 }
 
 .overlap-group7 {
@@ -152,6 +172,9 @@ export default {
   line-height: 10px;
   text-align: center;
   width: 149px;
+}
+.crossBtnDashboard {
+  margin-left: 43em;
 }
 
 .how-is-headers-created-in-html {
@@ -219,33 +242,33 @@ export default {
   border-radius: 10px;
   box-shadow: 0px 4px 4px #00000040;
   display: flex;
-  flex-direction: row;
   height: 237px;
-  justify-content: flex-end;
-  left: 319px;
-  width: 1543px;
-  padding: 19px 38.6px;
-  position: absolute;
-  top: 752px;
+  justify-content: space-evenly;
+  /* left: 319px; */
+  min-width: 1543px;
+  /* padding: 19px 38.6px; */
+  position: relative;
+  margin-top: 2em;
+  margin-bottom: 2em;
 }
 
 /* .overlap-group2 {
   padding: 23px 30.3px;
 } */
 
-.flex-row-11 {
+.flex-row-2 {
   align-items: flex-start;
   background-color: var(--dull-lavender);
   border-radius: 10px;
   box-shadow: 0px 4px 4px #00000040;
   display: flex;
   height: 237px;
-  justify-content: flex-end;
-  left: 319px;
+  justify-content: space-evenly;
+  /* left: 319px; */
   min-width: 1543px;
-  padding: 19px 38.6px;
-  position: absolute;
-  top: 493px;
+  /* padding: 19px 38.6px; */
+  position: relative;
+  margin-top: 25em;
 }
 
 .flex-col {
@@ -290,7 +313,8 @@ export default {
   align-items: flex-start;
   display: flex;
   flex-direction: column;
-  margin-left: 226px;
+  margin-left: 8em;
+  margin-bottom: 1em;
   min-height: 191px;
   width: 219px;
 }
@@ -302,7 +326,9 @@ export default {
   display: flex;
   height: 55px;
   min-width: 219px;
+  margin-top: 26px;
   padding: 0 34.7px;
+  cursor:pointer;
 }
 
 .editdeck-edit-button {
@@ -315,11 +341,12 @@ export default {
   margin-top: 83px;
   min-width: 219px;
   padding: 9.6px 34.7px;
+  cursor: pointer;
 }
 
 .overlap-group5 {
   height: 348px;
-  left: 319px;
+  left: 326px;
   position: absolute;
   top: 123px;
   width: 1543px;

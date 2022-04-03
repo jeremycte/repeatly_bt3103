@@ -30,6 +30,6 @@ export default {
 
 <style>
 .students-screen {
-    margin-left: 200px;
+    margin-left: 290px;
 }
 </style>

@@ -3,7 +3,7 @@
         <SideNav />
         <div class="student-dashboard-homepage screen">
     
-        <StudentsPageHeader :dashboardTitle="MyDashboard"/>
+        <Header2 :dashboardTitle="MyDashboard"/>
   
     <div class="add-students-overlap-group">
         <div class="overlap-group-allStudentsEmail">
@@ -37,7 +37,7 @@
 
 <script>
 import SideNav from "../components/SideNav.vue"
-import StudentsPageHeader from "../components/StudentsPageHeader.vue"
+import Header2 from "../components/Header2.vue"
 //import firebaseApp from "@/firebaseDetails";
 import {getAuth} from "firebase/auth";
 //import {collection,addDoc,getFirestore} from "firebase/firestore";
@@ -49,7 +49,7 @@ export default {
     
   name: "addStudents",
   components: {
-        StudentsPageHeader,
+        Header2,
         SideNav,
  
     },
@@ -132,7 +132,6 @@ export default {
   .overlap-group-groupName {
     align-items: flex-start;
     background-color: var(--white);
-
     border-radius: 20px;
     box-shadow: 0px 2px 8px 
 #00000022;
@@ -159,6 +158,7 @@ export default {
     min-width: 670px;
     text-align: center;
     margin-top:-10px;
+    cursor: pointer;
   }
 
   .add-student-allStudentsEmailbtn {

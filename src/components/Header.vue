@@ -3,8 +3,7 @@
     <h1 class="dashboard-title inter-bold-heavy-metal-50px">{{dashboardTitle}}</h1>
     <div class=remaining-header>
       <div class="searchbox">
-        <ay
-        input v-if="visible"
+        <input v-if="visible"
         type="search"
         class="search-bar inter-normal-silver-chalice-30px"
         placeholder="What are you looking for?" />
@@ -44,7 +43,7 @@
     };
 </script>
 
-<style>
+<style scoped>
   .headerDashboardTitle {
     display: flex;
     position: relative;

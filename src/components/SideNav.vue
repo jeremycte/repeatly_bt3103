@@ -14,16 +14,17 @@
             <img class="icon" src="../../img/SideBarImages/groups@2x.png"/>               
             <SideBarLink to="/groups">Groups</SideBarLink>
           </div>
+          
+          <div class="side-row">
+            <img class="icon" src="../../img/SideBarImages/ci-settings-filled@2x.png"/> 
+            <SideBarLink to="/settings">Settings</SideBarLink>
+          </div> 
           <div class="teacher-bar" v-if="role=='teacher'">
             <div class="side-row">
               <img class="icon" src="../../img/SideBarImages/vector-34@2x.png"/>
               <SideBarLink to="/students">Students</SideBarLink>
             </div>
           </div>
-          <div class="side-row">
-            <img class="icon" src="../../img/SideBarImages/ci-settings-filled@2x.png"/> 
-            <SideBarLink to="/settings">Settings</SideBarLink>
-          </div> 
         </div>
 
         <div class="bottom-nav">
@@ -124,6 +125,9 @@ export default {
 }
 </script>
 <style scoped>
+.teacher-bar {
+  transition: all 0.3s ease;;
+}
 .student-bar {
   margin-left: 1em;
 }
@@ -226,6 +230,7 @@ export default {
 }
 .side-row{
   display: flex;
+  transition: all 0.3s ease;
 }
 
 .icon{
@@ -237,11 +242,10 @@ export default {
 }
 
 .sync-icon{
-  width:2.5em;
   height:2.5em;
-  margin-top: 1em;
   margin-right: 1em;
   margin-left:-1.875em;
+  cursor: pointer;
 }
 .icon-profile{
   width:2.75em;

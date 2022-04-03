@@ -1,9 +1,7 @@
 <template>
   <div class="headerDashboardTitle">
     <h1 class="dashboard-title inter-bold-heavy-metal-50px">{{dashboardTitle}}</h1>
-    <router-link to="/home">
-        <img class="crossBtnDashboard" src="../../img/cross-arrow.png" />
-    </router-link>
+        <img @click="$router.go(-1)" class="crossBtnDashboard" src="../../img/cross-arrow.png" />
   </div>
 </template>
 
@@ -30,7 +28,7 @@
     };
 </script>
 
-<style>
+<style scoped>
   .headerDashboardTitle {
     display: flex;
     position: relative;
@@ -40,11 +38,12 @@
     justify-content: space-between;
   }
 
-  .addBtnDashboard {
+  .crossBtnDashboard {
     height: 50px;
     width: 50px;
     margin-left: 31px;
     margin-top: 16px;
+    cursor: pointer;
   }
 
   .dashboard-title {

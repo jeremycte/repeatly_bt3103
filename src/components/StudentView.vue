@@ -2,7 +2,7 @@
       <div class="students">
         <div class="student-container " v-for='item in items' :key='item'>
           <!-- Insert student name here -->
-          <div class="name inter-semi-bold-heavy-metal-23px">{{item.message}}</div>
+          <div class="student-name inter-semi-bold-heavy-metal-23px">{{item.message}}</div>
         </div>
 
       </div>
@@ -19,6 +19,9 @@ export default {
 }
 </script>
 <style scoped>
+.student-name {
+  text-transform: capitalize;
+}
 .students{
   display: flex;
   flex-wrap: wrap;
@@ -38,11 +41,12 @@ export default {
   padding: 13px 36.8px;
   position: relative;
 }
-.student-container:nth-child(odd){
+.student-container:nth-child(even){
   background-color: #D1F5ED;
 }
-.student-container:nth-child(even){
+.student-container:nth-child(odd){
   background-color: #A786F3;
 }
+
 
 </style>

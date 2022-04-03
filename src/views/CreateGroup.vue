@@ -63,9 +63,11 @@ export default {
       async save(){
         try{
           const userEmail = auth.currentUser.email;
+          const group = document.getElementById("GroupName").value;
+          const Group = group.charAt(0).toUpperCase() + group.slice(1);
           await addDoc(collection(db,"users",String(userEmail),"Groups"),
             {
-              title: document.getElementById("GroupName").value,
+              title: Group ,
               tag: document.getElementById("GroupTag").value,
               description: document.getElementById("description").value,
               estimatedTime: 0,

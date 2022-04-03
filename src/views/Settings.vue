@@ -133,6 +133,7 @@ import {getAuth,onAuthStateChanged,updatePassword,deleteUser} from "firebase/aut
 import {getFirestore,updateDoc,doc,deleteDoc} from "firebase/firestore";
 import moment from "moment";
 import router from "../../router/router";
+import VueSimpleAlert from "vue-simple-alert";
 
 
 const auth = getAuth()
@@ -192,7 +193,12 @@ export default {
                 DOB: dobVal,
               })
             } else {
-              alert("Ensure that DOB is in the correct format");
+              VueSimpleAlert.fire({
+                  type: 'info',
+                  title: 'Ensure that DOB is in the correct format',
+                  timer: 2000,
+                  // footer: '<a href>Why do I have this issue?</a>'
+              })
               throw "dob Invalid";
             }
           }
@@ -201,31 +207,50 @@ export default {
             if (passwordVal === confirmVal) {
               await updatePassword(currentRefUser, passwordVal)
             } else {
-              alert("Ensure that passwords are matching");
+              VueSimpleAlert.fire({
+                  type: 'info',
+                  title: 'Ensure that passwords are matching',
+                  timer: 2000,
+                  // footer: '<a href>Why do I have this issue?</a>'
+              })
               throw "password invalid";
             }
           }
           this.clear();
-          alert("Your infomation has been saved!");
-          location.reload();
+          VueSimpleAlert.fire({
+            type: 'success',
+            title: 'Your information has been saved',
+            // footer: '<a href>Why do I have this issue?</a>'
+          }).then(() => {
+            location.reload();
+          });
         } catch(error){
           console.log("update error")
         }
       },
       async deleteAcc(){
-        try{
-          const ok = confirm("Are you sure you want to delete your account?");
-
-          if(ok){
-            const tempUser = currentRefUser
-            await deleteDoc(doc(db,"users",tempUser.email));
-            await deleteUser(auth.currentUser);
-            alert("Your account has been deleted");
-            await router.push({name: 'SignIn'});
-          } else {
-            alert("Your account has not been deleted");
-          }
-        } catch(error){
+        try {
+          // const ok = confirm("Are you sure you want to delete your account?");
+          VueSimpleAlert.confirm("Are you sure you want to delete your account?").then(() => {
+              const tempUser = currentRefUser;
+              deleteDoc(doc(db,"users",tempUser.email));
+              deleteUser(auth.currentUser);
+              VueSimpleAlert.fire({
+                type: 'success',
+                title: 'Account Successfully Deleted',
+                text: 'Redirecting you back to Sign In',
+              }).then(() => {
+                router.push({name: 'SignIn'});
+              });
+              
+          })
+        } catch(error) {
+          VueSimpleAlert.fire({
+            type: 'error',
+            title: 'Account Deletion Error',
+            text: "Your account has not been deleted",
+            footer: "Error Name: " + error,
+          })
           console.log('account deletion error')
         }
       }

@@ -63,6 +63,7 @@
 import firebaseApp from "../firebaseDetails";
 import {getAuth,sendPasswordResetEmail} from "firebase/auth";
 import router from "../../router/router";
+import VueSimpleAlert from "vue-simple-alert";
 firebaseApp;
 
 export default {
@@ -83,18 +84,28 @@ export default {
         const auth = getAuth();
         const email = document.getElementById("email").value
         await sendPasswordResetEmail(auth,email)
-        alert("A reset password link has been sent to your email.")
-        console.log("forget password passed")
         this.validEmail = "yes"
         var validEmail = this.validEmail
-        router.push({ name: 'ForgetPasswordStatus', params: {validEmail} })
+        VueSimpleAlert.fire({
+          type: 'success',
+          title: 'Reset Password Successful',
+          text: 'A reset password link has been sent to your email',
+          // footer: '<a href>Why do I have this issue?</a>'
+        }).then(() => {
+          console.log("forget password passed")
+          router.push({ name: 'ForgetPasswordStatus', params: {validEmail} })
+        });        
       } catch(error){
-        alert("Please provide a valid email")
-        console.log("forget Password failed")
-        console.log(error)
         validEmail = "no"
         this.validEmail = "no"
+        VueSimpleAlert.fire({
+          type: 'error',
+          title: 'Forget Password Failed',
+          text: "Please provide a valid email address",
+          footer: "Error Name: " + error,
+        }).then(() => {
         router.push({ name: 'ForgetPasswordStatus', params: {validEmail} })
+        });     
       }
     }
   }

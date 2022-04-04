@@ -11,7 +11,7 @@
     <div class="group-162547">
     <div class="study-deck-group">
         <div class="study-deck-inner">
-            <a @click="$router.go(-1)">
+            <a @click="$router.push({name:'StudentStudyDeckStats'})">
             <img class="back-arrow" src="../../img/back-arrow.png" />
             <h1 class="end-study inter-semi-bold-edward-24px">End Study<br>Session</h1>
             </a>
@@ -20,13 +20,14 @@
             </div>
         </div>
         <div class="overlap-group-txtareaStudyDeck border-1px-quick-silver">
-        <textarea class="deck-description" name="deckdescription" placeholder="Enter Your Answer" type="text"></textarea>
+        <textarea class="deck-description" name="deckdescription" placeholder="Enter Your Answer" type="text"
+                  id="questionArea"></textarea>
       </div>
-      <btn class="checkAnswerStudybtn">
+      <button class="checkAnswerStudybtn" v-on:click="checkAnswers()">
         <div class="frame-1-checkanswers">
           <h1 class="studydeck-titleBtn inter-semi-bold-white-28px">Check Answers</h1>
         </div>
-      </btn>
+      </button>
     </div>
     
   </div>
@@ -37,16 +38,50 @@
 <script>
 import SideNav from "../components/SideNav.vue"
 // import Header from "../components/Header.vue"
+import cardClassList from "@/cardClassList";
+import router from "../../router/router";
+
+var cardsArray = []
+
 
 export default {
-    
   name: "StudyDeck",
   components: {
         SideNav
     },
-     props: [
-        "MyDashboard"
-    ]
+  mounted(){
+    const classifier = new cardClassList()
+    cardsArray = JSON.parse(sessionStorage.getItem("cardDetails"))
+    const cardOrder = JSON.parse(sessionStorage.getItem("questionOrder"))
+    // console.log(cardsArray)
+    classifier.addCardSet(cardsArray)
+    const retryCard = JSON.parse(sessionStorage.getItem("retryQuestion"))
+    var chosenCard;
+    if (!retryCard){
+      chosenCard = classifier.displayCard()
+    } else {
+      chosenCard = JSON.parse(sessionStorage.getItem("chosenCard"))
+    }
+    if (!cardOrder.includes(chosenCard.id)){
+      cardOrder.push(chosenCard.id)
+    }
+    const studyingCards = classifier.flatten()
+    sessionStorage.setItem("studyingCards",JSON.stringify(studyingCards))
+    sessionStorage.setItem("chosenCard",JSON.stringify(chosenCard))
+    sessionStorage.setItem("retryQuestion",JSON.stringify(false))
+    sessionStorage.setItem("questionOrder",JSON.stringify(cardOrder))
+    document.getElementById('question-field').innerHTML = chosenCard.question
+  },
+  methods:{
+    checkAnswers(){
+      sessionStorage.setItem("givenAnswer",String(document.getElementById("questionArea").value))
+      document.getElementById("questionArea").value = '';
+      router.push({name:'StudyDeckAnswer'})
+    }
+  },
+  props: [
+      "MyDashboard"
+  ]
 };
 </script>
 

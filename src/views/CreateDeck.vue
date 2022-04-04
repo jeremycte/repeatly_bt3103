@@ -66,26 +66,32 @@ export default {
           const Title = title.charAt(0).toUpperCase() + title.slice(1);
           const tag = document.getElementById("deckTag").value;
           const Tag = tag.charAt(0).toUpperCase() + tag.slice(1);
-          await addDoc(collection(db,"users",String(userEmail),"decks"),
-            {
-              title: Title,
-              tag: Tag,
-              description: document.getElementById("description").value,
-              estimatedTime: 0,
-              needsRecapping: 0,
-              totalCards: 0,
-              uncertainCards: 0,
-            })
-          document.getElementById("deckName").value = "";
-          document.getElementById("deckTag").value = "";
-          document.getElementById("description").value="";
-          VueSimpleAlert.fire({
+          const descrip = document.getElementById("description").value
+
+          if (title === '' || tag ==='' || descrip === ''){
+            alert("There are empty fields, please fill them up")
+          } else {
+            await addDoc(collection(db,"users",String(userEmail),"decks"),
+                {
+                  title: Title,
+                  tag: Tag,
+                  description: descrip,
+                  estimatedTime: 0,
+                  needsRecapping: 0,
+                  totalCards: 0,
+                  uncertainCards: 0,
+                })
+            document.getElementById("deckName").value = "";
+            document.getElementById("deckTag").value = "";
+            document.getElementById("description").value="";
+            VueSimpleAlert.fire({
               type: 'success',
               title: 'Successfully Created '+ Title +' Card Deck',
               // footer: '<a href>Why do I have this issue?</a>'
-          }).then(() => {
-            this.$router.push({name: "Home"})
-          });
+            }).then(() => {
+              this.$router.push({name: "Home"})
+            });
+          }
         }catch(error){
           console.log(error)
           VueSimpleAlert.fire({

@@ -167,46 +167,51 @@ export default {
         const userEmail = auth.currentUser.email
         const deckObj = JSON.parse(sessionStorage.getItem('deckObj'))
         const deckId = deckObj["deckId"]
-        if(this.selectedIndex === null){
-          const newItem = await addDoc(collection(db,"users",String(userEmail),"decks",deckId,"cards"),{
-            question: questionInput,
-            answer: answerInput,
-            title: titleInput,
-            boxType: 1,
-            firstAnswered: false,
-            isWrong:false
-          })
-          const tempCardDetails = {
-            'answer':answerInput,
-            'boxType':1,
-            'firstAnswered':false,
-            'isWrong': false,
-            'question':questionInput,
-            'title':titleInput,
-            'id': newItem.id,
+
+        if (titleInput === '' || questionInput === '' || answerInput ===''){
+          alert("There are empty fields, please fill them up")
+        } else{
+          if(this.selectedIndex === null){
+            const newItem = await addDoc(collection(db,"users",String(userEmail),"decks",deckId,"cards"),{
+              question: questionInput,
+              answer: answerInput,
+              title: titleInput,
+              boxType: 1,
+              firstAnswered: false,
+              isWrong:false
+            })
+            const tempCardDetails = {
+              'answer':answerInput,
+              'boxType':1,
+              'firstAnswered':false,
+              'isWrong': false,
+              'question':questionInput,
+              'title':titleInput,
+              'id': newItem.id,
+            }
+            this.documents.push(tempCardDetails)
+            cardsArray = this.documents
+            const updateRef = doc(db,"users",userEmail,"decks",deckId)
+            await updateDoc(updateRef,{
+              totalCards: increment(1),
+              estimatedTime: increment(1.5),
+              uncertainCards: increment(1),
+            })
+          } else {
+            const currentCardID = this.documents[this.selectedIndex]['id']
+            this.documents[this.selectedIndex]['question'] = questionInput
+            this.documents[this.selectedIndex]['answer'] = answerInput
+            this.documents[this.selectedIndex]['title'] = titleInput
+            const updateRef = doc(db,"users",userEmail,"decks",deckId,"cards",currentCardID)
+            await updateDoc(updateRef,{
+              question: questionInput,
+              answer: answerInput,
+              title: titleInput,
+            })
+            cardsArray = this.documents
           }
-          this.documents.push(tempCardDetails)
-          cardsArray = this.documents
-          const updateRef = doc(db,"users",userEmail,"decks",deckId)
-          await updateDoc(updateRef,{
-            totalCards: increment(1),
-            estimatedTime: increment(1.5),
-            uncertainCards: increment(1),
-          })
-        } else {
-          const currentCardID = this.documents[this.selectedIndex]['id']
-          this.documents[this.selectedIndex]['question'] = questionInput
-          this.documents[this.selectedIndex]['answer'] = answerInput
-          this.documents[this.selectedIndex]['title'] = titleInput
-          const updateRef = doc(db,"users",userEmail,"decks",deckId,"cards",currentCardID)
-          await updateDoc(updateRef,{
-            question: questionInput,
-            answer: answerInput,
-            title: titleInput,
-          })
-          cardsArray = this.documents
+          this.cancel()
         }
-        this.cancel()
       } catch(error){
         console.log(error)
         console.log("card creation/edit error")

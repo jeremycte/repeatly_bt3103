@@ -11,7 +11,7 @@
     <div class="group-162547">
         <div class="study-deck-group">
             <div class="study-deck-inner">
-                <a @click="$router.go(-1)">
+                <a @click="$router.push({name:'StudentStudyDeckStats'})">
                 <img class="back-arrow" src="../../img/back-arrow.png" />
                 <h1 class="end-study inter-semi-bold-edward-24px">End Study<br>Session</h1>
                 </a>
@@ -24,18 +24,15 @@
                 <div class="displayed-answer inter-semi-bold-black-28px" id="answer-field2">Test</div>
             </div>
         <div class="verification">
-            <div class="correct-button">
+            <button class="correct-button" v-on:click="correct()">
                 <img class="icon-check_mark" src="../../img/StudyDeckAnswer/subway-tick-1@2x.png" />
-            </div>
-            <div class="redo-button">
+            </button>
+            <button class="redo-button" v-on:click="retry()">
                 <img class="icon-check_mark" src="../../img/StudyDeckAnswer/reload.png" />
-            </div>
-            <div class="wrong-button">
-              <div class="overlap-group-deckans">
-                <div class="rectangle-6"></div>
+            </button>
+            <button class="wrong-button" v-on:click="wrong()">
                 <img class="icon-close" src="../../img/StudyDeckAnswer/vector-81@2x.png" />
-              </div>
-            </div>
+            </button>
           </div>
         </div>
     </div>
@@ -45,11 +42,59 @@
 
 <script>
 import SideNav from "../components/SideNav.vue"
+import cardClassList from "@/cardClassList";
+import router from "../../router/router";
+
+var cardsArray = []
 export default {
   name: "StudyDeckAnswer",
   components: {
         SideNav
+  },
+  data(){
+    return{
+      nativeClassifer: null,
+      chosenCardDetails: null
+    }
+  },
+  mounted(){
+    const classifier = new cardClassList()
+    this.nativeClassifer = classifier;
+    cardsArray = JSON.parse(sessionStorage.getItem("studyingCards"))
+    this.nativeClassifer.addCardSet(cardsArray)
+    const chosenCard = JSON.parse(sessionStorage.getItem('chosenCard'))
+    this.chosenCardDetails = chosenCard
+    const answerGiven = sessionStorage.getItem('givenAnswer')
+    document.getElementById('question-field').innerHTML = chosenCard.answer
+    document.getElementById('answer-field2').innerHTML = answerGiven;
+  },
+  methods:{
+    correct(){
+      this.nativeClassifer.promote(this.chosenCardDetails)
+      const outputArray = this.nativeClassifer.flatten()
+      sessionStorage.setItem("cardDetails",JSON.stringify(outputArray))
+      if(this.nativeClassifer.checkDone()){
+        router.push({name:'StudentStudyDeckStats'})
+      } else {
+        router.push({name:"StudyDeck"})
+      }
     },
+    retry(){
+      this.nativeClassifer.retry(this.chosenCardDetails)
+      sessionStorage.setItem("retryQuestion",JSON.stringify(true))
+      const outputArray = this.nativeClassifer.flatten()
+      sessionStorage.setItem("cardDetails",JSON.stringify(outputArray))
+      sessionStorage.setItem("chosenCard",JSON.stringify(this.chosenCardDetails))
+      router.push({name:"StudyDeck"})
+    },
+    wrong(){
+      this.nativeClassifer.demote(this.chosenCardDetails)
+      const outputArray = this.nativeClassifer.flatten()
+      console.log(outputArray)
+      sessionStorage.setItem("cardDetails",JSON.stringify(outputArray))
+      router.push({name:"StudyDeck"})
+    }
+  }
 };
 </script>
 

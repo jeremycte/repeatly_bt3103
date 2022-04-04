@@ -37,7 +37,7 @@
                     <h1 class="studydeck-titleBtn inter-semi-bold-white-28px">Edit Deck</h1>
                     </div>
                 </button>
-                <button class="studyBtn">
+                <button class="studyBtn" v-on:click="studyDeck()">
                     <div class="frame-2-study">
                     <h1 class="studydeck-titleBtn inter-semi-bold-white-28px">Study Deck</h1>
                     </div>
@@ -98,7 +98,7 @@ async function getCards(userEmail,deckObj){
         const answer = card.answer
         const cardTitle = card.title
         const boxType = card.boxType
-        const firstAnswered = card.firstAnswereed
+        const firstAnswered = card.firstAnswered
         const isWrong = card.isWrong
         const tempCardDetails = {
           'answer':answer,
@@ -107,11 +107,13 @@ async function getCards(userEmail,deckObj){
           'isWrong': isWrong,
           'question':question,
           'title':cardTitle,
-          'id':cardId
+          'id':cardId,
+          'tries':0,
         }
         cardsObjArray.push(tempCardDetails)
         refDoc.push(question)
       })
+      console.log(cardsObjArray)
       sessionStorage.setItem("cardDetails",JSON.stringify(cardsObjArray))
 
     }
@@ -171,6 +173,20 @@ export default {
         await router.push({name:'EditCardDeck'})
       }catch(error){
         console.log(error);
+      }
+    },
+    async studyDeck(){
+      try{
+        if (this.documents.length !== 0){
+          sessionStorage.setItem("retryQuestion",JSON.stringify(false))
+          const tempArray = []
+          sessionStorage.setItem("questionOrder",JSON.stringify(tempArray))
+          await router.push({name:'StudyDeck'})
+        } else {
+          alert("you have no cards")
+        }
+      }catch(error){
+        console.log("study deck error")
       }
     }
   }

@@ -31,7 +31,7 @@
                 <img class="icon-check_mark" src="../../img/StudyDeckAnswer/reload.png" />
             </button>
             <button class="wrong-button" v-on:click="wrong()">
-                <img class="icon-close" src="../../img/StudyDeckAnswer/vector-81@2x.png" />
+                <img class="icon-check_mark" src="../../img/StudyDeckAnswer/vector-81@2x.png" />
             </button>
           </div>
         </div>
@@ -116,9 +116,9 @@ export default {
 .verification {
     display: flex;
     height: 110px;
-    left: 745px;
+    left: 717px;
     position: absolute;
-    top: 841px;
+    top: 881px;
     width: 622px;
     justify-content: space-around;
 }
@@ -143,8 +143,8 @@ export default {
 
 .icon-check_mark {
   height: 58.99px;
-  margin-left: 38.6px;
-  margin-top: 24.5px;
+  margin-left: 32.6px;
+  margin-top: 19.5px;
   width: 70.95px;
 }
 

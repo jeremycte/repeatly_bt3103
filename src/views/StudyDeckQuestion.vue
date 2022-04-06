@@ -33,6 +33,11 @@
     
   </div>
   </div>
+
+  <div v-if="visible" class="help">
+      <textarea disabled class="help-description inter-normal-black-20px ">Text Box Bro with HelpText Box Bro with HelpText Box Bro with HelpText Box Bro with HelpText Box Bro with HelpText Box Bro with HelpText Box Bro with HelpText Box Bro with Help</textarea>
+  </div>
+  <img class="help-icon" src="../../img/help-icon.png" @click="visible = !visible"/>
   </div>
 </template>
 
@@ -85,6 +90,9 @@ export default {
       router.push({name:'StudyDeckAnswer'})
     }
   },
+  data: () => ({
+    visible: false
+  }),
   props: [
       "MyDashboard"
   ]

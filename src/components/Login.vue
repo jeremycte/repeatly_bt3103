@@ -57,7 +57,7 @@
       <p class="dont-have-an-account-sign-up-now valign-text-middle inter-bold-white-16px">
         <span>
           <span class="inter-bold-black-16px">Don't have an account?</span>
-          <router-link to="/registration">
+          <router-link to="/pick-user">
             <span class="span1 inter-bold-dull-lavender-16px"> Sign Up Now</span>
           </router-link>
         </span>

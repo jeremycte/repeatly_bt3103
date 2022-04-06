@@ -220,6 +220,7 @@ export default {
 .cards-tried-placeholder {
   text-align: center;
   font-size: 28px;
+  line-height: 42px;
 }
 
 

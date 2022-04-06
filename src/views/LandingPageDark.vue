@@ -115,7 +115,7 @@
               <div class="save-tons-of-time-g inter-bold-white-60px">
                 {{ saveTonsOfTimeG }}
               </div>
-              <router-link to="/registration">
+              <router-link to="/pick-user">
               <div class="button">
                 <div class="get-beta-access-dark inter-bold-white-30px">
                   Sign Up
@@ -146,7 +146,7 @@
             </div>
           </div>
           </router-link>
-          <router-link to="/registration">
+          <router-link to="/pick-user">
           <div class="register-button">
             <div class="overlap-group4 border-1px-white">
               <div class="get-beta-access-2 inter-normal-white-20px">Register</div>

@@ -34,3 +34,9 @@ input, select {
   -moz-box-sizing: border-box;
   -webkit-box-sizing: border-box;
 } 
+
+textarea::-webkit-scrollbar-thumb,  textarea::-webkit-scrollbar {
+  background-color: none;
+  outline:none;
+}
+

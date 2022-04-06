@@ -162,23 +162,22 @@ export default {
     opacity: 0;
 }
 
-.link{
+.link {
     display: flex;
     align-items: center;
     position: relative;
     user-select: none;
-
+    text-transform: capitalize;
     margin: 20px;
     padding: 0.4em;
     border-radius: 0.5em;
     height: 2em;
     color: white;
     text-decoration: none;
-
     font-family: Inter;
     font-weight: 600;
     font-size: 20px;
-    }
+}
     
 .link:hover {
     background-color: #cdb9fa;

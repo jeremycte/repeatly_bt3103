@@ -152,7 +152,7 @@ export default {
     border-radius: 40px;
     box-shadow: 0px 2px 8px #00000022;
     /* display: flex; */
-    height: 858px;
+    /* height: 858px; */
     margin-top: -1px;
     min-width: 1487px;
     padding: 26px 47px;
@@ -172,9 +172,8 @@ export default {
     border-radius: 25px;
     display: flex;
     align-items: flex-start;
-    margin-top: 29px;
-    margin-left: 71.2px;
-    margin-top: 26.7px;
+    margin-left: 67.2px;
+    margin-top: 22.7px;
 }
 
 .back-arrow {
@@ -206,6 +205,7 @@ export default {
   .checkAnswerStudybtn {
     background-color: var(--shamrock);
     border-radius: 25px;
+    border: none;
     height: 74px;
     width: 312px;
     cursor: pointer;
@@ -213,6 +213,6 @@ export default {
     box-shadow: 0px 2px 8px #00000022;
     margin-top: 29px;
     display: flex;
-    margin-left: 33em;
+    margin-left: 36%;
   }
 </style>

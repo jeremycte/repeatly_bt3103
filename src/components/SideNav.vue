@@ -114,6 +114,7 @@ export default {
       async signOut() {
         VueSimpleAlert.confirm("Sign Out?").then(() => {
           auth.signOut().then(() => {
+            sessionStorage.clear()
             console.log("user has sign out")
             router.push('/sign-in')
           })

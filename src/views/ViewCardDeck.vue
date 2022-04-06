@@ -64,6 +64,7 @@ var cardsObjArray = []
 
 
 
+
 async function displayDetails(userEmail,deckObj){
   try{
     const deckId = deckObj["deckId"]
@@ -91,6 +92,7 @@ async function getCards(userEmail,deckObj){
   try{
     const deckId = deckObj["deckId"]
     const userCards = await getDocs(collection(db,"users",String(userEmail),"decks",deckId,"cards"))
+    const cardBoxMap = new Map()
     if(!userCards.empty) {
       userCards.forEach((docs) => {
         const card = docs.data()
@@ -113,10 +115,11 @@ async function getCards(userEmail,deckObj){
         }
         cardsObjArray.push(tempCardDetails)
         refDoc.push(question)
+        cardBoxMap.set(cardId,boxType)
       })
       console.log(cardsObjArray)
       sessionStorage.setItem("cardDetails",JSON.stringify(cardsObjArray))
-
+      sessionStorage.setItem("cardBoxMap",JSON.stringify(Array.from(cardBoxMap.entries())))
     }
   }catch(error){
     console.log(error)
@@ -181,6 +184,7 @@ export default {
       try{
         if (this.documents.length !== 0){
           sessionStorage.setItem("retryQuestion",JSON.stringify(false))
+          sessionStorage.setItem("deckCompleted",JSON.stringify(false))
           const tempArray = []
           sessionStorage.setItem("questionOrder",JSON.stringify(tempArray))
           await router.push({name:'StudyDeck'})

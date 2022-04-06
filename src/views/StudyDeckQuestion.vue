@@ -15,7 +15,8 @@
             <img class="back-arrow" src="../../img/back-arrow.png" />
             <h1 class="end-study inter-semi-bold-edward-24px">End Study<br>Session</h1>
             </a>
-            <div class="question-rectangle"> 
+            <div class="question-rectangle">
+                <div class="category-description inter-bold-white-30px" id="category-description">Category 1</div>
                 <div class="question-field inter-bold-white-30px" id="question-field">Question will be inside here</div>
             </div>
         </div>
@@ -52,7 +53,6 @@ export default {
     const classifier = new cardClassList()
     cardsArray = JSON.parse(sessionStorage.getItem("cardDetails"))
     const cardOrder = JSON.parse(sessionStorage.getItem("questionOrder"))
-    // console.log(cardsArray)
     classifier.addCardSet(cardsArray)
     const retryCard = JSON.parse(sessionStorage.getItem("retryQuestion"))
     var chosenCard;
@@ -61,15 +61,22 @@ export default {
     } else {
       chosenCard = JSON.parse(sessionStorage.getItem("chosenCard"))
     }
-    if (!cardOrder.includes(chosenCard.id)){
-      cardOrder.push(chosenCard.id)
+    console.log(chosenCard)
+    if(typeof chosenCard === "undefined"){
+      sessionStorage.setItem("deckCompleted",JSON.stringify(true))
+      router.push({name:'StudentStudyDeckStats'})
+    } else {
+      if (!cardOrder.includes(chosenCard.id)){
+        cardOrder.push(chosenCard.id)
+      }
+      const studyingCards = classifier.flatten()
+      sessionStorage.setItem("studyingCards",JSON.stringify(studyingCards))
+      sessionStorage.setItem("chosenCard",JSON.stringify(chosenCard))
+      sessionStorage.setItem("retryQuestion",JSON.stringify(false))
+      sessionStorage.setItem("questionOrder",JSON.stringify(cardOrder))
+      document.getElementById('question-field').innerHTML = chosenCard.question
+      document.getElementById('category-description').innerHTML = "Mastery level " + String(chosenCard.boxType)
     }
-    const studyingCards = classifier.flatten()
-    sessionStorage.setItem("studyingCards",JSON.stringify(studyingCards))
-    sessionStorage.setItem("chosenCard",JSON.stringify(chosenCard))
-    sessionStorage.setItem("retryQuestion",JSON.stringify(false))
-    sessionStorage.setItem("questionOrder",JSON.stringify(cardOrder))
-    document.getElementById('question-field').innerHTML = chosenCard.question
   },
   methods:{
     checkAnswers(){
@@ -197,22 +204,29 @@ export default {
     padding: 13px 20.2px;
 }
 
-  .studyDeck-titleBtn {
-    height: 34px;
-    letter-spacing: 0;
-  }
+.category-description {
+  text-align: center;
+  margin-top: 5%;
+  font-size: 28px;
+  text-decoration: underline;
+}
 
-  .checkAnswerStudybtn {
-    background-color: var(--shamrock);
-    border-radius: 25px;
-    border: none;
-    height: 74px;
-    width: 312px;
-    cursor: pointer;
-    align-items: flex-start;
-    box-shadow: 0px 2px 8px #00000022;
-    margin-top: 29px;
-    display: flex;
-    margin-left: 36%;
-  }
+.studyDeck-titleBtn {
+  height: 34px;
+  letter-spacing: 0;
+}
+
+.checkAnswerStudybtn {
+  background-color: var(--shamrock);
+  border-radius: 25px;
+  border: none;
+  height: 74px;
+  width: 312px;
+  cursor: pointer;
+  align-items: flex-start;
+  box-shadow: 0px 2px 8px #00000022;
+  margin-top: 29px;
+  display: flex;
+  margin-left: 36%;
+}
 </style>

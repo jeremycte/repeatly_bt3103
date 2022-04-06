@@ -39,6 +39,7 @@ var refDoc=[];
 
 async function getCardDetails(userEmail){
   let userDecks = await getDocs(collection(db,"users",String(userEmail),"decks"));
+  console.log("i am running")
   if (!userDecks.empty){
     userDecks.forEach((docs)=>{
       let deck = docs.data()
@@ -73,7 +74,8 @@ export default {
       onAuthStateChanged(auth, async (user)=>{
         if(user) {
           await getCardDetails(user.email)
-          await this.randomImage()
+          this.randomImage()
+          console.log(refDoc)
           this.documents = refDoc;
           this.loading = true;
         }
@@ -93,6 +95,7 @@ export default {
   },
   mounted(){
     refDoc = []
+    this.documents = []
     this.getData()
   },
   data(){

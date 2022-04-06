@@ -68,6 +68,7 @@ export default {
     const answerGiven = sessionStorage.getItem('givenAnswer')
     document.getElementById('question-field').innerHTML = chosenCard.answer
     document.getElementById('answer-field2').innerHTML = answerGiven;
+    document.getElementById('category-description').innerHTML = "Mastery level " + String(chosenCard.boxType)
   },
   methods:{
     correct(){
@@ -107,7 +108,8 @@ export default {
 .category-description {
   text-align: center;
   margin-top: 5%;
-  font-size: var(--font-size-s22);
+  font-size: 28px;
+  text-decoration: underline;
 }
 .overlap-group-deckans {
     background-size: 100% 100%;

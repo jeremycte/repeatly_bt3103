@@ -55,6 +55,7 @@ import {getAuth,onAuthStateChanged} from "firebase/auth";
 import {getFirestore, collection, getDocs, doc, deleteDoc,getDoc} from "firebase/firestore";
 import SideNav from "../components/SideNav.vue";
 import router from "../../router/router";
+import VueSimpleAlert from "vue-simple-alert";
 
 const auth = getAuth();
 const db = getFirestore(firebaseApp);
@@ -126,6 +127,7 @@ async function getCards(userEmail,deckObj){
 
 
 export default {
+
   name: "ViewCardDeck",
   components: {
       SideNav
@@ -183,7 +185,11 @@ export default {
           sessionStorage.setItem("questionOrder",JSON.stringify(tempArray))
           await router.push({name:'StudyDeck'})
         } else {
-          alert("you have no cards")
+          VueSimpleAlert.fire({
+                  type: 'info',
+                  title: 'You have no questions available',
+                  timer: 3000,
+          })
         }
       }catch(error){
         console.log("study deck error")

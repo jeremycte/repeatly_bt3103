@@ -69,7 +69,11 @@ export default {
           const descrip = document.getElementById("description").value
 
           if (title === '' || tag ==='' || descrip === ''){
-            alert("There are empty fields, please fill them up")
+            VueSimpleAlert.fire({
+                  type: 'info',
+                  title: 'There are empty fields, please fill them up',
+                  timer: 3000,
+            })
           } else {
             await addDoc(collection(db,"users",String(userEmail),"decks"),
                 {

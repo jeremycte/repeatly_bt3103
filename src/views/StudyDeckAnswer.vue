@@ -1,6 +1,6 @@
 <template>
   <div class="container-center-horizontal">
-    <SideNav />
+    <SideNavStudy />
     <div class="student-study-deck-answer screen">
         <div class="headerDashboardTitle">
         <h1 class="dashboard-title inter-bold-heavy-metal-50px">Answer</h1>
@@ -41,7 +41,7 @@
 </template>
 
 <script>
-import SideNav from "../components/SideNav.vue"
+import SideNavStudy from "../components/SideNavStudy.vue"
 import cardClassList from "@/cardClassList";
 import router from "../../router/router";
 
@@ -49,7 +49,7 @@ var cardsArray = []
 export default {
   name: "StudyDeckAnswer",
   components: {
-        SideNav
+        SideNavStudy
   },
   data(){
     return{

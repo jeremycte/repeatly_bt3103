@@ -1,6 +1,6 @@
 <template>
 <div class="container-center-horizontal">
-    <SideNav />
+    <SideNavStudy />
     <div class="student-study-deck-question screen">
       <div class="headerDashboardTitle">
         <h1 class="dashboard-title inter-bold-heavy-metal-50px">{{MyDashboard}}</h1>
@@ -36,8 +36,7 @@
 </template>
 
 <script>
-import SideNav from "../components/SideNav.vue"
-// import Header from "../components/Header.vue"
+import SideNavStudy from "../components/SideNavStudy.vue"
 import cardClassList from "@/cardClassList";
 import router from "../../router/router";
 
@@ -47,7 +46,7 @@ var cardsArray = []
 export default {
   name: "StudyDeck",
   components: {
-        SideNav
+        SideNavStudy
     },
   mounted(){
     const classifier = new cardClassList()
@@ -87,6 +86,13 @@ export default {
 
 
 <style>
+.headerDashboardTitle {
+    display: flex;
+    position: relative;
+    margin-top: 25px;
+    align-items: center;
+    justify-content: space-between;
+}
 .student-study-deck-question {
     /* align-items: flex-start; */
     /* display: flex; */

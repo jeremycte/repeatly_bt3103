@@ -99,6 +99,7 @@ import SideNav from "../components/SideNav.vue"
 import Header2 from "../components/Header2.vue"
 import firebaseApp from "@/firebaseDetails";
 import {getAuth} from "firebase/auth";
+import VueSimpleAlert from "vue-simple-alert";
 import {
   doc,
   getFirestore,
@@ -169,7 +170,11 @@ export default {
         const deckId = deckObj["deckId"]
 
         if (titleInput === '' || questionInput === '' || answerInput ===''){
-          alert("There are empty fields, please fill them up")
+          VueSimpleAlert.fire({
+                  type: 'info',
+                  title: 'There are empty fields, please fill them up',
+                  timer: 3000,
+          })
         } else{
           if(this.selectedIndex === null){
             const newItem = await addDoc(collection(db,"users",String(userEmail),"decks",deckId,"cards"),{

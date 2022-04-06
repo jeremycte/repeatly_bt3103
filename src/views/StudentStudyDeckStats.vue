@@ -1,6 +1,6 @@
 <template>
 <div class="container-center-horizontal">
-    <SideNav />
+    <SideNavStudy />
     <div class="student-study-deck-question screen">
       <div class="headerDashboardTitle">
         <h1 class="dashboard-title inter-bold-heavy-metal-50px">Study Statistics</h1>
@@ -37,7 +37,7 @@
 </template>
 
 <script>
-import SideNav from "../components/SideNav.vue"
+import SideNavStudy from "../components/SideNavStudy.vue"
 import firebaseApp from "@/firebaseDetails";
 import {getAuth} from "firebase/auth";
 import {
@@ -133,7 +133,7 @@ async function updateDetails(cardsArray){
 export default {
   name: "StudentStudyDeckStats",
   components: {
-        SideNav
+        SideNavStudy
   },
   mounted(){
     const cardItems = JSON.parse(sessionStorage.getItem("cardDetails"))

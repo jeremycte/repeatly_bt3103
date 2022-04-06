@@ -28,3 +28,9 @@ input, textarea {
   border: none;
   outline: none;
 }
+
+input, select {
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+} 

@@ -150,7 +150,7 @@ export default {
     white-space: nowrap;
     font-family: var(--font-family-inter);
     font-size: var(--font-size-l);
-    width: 418px;
+    width: 100%;
   }
 
   .createGroup::placeholder {

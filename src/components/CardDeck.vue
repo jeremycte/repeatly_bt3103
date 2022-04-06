@@ -6,7 +6,7 @@
         <router-link to="/view-card-deck">
         <template v-if="loading">
           <div class="purple-deck" v-for="(item,index) in documents" :key="item" @click="displaySelectedItem(index)">
-             <img class="illustration" :src="require(`../../img/Dashboard/history-illustrations.png`)" />
+             <img class="illustration" :src="randomImage()" />
               <div class="overlay-deck">
                 <div class="deck-cards-info">
                     <div class="card-title inter-semi-bold-heavy-metal-36px" id="Deck Title">{{item["title"]}}</div>
@@ -81,9 +81,9 @@ export default {
     },
     randomImage() {
       // console.log(this.images[Math.floor(Math.random() * this.images.length)]);
-      return `url("../../img/Dashboard/${
+      return `../../img/${
         this.images[Math.floor(Math.random() * this.images.length)]
-      }")`;
+      }`;
     },
     displaySelectedItem(selectedItemIndex){
       // console.log(selectedItemIndex)
@@ -99,7 +99,7 @@ export default {
     return {
       loading: false,
       documents:[],
-      images: ['history-illustrations.png', 'tab-illustration.png', 'security-illustration.png', 'computer-illustration.png'],
+      images: ['history-illustrations.a72b3ca8.png', 'tab-illustration.acd9ee05.png', 'security-illustration.b477fb4c.png', 'computer-illustration.00d60cba.png'],
       colors: ['rgba(209, 245, 237, 1)', 'rgba(243, 217, 224, 1)', 'rgba(167, 134, 243, 1)'],
     }
   }
@@ -221,6 +221,7 @@ export default {
   min-height: 35px;
   min-width: 226px;
   white-space: nowrap;
+  color: #000;
 }
 
 .uncertain-cards {

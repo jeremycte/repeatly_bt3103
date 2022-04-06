@@ -465,7 +465,7 @@ export default {
   display: flex;
   flex-direction: column;
   margin-left: 8em;
-  margin-bottom: 1em;
+  margin-bottom: 3em;
   min-height: 191px;
   width: 219px;
 }
@@ -473,13 +473,15 @@ export default {
 .editdeck-delete-button {
   align-items: center;
   background-color: #D6433B;
+  border-color: transparent;
   border-radius: 14px;
   display: flex;
   height: 55px;
   min-width: 219px;
-  margin-top: 26px;
+  margin-top: 96px;
   padding: 0 34.7px;
-  cursor:pointer;
+  cursor: pointer;
+  margin-left: 18px;
 }
 
 .editdeck-edit-button {
@@ -515,6 +517,7 @@ export default {
 .overlap-group-2 {
   align-items: center;
   background-color: var(--shamrock);
+  border-color: transparent;
   border-radius: 14px;
   display: flex;
   height: 55px;
@@ -541,6 +544,7 @@ export default {
 .overlap-group1-2 {
   align-items: center;
   background-color: var(--granite-gray);
+  border-color: transparent;
   border-radius: 14px;
   display: flex;
   height: 55px;

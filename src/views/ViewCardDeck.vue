@@ -285,13 +285,14 @@ export default {
 
 .deleteCardDeckbtn {
     background-color: var(--red);
+    border-color: transparent;
     border-radius: 25px;
     height: 74px;
     width: 200px;
     cursor: pointer;
     align-items: flex-start;
     box-shadow: 0px 2px 8px #00000022;
-    margin-top: 29px;
+    margin-top: 50px;
     display: flex;
     margin-left: 10em;
 }
@@ -302,7 +303,7 @@ export default {
     align-items: flex-start;
     margin-top: 29px;
     margin-left: 4em;
-    margin-top: 26.7px;
+    margin-top: 21.7px;
 }
 
 .frame-1-editanswers {
@@ -310,8 +311,8 @@ export default {
     display: flex;
     align-items: flex-start;
     margin-top: 29px;
-    margin-left: 5em;
-    margin-top: 26.7px;
+    margin-left: 85px;
+    margin-top: 20.7px;
 }
 
 .frame-2-study {
@@ -319,15 +320,16 @@ export default {
     display: flex;
     align-items: flex-start;
     margin-top: 29px;
-    margin-left: 4em;
-    margin-top: 26.7px;
+    margin-left: 71px;
+    margin-top: 20.7px;
 }
 
 .studyBtn {
     background-color: var(--shamrock);
+    border-color: transparent;
     border-radius: 25px;
     height: 74px;
-    width: 16em;
+    width: 22em;
     margin-left: 19em;
     cursor: pointer;
     align-items: flex-start;
@@ -338,14 +340,20 @@ export default {
 
 .editBtn {
     background-color: var(--navy-blue);
+    border-color: transparent;
     border-radius: 25px;
     height: 74px;
-    width: 16em;
-    margin-left: 19em;
+    width: 22em;
+    margin-left: 20em;
     cursor: pointer;
     align-items: flex-start;
     box-shadow: 0px 2px 8px #00000022;
     margin-top: 29px;
     display: flex;
+}
+
+.study-deck-inner {
+    display: flex;
+    justify-content: space-between;
 }
 </style>

@@ -209,5 +209,13 @@ export default {
   font-size: 28px;
 }
 
+.checkAnswerStudybtn {
+  border-color: transparent;
+}
+
+.student-study-deck-question {
+  margin-top: 2em;
+}
+
 
 </style>

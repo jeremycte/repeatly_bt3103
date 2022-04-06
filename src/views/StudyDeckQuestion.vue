@@ -155,7 +155,7 @@ export default {
 .crossBtnDashboard {
     height: 60px;
     width: 60px;
-    margin-left: 57em;
+    margin-left: 88em;
     margin-top: 10px;
 }
 .study-deck-inner {
@@ -167,8 +167,8 @@ export default {
     display: flex;
     align-items: flex-start;
     margin-top: 29px;
-    margin-left: 71.2px;
-    margin-top: 26.7px;
+    margin-left: 62.2px;
+    margin-top: 20.7px;
 }
 
 .back-arrow {
@@ -207,6 +207,6 @@ export default {
     box-shadow: 0px 2px 8px #00000022;
     margin-top: 29px;
     display: flex;
-    margin-left: 33em;
+    margin-left: 38em;
   }
 </style>

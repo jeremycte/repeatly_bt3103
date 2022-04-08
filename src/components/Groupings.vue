@@ -6,7 +6,7 @@
 
         <template v-if="loading">
           <div class="purple-deck" v-for="item in documents" :key="item" >
-             <img class="illustration" :src="require(`../../img/Dashboard/history-illustrations.png`)" />
+             <div class="illustration" id="imageDeck" :style="randomImage()" />
               <div class="overlay-group">
                 <div class="group-info">
                     <div class="GroupTitle inter-semi-bold-heavy-metal-36px" id="GroupTitle">{{item["title"]}}</div>
@@ -78,11 +78,10 @@ export default {
       })
     },
     randomImage() {
-      console.log(this.images[Math.floor(Math.random() * this.images.length)]);
-      return `url("../../img/Dashboard/${
+      return "background-image: " + `url(${
         this.images[Math.floor(Math.random() * this.images.length)]
-      }")`;
-    }
+      });`;
+    },
   },
   mounted(){
     refDoc = []
@@ -92,7 +91,10 @@ export default {
     return {
       loading: false,
       documents:[],
-      images: ['history-illustrations.png', 'tab-illustration.png', 'security-illustration.png', 'computer-illustration.png'],
+      images: ['https://res.cloudinary.com/jeremycte23/image/upload/v1649429503/repeatly/tab-illustration_urxjbb.png', 
+      'https://res.cloudinary.com/jeremycte23/image/upload/v1649429503/repeatly/security-illustration_kuf6rq.png', 
+      'https://res.cloudinary.com/jeremycte23/image/upload/v1649429503/repeatly/computer-illustration_rcirpn.png', 
+      'https://res.cloudinary.com/jeremycte23/image/upload/v1649429503/repeatly/history-illustrations_h1vzpp.png'],
       colors: ['rgba(209, 245, 237, 1)', 'rgba(243, 217, 224, 1)', 'rgba(167, 134, 243, 1)'],
     }
   }

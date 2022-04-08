@@ -6,7 +6,7 @@
         <router-link to="/view-card-deck">
         <template v-if="loading">
           <div class="purple-deck" v-for="(item,index) in documents" :key="item" @click="displaySelectedItem(index)">
-             <img class="illustration" :src="randomImage()" />
+             <div class="illustration" id="imageDeck" :style="randomImage()" />
               <div class="overlay-deck">
                 <div class="deck-cards-info">
                     <div class="card-title inter-semi-bold-heavy-metal-36px" id="Deck Title">{{item["title"]}}</div>
@@ -78,14 +78,16 @@ export default {
           console.log(refDoc)
           this.documents = refDoc;
           this.loading = true;
+          var image = document.getElementsByClassName("illustration");
+          image.src = `../../img/${this.images[Math.floor(Math.random() * this.images.length * Math.PI)]}`
+          // document.getElementById("imageDeck").src=`../../img/${this.images[Math.floor(Math.random() * this.images.length)]}`;
         }
       })
     },
     randomImage() {
-      // console.log(this.images[Math.floor(Math.random() * this.images.length)]);
-      return `../../img/${
+      return "background-image: " + `url(${
         this.images[Math.floor(Math.random() * this.images.length)]
-      }`;
+      });`;
     },
     displaySelectedItem(selectedItemIndex){
       // console.log(selectedItemIndex)
@@ -102,7 +104,10 @@ export default {
     return {
       loading: false,
       documents:[],
-      images: ['history-illustrations.a72b3ca8.png', 'tab-illustration.acd9ee05.png', 'security-illustration.b477fb4c.png', 'computer-illustration.00d60cba.png'],
+      images: ['https://res.cloudinary.com/jeremycte23/image/upload/v1649429503/repeatly/tab-illustration_urxjbb.png', 
+      'https://res.cloudinary.com/jeremycte23/image/upload/v1649429503/repeatly/security-illustration_kuf6rq.png', 
+      'https://res.cloudinary.com/jeremycte23/image/upload/v1649429503/repeatly/computer-illustration_rcirpn.png', 
+      'https://res.cloudinary.com/jeremycte23/image/upload/v1649429503/repeatly/history-illustrations_h1vzpp.png'],
       colors: ['rgba(209, 245, 237, 1)', 'rgba(243, 217, 224, 1)', 'rgba(167, 134, 243, 1)'],
     }
   }

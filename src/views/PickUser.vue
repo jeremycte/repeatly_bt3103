@@ -69,7 +69,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .forget-password-status {
   background-color: var(--sauvignon);
   height: 1023px;

@@ -7,7 +7,13 @@
             <CardDeck />
         </div>
         <div v-if="visible" class="help">
-            <textarea disabled class="help-description inter-normal-black-20px ">Text Box Bro with HelpText Box Bro with HelpText Box Bro with HelpText Box Bro with HelpText Box Bro with HelpText Box Bro with HelpText Box Bro with HelpText Box Bro with Help</textarea>
+            <p disabled class="help-description inter-normal-black-20px"><strong>Welcome to the Dashboard</strong><br><br>
+            In here, you can perform a few things <br><br>
+                &#x2022; Create a new card deck <br><br>
+                &#x2022; Search your card deck using the search function <br><br>
+                &#x2022; View every card deck by clicking them <br><br>
+                &#x2022; Access the other pages e.g. Settings, Groups from the side panel
+            </p>
         </div>
         <img class="help-icon" src="../../img/help-icon.png" @click="visible = !visible"/>
         

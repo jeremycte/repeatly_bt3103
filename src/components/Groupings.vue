@@ -91,10 +91,10 @@ export default {
     return {
       loading: false,
       documents:[],
-      images: ['https://res.cloudinary.com/jeremycte23/image/upload/v1649429503/repeatly/tab-illustration_urxjbb.png', 
-      'https://res.cloudinary.com/jeremycte23/image/upload/v1649429503/repeatly/security-illustration_kuf6rq.png', 
-      'https://res.cloudinary.com/jeremycte23/image/upload/v1649429503/repeatly/computer-illustration_rcirpn.png', 
-      'https://res.cloudinary.com/jeremycte23/image/upload/v1649429503/repeatly/history-illustrations_h1vzpp.png'],
+      images: ['https://res.cloudinary.com/jeremycte23/image/upload/f_auto,q_50/v1649429503/repeatly/tab-illustration_urxjbb.png', 
+      'https://res.cloudinary.com/jeremycte23/image/upload/f_auto,q_50/v1649429503/repeatly/security-illustration_kuf6rq.png', 
+      'https://res.cloudinary.com/jeremycte23/image/upload/f_auto,q_50/v1649429503/repeatly/computer-illustration_rcirpn.png', 
+      'https://res.cloudinary.com/jeremycte23/image/upload/f_auto,q_50/v1649429503/repeatly/history-illustrations_h1vzpp.png'],
       colors: ['rgba(209, 245, 237, 1)', 'rgba(243, 217, 224, 1)', 'rgba(167, 134, 243, 1)'],
     }
   }

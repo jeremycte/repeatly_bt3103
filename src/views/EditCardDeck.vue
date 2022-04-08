@@ -718,7 +718,7 @@ export default {
   letter-spacing: 0;
   line-height: 10px;
   padding: 0;
-  width: 828px;
+  width: 1032px;
 }
 
 .header {

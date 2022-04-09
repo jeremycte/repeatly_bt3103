@@ -38,6 +38,7 @@
 
 <script>
 import SideNavStudy from "../components/SideNavStudy.vue"
+import motivationalQuotes from "@/motivationalQuotes";
 import firebaseApp from "@/firebaseDetails";
 import {getAuth} from "firebase/auth";
 import {
@@ -47,7 +48,7 @@ import {
 } from "firebase/firestore";
 const auth = getAuth();
 const db = getFirestore(firebaseApp);
-
+const quotes = motivationalQuotes;
 
 async function updateDetails(cardsArray,cardBoxMap){
   try{
@@ -61,6 +62,7 @@ async function updateDetails(cardsArray,cardBoxMap){
     const deckId = deckObj["deckId"]
     const userEmail = auth.currentUser.email
     const cardOrder = JSON.parse(sessionStorage.getItem('questionOrder'))
+    const chosenQuote = quotes[Math.floor(Math.random()*quotes.length)];
 
     for (let i = 0; i < cardsArray.length; i++) {
       let stringDisplay = '';
@@ -122,6 +124,7 @@ async function updateDetails(cardsArray,cardBoxMap){
       document.getElementById("cardsStudied").innerHTML = ''
       document.getElementById("cardsUnattempted").innerHTML = ''
     }
+    document.getElementById("answer-field2").innerHTML = String(chosenQuote)
     const currentDeckUpdateRef = doc(db,"users",userEmail,"decks",deckId);
     await updateDoc(currentDeckUpdateRef,{
       uncertainCards: uncertainCards,

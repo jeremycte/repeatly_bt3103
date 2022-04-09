@@ -5,23 +5,44 @@
         <div class="background-dashboard"></div>
         <router-link to="/view-card-deck">
         <template v-if="loading">
-          <div class="purple-deck" v-for="(item,index) in documents" :key="item" @click="displaySelectedItem(index)">
-             <div class="illustration" id="imageDeck" :style="randomImage()" />
-              <div class="overlay-deck">
-                <div class="deck-cards-info">
-                    <div class="card-title inter-semi-bold-heavy-metal-36px" id="Deck Title">{{item["title"]}}</div>
-                    <div class="flex-row-cards-info">
-                        <div class="total-cards inter-semi-bold-heavy-metal-25px" id="totalCards">Total Cards: {{item["totalCards"]}}</div>
-                        <div class="needs-recaping inter-semi-bold-mustard-25px" id="needsRecapping">Needs Recapping: {{item["needsRecapping"]}}</div>
-                        <div class="uncertain-cards inter-semi-bold-mexican-red-25px" id="uncertainCards">Uncertain Cards: {{item["uncertainCards"]}}</div>
-                    </div>
-                    <div class="estimated-time inter-semi-bold-heavy-metal-25px" id="estimatedTime">Estimated Time (min): {{item["estimatedTime"]}}</div>
+          <template v-if="checkTextPresence() && visibility">
+            <div class="purple-deck" v-for="(item,index) in intemediateDoc" :key="item" @click="displaySelectedItem(index,intemediateDoc)">
+               <div class="illustration" id="imageDeck" :style="randomImage()" />
+                <div class="overlay-deck">
+                  <div class="deck-cards-info">
+                      <div class="card-title inter-semi-bold-heavy-metal-36px" id="Deck Title">{{item["title"]}}</div>
+                      <div class="flex-row-cards-info">
+                          <div class="total-cards inter-semi-bold-heavy-metal-25px" id="totalCards">Total Cards: {{item["totalCards"]}}</div>
+                          <div class="needs-recaping inter-semi-bold-mustard-25px" id="needsRecapping">Needs Recapping: {{item["needsRecapping"]}}</div>
+                          <div class="uncertain-cards inter-semi-bold-mexican-red-25px" id="uncertainCards">Uncertain Cards: {{item["uncertainCards"]}}</div>
+                      </div>
+                      <div class="estimated-time inter-semi-bold-heavy-metal-25px" id="estimatedTime">Estimated Time (min): {{item["estimatedTime"]}}</div>
+                  </div>
+                <div class="overlay-tagName">
+                  <div class="tagName inter-semi-bold-heavy-metal-23px" id="tagName">{{item["tag"]}}</div>
                 </div>
-              <div class="overlay-tagName">
-                <div class="tagName inter-semi-bold-heavy-metal-23px" id="tagName">{{item["tag"]}}</div>
               </div>
             </div>
-          </div>
+          </template>
+          <template v-else>
+            <div class="purple-deck" v-for="(item,index) in documents" :key="item" @click="displaySelectedItem(index,documents)">
+              <div class="illustration" id="imageDeck" :style="randomImage()" />
+              <div class="overlay-deck">
+                <div class="deck-cards-info">
+                  <div class="card-title inter-semi-bold-heavy-metal-36px" id="Deck Title">{{item["title"]}}</div>
+                  <div class="flex-row-cards-info">
+                    <div class="total-cards inter-semi-bold-heavy-metal-25px" id="totalCards">Total Cards: {{item["totalCards"]}}</div>
+                    <div class="needs-recaping inter-semi-bold-mustard-25px" id="needsRecapping">Needs Recapping: {{item["needsRecapping"]}}</div>
+                    <div class="uncertain-cards inter-semi-bold-mexican-red-25px" id="uncertainCards">Uncertain Cards: {{item["uncertainCards"]}}</div>
+                  </div>
+                  <div class="estimated-time inter-semi-bold-heavy-metal-25px" id="estimatedTime">Estimated Time (min): {{item["estimatedTime"]}}</div>
+                </div>
+                <div class="overlay-tagName">
+                  <div class="tagName inter-semi-bold-heavy-metal-23px" id="tagName">{{item["tag"]}}</div>
+                </div>
+              </div>
+            </div>
+          </template>
         </template>
         </router-link>
       </div>
@@ -39,7 +60,6 @@ var refDoc=[];
 
 async function getCardDetails(userEmail){
   let userDecks = await getDocs(collection(db,"users",String(userEmail),"decks"));
-  console.log("i am running")
   if (!userDecks.empty){
     userDecks.forEach((docs)=>{
       let deck = docs.data()
@@ -75,8 +95,8 @@ export default {
         if(user) {
           await getCardDetails(user.email)
           this.randomImage()
-          console.log(refDoc)
           this.documents = refDoc;
+          this.intemediateDoc = [];
           this.loading = true;
           var image = document.getElementsByClassName("illustration");
           image.src = `../../img/${this.images[Math.floor(Math.random() * this.images.length * Math.PI)]}`
@@ -89,28 +109,43 @@ export default {
         this.images[Math.floor(Math.random() * this.images.length)]
       });`;
     },
-    displaySelectedItem(selectedItemIndex){
-      // console.log(selectedItemIndex)
-      // console.log(refDoc[parseInt(selectedItemIndex)])
-      sessionStorage.setItem('deckObj',JSON.stringify(refDoc[parseInt(selectedItemIndex)]))
+    displaySelectedItem(selectedItemIndex,refDeck){
+      sessionStorage.setItem('deckObj',JSON.stringify(refDeck[parseInt(selectedItemIndex)]))
+    },
+    checkTextPresence(){
+      const tempArray = []
+      if (this.textVal !== ''){
+        for (let i = 0; i < this.documents.length; i++) {
+          if (this.documents[i].title.toUpperCase().indexOf(this.textVal.toUpperCase()) > -1){
+           tempArray.push(this.documents[i])
+          }
+        }
+        this.intemediateDoc = tempArray;
+        return true;
+      } else {
+        return false
+      }
     }
   },
   mounted(){
     refDoc = []
     this.documents = []
+    this.intemediateDoc = []
     this.getData()
   },
   data(){
     return {
       loading: false,
       documents:[],
+      intemediateDoc:[],
       images: ['https://res.cloudinary.com/jeremycte23/image/upload/f_auto,q_50/v1649429503/repeatly/tab-illustration_urxjbb.png', 
       'https://res.cloudinary.com/jeremycte23/image/upload/f_auto,q_50/v1649429503/repeatly/security-illustration_kuf6rq.png', 
       'https://res.cloudinary.com/jeremycte23/image/upload/f_auto,q_50/v1649429503/repeatly/computer-illustration_rcirpn.png', 
       'https://res.cloudinary.com/jeremycte23/image/upload/f_auto,q_50/v1649429503/repeatly/history-illustrations_h1vzpp.png'],
       colors: ['rgba(209, 245, 237, 1)', 'rgba(243, 217, 224, 1)', 'rgba(167, 134, 243, 1)'],
     }
-  }
+  },
+  props:['textVal','visibility']
 };
 </script>
 

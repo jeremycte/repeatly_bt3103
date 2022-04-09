@@ -210,6 +210,7 @@ import { getAuth,GoogleAuthProvider,
 import firebaseApp from "../firebaseDetails";
 import {doc, setDoc,getFirestore} from "firebase/firestore";
 import VueSimpleAlert from "vue-simple-alert";
+import router from "../../router/router";
 
 const db = getFirestore(firebaseApp);
 
@@ -227,11 +228,13 @@ async function googleRegisterFirebase() {
       const month = "0" + (date.getMonth() + 1).toString();
       const year = date.getFullYear().toString();
       const dob = year + "/" + month + "/" + day;
+      const role = String(sessionStorage.getItem("choice"))
 
       const userDocRef = await setDoc(doc(db,'users',eMail),{
         username: userName,
         email: eMail,
         DOB: dob,
+        role: role,
       })
 
       VueSimpleAlert.fire({
@@ -275,7 +278,7 @@ getRedirectResult(auth)
       const credential = GoogleAuthProvider.credentialFromError(error);
       console.log(errorCode + errorMessage + email + credential);
 });
-//import SocialMediaLogin from "@/components/SocialMediaLogin.vue";
+
 
 export default {
   name: "Registration",
@@ -319,6 +322,7 @@ export default {
 
     async googleLogin(){
       try{
+        await router.push({name: "SignIn"})
         await signInWithRedirect(auth,provider)
       }catch(error){
         console.log("google login fail")
@@ -335,6 +339,8 @@ export default {
       const month = document.getElementById("month").value.toString()
       const year = document.getElementById("year").value.toString()
       const dob = year + "/" + month + "/" + day;
+      const role = String(sessionStorage.getItem("choice"))
+
       VueSimpleAlert.fire({
           type: 'info',
           title: 'Registering Your Account',
@@ -362,22 +368,22 @@ export default {
             email,
             password,
         )
-          const userDocRef = await setDoc(doc(db,'users',userDetails.user.email),{
+          await setDoc(doc(db,'users',userDetails.user.email),{
             username: userName,
             email: userDetails.user.email,
             DOB: dob,
-            role: this.userrole,
+            role: role,
 
         })
-          console.log(userDetails.user)
-          console.log(userDocRef)
-
           VueSimpleAlert.fire({
             type: 'success',
             title: 'Successfully Signed Up',
             text: 'Thanks for registering an account',
           // footer: '<a href>Why do I have this issue?</a>'
           }).then(() => {
+            document.getElementById("email").value = ""
+            document.getElementById("password").value = ""
+            document.getElementById("username").value = ""
             this.$router.push({name: "SignIn"});
           });
           

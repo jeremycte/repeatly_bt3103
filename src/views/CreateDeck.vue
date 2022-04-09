@@ -50,7 +50,6 @@ import VueSimpleAlert from "vue-simple-alert";
 
 const auth = getAuth();
 const db = getFirestore(firebaseApp);
-console.log(auth.userEmail)
 export default {
     
   name: "CreateDeck",
@@ -58,43 +57,54 @@ export default {
         Header2,
         SideNav
     },
+  mounted(){
+    this.pressed = false
+  },
+  data(){
+    return{
+      pressed:false,
+    }
+  },
     methods: {
       async save(){
         try{
-          const userEmail = auth.currentUser.email;
-          const title = document.getElementById("deckName").value;
-          const Title = title.charAt(0).toUpperCase() + title.slice(1);
-          const tag = document.getElementById("deckTag").value;
-          const Tag = tag.charAt(0).toUpperCase() + tag.slice(1);
-          const descrip = document.getElementById("description").value
+          if (!this.pressed){
+            const userEmail = auth.currentUser.email;
+            const title = document.getElementById("deckName").value;
+            const Title = title.charAt(0).toUpperCase() + title.slice(1);
+            const tag = document.getElementById("deckTag").value;
+            const Tag = tag.charAt(0).toUpperCase() + tag.slice(1);
+            const descrip = document.getElementById("description").value
 
-          if (title === '' || tag ==='' || descrip === ''){
-            VueSimpleAlert.fire({
-                  type: 'info',
-                  title: 'There are empty fields, please fill them up',
-                  timer: 3000,
-            })
-          } else {
-            await addDoc(collection(db,"users",String(userEmail),"decks"),
-                {
-                  title: Title,
-                  tag: Tag,
-                  description: descrip,
-                  estimatedTime: 0,
-                  needsRecapping: 0,
-                  totalCards: 0,
-                  uncertainCards: 0,
-                })
-            document.getElementById("deckName").value = "";
-            document.getElementById("deckTag").value = "";
-            document.getElementById("description").value="";
-            VueSimpleAlert.fire({
-              type: 'success',
-              title: 'Successfully Created '+ Title +' Card Deck',
-              // footer: '<a href>Why do I have this issue?</a>'
-            }).then(() => {
-              this.$router.push({name: "Home"})
-            });
+            if (title === '' || tag ==='' || descrip === ''){
+              VueSimpleAlert.fire({
+                type: 'info',
+                title: 'There are empty fields, please fill them up',
+                timer: 3000,
+              })
+            } else {
+              await addDoc(collection(db,"users",String(userEmail),"decks"),
+                  {
+                    title: Title,
+                    tag: Tag,
+                    description: descrip,
+                    estimatedTime: 0,
+                    needsRecapping: 0,
+                    totalCards: 0,
+                    uncertainCards: 0,
+                  })
+              document.getElementById("deckName").value = "";
+              document.getElementById("deckTag").value = "";
+              document.getElementById("description").value="";
+              VueSimpleAlert.fire({
+                type: 'success',
+                title: 'Successfully Created '+ Title +' Card Deck',
+                // footer: '<a href>Why do I have this issue?</a>'
+              }).then(() => {
+                this.$router.push({name: "Home"})
+              });
+            }
+            this.pressed = true;
           }
         }catch(error){
           console.log(error)

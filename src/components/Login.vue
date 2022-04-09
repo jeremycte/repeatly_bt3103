@@ -69,10 +69,8 @@
 
 <script>
 import {getAuth, signInWithEmailAndPassword} from "firebase/auth";
-import firebaseApp from "../firebaseDetails";
 import SocialMediaLogin from "@/components/SocialMediaLogin.vue";
 import VueSimpleAlert from "vue-simple-alert";
-firebaseApp;
 
 
 
@@ -92,8 +90,8 @@ export default {
             email,
             password,
         )
-        console.log("login pass")
-        
+        document.getElementById("email").value = ""
+        document.getElementById("password").value = ""
       } catch(error){
         console.log("login fail")
         console.log(error)

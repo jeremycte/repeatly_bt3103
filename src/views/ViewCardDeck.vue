@@ -27,7 +27,8 @@
                 </button>
             </div>
             <div class="view-card-description-title inter-semi-bold-heavy-metal-36px">Description</div>
-            <div class="view-card-description inter-semi-bold-heavy-metal-25px">Description will be located here inside all the sem.</div>
+            <div class="view-card-description inter-semi-bold-heavy-metal-25px" id="descriptionText">
+              Description will be located here inside all the sem.</div>
 
             <div class="overlap-group-txtareaViewDeck border-1px-quick-silver" style="overflow-y: scroll; height:500px">
               <template v-if="loading">
@@ -60,7 +61,7 @@
 <script>
 import firebaseApp from "@/firebaseDetails";
 import {getAuth,onAuthStateChanged} from "firebase/auth";
-import {getFirestore, collection, getDocs, doc, deleteDoc,getDoc} from "firebase/firestore";
+import {getFirestore, collection, getDocs, doc, deleteDoc, getDoc, updateDoc} from "firebase/firestore";
 import SideNav from "../components/SideNav.vue";
 import router from "../../router/router";
 import VueSimpleAlert from "vue-simple-alert";
@@ -84,13 +85,17 @@ async function displayDetails(userEmail,deckObj){
     const dispEstimatedTime = deckData.estimatedTime
     const dispNeedsRecapping = deckData.needsRecapping
     const dispUncertainCards = deckData.uncertainCards
+    const disDescription = deckData.description
 
     document.getElementById("Deck Title").innerHTML = dispTitle
     document.getElementById("totalCards").innerHTML = 'Total Cards: ' + dispTotalCards
     document.getElementById("estimatedTime").innerHTML = 'Estimated Time (min): ' + dispEstimatedTime
     document.getElementById("needsRecapping").innerHTML = 'Needs Recapping: ' + dispNeedsRecapping
-    document.getElementById("uncertainCards").innerHTML = 'Uncertain Cards: ' + dispUncertainCards;
+    document.getElementById("uncertainCards").innerHTML = 'Uncertain Cards: ' + dispUncertainCards
+    document.getElementById("descriptionText").innerHTML = disDescription
+
   }catch (error){
+    console.log(error)
     console.log("display deck stats error")
   }
 
@@ -125,7 +130,6 @@ async function getCards(userEmail,deckObj){
         refDoc.push(question)
         cardBoxMap.set(cardId,boxType)
       })
-      console.log(cardsObjArray)
       sessionStorage.setItem("cardDetails",JSON.stringify(cardsObjArray))
       sessionStorage.setItem("cardBoxMap",JSON.stringify(Array.from(cardBoxMap.entries())))
     }
@@ -196,9 +200,24 @@ export default {
       }
     },
     async resetDeck() {
-      VueSimpleAlert.confirm("Reset the whole study deck?").then(() => {
-          //do something inside
-        });
+      VueSimpleAlert.confirm("Reset the whole study deck?").then(async () => {
+        try {
+          const deckObj = JSON.parse(sessionStorage.getItem('deckObj'))
+          const userEmail = auth.currentUser.email
+          const deckId = deckObj["deckId"]
+          for (let i = 0; i < cardsObjArray.length; i++) {
+            const cardId = cardsObjArray[i].id
+            const docRef = doc(db, "users", userEmail, "decks", deckId, "cards", cardId)
+            await updateDoc(docRef,{
+              boxType: 1,
+            })
+          }
+          await this.displayCards(deckObj)
+        } catch (error) {
+          console.log("rest Deck Error")
+          console.log(error)
+        }
+      });
     },
     async studyDeck(){
       try{

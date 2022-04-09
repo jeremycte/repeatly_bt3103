@@ -3,8 +3,8 @@
         <SideNav />
 
         <div class="student-dashboard-homepage screen">
-            <Header :dashboardTitle="MyDashboard"/>
-            <CardDeck />
+            <Header :dashboardTitle="MyDashboard" @getSearchVal="getSearchVal($event)"/>
+            <CardDeck :textVal = "textVal" :visibility = "visibility"/>
         </div>
         <div v-if="visible" class="help">
             <p disabled class="help-description inter-normal-black-20px"><strong>Welcome to the Dashboard</strong><br><br>
@@ -37,11 +37,19 @@ export default {
     sessionStorage.clear();
   },
   data: () => ({
-    visible: false
+    visible: false,
+    textVal: "",
+    visibility:false,
   }),
   props: [
       "MyDashboard"
-  ]
+  ],
+  methods:{
+    getSearchVal(outputVal){
+      this.textVal = outputVal[0]
+      this.visibility = outputVal[1]
+    }
+  }
 }
 </script>
 

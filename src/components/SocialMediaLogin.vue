@@ -49,13 +49,25 @@ async function googleRegisterFirebase() {
       const dob = year + "/" + month + "/" + day;
       const testRef = doc(db,"users",eMail);
       const test = await getDoc(testRef);
+      const role = sessionStorage.getItem("choice")
 
-      if (!test.exists()){
+      if (!test.exists() && role !== null){
         const userDocRef = await setDoc(doc(db,'users',eMail),{
           username: userName,
           email: eMail,
           DOB: dob,
+          role: role,
         })
+        sessionStorage.clear();
+        console.log(userDocRef);
+      } else if (!test.exists() && role === null){
+        const userDocRef = await setDoc(doc(db,'users',eMail),{
+          username: userName,
+          email: eMail,
+          DOB: dob,
+          role: "student",
+        })
+        sessionStorage.clear();
         console.log(userDocRef);
       }
 
@@ -71,13 +83,9 @@ async function googleRegisterFirebase() {
 getRedirectResult(auth)
     .then((result) => {
       // This gives you a Google Access Token. You can use it to access Google APIs.
-      const credential = GoogleAuthProvider.credentialFromResult(result);
-      const token = credential.accessToken;
-
       // The signed-in user info.
       user = result.user;
       googleRegisterFirebase();
-      console.log(user,token);
       console.log("login successful")
     }).catch((error) => {
   // Handle Errors here.
@@ -95,7 +103,17 @@ export default {
   methods:{
     async googleLogin(){
       try{
-        await signInWithRedirect(auth,provider)
+        signInWithRedirect(auth,provider).then(
+            function(result){
+              const isNewUser = result.additionalUserInfo.isNewUser
+              console.log(isNewUser)
+              if (isNewUser){
+                throw("new User")
+              }
+            }
+        ).catch(function(error){
+          console.log(error)
+        })
       }catch(error){
         console.log("google login fail")
         console.log(error)

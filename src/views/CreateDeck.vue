@@ -44,7 +44,10 @@
 							type="text"
 						></textarea>
 					</div>
-					<btn class="add-student-createdeckbtn" v-on:click="save()">
+					<button
+						class="add-student-createdeckbtn"
+						v-on:click="save()"
+					>
 						<div class="frame-1-createdeck">
 							<h1
 								class="createdeck-titleBtn inter-semi-bold-white-28px"
@@ -52,7 +55,7 @@
 								Create Deck
 							</h1>
 						</div>
-					</btn>
+					</button>
 				</div>
 			</div>
 		</div>
@@ -70,9 +73,7 @@
 
 	const auth = getAuth();
 	const db = getFirestore(firebaseApp);
-	console.log(auth.userEmail);
 	const prevPath = null;
-	console.log("Router: " + prevPath);
 
 	export default {
 		name: "CreateDeck",
@@ -80,80 +81,84 @@
 			Header2,
 			SideNav,
 		},
+		mounted() {
+			this.pressed = false;
+		},
 		data() {
 			return {
+				pressed: false,
 				prevRoute: null,
 			};
-		},
-		beforeRouteEnter(to, from, next) {
-			next((vm) => {
-				vm.prevRoute = from;
-			});
 		},
 		methods: {
 			async save() {
 				try {
-					const userEmail = auth.currentUser.email;
-					const title = document.getElementById("deckName").value;
-					const Title =
-						title.charAt(0).toUpperCase() + title.slice(1);
-					const tag = document.getElementById("deckTag").value;
-					const Tag = tag.charAt(0).toUpperCase() + tag.slice(1);
-					const descrip =
-						document.getElementById("description").value;
+					if (!this.pressed) {
+						const userEmail = auth.currentUser.email;
+						const title = document.getElementById("deckName").value;
+						const Title =
+							title.charAt(0).toUpperCase() + title.slice(1);
+						const tag = document.getElementById("deckTag").value;
+						const Tag = tag.charAt(0).toUpperCase() + tag.slice(1);
+						const descrip =
+							document.getElementById("description").value;
 
-					if (title === "" || tag === "" || descrip === "") {
-						VueSimpleAlert.fire({
-							type: "info",
-							title: "There are empty fields, please fill them up",
-							timer: 3000,
-						});
-					} else {
-						if (prevPath == "/home") {
-							await addDoc(
-								collection(
-									db,
-									"users",
-									String(userEmail),
-									"decks"
-								),
-								{
-									title: Title,
-									tag: Tag,
-									description: descrip,
-									estimatedTime: 0,
-									needsRecapping: 0,
-									totalCards: 0,
-									uncertainCards: 0,
-									isGroupDeck: false,
-								}
-							);
+						if (title === "" || tag === "" || descrip === "") {
+							VueSimpleAlert.fire({
+								type: "info",
+								title: "There are empty fields, please fill them up",
+								timer: 3000,
+							});
 						} else {
-							await addDoc(
-								collection(db, "groups", Tag, "decks"),
-								{
-									title: Title,
-									tag: Tag,
-									description: descrip,
-									estimatedTime: 0,
-									needsRecapping: 0,
-									totalCards: 0,
-									uncertainCards: 0,
-									isGroupDeck: true,
-								}
-							);
+							if (prevPath == "/home") {
+								await addDoc(
+									collection(
+										db,
+										"users",
+										String(userEmail),
+										"decks"
+									),
+									{
+										title: Title,
+										tag: Tag,
+										description: descrip,
+										estimatedTime: 0,
+										needsRecapping: 0,
+										totalCards: 0,
+										uncertainCards: 0,
+										isGroupDeck: false,
+									}
+								);
+							} else {
+								await addDoc(
+									collection(db, "groups", Tag, "decks"),
+									{
+										title: Title,
+										tag: Tag,
+										description: descrip,
+										estimatedTime: 0,
+										needsRecapping: 0,
+										totalCards: 0,
+										uncertainCards: 0,
+										isGroupDeck: true,
+									}
+								);
+							}
+							document.getElementById("deckName").value = "";
+							document.getElementById("deckTag").value = "";
+							document.getElementById("description").value = "";
+							VueSimpleAlert.fire({
+								type: "success",
+								title:
+									"Successfully Created " +
+									Title +
+									" Card Deck",
+								// footer: '<a href>Why do I have this issue?</a>'
+							}).then(() => {
+								this.$router.push({ name: "Home" });
+							});
 						}
-						document.getElementById("deckName").value = "";
-						document.getElementById("deckTag").value = "";
-						document.getElementById("description").value = "";
-						VueSimpleAlert.fire({
-							type: "success",
-							title:
-								"Successfully Created " + Title + " Card Deck",
-							// footer: '<a href>Why do I have this issue?</a>'
-						}).then(() => {
-							this.$router.push({ name: "Home" });
-						});
+						this.pressed = true;
 					}
 				} catch (error) {
 					console.log(error);
@@ -173,8 +178,8 @@
 					await this.$router.push({ name: "Dashboard" });
 				}
 			},
-			props: ["MyDashboard"],
 		},
+		props: ["MyDashboard"],
 	};
 </script>
 
@@ -271,7 +276,7 @@
 		color: #afafaf7a;
 	}
 
-	.add-student-createdeckbtn {
+	<<<<<<< HEAD .add-student-createdeckbtn {
 		background-color: var(--shamrock);
 		border-radius: 25px;
 		height: 74px;
@@ -293,8 +298,30 @@
 		margin-top: 26.7px;
 		/* width: 155.43px; */
 	}
+	======= .add-student-createdeckbtn {
+		background-color: var(--shamrock);
+		border-radius: 25px;
+		border: none;
+		height: 74px;
+		width: 312px;
+		cursor: pointer;
+		align-items: flex-start;
+		box-shadow: 0px 2px 8px #00000022;
+		margin-top: 29px;
+		/* min-width: 718px; */
+		margin-right: 16em;
+	}
 
-	.createdeck-titleBtn {
+	.frame-1-createdeck {
+		border-radius: 25px;
+		display: flex;
+		align-items: flex-start;
+		margin-top: 29px;
+		margin-left: 81.2px;
+		margin-top: 8.7px;
+		/* width: 155.43px; */
+	}
+	>>>>>>>41b318ab5c1afb32721c4f04482e6821f092e78d .createdeck-titleBtn {
 		height: 34px;
 		letter-spacing: 0;
 		/* margin-left: -5.8px;

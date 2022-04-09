@@ -3,13 +3,14 @@
     <h1 class="dashboard-title inter-bold-heavy-metal-50px">{{dashboardTitle}}</h1>
     <div class=remaining-header>
       <div class="searchbox">
-        <input v-if="visible"
+        <input v-if="visibility"
         type="search"
-        class="search-bar inter-normal-silver-chalice-30px"
-        placeholder="What are you looking for?" />
+        class="search-bar inter-normal-silver-chalice-30px" id="searchBar"
+        placeholder="What are you looking for?"
+        v-on:keyup="this.getSearchVal()"/>
       </div>
       <div class="search-function">
-        <button type ="submit" class="icon-search" @click="visible = !visible">
+        <button type ="submit" class="icon-search" @click="initialGetSearchVal()">
          <img class="icon-image" src="../../img/search2.png" />
         </button>
         <router-link to="/create-deck">
@@ -26,7 +27,7 @@
   export default {
     name: "Header",
     data: () => ({
-    visible: false
+    visibility: false
   }),
     /*directives: {
         clickOutside: vClickOutside.directive
@@ -36,8 +37,16 @@
       searchBtn(){
         window.location.reload();
       },
+      getSearchVal(){
+        var textVal = document.getElementById("searchBar").value;
+        this.$emit('getSearchVal',[textVal,this.visibility])
+      },
+      initialGetSearchVal(){
+        this.visibility = !this.visibility
+        this.$emit('getSearchVal',["",this.visibility])
+      }
       /*checkSearchBox() {
-          this.visible = false;
+          this.visibility = false;
         }*/
       },
     };

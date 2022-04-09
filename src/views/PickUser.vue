@@ -4,14 +4,14 @@
         <div class="body-fps">
             <div>
                 <router-link to="/registration">
-                <div class="button-send-link-fps">
+                <div class="button-send-link-fps" v-on:click="studentChoice()">
                     <div class="overlap-group-fps-pickuser">
                         <div class="login-page-fps valign-text-middle inter-bold-white-28px">Student</div>
                     </div>
                 </div>
                 </router-link>
                 <router-link to="/registration">
-                <div class="button-send-link-fps">
+                <div class="button-send-link-fps" v-on:click="teacherChoice()">
                     <div class="overlap-group-fps-pickuser">
                         <div class="login-page-fps valign-text-middle inter-bold-white-28px">Teacher</div>
                     </div>
@@ -45,7 +45,8 @@
 </template>
 
 <script>
-// console.log(this.validEmail);
+
+
 export default {
   name: "ForgetPasswordStatus",
   components: {
@@ -60,7 +61,13 @@ export default {
   methods: {
     debug (event) {
       console.log(event)
-  }
+  },
+    studentChoice(){
+      sessionStorage.setItem("choice","student")
+    },
+    teacherChoice(){
+      sessionStorage.setItem("choice","teacher")
+    }
   },
   computed: {
     console: () => console,

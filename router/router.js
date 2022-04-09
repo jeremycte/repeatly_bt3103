@@ -22,6 +22,7 @@ import addStudent from '@/views/AddStudents.vue'
 import StudentStudyDeckStats from "@/views/StudentStudyDeckStats";
 
 import PickUser from '@/views/PickUser.vue'
+import ViewGroupDeck from '@/views/ViewGroupDeck.vue'
 
 const routes = [
     {
@@ -186,8 +187,8 @@ const routes = [
             withLotsOfUnique2: "We provide flexibility to accomodate teachers with large number of students",
             fullyResponsive3: "Create Your Own",
             withLotsOfUnique3: "Create your own flashcard or refer to our database of created flashcards",
-            fullyResponsive4: "Analytics",
-            withLotsOfUnique4: "We provide analytics for teachers to track your students’ progress",
+            fullyResponsive4: "Leaderboard",
+            withLotsOfUnique4: "Challenge yourself with friends, peers and students worldwide",
             add3: require("../img/LandingPageDark/add3.png"),
             logoIcon12: require("../img/repeatlyIcon.png"),
             repeately: "Repeately",
@@ -342,6 +343,14 @@ const routes = [
         path:'/pick-user',
         name: 'PickUser',
         component: PickUser,
+    },
+    {
+        path:'/view-group-deck',
+        name: 'View Group Deck',
+        component: ViewGroupDeck,
+        props: {
+            MyDashboard: "View Group Deck"
+        },
     },
     {
         path: '/:catchAll(.*)',

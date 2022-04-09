@@ -149,34 +149,6 @@
                 </div>
                 </div>
             </div>
-              <div class="_radio-container-registration">
-                <div class="student_radio-registration">
-                    <div class="radio-registration">
-                    <div class="mdc-radio mdc-radio--touch" data-id="anima-widget">
-                        <input class="mdc-radio__native-control" type="radio" id="radio-1-student" value="student" v-model="userrole" name="radios" />
-                        <div class="mdc-radio__background">
-                        <div class="mdc-radio__outer-circle"></div>
-                        <div class="mdc-radio__inner-circle"></div>
-                        </div>
-                        <div class="mdc-radio__ripple"></div>
-                    </div>
-                    </div>
-                    <div class="im-a-registration inter-normal-black-20px">I'm a student</div>
-                </div>
-                <div class="teacher_radio-registration">
-                    <div class="radio-registration">
-                    <div class="mdc-radio mdc-radio--touch" data-id="anima-widget">
-                        <input class="mdc-radio__native-control" type="radio" id="radio-1-teacher" value="teacher" v-model="userrole" name="radios" />
-                        <div class="mdc-radio__background">
-                        <div class="mdc-radio__outer-circle"></div>
-                        <div class="mdc-radio__inner-circle"></div>
-                        </div>
-                        <div class="mdc-radio__ripple"></div>
-                    </div>
-                    </div>
-                    <div class="im-a-registration inter-normal-black-20px">I'm a Teacher</div>
-                </div>
-              </div>
             </div>
             <div class="overlap-group6-registration">
               <img class="vector-4-registration" src='../../img/Login/vector1.png' />
@@ -210,6 +182,7 @@ import { getAuth,GoogleAuthProvider,
 import firebaseApp from "../firebaseDetails";
 import {doc, setDoc,getFirestore} from "firebase/firestore";
 import VueSimpleAlert from "vue-simple-alert";
+import router from "../../router/router";
 
 const db = getFirestore(firebaseApp);
 
@@ -227,11 +200,13 @@ async function googleRegisterFirebase() {
       const month = "0" + (date.getMonth() + 1).toString();
       const year = date.getFullYear().toString();
       const dob = year + "/" + month + "/" + day;
+      const role = String(sessionStorage.getItem("choice"))
 
       const userDocRef = await setDoc(doc(db,'users',eMail),{
         username: userName,
         email: eMail,
         DOB: dob,
+        role: role,
       })
 
       VueSimpleAlert.fire({
@@ -275,7 +250,7 @@ getRedirectResult(auth)
       const credential = GoogleAuthProvider.credentialFromError(error);
       console.log(errorCode + errorMessage + email + credential);
 });
-//import SocialMediaLogin from "@/components/SocialMediaLogin.vue";
+
 
 export default {
   name: "Registration",
@@ -283,11 +258,11 @@ export default {
   components: {
   },
 
-  data(){
-    return{
-      userrole: "",
-    }
-  },
+  // data(){
+  //   return{
+  //     userrole: "",
+  //   }
+  // },
 
   computed : {
     years () {
@@ -319,6 +294,7 @@ export default {
 
     async googleLogin(){
       try{
+        await router.push({name: "SignIn"})
         await signInWithRedirect(auth,provider)
       }catch(error){
         console.log("google login fail")
@@ -335,6 +311,8 @@ export default {
       const month = document.getElementById("month").value.toString()
       const year = document.getElementById("year").value.toString()
       const dob = year + "/" + month + "/" + day;
+      const role = String(sessionStorage.getItem("choice"))
+
       VueSimpleAlert.fire({
           type: 'info',
           title: 'Registering Your Account',
@@ -343,7 +321,7 @@ export default {
       })
       try {
 
-        if (userName == "" || email == "" || password == "" || day == "" || month == "" || year == "" || this.userrole == "") {
+        if (userName == "" || email == "" || password == "" || day == "" || month == "" || year == "") {
           VueSimpleAlert.fire({
             type: 'info',
             text: 'Please fill up all fields and try again.'
@@ -362,22 +340,22 @@ export default {
             email,
             password,
         )
-          const userDocRef = await setDoc(doc(db,'users',userDetails.user.email),{
+          await setDoc(doc(db,'users',userDetails.user.email),{
             username: userName,
             email: userDetails.user.email,
             DOB: dob,
-            role: this.userrole,
+            role: role,
 
         })
-          console.log(userDetails.user)
-          console.log(userDocRef)
-
           VueSimpleAlert.fire({
             type: 'success',
             title: 'Successfully Signed Up',
             text: 'Thanks for registering an account',
           // footer: '<a href>Why do I have this issue?</a>'
           }).then(() => {
+            document.getElementById("email").value = ""
+            document.getElementById("password").value = ""
+            document.getElementById("username").value = ""
             this.$router.push({name: "SignIn"});
           });
           
@@ -518,7 +496,7 @@ export default {
   display: flex;
   height: 72px;
   margin-left: 2px;
-  margin-top: 115px;
+  margin-top: 72px;
   min-width: 593px;
   padding: 17px 18px;
   cursor: pointer;

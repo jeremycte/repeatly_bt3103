@@ -2,16 +2,16 @@
   <div class="headerDashboardTitle">
     <h1 class="dashboard-title inter-bold-heavy-metal-50px">{{dashboardTitle}}</h1>
     <div class=remaining-header>
-      <div class="searchbox">
+      <!-- <div class="searchbox">
         <input v-if="visible"
         type="search"
         class="search-bar inter-normal-silver-chalice-30px"
         placeholder="What are you looking for?" />
-      </div>
+      </div> -->
       <div class="search-function">
-        <button type ="submit" class="icon-search" @click="visible = !visible">
+        <!-- <button type ="submit" class="icon-search" @click="visible = !visible">
          <img class="icon-image" src="../../img/search2.png" />
-        </button>
+        </button> -->
         <router-link to="/create-group">
           <img class="addBtnDashboard" src="../../img/add.svg" />
         </router-link>

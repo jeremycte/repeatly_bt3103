@@ -41,7 +41,7 @@
 							class="motivational-statement inter-semi-bold-black-28px"
 							id="answer-field2"
 						>
-							Motivational Statement Here
+							Great Job! Amazing work!
 						</div>
 					</div>
 					<button class="checkAnswerStudybtn">
@@ -63,29 +63,13 @@
 
 <script>
 	import SideNavStudy from "../components/SideNavStudy.vue";
+	import motivationalQuotes from "@/motivationalQuotes";
 	import firebaseApp from "@/firebaseDetails";
 	import { getAuth } from "firebase/auth";
-	import { doc, getFirestore, getDoc, updateDoc } from "firebase/firestore";
+	import { doc, getDoc, getFirestore, updateDoc } from "firebase/firestore";
 	const auth = getAuth();
 	const db = getFirestore(firebaseApp);
-
-	// function searchDeckIndex(nameKey, arrayObj) {
-	// 	for (var i = 0; i < arrayObj.length; i++) {
-	// 		const abc = arrayObj[i].id;
-	// 		if (abc === nameKey) {
-	// 			return i;
-	// 		}
-	// 	}
-	// }
-
-	// function searchCardIndex(nameKey, deckIndex, arrayObj) {
-	// 	for (var i = 0; i < arrayObj[deckIndex]["cards"].length; i++) {
-	// 		const abc = arrayObj[deckIndex]["cards"][i].id;
-	// 		if (abc === nameKey) {
-	// 			return i;
-	// 		}
-	// 	}
-	// }
+	const quotes = motivationalQuotes;
 
 	async function updateDetails(cardsArray, cardBoxMap) {
 		try {
@@ -99,11 +83,13 @@
 			const deckObj = JSON.parse(sessionStorage.getItem("deckObj"));
 			const isGroupDeck = deckObj["isGroupDeck"];
 			const deckId = deckObj["deckId"];
-			const userDocRef = doc(db, "users", userEmail);
 			const userEmail = auth.currentUser.email;
+			const userDocRef = doc(db, "users", userEmail);
 			const cardOrder = JSON.parse(
 				sessionStorage.getItem("questionOrder")
 			);
+			const chosenQuote =
+				quotes[Math.floor(Math.random() * quotes.length)];
 
 			for (let i = 0; i < cardsArray.length; i++) {
 				let stringDisplay = "";
@@ -203,8 +189,8 @@
 						}
 					}
 				}
+				// #############################################
 			}
-			// #############################################
 
 			if (anyChange) {
 				let stringDisplayResult = "";
@@ -223,6 +209,8 @@
 				document.getElementById("cardsStudied").innerHTML = "";
 				document.getElementById("cardsUnattempted").innerHTML = "";
 			}
+			document.getElementById("answer-field2").innerHTML =
+				String(chosenQuote);
 			const currentDeckUpdateRef = doc(
 				db,
 				"users",
@@ -234,7 +222,6 @@
 				uncertainCards: uncertainCards,
 				needsRecapping: needsRecapping,
 			});
-
 			// ############### NEW ADDITION ###############
 			if (isGroupDeck) {
 				for (const grpDeck of userGroupDecks) {
@@ -265,10 +252,6 @@
 			const cardBoxMap = new Map(
 				JSON.parse(sessionStorage.getItem("cardBoxMap"))
 			);
-			console.log("cardItems: " + JSON.stringify(cardItems));
-			console.log("deckCompleted: " + JSON.stringify(deckCompleted));
-			console.log("cardBoxMap: " + JSON.stringify(cardBoxMap));
-
 			if (deckCompleted) {
 				document.getElementById("cardStatsDisplay").innerHTML =
 					"Congratulations you finished studying this deck!";

@@ -67,8 +67,9 @@
 				</div>
 				<div
 					class="view-card-description inter-semi-bold-heavy-metal-25px"
+					id="descriptionText"
 				>
-					Description will be located here inside all the sem.
+					Card deck description
 				</div>
 
 				<div
@@ -157,9 +158,7 @@
 			let deckResult = null;
 			let deckData = {};
 
-			// ####################################################
 			// GROUP DECK
-
 			if (isGroupDeck) {
 				const userDocRef = doc(db, "users", userEmail);
 				const userDoc = await getDoc(userDocRef);
@@ -176,12 +175,13 @@
 				deckResult = await getDoc(deckRef);
 				deckData = deckResult.data();
 			}
-			// ####################################################
+
 			const dispTitle = deckData.title;
 			const dispTotalCards = deckData.totalCards;
 			const dispEstimatedTime = deckData.estimatedTime;
 			const dispNeedsRecapping = deckData.needsRecapping;
 			const dispUncertainCards = deckData.uncertainCards;
+			const disDescription = deckData.description;
 
 			document.getElementById("Deck Title").innerHTML = dispTitle;
 			document.getElementById("totalCards").innerHTML =
@@ -192,13 +192,17 @@
 				"Needs Recapping: " + dispNeedsRecapping;
 			document.getElementById("uncertainCards").innerHTML =
 				"Uncertain Cards: " + dispUncertainCards;
+			document.getElementById("descriptionText").innerHTML =
+				disDescription;
 		} catch (error) {
+			console.log(error);
 			console.log("display deck stats error");
 		}
 	}
 
 	async function getCards(userEmail, deckObj) {
 		try {
+			// GROUP DECK
 			const isGroupDeck = deckObj["isGroupDeck"];
 			const deckId = deckObj["deckId"];
 			let userCards = {};
@@ -264,7 +268,6 @@
 					refDoc.push(question);
 					cardBoxMap.set(cardId, boxType);
 				});
-				console.log(cardsObjArray);
 				sessionStorage.setItem(
 					"cardDetails",
 					JSON.stringify(cardsObjArray)
@@ -306,6 +309,8 @@
 						await getCards(user.email, deckObj);
 						this.documents = refDoc;
 						this.loading = true;
+					} else {
+						router.push("/sign-in");
 					}
 				});
 			},
@@ -341,8 +346,33 @@
 			},
 			async resetDeck() {
 				VueSimpleAlert.confirm("Reset the whole study deck?").then(
-					() => {
-						//do something inside
+					async () => {
+						try {
+							const deckObj = JSON.parse(
+								sessionStorage.getItem("deckObj")
+							);
+							const userEmail = auth.currentUser.email;
+							const deckId = deckObj["deckId"];
+							for (let i = 0; i < cardsObjArray.length; i++) {
+								const cardId = cardsObjArray[i].id;
+								const docRef = doc(
+									db,
+									"users",
+									userEmail,
+									"decks",
+									deckId,
+									"cards",
+									cardId
+								);
+								await updateDoc(docRef, {
+									boxType: 1,
+								});
+							}
+							await this.displayCards(deckObj);
+						} catch (error) {
+							console.log("rest Deck Error");
+							console.log(error);
+						}
 					}
 				);
 			},

@@ -66,7 +66,6 @@ export default {
     } else {
       chosenCard = JSON.parse(sessionStorage.getItem("chosenCard"))
     }
-    console.log(chosenCard)
     if(typeof chosenCard === "undefined"){
       sessionStorage.setItem("deckCompleted",JSON.stringify(true))
       router.push({name:'StudentStudyDeckStats'})

@@ -20,7 +20,6 @@
 					id="imageDeck"
 					:style="randomImage()"
 				/>
-
 				<div class="overlay-group">
 					<div class="group-info">
 						<div
@@ -195,13 +194,23 @@
 					}
 				});
 			},
+			// randomImage() {
+			// 	console.log(
+			// 		this.images[Math.floor(Math.random() * this.images.length)]
+			// 	);
+			// 	return `url("../../img/Dashboard/${
+			// 		this.images[Math.floor(Math.random() * this.images.length)]
+			// 	}")`;
+			// },
 			randomImage() {
-				console.log(
-					this.images[Math.floor(Math.random() * this.images.length)]
+				return (
+					"background-image: " +
+					`url(${
+						this.images[
+							Math.floor(Math.random() * this.images.length)
+						]
+					});`
 				);
-				return `url("../../img/Dashboard/${
-					this.images[Math.floor(Math.random() * this.images.length)]
-				}")`;
 			},
 			displaySelectedItem(selectedItemIndex) {
 				// console.log(selectedItemIndex)
@@ -221,10 +230,10 @@
 				loading: false,
 				documents: [],
 				images: [
-					"history-illustrations.png",
-					"tab-illustration.png",
-					"security-illustration.png",
-					"computer-illustration.png",
+					"https://res.cloudinary.com/jeremycte23/image/upload/f_auto,q_50/v1649429503/repeatly/tab-illustration_urxjbb.png",
+					"https://res.cloudinary.com/jeremycte23/image/upload/f_auto,q_50/v1649429503/repeatly/security-illustration_kuf6rq.png",
+					"https://res.cloudinary.com/jeremycte23/image/upload/f_auto,q_50/v1649429503/repeatly/computer-illustration_rcirpn.png",
+					"https://res.cloudinary.com/jeremycte23/image/upload/f_auto,q_50/v1649429503/repeatly/history-illustrations_h1vzpp.png",
 				],
 				colors: [
 					"rgba(209, 245, 237, 1)",

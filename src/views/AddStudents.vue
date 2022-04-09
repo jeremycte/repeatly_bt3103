@@ -66,7 +66,7 @@
 	import firebaseApp from "@/firebaseDetails";
 	// import { getAuth } from "firebase/auth";
 	import {
-		addDoc,
+		// addDoc,
 		collection,
 		doc,
 		getDoc,
@@ -80,6 +80,15 @@
 
 	// const auth = getAuth();
 	const db = getFirestore(firebaseApp);
+
+	function searchIndex(nameKey, arrayObj) {
+		for (var i = 0; i < arrayObj.length; i++) {
+			const abc = arrayObj[i].deckRef;
+			if (abc === nameKey) {
+				return i;
+			}
+		}
+	}
 
 	async function getUser(email) {
 		try {
@@ -100,21 +109,33 @@
 
 	async function copyDeck(grpID) {
 		var cardDict = {};
+		var NEWCARDDICT = [];
 		try {
 			const q1 = query(collection(db, "groups", grpID, "decks"));
 			const allDecks = await getDocs(q1);
 			// console.log('Decks Exsits: ' + allDecks.exists());
 
 			var deckIndex = 1;
-			for (const deck of allDecks.docs) {
+			for (const d of allDecks.docs) {
 				console.log("Checkpoint 1");
-				let currDeck = deck.data();
+				let currDeck = d.data();
 				let deckKey = "d" + String(deckIndex);
 				cardDict[deckKey] = { data: currDeck, cards: {} };
+
+				// NEW NEW NEW NEW NEW
+				let deckRef = await doc(db, "groups", grpID, "decks", d.id);
+				NEWCARDDICT.push({
+					data: currDeck,
+					deckRef: deckRef,
+					id: d.id,
+					cards: [],
+				});
+				// NEW NEW NEW NEW NEW
+
 				console.log("Checkpoint 2");
 				// Get Cards in the Deck
 				const q2 = query(
-					collection(db, "groups", grpID, "decks", deck.id, "cards")
+					collection(db, "groups", grpID, "decks", d.id, "cards")
 				);
 				const allCards = await getDocs(q2);
 				var cardIndex = 1;
@@ -123,6 +144,30 @@
 					let currCard = card.data();
 					let cardKey = "c" + String(cardIndex);
 					cardDict[deckKey]["cards"][cardKey] = currCard;
+
+					// NEW NEW NEW NEW NEW
+					let cardRef = doc(
+						db,
+						"groups",
+						grpID,
+						"decks",
+						d.id,
+						"cards",
+						card.id
+					);
+
+					console.log("HERE");
+					let deckInd = searchIndex(deckRef, NEWCARDDICT);
+					console.log("HERE 2, " + "Number is: " + deckInd);
+
+					NEWCARDDICT[deckInd]["cards"].push({
+						data: currCard,
+						cardRef: cardRef,
+						id: card.id,
+					});
+					console.log("HERE 3");
+					// NEW NEW NEW NEW NEW
+
 					cardIndex++;
 				}
 				deckIndex++;
@@ -130,7 +175,7 @@
 			console.log(
 				"Deck copying from " + grpID + " completed successfully"
 			);
-			return cardDict;
+			return NEWCARDDICT;
 		} catch (error) {
 			console.log("Failed to copy " + grpID + " decks");
 			console.log(error);
@@ -165,7 +210,6 @@
 		// 	};
 		// },
 		methods: {
-			//Need to be replaced with add student
 			async save() {
 				try {
 					const email =
@@ -220,71 +264,91 @@
 									noOfStudent: increment(1),
 								});
 
-								// Copy existing groups deck into users account
-								const groupDecks = await copyDeck(groupName);
+								// NEW NEW NEW NEW NEW
+								const studentRef = doc(db, "users", email);
+								const allGroupDecksRef = await copyDeck(
+									groupName
+								);
 								console.log("Copy Deck Done!");
-								let totalDecks = Object.keys(groupDecks).length;
-								for (let i = 1; i <= totalDecks; i++) {
-									var currDeck = "d" + String(i);
-									var deckData = groupDecks[currDeck]["data"];
+								let totalDecks =
+									Object.keys(allGroupDecksRef).length;
+								// let allDecks = Object.keys(groupDecks);
+								for (let i = 0; i < totalDecks; i++) {
+									var currDeckID = allGroupDecksRef[i];
 									console.log(
-										"Current Deck " + currDeck + " Done!"
+										"Current Deck " + currDeckID + " Done!"
 									);
-
-									// Add Deck
-									const newDeckAdded = await addDoc(
-										collection(db, "users", email, "decks"),
-										{
-											title: deckData.title,
-											tag: deckData.tag,
-											description: deckData.description,
-											estimatedTime:
-												deckData.estimatedTime,
-											needsRecapping: 0,
-											totalCards: deckData.totalCards,
-											uncertainCards: 0,
-										}
-									);
-
-									// Add Cards (if any)
-									if ("cards" in groupDecks[currDeck]) {
-										let totalCards = Object.keys(
-											groupDecks[currDeck]["cards"]
-										).length;
-										console.log(
-											"NEW DECK ID: " + newDeckAdded.id
-										);
-										for (let j = 1; j <= totalCards; j++) {
-											var currCard = "c" + String(j);
-											var cardData =
-												groupDecks[currDeck]["cards"][
-													currCard
-												];
-											const newCardAdded = await addDoc(
-												collection(
-													db,
-													"users",
-													email,
-													"decks",
-													newDeckAdded.id,
-													"cards"
-												),
-												{
-													question: cardData.question,
-													answer: cardData.answer,
-													title: cardData.title,
-													boxType: 1,
-													firstAnswered: false,
-													isWrong: false,
-												}
-											);
-											console.log(
-												"NEW CARD ID: " +
-													newCardAdded.id
-											);
-										}
-									}
+									await updateDoc(studentRef, {
+										groupDecks: allGroupDecksRef,
+									});
 								}
+								// NEW NEW NEW NEW NEW
+
+								// // Copy existing groups deck into users account
+								// const groupDecks = await copyDeck(groupName);
+								// console.log("Copy Deck Done!");
+								// let totalDecks = Object.keys(groupDecks).length;
+								// for (let i = 1; i <= totalDecks; i++) {
+								// 	var currDeck = "d" + String(i);
+								// 	var deckData = groupDecks[currDeck]["data"];
+								// 	console.log(
+								// 		"Current Deck " + currDeck + " Done!"
+								// 	);
+
+								// 	// Add Deck
+								// 	const newDeckAdded = await addDoc(
+								// 		collection(db, "users", email, "decks"),
+								// 		{
+								// 			title: deckData.title,
+								// 			tag: deckData.tag,
+								// 			description: deckData.description,
+								// 			estimatedTime:
+								// 				deckData.estimatedTime,
+								// 			needsRecapping: 0,
+								// 			totalCards: deckData.totalCards,
+								// 			uncertainCards: 0,
+								// 		}
+								// 	);
+
+								// 	// Add Cards (if any)
+								// 	if ("cards" in groupDecks[currDeck]) {
+								// 		let totalCards = Object.keys(
+								// 			groupDecks[currDeck]["cards"]
+								// 		).length;
+								// 		console.log(
+								// 			"NEW DECK ID: " + newDeckAdded.id
+								// 		);
+								// 		for (let j = 1; j <= totalCards; j++) {
+								// 			var currCard = "c" + String(j);
+								// 			var cardData =
+								// 				groupDecks[currDeck]["cards"][
+								// 					currCard
+								// 				];
+								// 			const newCardAdded = await addDoc(
+								// 				collection(
+								// 					db,
+								// 					"users",
+								// 					email,
+								// 					"decks",
+								// 					newDeckAdded.id,
+								// 					"cards"
+								// 				),
+								// 				{
+								// 					question: cardData.question,
+								// 					answer: cardData.answer,
+								// 					title: cardData.title,
+								// 					boxType: 1,
+								// 					firstAnswered: false,
+								// 					isWrong: false,
+								// 				}
+								// 			);
+								// 			console.log(
+								// 				"NEW CARD ID: " +
+								// 					newCardAdded.id
+								// 			);
+								// 		}
+								// 	}
+								// }
 								console.log(newStudent);
 								console.log(
 									"New student enrolled to Group: " +

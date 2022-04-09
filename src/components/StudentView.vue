@@ -28,8 +28,13 @@
 	let authEmail = "";
 	// console.log(authEmail);
 
+	const prevPath = null;
+	console.log("Router: " + prevPath);
+
 	async function displayStudents() {
+		const groupObj = JSON.parse(sessionStorage.getItem("groupObj"));
 		// Find all the groups this teacher is in
+
 		const q1 = query(
 			collection(db, "groups"),
 			where("teacherEmail", "==", authEmail)
@@ -46,15 +51,17 @@
 
 		let allStudent = [];
 		for (const grpID of allGroups) {
+			if (prevPath == "/groups") {
+				if (grpID != groupObj["groupID"]) {
+					continue;
+				}
+			}
 			let allStudents = await getDocs(
 				collection(db, "groups", grpID, "students")
 			);
 			allStudents.forEach((doc) => {
 				let student = doc.data();
 				console.log("Students: " + student);
-				// var table = document.getElementById("studentList");
-				// var row = table.insertRow(ind);
-
 				var role = student.role;
 
 				// If the user is a teacher, exclude from the output
@@ -73,26 +80,6 @@
 				) {
 					allStudent.push({ message: name });
 				}
-
-				// var cell1 = row.insertCell(0);
-				// var cell2 = row.insertCell(1);
-				// var cell3 = row.insertCell(2);
-				// var cell4 = row.insertCell(3);
-				// var cell5 = row.insertCell(4);
-
-				// cell1.style.border = "1px solid #000";
-				// cell2.style.border = "1px solid #000";
-				// cell3.style.border = "1px solid #000";
-				// cell4.style.border = "1px solid #000";
-				// cell5.style.border = "1px solid #000";
-
-				// cell1.innerHTML = ind;
-				// cell2.innerHTML = name;
-				// cell3.innerHTML = email;
-				// cell4.innerHTML = role;
-				// cell5.innerHTML = groups;
-
-				// ind += 1;
 			});
 		}
 		return allStudent;
@@ -116,6 +103,11 @@
 			return {
 				items: [],
 			};
+		},
+		beforeRouteEnter(to, from, next) {
+			next((vm) => {
+				vm.prevRoute = from;
+			});
 		},
 	};
 </script>

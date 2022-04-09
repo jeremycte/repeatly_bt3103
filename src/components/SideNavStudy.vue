@@ -8,8 +8,7 @@
         <div class="student-bar">
           <div class="side-row">
             <img class="icon" src="../../img/SideBarImages/mdi-home-circle@2x.png"/>
-            <!-- <SideBarLinkStudy to="/home">Homepage</SideBarLinkStudy> -->
-            <div @click="dialogBox('/home')" class="link" :class="{ active: isActive }">
+            <div @click="dialogBox('/home')" class="link isActive">
               <transition name="fade">
                   Homepage
               </transition>
@@ -17,7 +16,7 @@
           </div>
           <div class="side-row">
             <img class="icon" src="../../img/SideBarImages/groups@2x.png"/>               
-            <div @click="dialogBox('/groups')" class="link" :class="{ active: isActive }">
+            <div @click="dialogBox('/groups')" class="link isActive">
               <transition name="fade">
                   Groups
               </transition>
@@ -26,7 +25,7 @@
           
           <div class="side-row">
             <img class="icon" src="../../img/SideBarImages/ci-settings-filled@2x.png"/> 
-             <div @click="dialogBox('/settings')" class="link" :class="{ active: isActive }">
+             <div @click="dialogBox('/settings')" class="link isActive">
               <transition name="fade">
                   Settings
               </transition>
@@ -35,7 +34,7 @@
           <div class="teacher-bar" v-if="role=='teacher'">
             <div class="side-row">
               <img class="icon" src="../../img/SideBarImages/vector-34@2x.png"/>
-               <div @click="dialogBox('/students')" class="link" :class="{ active: isActive }">
+               <div @click="dialogBox('/students')" class="link isActive">
               <transition name="fade">
                   Homepage
               </transition>
@@ -48,7 +47,7 @@
             <hr /> 
             <div class="side-row">
               <img class="icon-profile" src="../../img/SideBarImages/oval-37@2x.png"/>  
-               <div @click="dialogBox('/settings')" class="link" :class="{ active: isActive }">
+               <div @click="dialogBox('/settings')" class="link isActive">
               <transition name="fade">
                   {{username}}
               </transition>
@@ -57,7 +56,7 @@
             <div class="sync">
               <div class="side-row">
                 <img class="sync-icon" src="../../img/SideBarImages/sync-arrows--1--1@2x.png"/> 
-                <button class="sync-button" @click="dialogBox('/home')" >Sync</button>
+                <button class="sync-button" @click="dialogBoxRefresh()">Sync</button>
               </div>
             </div>
             
@@ -135,14 +134,18 @@ export default {
                 router.push(link)
             });
         },
-
-      async signOut() {
-        VueSimpleAlert.confirm("Sign Out?").then(() => {
-          auth.signOut().then(() => {
-            console.log("user has sign out")
-            router.push('/sign-in')
-          })
-        });
+        dialogBoxRefresh() {
+          VueSimpleAlert.confirm("Are you sure you want to leave?", "Your progress will be lost", "warning").then(() => {
+                window.location.reload();
+            });
+        },
+        async signOut() {
+          VueSimpleAlert.confirm("Sign Out?").then(() => {
+            auth.signOut().then(() => {
+              console.log("user has sign out")
+              router.push('/sign-in')
+            })
+          });
         
       }
     }
@@ -159,23 +162,22 @@ export default {
     opacity: 0;
 }
 
-.link{
+.link {
     display: flex;
     align-items: center;
     position: relative;
     user-select: none;
-
+    text-transform: capitalize;
     margin: 20px;
     padding: 0.4em;
     border-radius: 0.5em;
     height: 2em;
     color: white;
     text-decoration: none;
-
     font-family: Inter;
     font-weight: 600;
     font-size: 20px;
-    }
+}
     
 .link:hover {
     background-color: #cdb9fa;

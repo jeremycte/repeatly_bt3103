@@ -100,6 +100,7 @@
         </div>
     </div>
   </div>
+  <div class="delete-account-section">
   <div class="delete-account">
     <div class="logo-and-title-3">
       <img class="vector" src="../../img/Setting/vector-6@2x.png" />
@@ -121,6 +122,7 @@
     </div>
 
   </div>
+  </div> 
 <div class="cancel-save">
   <button class="cancel-button" v-on:click="clear()">Cancel</button>
   <button class="save-button" v-on:click="save()" >Save</button>
@@ -173,7 +175,7 @@ export default {
         this.confirmPassword = "";
       },
       async save(){
-        try{
+        try {
           emailRef = currentRefUser.email
           const usernameVal = document.getElementById("usernameInput").value
           const dobVal = document.getElementById("dobInput").value
@@ -262,7 +264,9 @@ export default {
 
 
 <style scoped>
-
+.update-password-section {
+  top: 10%;
+}
 .header {
   display: flex;
   height: 3.5em;
@@ -285,8 +289,9 @@ export default {
 }
 
 .cancel-save {
-  margin:6.25em;
+  margin-top: 56%;
   text-align: center;
+  margin-bottom: 3%;
 }
 .cancel-button {
     background-color: #A786F3; 
@@ -440,8 +445,8 @@ export default {
   letter-spacing: 0;
   position: absolute;
   top: 1.188em;
-  width: 31em;
 }
+
 .placeholder-value-1 {
   background-color: transparent;
   border: 0;
@@ -450,6 +455,15 @@ export default {
   line-height: 1em;
   padding: 0;
   width: 34.125em;
+  cursor: auto;
+}
+
+.delete-account-section {
+  top: 87%;
+  align-items: flex-start;
+  display: flex;
+  min-width: 67em;
+  position: absolute;
 }
 
 .placeholder-value-1::placeholder {
@@ -476,7 +490,7 @@ export default {
     left: 21em;
     min-width: 67em;
     position: absolute;
-    top: 22.5em
+    top: 42%;
   }
 
 .logo-and-title-1 {
@@ -546,18 +560,15 @@ export default {
   letter-spacing: 0;
   position: absolute;
   top: 1.188em;
-  width: 31em;
+  /* width: 31em; */
 }
 
-  .delete-account {
-    align-items: flex-start;
-    display: flex;
-    height: 31.25em;
-    left: 21em;
-    min-width: 67em;
-    position: absolute;
-    top: 38.75em;
-  }
+.delete-account {
+  align-items: flex-start;
+  display: flex;
+  left: 21em;
+  position: absolute;
+}
 
   .logo-and-title-3 {
     align-items: center;
@@ -585,7 +596,7 @@ export default {
     display: flex;
     justify-content: flex-end;
     margin-left: 36.25em;
-    margin-top: 47.188em;
+    /* margin-top: 47.188em; */
     min-width: 66.125em;
     padding: 0.625em 1.438em;
     height: 12.5em;
@@ -599,7 +610,6 @@ export default {
   }
 
   .description-1{
-    height: 6.375em;
     left: 0;
     letter-spacing: 0;
     position: absolute;
@@ -615,7 +625,7 @@ export default {
     letter-spacing: 0;
     position: absolute;
     top: 0;
-    width: 28.75em;
+    /* width: 28.75em; */
     margin-top: -1.063em;
     
   }

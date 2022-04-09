@@ -49,7 +49,7 @@ const auth = getAuth();
 const db = getFirestore(firebaseApp);
 
 
-async function updateDetails(cardsArray){
+async function updateDetails(cardsArray,cardBoxMap){
   try{
     let needsRecapping = 0;
     let uncertainCards = 0;
@@ -79,14 +79,18 @@ async function updateDetails(cardsArray){
 
       let triesString
       if (currentCard.tries > 1){
-        triesString = String(currentCard.tries) + " tries" + '<br />'
+        const improvement = ', Mastery level ' + String(cardBoxMap.get(currentCardId)) + '-> '
+            + String(currentCardBoxType)
+        triesString = String(currentCard.tries) + " tries" + improvement + '<br />'
         anyChange = true
         cardsVisited += 1
         const cardIndex = cardOrder.indexOf(currentCardId)
         stringDisplay += "Card "+ (cardIndex +1) + ': ' + triesString
         statsOuputArray[cardIndex] = stringDisplay
       } else if (currentCard.tries >0){
-        triesString = String(currentCard.tries) + " try" + '<br />'
+        const improvement = ', Mastery level ' + String(cardBoxMap.get(currentCardId)) + '-> '
+            + String(currentCardBoxType)
+        triesString = String(currentCard.tries) + " tries" + improvement + '<br />'
         anyChange = true
         cardsVisited += 1
         const cardIndex = cardOrder.indexOf(currentCardId)
@@ -137,7 +141,16 @@ export default {
   },
   mounted(){
     const cardItems = JSON.parse(sessionStorage.getItem("cardDetails"))
-    updateDetails(cardItems)
+    const deckCompleted = JSON.parse(sessionStorage.getItem('deckCompleted'))
+    const cardBoxMap = new Map(JSON.parse(sessionStorage.getItem('cardBoxMap')))
+    if (deckCompleted){
+      document.getElementById("cardStatsDisplay").innerHTML = 'Congratulations you finished studying this deck!'
+      document.getElementById("cardsStudied").innerHTML = ''
+      document.getElementById("cardsUnattempted").innerHTML = ''
+      sessionStorage.setItem("deckCompleted",JSON.stringify(true))
+    } else {
+      updateDetails(cardItems,cardBoxMap)
+    }
   }
 };
 </script>
@@ -207,6 +220,7 @@ export default {
 .cards-tried-placeholder {
   text-align: center;
   font-size: 28px;
+  line-height: 42px;
 }
 
 

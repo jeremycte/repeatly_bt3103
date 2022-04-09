@@ -28,3 +28,21 @@ input, textarea {
   border: none;
   outline: none;
 }
+
+input, select {
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+} 
+
+textarea::-webkit-scrollbar-thumb,  textarea::-webkit-scrollbar {
+  background-color: none;
+  outline:none;
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+    transition: background-color 50000s ease-in-out 0s, color 5000s ease-in-out 0s;
+}

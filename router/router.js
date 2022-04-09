@@ -21,6 +21,8 @@ import students from '@/views/Students.vue'
 import addStudent from '@/views/AddStudents.vue'
 import StudentStudyDeckStats from "@/views/StudentStudyDeckStats";
 
+import PickUser from '@/views/PickUser.vue'
+
 const routes = [
     {
         path: '/',
@@ -335,6 +337,11 @@ const routes = [
         component: EditCardDeck,
         props: {
             MyDashboard: "Edit Study Questions"},
+    },
+    {
+        path:'/pick-user',
+        name: 'PickUser',
+        component: PickUser,
     },
     {
         path: '/:catchAll(.*)',

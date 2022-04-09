@@ -5,8 +5,7 @@
       <Header2 :dashboardTitle="MyDashboard" />
       <div class="overlap-group5">
         <div class="left-container-editquestion">
-          <div class="card-title">Edit Question</div>
-          <div class="title">
+          <div class="card-title">Create/edit Question</div><div class="title">\
             <div class="title-1 inter-semi-bold-black-18px">Title:</div>
             <div class="title-2">
               <div class="title-input">
@@ -719,7 +718,7 @@ export default {
   letter-spacing: 0;
   line-height: 10px;
   padding: 0;
-  width: 828px;
+  width: 1032px;
 }
 
 .header {

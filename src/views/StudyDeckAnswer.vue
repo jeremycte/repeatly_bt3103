@@ -15,7 +15,8 @@
                 <img class="back-arrow" src="../../img/back-arrow.png" />
                 <h1 class="end-study inter-semi-bold-edward-24px">End Study<br>Session</h1>
                 </a>
-                <div class="question-rectangle"> 
+                <div class="question-rectangle">
+                    <div class="category-description inter-bold-white-30px" id="category-description">Category 1</div>
                     <div class="question-field inter-bold-white-30px" id="question-field">Answer will be here</div>
                 </div>
             </div>
@@ -28,10 +29,10 @@
                 <img class="icon-check_mark" src="../../img/StudyDeckAnswer/subway-tick-1@2x.png" />
             </button>
             <button class="redo-button" v-on:click="retry()">
-                <img class="icon-check_mark" src="../../img/StudyDeckAnswer/reload.png" />
+                <img class="icon-try-again" src="../../img/StudyDeckAnswer/reload.png" />
             </button>
             <button class="wrong-button" v-on:click="wrong()">
-                <img class="icon-check_mark" src="../../img/StudyDeckAnswer/vector-81@2x.png" />
+                <img class="icon-wrong" src="../../img/StudyDeckAnswer/vector-81@2x.png" />
             </button>
           </div>
         </div>
@@ -67,6 +68,7 @@ export default {
     const answerGiven = sessionStorage.getItem('givenAnswer')
     document.getElementById('question-field').innerHTML = chosenCard.answer
     document.getElementById('answer-field2').innerHTML = answerGiven;
+    document.getElementById('category-description').innerHTML = "Mastery level " + String(chosenCard.boxType)
   },
   methods:{
     correct(){
@@ -99,6 +101,16 @@ export default {
 </script>
 
 <style scoped>
+.question-field {
+    margin-top: 26%;
+    text-align: center;
+}
+.category-description {
+  text-align: center;
+  margin-top: 5%;
+  font-size: 28px;
+  text-decoration: underline;
+}
 .overlap-group-deckans {
     background-size: 100% 100%;
     margin-top: -0.15px;
@@ -108,7 +120,7 @@ export default {
 .student-study-deck-answer {
     /* align-items: flex-start; */
     /* display: flex; */
-    height: 856px;
+    min-height: 1000px;
     min-width: 1491px;
     margin-left: 200px;
   }
@@ -116,16 +128,18 @@ export default {
 .verification {
     display: flex;
     height: 110px;
-    left: 717px;
-    position: absolute;
-    top: 881px;
+    text-align: center;
+    margin-top: 18px;
     width: 622px;
+    margin-left: 22em;
+    align-items: center;
     justify-content: space-around;
 }
 
 .correct-button {
   background-color: var(--shamrock);
   border-radius: 20px;
+  border:none;
   cursor: pointer;
   display: flex;
   height: 100px;
@@ -135,6 +149,7 @@ export default {
 .redo-button {
   background-color: var(--mustard);
   border-radius: 20px;
+  border:none;
   cursor: pointer;
   display: flex;
   height: 100px;
@@ -143,14 +158,28 @@ export default {
 
 .icon-check_mark {
   height: 58.99px;
-  margin-left: 32.6px;
-  margin-top: 19.5px;
-  width: 70.95px;
+  margin-left: 43px;
+  margin-top: 22px;
 }
+
+.icon-try-again {
+  height: 58.99px;
+  margin-left: 39px;
+  margin-top: 19px;
+
+}
+
+.icon-wrong {
+  height: 45.99px;
+  margin-left: 47px;
+  margin-top: 28px;
+}
+
 
 .wrong-button {
   background-color: #D6433B;
   align-items: flex-start;
+  border: none;
   display: flex;
   width: 150px;
   height: 100px;
@@ -168,6 +197,7 @@ export default {
 .your-answer-field {
     text-align: center;
     font-size: 35px;
+    margin-top: 10px;
 } 
 
 .displayed-answer {

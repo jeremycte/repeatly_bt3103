@@ -9,12 +9,18 @@
 				:key="item"
 				@click="displaySelectedItem(index)"
 			>
-				<img
+				<!-- <img
 					class="illustration"
 					:src="
 						require(`../../img/Dashboard/history-illustrations.png`)
 					"
+				/> -->
+				<div
+					class="illustration"
+					id="imageDeck"
+					:style="randomImage()"
 				/>
+
 				<div class="overlay-group">
 					<div class="group-info">
 						<div

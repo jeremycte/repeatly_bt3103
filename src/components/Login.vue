@@ -57,7 +57,7 @@
       <p class="dont-have-an-account-sign-up-now valign-text-middle inter-bold-white-16px">
         <span>
           <span class="inter-bold-black-16px">Don't have an account?</span>
-          <router-link to="/registration">
+          <router-link to="/pick-user">
             <span class="span1 inter-bold-dull-lavender-16px"> Sign Up Now</span>
           </router-link>
         </span>
@@ -68,19 +68,12 @@
 </template>
 
 <script>
-import {getAuth, signInWithEmailAndPassword, onAuthStateChanged} from "firebase/auth";
+import {getAuth, signInWithEmailAndPassword} from "firebase/auth";
 import firebaseApp from "../firebaseDetails";
 import SocialMediaLogin from "@/components/SocialMediaLogin.vue";
-import router from "../../router/router";
 import VueSimpleAlert from "vue-simple-alert";
 firebaseApp;
-const auth = getAuth();
 
-onAuthStateChanged(auth,(user)=>{
-  if(user){
-    router.push({name: "Home"});
-  }
-})
 
 
 export default {
@@ -94,23 +87,12 @@ export default {
       const email = document.getElementById("email").value
       const password = document.getElementById("password").value
       try{
-        const userDetails = await signInWithEmailAndPassword(
+        await signInWithEmailAndPassword(
             auth,
             email,
             password,
         )
-        console.log(userDetails.user);
         console.log("login pass")
-        VueSimpleAlert.fire({
-          type: 'success',
-          title: 'Successfully Signed In',
-          text: 'Redirecting you to your dashboard',
-          color: '#a786f3',
-          // footer: '<a href>Why do I have this issue?</a>'
-        }).then(r => {
-          console.log(r.value);
-          this.$router.push({name: "Home"})
-        });
         
       } catch(error){
         console.log("login fail")

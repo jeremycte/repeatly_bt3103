@@ -26,6 +26,9 @@
                     </div>
                 </button>
             </div>
+            <div class="view-card-description-title inter-semi-bold-heavy-metal-36px">Description</div>
+            <div class="view-card-description inter-semi-bold-heavy-metal-25px">Description will be located here inside all the sem.</div>
+
             <div class="overlap-group-txtareaViewDeck border-1px-quick-silver" style="overflow-y: scroll; height:500px">
               <template v-if="loading">
               <p class="questions inter-bold-black-28px" v-for="item in documents" :key="item">{{item}}</p>
@@ -35,6 +38,11 @@
                 <button class="editBtn" v-on:click="editDeck()">
                     <div class="frame-1-editanswers">
                     <h1 class="studydeck-titleBtn inter-semi-bold-white-28px">Edit Deck</h1>
+                    </div>
+                </button>
+                <button class="resetBtn" v-on:click="resetDeck()">
+                    <div class="frame-1-resetanswers">
+                    <h1 class="studydeck-titleBtn inter-semi-bold-white-28px">Reset Deck</h1>
                     </div>
                 </button>
                 <button class="studyBtn" v-on:click="studyDeck()">
@@ -61,6 +69,7 @@ const auth = getAuth();
 const db = getFirestore(firebaseApp);
 var refDoc = [];
 var cardsObjArray = []
+
 
 
 
@@ -91,6 +100,7 @@ async function getCards(userEmail,deckObj){
   try{
     const deckId = deckObj["deckId"]
     const userCards = await getDocs(collection(db,"users",String(userEmail),"decks",deckId,"cards"))
+    const cardBoxMap = new Map()
     if(!userCards.empty) {
       userCards.forEach((docs) => {
         const card = docs.data()
@@ -113,10 +123,11 @@ async function getCards(userEmail,deckObj){
         }
         cardsObjArray.push(tempCardDetails)
         refDoc.push(question)
+        cardBoxMap.set(cardId,boxType)
       })
       console.log(cardsObjArray)
       sessionStorage.setItem("cardDetails",JSON.stringify(cardsObjArray))
-
+      sessionStorage.setItem("cardBoxMap",JSON.stringify(Array.from(cardBoxMap.entries())))
     }
   }catch(error){
     console.log(error)
@@ -159,16 +170,23 @@ export default {
       })
     },
     async deleteDeck(){
-      try{
-        const deckObj = JSON.parse(sessionStorage.getItem('deckObj'))
-        const userEmail = auth.currentUser.email
-        const deckId = deckObj["deckId"]
-        await deleteDoc(doc(db,"users",String(userEmail),"decks",deckId));
-        sessionStorage.clear();
-        await router.push({name:'Home'})
-      } catch (error){
-        console.log("delete deck error")
-      }
+      VueSimpleAlert.confirm("Delete the whole deck?").then(() => {
+          try{
+            const deckObj = JSON.parse(sessionStorage.getItem('deckObj'))
+            const userEmail = auth.currentUser.email
+            const deckId = deckObj["deckId"]
+            deleteDoc(doc(db,"users",String(userEmail),"decks",deckId));
+            sessionStorage.clear();
+            router.push({name:'Home'})
+          } catch (error){
+            VueSimpleAlert.fire({
+              type: 'error',
+              title: 'Delete Deck Error',
+              text: 'Refer to error message below',
+              footer: '<p>' + error +'</p>'
+            })
+          }
+        });
     },
     async editDeck(){
       try{
@@ -177,10 +195,16 @@ export default {
         console.log(error);
       }
     },
+    async resetDeck() {
+      VueSimpleAlert.confirm("Reset the whole study deck?").then(() => {
+          //do something inside
+        });
+    },
     async studyDeck(){
       try{
         if (this.documents.length !== 0){
           sessionStorage.setItem("retryQuestion",JSON.stringify(false))
+          sessionStorage.setItem("deckCompleted",JSON.stringify(false))
           const tempArray = []
           sessionStorage.setItem("questionOrder",JSON.stringify(tempArray))
           await router.push({name:'StudyDeck'})
@@ -201,6 +225,16 @@ export default {
 
 
 <style scoped>
+.view-card-description {
+  margin-left: 32px;
+  margin-bottom: 20px;
+  width: 1350px;
+}
+.view-card-description-title {
+  margin-left: 32px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
 .viewCardDeckBtns {
     display: flex;
 }
@@ -315,6 +349,15 @@ export default {
     margin-top: 20.7px;
 }
 
+.frame-1-resetanswers {
+    border-radius: 25px;
+    display: flex;
+    align-items: flex-start;
+    margin-top: 29px;
+    margin-left: 80px;
+    margin-top: 20.7px;
+}
+
 .frame-2-study {
     border-radius: 25px;
     display: flex;
@@ -330,7 +373,21 @@ export default {
     border-radius: 25px;
     height: 74px;
     width: 22em;
-    margin-left: 19em;
+    margin-left: 5em;
+    cursor: pointer;
+    align-items: flex-start;
+    box-shadow: 0px 2px 8px #00000022;
+    margin-top: 29px;
+    display: flex;
+}
+
+.resetBtn {
+    background-color: var(--dull-lavender);
+    border-color: transparent;
+    border-radius: 25px;
+    height: 74px;
+    width: 22em;
+    margin-left: 5em;
     cursor: pointer;
     align-items: flex-start;
     box-shadow: 0px 2px 8px #00000022;
@@ -344,7 +401,7 @@ export default {
     border-radius: 25px;
     height: 74px;
     width: 22em;
-    margin-left: 20em;
+    margin-left: 15em;
     cursor: pointer;
     align-items: flex-start;
     box-shadow: 0px 2px 8px #00000022;

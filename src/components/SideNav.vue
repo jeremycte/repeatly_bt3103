@@ -114,6 +114,7 @@ export default {
       async signOut() {
         VueSimpleAlert.confirm("Sign Out?").then(() => {
           auth.signOut().then(() => {
+            sessionStorage.clear()
             console.log("user has sign out")
             router.push('/sign-in')
           })
@@ -130,7 +131,7 @@ export default {
 .student-bar {
   margin-left: 1em;
 }
-.sidebar{
+.sidebar {
     color:white;
     background-color: #A786F3;  
     float: left;
@@ -143,6 +144,7 @@ export default {
     transition: 0.3s ease;
     display: flex;
     flex-direction: column;
+    z-index: 10;
     
     border-top-right-radius: 1.25em;
     border-bottom-right-radius: 1.25em;

@@ -6,7 +6,7 @@
         <router-link to="/view-card-deck">
         <template v-if="loading">
           <div class="purple-deck" v-for="(item,index) in documents" :key="item" @click="displaySelectedItem(index)">
-             <img class="illustration" :src="require(`../../img/Dashboard/history-illustrations.png`)" />
+             <div class="illustration" id="imageDeck" :style="randomImage()" />
               <div class="overlay-deck">
                 <div class="deck-cards-info">
                     <div class="card-title inter-semi-bold-heavy-metal-36px" id="Deck Title">{{item["title"]}}</div>
@@ -39,6 +39,7 @@ var refDoc=[];
 
 async function getCardDetails(userEmail){
   let userDecks = await getDocs(collection(db,"users",String(userEmail),"decks"));
+  console.log("i am running")
   if (!userDecks.empty){
     userDecks.forEach((docs)=>{
       let deck = docs.data()
@@ -73,17 +74,20 @@ export default {
       onAuthStateChanged(auth, async (user)=>{
         if(user) {
           await getCardDetails(user.email)
-          await this.randomImage()
+          this.randomImage()
+          console.log(refDoc)
           this.documents = refDoc;
           this.loading = true;
+          var image = document.getElementsByClassName("illustration");
+          image.src = `../../img/${this.images[Math.floor(Math.random() * this.images.length * Math.PI)]}`
+          // document.getElementById("imageDeck").src=`../../img/${this.images[Math.floor(Math.random() * this.images.length)]}`;
         }
       })
     },
     randomImage() {
-      // console.log(this.images[Math.floor(Math.random() * this.images.length)]);
-      return `url("../../img/Dashboard/${
+      return "background-image: " + `url(${
         this.images[Math.floor(Math.random() * this.images.length)]
-      }")`;
+      });`;
     },
     displaySelectedItem(selectedItemIndex){
       // console.log(selectedItemIndex)
@@ -93,13 +97,17 @@ export default {
   },
   mounted(){
     refDoc = []
+    this.documents = []
     this.getData()
   },
   data(){
     return {
       loading: false,
       documents:[],
-      images: ['history-illustrations.png', 'tab-illustration.png', 'security-illustration.png', 'computer-illustration.png'],
+      images: ['https://res.cloudinary.com/jeremycte23/image/upload/f_auto,q_50/v1649429503/repeatly/tab-illustration_urxjbb.png', 
+      'https://res.cloudinary.com/jeremycte23/image/upload/f_auto,q_50/v1649429503/repeatly/security-illustration_kuf6rq.png', 
+      'https://res.cloudinary.com/jeremycte23/image/upload/f_auto,q_50/v1649429503/repeatly/computer-illustration_rcirpn.png', 
+      'https://res.cloudinary.com/jeremycte23/image/upload/f_auto,q_50/v1649429503/repeatly/history-illustrations_h1vzpp.png'],
       colors: ['rgba(209, 245, 237, 1)', 'rgba(243, 217, 224, 1)', 'rgba(167, 134, 243, 1)'],
     }
   }
@@ -221,6 +229,7 @@ export default {
   min-height: 35px;
   min-width: 226px;
   white-space: nowrap;
+  color: #000;
 }
 
 .uncertain-cards {

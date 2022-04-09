@@ -20,7 +20,7 @@
             </div>
         </div>
         <div class="overlap-group-txtareaStudyDeck border-1px-quick-silver">
-            <div class="motivational-statement inter-semi-bold-black-28px" id="answer-field2">Motivational Statement Here</div>
+            <div class="motivational-statement inter-semi-bold-black-28px" id="answer-field2">Great Job! Amazing work!</div>
         </div>
       <button class="checkAnswerStudybtn">
         <div class="frame-1-checkanswers">

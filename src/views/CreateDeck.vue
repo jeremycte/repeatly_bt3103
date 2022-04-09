@@ -29,11 +29,11 @@
       <div class="overlap-group-txtareaCreateDeck border-1px-quick-silver">
         <textarea class="deck-description" id="description" name="deckdescription" placeholder="Deck Description" type="text"></textarea>
       </div>
-      <btn class="add-student-createdeckbtn" v-on:click="save()">
+      <button class="add-student-createdeckbtn" v-on:click="save()">
         <div class="frame-1-createdeck">
           <h1 class="createdeck-titleBtn inter-semi-bold-white-28px">Create Deck</h1>
         </div>
-      </btn>
+      </button>
     </div>
   </div>
   </div>
@@ -229,6 +229,7 @@ export default {
   .add-student-createdeckbtn {
     background-color: var(--shamrock);
     border-radius: 25px;
+    border: none;
     height: 74px;
     width: 312px;
     cursor: pointer;
@@ -236,7 +237,7 @@ export default {
     box-shadow: 0px 2px 8px #00000022;
     margin-top: 29px;
     /* min-width: 718px; */
-    margin-right: 12em;
+    margin-right: 16em;
   }
 
   .frame-1-createdeck {
@@ -244,8 +245,8 @@ export default {
     display: flex;
     align-items: flex-start;
     margin-top: 29px;
-    margin-left: 89.2px;
-    margin-top: 26.7px;
+    margin-left: 81.2px;
+    margin-top: 8.7px;
     /* width: 155.43px; */
     
   }

@@ -21,6 +21,7 @@ import {getAuth,onAuthStateChanged} from "firebase/auth";
 import HeaderGroup from '../components/HeaderGroup.vue'
 import {doc,getDoc,getFirestore} from "firebase/firestore";
 import firebaseApp from "@/firebaseDetails";
+import router from "../../router/router";
 
 const auth = getAuth();
 const db = getFirestore(firebaseApp);
@@ -55,6 +56,8 @@ export default {
                 console.log(user.email)
                 const tempRole= await getRole(user.email)
                 this.role = tempRole
+            } else {
+              router.push('/sign-in')
             }
         })        
     },

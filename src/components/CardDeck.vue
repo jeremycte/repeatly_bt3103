@@ -98,9 +98,6 @@ export default {
           this.documents = refDoc;
           this.intemediateDoc = [];
           this.loading = true;
-          var image = document.getElementsByClassName("illustration");
-          image.src = `../../img/${this.images[Math.floor(Math.random() * this.images.length * Math.PI)]}`
-          // document.getElementById("imageDeck").src=`../../img/${this.images[Math.floor(Math.random() * this.images.length)]}`;
         }
       })
     },
@@ -112,7 +109,7 @@ export default {
     displaySelectedItem(selectedItemIndex,refDeck){
       sessionStorage.setItem('deckObj',JSON.stringify(refDeck[parseInt(selectedItemIndex)]))
     },
-    checkTextPresence(){
+    checkTextPresence() {
       const tempArray = []
       if (this.textVal !== ''){
         for (let i = 0; i < this.documents.length; i++) {
@@ -127,7 +124,7 @@ export default {
       }
     }
   },
-  mounted(){
+  mounted() {
     refDoc = []
     this.documents = []
     this.intemediateDoc = []

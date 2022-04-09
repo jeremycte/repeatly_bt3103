@@ -149,34 +149,6 @@
                 </div>
                 </div>
             </div>
-              <div class="_radio-container-registration">
-                <div class="student_radio-registration">
-                    <div class="radio-registration">
-                    <div class="mdc-radio mdc-radio--touch" data-id="anima-widget">
-                        <input class="mdc-radio__native-control" type="radio" id="radio-1-student" value="student" v-model="userrole" name="radios" />
-                        <div class="mdc-radio__background">
-                        <div class="mdc-radio__outer-circle"></div>
-                        <div class="mdc-radio__inner-circle"></div>
-                        </div>
-                        <div class="mdc-radio__ripple"></div>
-                    </div>
-                    </div>
-                    <div class="im-a-registration inter-normal-black-20px">I'm a student</div>
-                </div>
-                <div class="teacher_radio-registration">
-                    <div class="radio-registration">
-                    <div class="mdc-radio mdc-radio--touch" data-id="anima-widget">
-                        <input class="mdc-radio__native-control" type="radio" id="radio-1-teacher" value="teacher" v-model="userrole" name="radios" />
-                        <div class="mdc-radio__background">
-                        <div class="mdc-radio__outer-circle"></div>
-                        <div class="mdc-radio__inner-circle"></div>
-                        </div>
-                        <div class="mdc-radio__ripple"></div>
-                    </div>
-                    </div>
-                    <div class="im-a-registration inter-normal-black-20px">I'm a Teacher</div>
-                </div>
-              </div>
             </div>
             <div class="overlap-group6-registration">
               <img class="vector-4-registration" src='../../img/Login/vector1.png' />
@@ -286,11 +258,11 @@ export default {
   components: {
   },
 
-  data(){
-    return{
-      userrole: "",
-    }
-  },
+  // data(){
+  //   return{
+  //     userrole: "",
+  //   }
+  // },
 
   computed : {
     years () {
@@ -349,7 +321,7 @@ export default {
       })
       try {
 
-        if (userName == "" || email == "" || password == "" || day == "" || month == "" || year == "" || this.userrole == "") {
+        if (userName == "" || email == "" || password == "" || day == "" || month == "" || year == "") {
           VueSimpleAlert.fire({
             type: 'info',
             text: 'Please fill up all fields and try again.'
@@ -524,7 +496,7 @@ export default {
   display: flex;
   height: 72px;
   margin-left: 2px;
-  margin-top: 115px;
+  margin-top: 72px;
   min-width: 593px;
   padding: 17px 18px;
   cursor: pointer;

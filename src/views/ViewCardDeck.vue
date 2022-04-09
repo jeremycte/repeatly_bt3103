@@ -28,7 +28,7 @@
             </div>
             <div class="view-card-description-title inter-semi-bold-heavy-metal-36px">Description</div>
             <div class="view-card-description inter-semi-bold-heavy-metal-25px" id="descriptionText">
-              Description will be located here inside all the sem.</div>
+              Card deck description</div>
 
             <div class="overlap-group-txtareaViewDeck border-1px-quick-silver" style="overflow-y: scroll; height:500px">
               <template v-if="loading">
@@ -170,6 +170,9 @@ export default {
           await getCards(user.email,deckObj)
           this.documents = refDoc
           this.loading = true;
+        } 
+        else {
+              router.push('/sign-in')
         }
       })
     },

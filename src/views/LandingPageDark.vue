@@ -47,7 +47,7 @@
               type="text/html"
               width="100%"
               height="100%"
-              src="https://www.youtube.com/embed/dQw4w9WgXcQ?rel=0&mute=0&autoplay=1"
+              src="https://www.youtube.com/embed/Z-zNHHpXoMM?rel=0&mute=0&autoplay=1"
               frameborder="0"
               allowfullscreen="allowfullscreen"
               mozallowfullscreen="mozallowfullscreen"
@@ -307,7 +307,7 @@
                       <div
                         class="with-lots-of-unique-2 nunitosans-normal-white-22px"
                       >
-                        {{ withLotsOfUnique4 }}
+                        {{ withLotsOfUnique4 }} <br>(Feature Coming Soon)
                       </div>
                     </div>
                   </div>
@@ -324,7 +324,7 @@
                         class="with-lots-of-unique-3 nunitosans-normal-white-22px"
                       >
                         We provide analytics for teachers to track your
-                        students’ progress
+                        students’ progress <br> (Feature Coming Soon)
                       </div>
                     </div>
                   </div>

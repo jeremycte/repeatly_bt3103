@@ -19,9 +19,13 @@ export default class cardClassList{
         this.cardList[boxIndex].push(tempCardObj)
     }
 
-    addCardSet(tempCardList){
-        for (let i = 0; i < tempCardList.length; i++) {
-            this.addCard(tempCardList[i])
+    addCardSet(tempCardList) {
+        try {
+            for (let i = 0; i < tempCardList.length; i++) {
+                this.addCard(tempCardList[i])
+            }
+        } catch {
+            console.log("card list is null")
         }
     }
 

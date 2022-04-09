@@ -1,46 +1,47 @@
 <template>
   <div class="headerDashboardTitle">
-    <h1 class="dashboard-title inter-bold-heavy-metal-50px">{{dashboardTitle}}</h1>
-    <div class=remaining-header>
-      <!-- <div class="searchbox">
-        <input v-if="visible"
+    <h1 class="dashboard-title-1 inter-bold-heavy-metal-50px">{{dashboardTitle}}</h1>
+    <!-- <button class="sync-button" @click="searchBtn()" > -->
+
+    <!-- <div class="searchbox">
+        <input v-if="visibility"
         type="search"
-        class="search-bar inter-normal-silver-chalice-30px"
-        placeholder="What are you looking for?" />
-      </div> -->
-      <div class="search-function">
-        <!-- <button type ="submit" class="icon-search" @click="visible = !visible">
-         <img class="icon-image" src="../../img/search2.png" />
-        </button> -->
-        <router-link to="/create-group">
-          <img class="addBtnDashboard" src="../../img/add.svg" />
-        </router-link>
-      </div>
+        class="search-bar inter-normal-silver-chalice-30px" id="searchBar"
+        placeholder="What are you looking for?"
+        v-on:keyup="this.getSearchVal()"/>
     </div>
+    <button type ="submit" class="icon-search" @click="initialGetSearchVal()">
+        <img class="icon-image" src="../../img/search2.png" />
+    </button> -->
+    <!-- </button> -->
+    
+    <router-link to="/create-group">
+      <img class="addBtnDashboard" src="../../img/add.svg" />
+    </router-link>
   </div>
 </template>
 
 <script>
-//import vClickOutside from 'v-click-outside'
-
   export default {
-    name: "Header",
+    name: "GroupHeader",
+    props: ["dashboardTitle","to"],
     data: () => ({
-    visible: false
-  }),
-    /*directives: {
-        clickOutside: vClickOutside.directive
-      },*/
-    props: ["dashboardTitle"],
+    visibility: false
+    }),
     methods: {
       searchBtn(){
         window.location.reload();
       },
-      /*checkSearchBox() {
-          this.visible = false;
-        }*/
+      getSearchVal(){
+        var textVal = document.getElementById("searchBar").value;
+        this.$emit('getSearchVal',[textVal,this.visibility])
       },
-    };
+      initialGetSearchVal(){
+        this.visibility = !this.visibility
+        this.$emit('getSearchVal',["",this.visibility])
+      }
+    },
+  };
 </script>
 
 <style scoped>
@@ -49,8 +50,6 @@
     position: relative;
     /* width: 1359px; */
     margin-top: 25px;
-    align-items: center;
-    justify-content: space-between;
   }
 
   .addBtnDashboard {
@@ -60,7 +59,7 @@
     margin-top: 16px;
   }
 
-  .dashboard-title {
+  .dashboard-title-1 {
     letter-spacing: 0;
     line-height: 70px;
     min-height: 70px;
@@ -94,10 +93,6 @@
     transition: all 0.3s ease;
   }
 
-  .remaining-header {
-    display: flex;
-  }
-
   .icon-search {
     height: 39px;
     width: 39px;
@@ -114,6 +109,4 @@
     height: 30px;
     width: 30px;
   }
-
-
 </style>

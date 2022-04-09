@@ -121,6 +121,9 @@ export default {
                 const tempRole= await getRole(user.email)
                 this.username = tempUsername;
                 this.role = tempRole
+            } 
+            else {
+              router.push('/sign-in')
             }
         })
     },

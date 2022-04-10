@@ -20,8 +20,12 @@ export default class cardClassList{
     }
 
     addCardSet(tempCardList){
-        for (let i = 0; i < tempCardList.length; i++) {
-            this.addCard(tempCardList[i])
+        try {
+            for (let i = 0; i < tempCardList.length; i++) {
+                this.addCard(tempCardList[i])
+            }
+        } catch {
+            console.log("card list is null")
         }
     }
 

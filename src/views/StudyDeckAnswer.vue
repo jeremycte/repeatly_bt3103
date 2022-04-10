@@ -46,6 +46,9 @@ import SideNavStudy from "../components/SideNavStudy.vue"
 import cardClassList from "@/cardClassList";
 import router from "../../router/router";
 
+import {getAuth, onAuthStateChanged} from "firebase/auth";
+const auth = getAuth();
+
 var cardsArray = []
 export default {
   name: "StudyDeckAnswer",
@@ -59,16 +62,22 @@ export default {
     }
   },
   mounted(){
-    const classifier = new cardClassList()
-    this.nativeClassifer = classifier;
-    cardsArray = JSON.parse(sessionStorage.getItem("studyingCards"))
-    this.nativeClassifer.addCardSet(cardsArray)
-    const chosenCard = JSON.parse(sessionStorage.getItem('chosenCard'))
-    this.chosenCardDetails = chosenCard
-    const answerGiven = sessionStorage.getItem('givenAnswer')
-    document.getElementById('question-field').innerHTML = chosenCard.answer
-    document.getElementById('answer-field2').innerHTML = answerGiven;
-    document.getElementById('category-description').innerHTML = "Mastery level " + String(chosenCard.boxType)
+    onAuthStateChanged( auth , async (user) => {
+      if  (user) {
+        const classifier = new cardClassList()
+        this.nativeClassifer = classifier;
+        cardsArray = JSON.parse(sessionStorage.getItem("studyingCards"))
+        this.nativeClassifer.addCardSet(cardsArray)
+        const chosenCard = JSON.parse(sessionStorage.getItem('chosenCard'))
+        this.chosenCardDetails = chosenCard
+        const answerGiven = sessionStorage.getItem('givenAnswer')
+        document.getElementById('question-field').innerHTML = chosenCard.answer
+        document.getElementById('answer-field2').innerHTML = answerGiven;
+        document.getElementById('category-description').innerHTML = "Mastery level " + String(chosenCard.boxType)
+      } else {
+        router.push('/sign-in')
+      }
+    })
   },
   methods:{
     correct(){

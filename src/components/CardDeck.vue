@@ -3,6 +3,7 @@
     <!-- <div class="student-dashboard-homepage screen"> -->
       <div class="deck-card-group">
         <div class="background-dashboard"></div>
+        <router-link to="/view-card-deck">
         <div v-if="loading">
           <div v-if="checkTextPresence() && visibility">
             <div class="purple-deck" v-for="(item,index) in intemediateDoc" :key="item" @click="displaySelectedItem(index,intemediateDoc)">
@@ -43,6 +44,7 @@
             </div>
           </div>
         </div>
+        </router-link>
       </div>
     <!-- </div> -->
 </template>
@@ -51,7 +53,7 @@
 import firebaseApp from "@/firebaseDetails";
 import {getAuth,onAuthStateChanged} from "firebase/auth";
 import {collection,getDocs,getFirestore} from "firebase/firestore";
-import router from "../../router/router";
+// import router from "../../router/router";
 
 const auth = getAuth();
 const db = getFirestore(firebaseApp);
@@ -107,7 +109,7 @@ export default {
     },
     displaySelectedItem(selectedItemIndex,refDeck){
       sessionStorage.setItem('deckObj',JSON.stringify(refDeck[parseInt(selectedItemIndex)]))
-      router.push({name:"ViewCardDeck"})
+      // router.push({name:"ViewCardDeck"})
     },
     checkTextPresence() {
       // const tempArray = []

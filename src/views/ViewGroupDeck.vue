@@ -71,7 +71,29 @@
             </h1>
           </div>
         </button>
+
+        <button class="createBtn">
+          <div class="frame-1-editanswers">
+            <h1
+                class="studydeck-titleBtn inter-semi-bold-white-28px"
+            >
+              Create Deck
+            </h1>
+          </div>
+        </button>
+
+        <button class="createBtn">
+          <div class="frame-1-editanswers">
+            <h1
+                class="studydeck-titleBtn inter-semi-bold-white-28px"
+            >
+              Add Students
+            </h1>
+          </div>
+        </button>
+
       </div>
+
       <div
           class="view-card-description-title inter-semi-bold-heavy-metal-36px"
       >

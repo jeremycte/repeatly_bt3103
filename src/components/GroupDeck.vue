@@ -367,24 +367,6 @@
 				);
 				await copy(groupObj, refDeck[parseInt(selectedItemIndex)]);
 			},
-			checkTextPresence() {
-				const tempArray = [];
-				if (this.textVal !== "") {
-					for (let i = 0; i < this.documents.length; i++) {
-						if (
-							this.documents[i].title
-								.toUpperCase()
-								.indexOf(this.textVal.toUpperCase()) > -1
-						) {
-							tempArray.push(this.documents[i]);
-						}
-					}
-					this.intemediateDoc = tempArray;
-					return true;
-				} else {
-					return false;
-				}
-			},
 		},
 		mounted() {
 			onAuthStateChanged(auth, async (user) => {
@@ -431,6 +413,7 @@
 		transition: all 0.3s ease;
 		border-radius: 40px;
 		box-shadow: 0px 2px 8px #00000022;
+    cursor: pointer;
 	}
 
 	.overlay-deck {

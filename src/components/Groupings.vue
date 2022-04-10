@@ -1,59 +1,60 @@
 <template>
 	<div class="student-group">
 		<div class="background-dashboard"></div>
-
-		<template v-if="loading">
-			<div
-				class="purple-deck"
-				v-for="(item, index) in documents"
-				:key="item"
-				@click="displaySelectedItem(index)"
-			>
-				<!-- <img
+		<router-link to="/view-group-deck">
+			<template v-if="loading">
+				<div
+					class="purple-deck"
+					v-for="(item, index) in documents"
+					:key="item"
+					@click="displaySelectedItem(index, documents)"
+				>
+					<!-- <img
 					class="illustration"
 					:src="
 						require(`../../img/Dashboard/history-illustrations.png`)
 					"
 				/> -->
-				<div
-					class="illustration"
-					id="imageDeck"
-					:style="randomImage()"
-				/>
-				<div class="overlay-group">
-					<div class="group-info">
-						<div
-							class="GroupTitle inter-semi-bold-heavy-metal-36px"
-							id="GroupTitle"
-						>
-							{{ item["longName"] }}
-						</div>
-						<div class="flex-row-cards-info">
+					<div
+						class="illustration"
+						id="imageDeck"
+						:style="randomImage()"
+					/>
+					<div class="overlay-group">
+						<div class="group-info">
 							<div
-								class="dateCreated inter-semi-bold-heavy-metal-25px"
-								id="dateCreated"
+								class="GroupTitle inter-semi-bold-heavy-metal-36px"
+								id="GroupTitle"
 							>
-								Date Created: {{ item["dateCreated"] }}
+								{{ item["longName"] }}
+							</div>
+							<div class="flex-row-cards-info">
+								<div
+									class="dateCreated inter-semi-bold-heavy-metal-25px"
+									id="dateCreated"
+								>
+									Date Created: {{ item["dateCreated"] }}
+								</div>
+							</div>
+							<div
+								class="noOfStudent inter-semi-bold-heavy-metal-25px"
+								id="noOfStudent"
+							>
+								No of Students: {{ item["noOfStudent"] }}
 							</div>
 						</div>
-						<div
-							class="noOfStudent inter-semi-bold-heavy-metal-25px"
-							id="noOfStudent"
-						>
-							No of Students: {{ item["noOfStudent"] }}
-						</div>
-					</div>
-					<div class="overlay-tagName">
-						<div
-							class="tagName inter-semi-bold-heavy-metal-23px"
-							id="tagName"
-						>
-							{{ item["groupID"] }}
+						<div class="overlay-tagName">
+							<div
+								class="tagName inter-semi-bold-heavy-metal-23px"
+								id="tagName"
+							>
+								{{ item["groupID"] }}
+							</div>
 						</div>
 					</div>
 				</div>
-			</div>
-		</template>
+			</template>
+		</router-link>
 		<!--        </router-link>-->
 	</div>
 	<!-- </div> -->
@@ -162,22 +163,6 @@
 				teacherName: teacherName,
 			};
 			refDoc.push(tempGroupDetails);
-
-			// const accessButt = document.createElement("button");
-			// accessButt.className = "bwt";
-			// accessButt.id = String(ind);
-			// accessButt.innerHTML = "Access";
-			// accessButt.onclick = async function () {
-			// 	try {
-			// 		sessionStorage.setItem("currGroup", name);
-			// 		await router.push({ name: "viewGroup" });
-			// 	} catch (error) {
-			// 		console.log("Access group button error");
-			// 		console.log(error);
-			// 	}
-			// };
-			// cell6.appendChild(accessButt);
-			// ind += 1;
 		}
 	}
 
@@ -194,14 +179,6 @@
 					}
 				});
 			},
-			// randomImage() {
-			// 	console.log(
-			// 		this.images[Math.floor(Math.random() * this.images.length)]
-			// 	);
-			// 	return `url("../../img/Dashboard/${
-			// 		this.images[Math.floor(Math.random() * this.images.length)]
-			// 	}")`;
-			// },
 			randomImage() {
 				return (
 					"background-image: " +
@@ -212,9 +189,10 @@
 					});`
 				);
 			},
-			displaySelectedItem(selectedItemIndex) {
-				// console.log(selectedItemIndex)
-				// console.log(refDoc[parseInt(selectedItemIndex)])
+			displaySelectedItem(selectedItemIndex, refDoc) {
+				// console.log(selectedItemIndex);
+				// console.log(refDoc[parseInt(selectedItemIndex)]);
+				sessionStorage.clear();
 				sessionStorage.setItem(
 					"groupObj",
 					JSON.stringify(refDoc[parseInt(selectedItemIndex)])
@@ -223,6 +201,7 @@
 		},
 		mounted() {
 			refDoc = [];
+			this.documents = [];
 			this.getData();
 		},
 		data() {

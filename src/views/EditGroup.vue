@@ -61,30 +61,41 @@
 				Group Description
 			</div>
 			<br /><br />
+
+			<div class="formli">
+				<div
+					class="view-card-description inter-semi-bold-heavy-metal-25px"
+					id="editGroupDescription"
+				>
+					Edit Group Description
+				</div>
+				<br /><br />
+				<textarea
+					class="textwrapper"
+					name="groupDescription"
+					id="editedGroupDescription"
+					cols="40"
+					rows="5"
+				></textarea>
+				<br /><br />
+			</div>
+			<!-- <div class="save">
+				<button id="savebutton" type="button" v-on:click="save()">
+					Save</button
+				><br /><br />
+			</div> -->
+
 			<div class="viewCardDeckBtns">
-				<button class="editBtn" v-on:click="editDeck()">
+				<button class="editBtn" v-on:click="save()">
 					<div class="frame-1-editanswers">
 						<h1
 							class="studydeck-titleBtn inter-semi-bold-white-28px"
 						>
-							Edit Group
+							Save Group
 						</h1>
 					</div>
 				</button>
 			</div>
-			<div
-				class="view-card-description-title inter-semi-bold-heavy-metal-36px"
-			>
-				Decks
-			</div>
-			<GroupDeck />
-			<br /><br />
-			<div
-				class="view-card-description-title inter-semi-bold-heavy-metal-36px"
-			>
-				Students
-			</div>
-			<GroupStudentView />
 			<br /><br />
 		</div>
 	</div>
@@ -99,12 +110,13 @@
 		// getDocs,
 		deleteDoc,
 		getFirestore,
+		updateDoc,
 	} from "firebase/firestore";
 	import router from "../../router/router";
 	import SideNav from "../components/SideNav.vue";
 	import StudentsPageHeader from "../components/StudentsPageHeader.vue";
-	import GroupDeck from "../components/GroupDeck.vue";
-	import GroupStudentView from "../components/GroupStudentView.vue";
+	// import GroupDeck from "../components/GroupDeck.vue";
+	// import GroupStudentView from "../components/GroupStudentView.vue";
 
 	const db = getFirestore(firebaseApp);
 
@@ -134,13 +146,34 @@
 		components: {
 			SideNav,
 			StudentsPageHeader,
-			GroupDeck,
-			GroupStudentView,
+			// GroupDeck,
+			// GroupStudentView,
 		},
 		mounted() {
 			displayDetails();
 		},
 		methods: {
+			async save() {
+				try {
+					const grpID = JSON.parse(
+						sessionStorage.getItem("groupObj")
+					);
+					const groupDescription = document
+						.getElementById("editedGroupDescription")
+						.value.toString();
+					const updateRef = doc(db, "groups", grpID.groupID);
+					console.log(updateRef);
+					await updateDoc(updateRef, {
+						description: groupDescription,
+					});
+					document.getElementById("editedGroupDescription").value =
+						"";
+					await this.$router.push({ name: "Groups" });
+				} catch (error) {
+					console.log("Edit group failed");
+					console.log(error);
+				}
+			},
 			async deleteGroup() {
 				try {
 					const groupObj = JSON.parse(
@@ -157,7 +190,7 @@
 			},
 			async editDeck() {
 				try {
-					await router.push({ name: "editGroup" });
+					await router.push({ name: "createGroup" });
 				} catch (error) {
 					console.log(error);
 				}
@@ -304,5 +337,14 @@
 		box-shadow: 0px 2px 8px #00000022;
 		margin-top: 29px;
 		display: flex;
+	}
+
+	textarea {
+		width: 100%;
+	}
+	.textwrapper {
+		border: 1px solid #999999;
+		margin: 5px 0;
+		padding: 3px;
 	}
 </style>

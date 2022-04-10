@@ -414,14 +414,19 @@
 					console.log(authEmail);
 					const tempRole = await getRole(user.email);
 					this.role = tempRole;
-					const deckObj = JSON.parse(sessionStorage.getItem("deckObj"));
-					refDoc = [];
-					this.displayCards(deckObj);
 				}
 				else {
 					router.push('/sign-in')
 				} 
 			});
+
+			try {
+				const deckObj = JSON.parse(sessionStorage.getItem("deckObj"));
+				refDoc = [];
+				this.displayCards(deckObj);
+			} catch(error) {
+				console.log(error);
+			}
 			
 		},
 		data() {

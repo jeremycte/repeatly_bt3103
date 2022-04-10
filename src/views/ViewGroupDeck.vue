@@ -172,13 +172,19 @@
 				if (user) {
 					const tempRole = await getRole(user.email);
 					this.role = tempRole;
-					const groupObj = JSON.parse(sessionStorage.getItem("groupObj"));
-					this.groupId = String(groupObj["groupID"]);
-					this.displayDetails();
+					
 				} else {
 					router.push('/sign-in')
 				}
 			});
+			try {
+				const groupObj = JSON.parse(sessionStorage.getItem("groupObj"));
+				this.groupId = String(groupObj["groupID"]);
+				this.displayDetails();
+			} catch (error) {
+				console.log(error);
+			}
+			
 			
 			
 		},

@@ -1,141 +1,263 @@
 <template>
-
-
-      <div class="student-group">
-        <div class="background-dashboard"></div>
-
-        <template v-if="loading">
-          <div class="purple-deck" v-for="item in documents" :key="item" >
-             <div class="illustration" id="imageDeck" :style="randomImage()" />
-              <div class="overlay-group">
-                <div class="group-info">
-                    <div class="GroupTitle inter-semi-bold-heavy-metal-36px" id="GroupTitle">{{item["title"]}}</div>
-                    <div class="flex-row-cards-info">
-                        <div class="CreationDate inter-semi-bold-heavy-metal-25px" id="CreationDate">Date Created: {{item["CreationDate"]}}</div>
-                    </div>
-                    <div class="StudentNumber inter-semi-bold-heavy-metal-25px" id="StudentNumber">No of Students {{item["StudentNumber"]}}</div>
+  <div class="student-group">
+    <div class="background-dashboard"></div>
+    <router-link to="/view-group-deck">
+      <template v-if="loading">
+        <div
+            class="purple-deck"
+            v-for="(item, index) in documents"
+            :key="item"
+            @click="displaySelectedItem(index, documents)"
+        >
+          <!-- <img
+          class="illustration"
+          :src="
+            require(`../../img/Dashboard/history-illustrations.png`)
+          "
+        /> -->
+          <div
+              class="illustration"
+              id="imageDeck"
+              :style="randomImage()"
+          />
+          <div class="overlay-group">
+            <div class="group-info">
+              <div
+                  class="GroupTitle inter-semi-bold-heavy-metal-36px"
+                  id="GroupTitle"
+              >
+                {{ item["longName"] }}
+              </div>
+              <div class="flex-row-cards-info">
+                <div
+                    class="dateCreated inter-semi-bold-heavy-metal-25px"
+                    id="dateCreated"
+                >
+                  Date Created: {{ item["dateCreated"] }}
                 </div>
-              <div class="overlay-tagName">
-                <div class="tagName inter-semi-bold-heavy-metal-23px" id="tagName">{{item["tag"]}}</div>
+              </div>
+              <div
+                  class="noOfStudent inter-semi-bold-heavy-metal-25px"
+                  id="noOfStudent"
+              >
+                No of Students: {{ item["noOfStudent"] }}
+              </div>
+            </div>
+            <div class="overlay-tagName">
+              <div
+                  class="tagName inter-semi-bold-heavy-metal-23px"
+                  id="tagName"
+              >
+                {{ item["groupID"] }}
               </div>
             </div>
           </div>
-        </template>
-<!--        </router-link>-->
-      </div>
-    <!-- </div> -->
+        </div>
+      </template>
+    </router-link>
+    <!--        </router-link>-->
+  </div>
+  <!-- </div> -->
 </template>
 
 <script>
 import firebaseApp from "@/firebaseDetails";
-import {getAuth,onAuthStateChanged} from "firebase/auth";
-import {collection,getDocs,getFirestore} from "firebase/firestore";
+import { getAuth, onAuthStateChanged } from "firebase/auth";
+import {
+  collection,
+  doc,
+  getDoc,
+  getDocs,
+  query,
+  where,
+  getFirestore,
+} from "firebase/firestore";
+import dateFormat from "dateformat";
 
 const auth = getAuth();
 const db = getFirestore(firebaseApp);
-var refDoc=[];
+var refDoc = [];
 
-async function getCardDetails(userEmail){
-  let userDecks = await getDocs(collection(db,"users",String(userEmail),"decks"));
-  if (!userDecks.empty){
-    userDecks.forEach((docs)=>{
-      let deck = docs.data()
-      let deckId = docs.id
-      const title = deck.title
-      const StudentNumber = deck.StudentNumber
-      const needsRecapping = deck.needsRecapping
-      const tag = deck.tag
-      const CreationDate = deck.CreationDate
-      const uncertainCards = deck.uncertainCards
-      const tempDeckDetails = {
-        'deckId':deckId,
-        'title':title,
-        'StudentNumber':StudentNumber,
-        'needsRecapping':needsRecapping,
-        'tag':tag,
-        'CreationDate':CreationDate,
-        'uncertainCards':uncertainCards,
+// async function getCardDetails(userEmail) {
+// 	let userDecks = await getDocs(
+// 		collection(db, "users", String(userEmail), "decks")
+// 	);
+// 	if (!userDecks.empty) {
+// 		userDecks.forEach((docs) => {
+// 			let deck = docs.data();
+// 			let deckId = docs.id;
+// 			const longName = deck.longName;
+// 			const noOfStudent = deck.noOfStudent;
+// 			const needsRecapping = deck.needsRecapping;
+// 			const groupID = deck.groupID;
+// 			const dateCreated = deck.dateCreated;
+// 			const uncertainCards = deck.uncertainCards;
+// 			const tempDeckDetails = {
+// 				deckId: deckId,
+// 				longName: longName,
+// 				noOfStudent: noOfStudent,
+// 				needsRecapping: needsRecapping,
+// 				groupID: groupID,
+// 				dateCreated: dateCreated,
+// 				uncertainCards: uncertainCards,
+// 			};
+// 			refDoc.push(tempDeckDetails);
+// 		});
+// 	}
+// }
+
+async function getGroupDetails(userEmail) {
+  let currUser = await getDoc(doc(db, "users", String(userEmail)));
+  let userData = currUser.data();
+  console.log("Current User: " + userData.role);
+  var q1 = query(collection(db, "groups"));
+  if (userData.role == "teacher") {
+    console.log("Current User Role: " + "teacher");
+    // Find all the groups this teacher is in
+    q1 = query(
+        collection(db, "groups"),
+        where("teacherEmail", "==", String(userEmail))
+    );
+  } else {
+    console.log("Current User Role: " + "student");
+  }
+
+  const querySnapshot = await getDocs(q1);
+
+  // let ind = 1;
+  for (const docu of querySnapshot.docs) {
+    let group = docu.data();
+    // console.log('DOC ID like that: ' + docu.id);
+    if (userData.role != "teacher") {
+      let student = await getDoc(
+          doc(
+              db,
+              "groups",
+              String(group.groupID),
+              "students",
+              String(userEmail)
+          )
+      );
+
+      if (!student.exists()) {
+        continue;
       }
-      refDoc.push(tempDeckDetails)
-    })
+    }
+    const dateCreated = dateFormat(
+        group.dateCreated.toDate(),
+        "mmmm d, yyyy"
+    );
+    const description = group.description;
+    const groupID = group.groupID;
+    const longName = group.longName;
+    const noOfStudent = group.noOfStudent;
+    const teacherEmail = group.teacherEmail;
+    const teacherName = group.teacherName;
+    const tempGroupDetails = {
+      dateCreated: dateCreated,
+      description: description,
+      groupID: groupID,
+      longName: longName,
+      noOfStudent: noOfStudent,
+      teacherEmail: teacherEmail,
+      teacherName: teacherName,
+    };
+    refDoc.push(tempGroupDetails);
   }
 }
-
-
-
 
 export default {
   name: "Groupings",
-  methods:{
+  methods: {
     async getData() {
-      onAuthStateChanged(auth, async (user)=>{
-        if(user) {
-          await getCardDetails(user.email)
-          await this.randomImage()
+      onAuthStateChanged(auth, async (user) => {
+        if (user) {
+          await getGroupDetails(user.email);
+          await this.randomImage();
           this.documents = refDoc;
           this.loading = true;
         }
-      })
+      });
     },
     randomImage() {
-      return "background-image: " + `url(${
-        this.images[Math.floor(Math.random() * this.images.length)]
-      });`;
+      return (
+          "background-image: " +
+          `url(${
+              this.images[
+                  Math.floor(Math.random() * this.images.length)
+                  ]
+          });`
+      );
+    },
+    displaySelectedItem(selectedItemIndex, refDoc) {
+      // console.log(selectedItemIndex);
+      // console.log(refDoc[parseInt(selectedItemIndex)]);
+      sessionStorage.clear();
+      sessionStorage.setItem(
+          "groupObj",
+          JSON.stringify(refDoc[parseInt(selectedItemIndex)])
+      );
     },
   },
-  mounted(){
-    refDoc = []
-    this.getData()
+  mounted() {
+    refDoc = [];
+    this.documents = [];
+    this.getData();
   },
-  data(){
+  data() {
     return {
       loading: false,
-      documents:[],
-      images: ['https://res.cloudinary.com/jeremycte23/image/upload/f_auto,q_50/v1649429503/repeatly/tab-illustration_urxjbb.png', 
-      'https://res.cloudinary.com/jeremycte23/image/upload/f_auto,q_50/v1649429503/repeatly/security-illustration_kuf6rq.png', 
-      'https://res.cloudinary.com/jeremycte23/image/upload/f_auto,q_50/v1649429503/repeatly/computer-illustration_rcirpn.png', 
-      'https://res.cloudinary.com/jeremycte23/image/upload/f_auto,q_50/v1649429503/repeatly/history-illustrations_h1vzpp.png'],
-      colors: ['rgba(209, 245, 237, 1)', 'rgba(243, 217, 224, 1)', 'rgba(167, 134, 243, 1)'],
-    }
-  }
+      documents: [],
+      images: [
+        "https://res.cloudinary.com/jeremycte23/image/upload/f_auto,q_50/v1649429503/repeatly/tab-illustration_urxjbb.png",
+        "https://res.cloudinary.com/jeremycte23/image/upload/f_auto,q_50/v1649429503/repeatly/security-illustration_kuf6rq.png",
+        "https://res.cloudinary.com/jeremycte23/image/upload/f_auto,q_50/v1649429503/repeatly/computer-illustration_rcirpn.png",
+        "https://res.cloudinary.com/jeremycte23/image/upload/f_auto,q_50/v1649429503/repeatly/history-illustrations_h1vzpp.png",
+      ],
+      colors: [
+        "rgba(209, 245, 237, 1)",
+        "rgba(243, 217, 224, 1)",
+        "rgba(167, 134, 243, 1)",
+      ],
+    };
+  },
 };
 </script>
 
-
 <style scoped>
-.overlay-group{
-    align-items: flex-start;
-    border-radius: 40px;
-    box-shadow: 0px 2px 8px #00000022;
-    display: flex;
-    height: 210px;
-    margin-top: 30px;
-    min-width: 1429px;
-    padding: 19.6px 36.8px;
-    position: relative;
+.overlay-group {
+  align-items: flex-start;
+  border-radius: 40px;
+  box-shadow: 0px 2px 8px #00000022;
+  display: flex;
+  height: 210px;
+  margin-top: 30px;
+  min-width: 1429px;
+  padding: 19.6px 36.8px;
+  position: relative;
 }
 
-.purple-deck:nth-child(odd){
+.purple-deck:nth-child(odd) {
   background-color: var(--vanilla-ice);
   border-radius: 40px;
   box-shadow: 0px 2px 8px #00000022;
 }
-.purple-deck:nth-child(even){
-  background-color:  var(--humming-bird);
+.purple-deck:nth-child(even) {
+  background-color: var(--humming-bird);
   border-radius: 40px;
   box-shadow: 0px 2px 8px #00000022;
 }
 
 .overlay-tagName {
-    align-items: center;
-    background-color: var(--white-22);
-    border-radius: 16px;
-    display: flex;
-    height: 61px;
-    margin-left: 250px;
-    margin-top: 14.44px;
-    padding: 14px 51.7px;
-    word-break: break-all;
+  align-items: center;
+  background-color: var(--white-22);
+  border-radius: 16px;
+  display: flex;
+  height: 61px;
+  margin-left: 250px;
+  margin-top: 14.44px;
+  padding: 14px 51.7px;
+  word-break: break-all;
 }
 .bar-illustration {
   align-self: center;
@@ -192,7 +314,7 @@ export default {
   min-width: 716px;
 }
 
-.CreationDate {
+.dateCreated {
   letter-spacing: 0;
   line-height: 35px;
   min-height: 35px;
@@ -200,7 +322,7 @@ export default {
   white-space: nowrap;
 }
 
-.StudentNumber {
+.noOfStudent {
   letter-spacing: 0;
   line-height: 35px;
   margin-top: 19px;

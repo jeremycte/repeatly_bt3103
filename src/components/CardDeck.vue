@@ -3,9 +3,8 @@
     <!-- <div class="student-dashboard-homepage screen"> -->
       <div class="deck-card-group">
         <div class="background-dashboard"></div>
-        <router-link to="/view-card-deck">
-        <template v-if="loading">
-          <template v-if="checkTextPresence() && visibility">
+        <div v-if="loading">
+          <div v-if="checkTextPresence() && visibility">
             <div class="purple-deck" v-for="(item,index) in intemediateDoc" :key="item" @click="displaySelectedItem(index,intemediateDoc)">
                <div class="illustration" id="imageDeck" :style="randomImage()" />
                 <div class="overlay-deck">
@@ -23,8 +22,8 @@
                 </div>
               </div>
             </div>
-          </template>
-          <template v-else>
+          </div>
+          <div v-else>
             <div class="purple-deck" v-for="(item,index) in documents" :key="item" @click="displaySelectedItem(index,documents)">
               <div class="illustration" id="imageDeck" :style="randomImage()" />
               <div class="overlay-deck">
@@ -42,9 +41,8 @@
                 </div>
               </div>
             </div>
-          </template>
-        </template>
-        </router-link>
+          </div>
+        </div>
       </div>
     <!-- </div> -->
 </template>
@@ -53,6 +51,7 @@
 import firebaseApp from "@/firebaseDetails";
 import {getAuth,onAuthStateChanged} from "firebase/auth";
 import {collection,getDocs,getFirestore} from "firebase/firestore";
+import router from "../../router/router";
 
 const auth = getAuth();
 const db = getFirestore(firebaseApp);
@@ -108,16 +107,18 @@ export default {
     },
     displaySelectedItem(selectedItemIndex,refDeck){
       sessionStorage.setItem('deckObj',JSON.stringify(refDeck[parseInt(selectedItemIndex)]))
+      router.push({name:"ViewCardDeck"})
     },
     checkTextPresence() {
-      const tempArray = []
+      // const tempArray = []
       if (this.textVal !== ''){
-        for (let i = 0; i < this.documents.length; i++) {
-          if (this.documents[i].title.toUpperCase().indexOf(this.textVal.toUpperCase()) > -1){
-           tempArray.push(this.documents[i])
-          }
-        }
-        this.intemediateDoc = tempArray;
+        // for (let i = 0; i < this.documents.length; i++) {
+        //   if (this.documents[i].title.toUpperCase().indexOf(this.textVal.toUpperCase()) > -1){
+        //    tempArray.push(this.documents[i])
+        //   }
+        // }
+        // this.intemediateDoc = tempArray;
+        // console.log(tempArray)
         return true;
       } else {
         return false
@@ -142,7 +143,18 @@ export default {
       colors: ['rgba(209, 245, 237, 1)', 'rgba(243, 217, 224, 1)', 'rgba(167, 134, 243, 1)'],
     }
   },
-  props:['textVal','visibility']
+  props:['textVal','visibility'],
+  watch:{
+    textVal: function(){
+      const tempArray = []
+      for (let i = 0; i < this.documents.length; i++) {
+        if (this.documents[i].title.toUpperCase().indexOf(this.textVal.toUpperCase()) > -1){
+         tempArray.push(this.documents[i])
+        }
+      }
+      this.intemediateDoc = tempArray;
+    }
+  }
 };
 </script>
 

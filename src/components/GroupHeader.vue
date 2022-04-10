@@ -51,14 +51,12 @@
     /* width: 1359px; */
     margin-top: 25px;
   }
-
   .addBtnDashboard {
     height: 50px;
     width: 50px;
     margin-left: 31px;
     margin-top: 16px;
   }
-
   .dashboard-title-1 {
     letter-spacing: 0;
     line-height: 70px;
@@ -66,7 +64,6 @@
     white-space: nowrap;
     width: 500px;
   }
-
   .search-function {
     float: right;
     display: flex;
@@ -88,11 +85,9 @@
     background-color: var(--white);
     transition: all 0.3s ease;
   }
-
   .searchbox {
     transition: all 0.3s ease;
   }
-
   .icon-search {
     height: 39px;
     width: 39px;
@@ -104,7 +99,6 @@
     background: transparent;
     cursor: pointer;
   }
-
   .icon-image {
     height: 30px;
     width: 30px;

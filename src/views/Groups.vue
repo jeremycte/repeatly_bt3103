@@ -5,9 +5,9 @@
       <div v-if="role == 'teacher'">
         <GroupHeader :dashboardTitle="MyDashboard"/>
       </div>
-      <div v-else>
+      <!-- <div v-else>
         <HeaderGroup :dashboardTitle="MyDashboard"/>
-      </div>
+      </div> -->
       <Groupings/>
     </div>
   </div>
@@ -18,7 +18,7 @@ import SideNav from "../components/SideNav.vue"
 import Groupings from "../components/Groupings.vue"
 import GroupHeader from '../components/GroupHeader.vue'
 import {getAuth, onAuthStateChanged} from "firebase/auth";
-import HeaderGroup from '../components/HeaderGroup.vue'
+// import HeaderGroup from '../components/HeaderGroup.vue'
 import {doc, getDoc, getFirestore} from "firebase/firestore";
 import firebaseApp from "@/firebaseDetails";
 import router from "../../router/router";
@@ -43,7 +43,7 @@ export default {
     Groupings,
     SideNav,
     GroupHeader,
-    HeaderGroup
+    // HeaderGroup
 
   },
   data() {

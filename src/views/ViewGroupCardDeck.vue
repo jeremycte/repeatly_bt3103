@@ -168,7 +168,6 @@
 	let authEmail = "";
 	var refDoc = [];
 	var cardsObjArray = [];
-	const groupObj = JSON.parse(sessionStorage.getItem("groupObj"));
 
 	async function displayDetails(deckObj, groupObj) {
 		try {
@@ -480,68 +479,9 @@
 					console.log(error);
 				}
 			},
-			// async resetDeck() {
-			// 	VueSimpleAlert.confirm("Reset the whole study deck?").then(
-			// 		async () => {
-			// 			try {
-			// 				const deckObj = JSON.parse(
-			// 					sessionStorage.getItem("deckObj")
-			// 				);
-			// 				const userEmail = auth.currentUser.email;
-			// 				const deckId = deckObj["deckId"];
-			// 				for (let i = 0; i < cardsObjArray.length; i++) {
-			// 					const cardId = cardsObjArray[i].id;
-			// 					const docRef = doc(
-			// 						db,
-			// 						"users",
-			// 						userEmail,
-			// 						"decks",
-			// 						deckId,
-			// 						"cards",
-			// 						cardId
-			// 					);
-			// 					await updateDoc(docRef, {
-			// 						boxType: 1,
-			// 					});
-			// 				}
-			// 				await this.displayCards(deckObj);
-			// 			} catch (error) {
-			// 				console.log("rest Deck Error");
-			// 				console.log(error);
-			// 			}
-			// 		}
-			// 	);
-			// },
-			// async studyDeck() {
-			// 	try {
-			// 		if (this.documents.length !== 0) {
-			// 			sessionStorage.setItem(
-			// 				"retryQuestion",
-			// 				JSON.stringify(false)
-			// 			);
-			// 			sessionStorage.setItem(
-			// 				"deckCompleted",
-			// 				JSON.stringify(false)
-			// 			);
-			// 			const tempArray = [];
-			// 			sessionStorage.setItem(
-			// 				"questionOrder",
-			// 				JSON.stringify(tempArray)
-			// 			);
-			// 			await router.push({ name: "StudyDeck" });
-			// 		} else {
-			// 			VueSimpleAlert.fire({
-			// 				type: "info",
-			// 				title: "You have no questions available",
-			// 				timer: 3000,
-			// 			});
-			// 		}
-			// 	} catch (error) {
-			// 		console.log("study deck error");
-			// 	}
-			// },
 			async copyDeck() {
 				const deckObj = JSON.parse(sessionStorage.getItem("deckObj"));
+        const groupObj = JSON.parse(sessionStorage.getItem("groupObj"));
 				console.log("Copying: " + deckObj["deckId"]);
 				await copy(groupObj, deckObj);
 			},

@@ -78,33 +78,6 @@ const auth = getAuth();
 const db = getFirestore(firebaseApp);
 var refDoc = [];
 
-// async function getCardDetails(userEmail) {
-// 	let userDecks = await getDocs(
-// 		collection(db, "users", String(userEmail), "decks")
-// 	);
-// 	if (!userDecks.empty) {
-// 		userDecks.forEach((docs) => {
-// 			let deck = docs.data();
-// 			let deckId = docs.id;
-// 			const longName = deck.longName;
-// 			const noOfStudent = deck.noOfStudent;
-// 			const needsRecapping = deck.needsRecapping;
-// 			const groupID = deck.groupID;
-// 			const dateCreated = deck.dateCreated;
-// 			const uncertainCards = deck.uncertainCards;
-// 			const tempDeckDetails = {
-// 				deckId: deckId,
-// 				longName: longName,
-// 				noOfStudent: noOfStudent,
-// 				needsRecapping: needsRecapping,
-// 				groupID: groupID,
-// 				dateCreated: dateCreated,
-// 				uncertainCards: uncertainCards,
-// 			};
-// 			refDoc.push(tempDeckDetails);
-// 		});
-// 	}
-// }
 
 async function getGroupDetails(userEmail) {
   let currUser = await getDoc(doc(db, "users", String(userEmail)));

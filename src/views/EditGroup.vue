@@ -49,6 +49,14 @@
 					</div>
 				</button>
 			</div>
+      <div
+          class="view-card-description-title inter-semi-bold-heavy-metal-36px"
+      >
+        Students
+      </div>
+      <GroupStudentView />
+      <br /><br />
+
 			<div
 				class="view-card-description-title inter-semi-bold-heavy-metal-36px"
 			>
@@ -103,18 +111,19 @@
 
 <script>
 	import firebaseApp from "@/firebaseDetails";
-	import {
-		// collection,
-		doc,
-		// getDoc,
-		// getDocs,
-		deleteDoc,
-		getFirestore,
-		updateDoc,
-	} from "firebase/firestore";
+  import {
+    // collection,
+    doc,
+    // getDoc,
+    // getDocs,
+    deleteDoc,
+    getFirestore,
+    updateDoc, getDoc,
+  } from "firebase/firestore";
 	import router from "../../router/router";
 	import SideNav from "../components/SideNav.vue";
 	import StudentsPageHeader from "../components/StudentsPageHeader.vue";
+  import GroupStudentView from "../components/GroupStudentView.vue";
 	// import GroupDeck from "../components/GroupDeck.vue";
 	// import GroupStudentView from "../components/GroupStudentView.vue";
 
@@ -125,14 +134,14 @@
 		// console.log('DOC ID: ' + grpID);
 
 		// Display Group Details
-		// const groupObj = await getDoc(doc(db, 'groups', String(grpID)));
+		const groupTemp = await getDoc(doc(db, 'groups', String(groupObj["groupID"])));
 
-		// const groupDetails = groupObj.data();
+		const groupDetails = groupTemp.data();
 
 		document.getElementById("groupTitle").innerHTML =
 			groupObj["groupID"] + " " + groupObj["longName"];
 		document.getElementById("noOfStudent").innerHTML =
-			"Total Number of Students: " + groupObj["noOfStudent"];
+			"Total Number of Students: " + groupDetails.noOfStudent;
 		document.getElementById("teacherName").innerHTML =
 			"Teacher Name: " + groupObj["teacherName"];
 		document.getElementById("teacherEmail").innerHTML =
@@ -147,7 +156,7 @@
 			SideNav,
 			StudentsPageHeader,
 			// GroupDeck,
-			// GroupStudentView,
+			GroupStudentView,
 		},
 		mounted() {
 			displayDetails();

@@ -72,7 +72,7 @@
           </div>
         </button>
 
-        <button class="createBtn">
+        <button class="createBtn" v-on:click="createGroupDeck()">
           <div class="frame-1-editanswers">
             <h1
                 class="studydeck-titleBtn inter-semi-bold-white-28px"
@@ -82,7 +82,7 @@
           </div>
         </button>
 
-        <button class="createBtn">
+        <button class="createBtn" v-on:click="addStudents()">
           <div class="frame-1-editanswers">
             <h1
                 class="studydeck-titleBtn inter-semi-bold-white-28px"
@@ -99,14 +99,7 @@
       >
         Decks
       </div>
-      <GroupDeck />
-      <br /><br />
-      <div
-          class="view-card-description-title inter-semi-bold-heavy-metal-36px"
-      >
-        Students
-      </div>
-      <GroupStudentView />
+      <GroupDeck :groupId="groupId"/>
       <br /><br />
     </div>
   </div>
@@ -120,36 +113,15 @@ import {
   // getDoc,
   // getDocs,
   deleteDoc,
-  getFirestore,
+  getFirestore, getDoc,
 } from "firebase/firestore";
 import router from "../../router/router";
 import SideNav from "../components/SideNav.vue";
 import StudentsPageHeader from "../components/StudentsPageHeader.vue";
 import GroupDeck from "../components/GroupDeck.vue";
-import GroupStudentView from "../components/GroupStudentView.vue";
 
 const db = getFirestore(firebaseApp);
 
-async function displayDetails() {
-  const groupObj = JSON.parse(sessionStorage.getItem("groupObj"));
-  // console.log('DOC ID: ' + grpID);
-
-  // Display Group Details
-  // const groupObj = await getDoc(doc(db, 'groups', String(grpID)));
-
-  // const groupDetails = groupObj.data();
-
-  document.getElementById("groupTitle").innerHTML =
-      groupObj["groupID"] + " " + groupObj["longName"];
-  document.getElementById("noOfStudent").innerHTML =
-      "Total Number of Students: " + groupObj["noOfStudent"];
-  document.getElementById("teacherName").innerHTML =
-      "Teacher Name: " + groupObj["teacherName"];
-  document.getElementById("teacherEmail").innerHTML =
-      "Teacher's Email: " + groupObj["teacherEmail"];
-  document.getElementById("groupDescription").innerHTML =
-      groupObj["description"];
-}
 
 export default {
   name: "View Group Deck",
@@ -157,12 +129,33 @@ export default {
     SideNav,
     StudentsPageHeader,
     GroupDeck,
-    GroupStudentView,
   },
   mounted() {
-    displayDetails();
+    const groupObj = JSON.parse(sessionStorage.getItem("groupObj"));
+    this.groupId = String(groupObj["groupID"])
+    this.displayDetails();
   },
   methods: {
+    async displayDetails() {
+      const groupObj = JSON.parse(sessionStorage.getItem("groupObj"));
+      // console.log('DOC ID: ' + grpID);
+
+      // Display Group Details
+      const groupTemp = await getDoc(doc(db, 'groups', String(groupObj["groupID"])));
+
+      const groupDetails = groupTemp.data();
+
+      document.getElementById("groupTitle").innerHTML =
+          groupObj["groupID"] + " " + groupObj["longName"];
+      document.getElementById("noOfStudent").innerHTML =
+          "Total Number of Students: " + groupDetails.noOfStudent;
+      document.getElementById("teacherName").innerHTML =
+          "Teacher Name: " + groupObj["teacherName"];
+      document.getElementById("teacherEmail").innerHTML =
+          "Teacher's Email: " + groupObj["teacherEmail"];
+      document.getElementById("groupDescription").innerHTML =
+          groupObj["description"];
+    },
     async deleteGroup() {
       try {
         const groupObj = JSON.parse(
@@ -184,6 +177,25 @@ export default {
         console.log(error);
       }
     },
+    async addStudents() {
+      try {
+        await router.push({ name: "addStudent" });
+      } catch (error) {
+        console.log(error);
+      }
+    },
+    async createGroupDeck() {
+      try {
+        await router.push({ name: "CreateGroupDeck" });
+      } catch (error) {
+        console.log(error);
+      }
+    }
+  },
+  data(){
+    return{
+      groupId:null
+    }
   },
   props: ["MyDashboard"],
 };

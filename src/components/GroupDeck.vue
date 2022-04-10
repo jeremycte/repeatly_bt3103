@@ -144,12 +144,11 @@
 	let authEmail = "";
 	const prevPath = null;
 	console.log("Router: " + prevPath);
-	const groupObj = JSON.parse(sessionStorage.getItem("groupObj"));
 
-	async function getCardDetails() {
+	async function getCardDetails(groupId) {
 		// const groupObj = JSON.parse(sessionStorage.getItem("groupObj"));
 		let userDecks = await getDocs(
-			collection(db, "groups", groupObj["groupID"], "decks")
+			collection(db, "groups", groupId, "decks")
 		);
 		if (!userDecks.empty) {
 			userDecks.forEach((docs) => {
@@ -175,166 +174,14 @@
 		}
 	}
 
-	// async function copyDeck(groupObj, deckObj) {
-	// 	var cardDict = {};
-	// 	const grpID = groupObj["groupID"];
-	// 	console.log("GROUP ID RETRIEVED: " + grpID);
-	// 	const deckSelected = deckObj;
-	// 	console.log("DECK RETRIEVED: " + deckSelected.deckId);
-	// 	try {
-	// 		const deckRef = doc(
-	// 			db,
-	// 			"groups",
-	// 			grpID,
-	// 			"decks",
-	// 			deckSelected.deckId
-	// 		);
-	// 		const selectedDeck = await getDoc(deckRef);
-	// 		console.log("Got Deck Here to Copy: " + selectedDeck);
-	// 		// console.log('Decks Exsits: ' + allDecks.exists());
-
-	// 		var deckIndex = 1;
-
-	// 		console.log("Checkpoint 1");
-	// 		let currDeck = selectedDeck.data();
-	// 		let deckKey = "d" + String(deckIndex);
-	// 		cardDict[deckKey] = { data: currDeck, cards: {} };
-	// 		console.log("Checkpoint 2");
-	// 		// Get Cards in the Deck
-	// 		const q2 = query(
-	// 			collection(
-	// 				db,
-	// 				"groups",
-	// 				grpID,
-	// 				"decks",
-	// 				deckSelected.deckId,
-	// 				"cards"
-	// 			)
-	// 		);
-	// 		const allCards = await getDocs(q2);
-	// 		var cardIndex = 1;
-	// 		for (const card of allCards.docs) {
-	// 			console.log("Checkpoint 3");
-	// 			let currCard = card.data();
-	// 			let cardKey = "c" + String(cardIndex);
-	// 			cardDict[deckKey]["cards"][cardKey] = currCard;
-	// 			cardIndex++;
-	// 		}
-	// 		deckIndex++;
-
-	// 		console.log(
-	// 			"Deck copying from " + grpID + " completed successfully"
-	// 		);
-	// 		return cardDict;
-	// 	} catch (error) {
-	// 		console.log("Failed to copy " + grpID + " decks");
-	// 		console.log(error);
-	// 	}
-	// }
-
-	// async function copy(groupObj, deckObj) {
-	// 	// Copy existing groups deck into users account
-	// 	try {
-	// 		const groupDecks = await copyDeck(groupObj, deckObj);
-	// 		console.log("Copy Deck Done!");
-	// 		let totalDecks = Object.keys(groupDecks).length;
-	// 		for (let i = 1; i <= totalDecks; i++) {
-	// 			var currDeck = "d" + String(i);
-	// 			var deckData = groupDecks[currDeck]["data"];
-	// 			console.log("Current Deck " + currDeck + " Done!");
-
-	// 			// Add Deck
-	// 			try {
-	// 				let newDeckAdded = {};
-	// 				const copyDeckRef = doc(
-	// 					db,
-	// 					"groups",
-	// 					groupObj.groupID,
-	// 					"decks",
-	// 					deckObj.deckId
-	// 				);
-	// 				// const deckRef = query(
-	// 				// 	collection(db, "groups", authEmail, "decks"),
-	// 				// 	where("title", "==", deckObj.title)
-	// 				// );
-
-	// 				// const groupSnap = await getDocs(deckRef);
-	// 				// console.log("GET GET! : " + groupSnap.empty);
-	// 				// console.log("REF! : " + JSON.stringify(groupSnap));
-
-	// 				// if (groupSnap != null) {
-	// 				// 	console.log("Deck exists: " + true);
-	// 				// 	return;
-	// 				// } else {
-	// 				newDeckAdded = await addDoc(
-	// 					collection(db, "users", authEmail, "decks"),
-	// 					{
-	// 						title: deckData.title,
-	// 						tag: deckData.tag,
-	// 						description: deckData.description,
-	// 						estimatedTime: deckData.estimatedTime,
-	// 						needsRecapping: 0,
-	// 						totalCards: deckData.totalCards,
-	// 						uncertainCards: 0,
-	// 						isGroupDeck: true,
-	// 						originalRef: copyDeckRef,
-	// 					}
-	// 				);
-	// 				// Add Cards (if any)
-	// 				if ("cards" in groupDecks[currDeck]) {
-	// 					let totalCards = Object.keys(
-	// 						groupDecks[currDeck]["cards"]
-	// 					).length;
-	// 					console.log("NEW DECK ID: " + newDeckAdded.id);
-	// 					for (let j = 1; j <= totalCards; j++) {
-	// 						var currCard = "c" + String(j);
-	// 						var cardData =
-	// 							groupDecks[currDeck]["cards"][currCard];
-	// 						const newCardAdded = await addDoc(
-	// 							collection(
-	// 								db,
-	// 								"users",
-	// 								authEmail,
-	// 								"decks",
-	// 								newDeckAdded.id,
-	// 								"cards"
-	// 							),
-	// 							{
-	// 								question: cardData.question,
-	// 								answer: cardData.answer,
-	// 								title: cardData.title,
-	// 								boxType: 1,
-	// 								firstAnswered: false,
-	// 								isWrong: false,
-	// 							}
-	// 						);
-	// 						console.log("NEW CARD ID: " + newCardAdded.id);
-	// 					}
-	// 					// }
-	// 				}
-	// 				console.log("Deck Imported Successfully!");
-	// 				VueSimpleAlert.fire({
-	// 					type: "success",
-	// 					title: "Deck Imported Successfully!",
-	// 				});
-	// 			} catch (error) {
-	// 				console.log("Add Deck Error!");
-	// 				console.log(error);
-	// 			}
-	// 		}
-	// 	} catch (error) {
-	// 		console.log("Import Deck Failed");
-	// 		console.log(error);
-	// 	}
-	// }
-
 	export default {
 		name: "CardDeck",
 		methods: {
 			async getData() {
 				onAuthStateChanged(auth, async (user) => {
 					if (user) {
-						await getCardDetails();
+            console.log(this.groupId)
+						await getCardDetails(this.groupId);
 						this.randomImage();
 						this.documents = refDoc;
 						this.intemediateDoc = [];
@@ -373,6 +220,7 @@
 					this.documents = [];
 					this.intemediateDoc = [];
 					this.getData();
+          this.loading = true;
 				}
 			});
 		},
@@ -400,7 +248,7 @@
 				vm.prevRoute = from;
 			});
 		},
-		props: ["textVal", "visibility"],
+		props: ["textVal", "visibility","groupId"],
 	};
 </script>
 

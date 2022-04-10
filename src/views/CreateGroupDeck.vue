@@ -1,310 +1,270 @@
 <template>
-  <div class="container-center-classNameontal">
-    <SideNav/>
-
-    <div class="students-screen">classNameStudentsPageHeader :dashboardTitle="MyDashboard" />
-      <div class="study-deck-inner" className
-      <div class="deck-cards-info">className
-        <div
-            class="card-title inter-classNamebold-heavy-metal-36px"
-            id="groupTitle"
-        >
-          Title
+  <div class="container-center-horizontal">
+    <SideNav />
+    <div class="student-dashboard-homepage screen">
+      <Header2 :dashboardTitle="MyDashboard"/>
+      <div class="create-deck-overlap-group">
+        <div class="overlap-group-createdeck">
+          <img class="illustration" src="../../img/Dashboard/history-illustrations.png" />
+          <div class="overlap-group-nameUrDeck border-1px-quick-silver">
+            <input
+                class="createDeck inter-normal-silver-chalice-30px"
+                id="deckName"
+                name="nameyourdeck"
+                placeholder="Name your deck"
+                type="text"
+                required
+            />
+          </div>
+          <div class="overlap-group-createdeckTag border-1px-quick-silver">
+            <input
+                class="createDeck inter-normal-silver-chalice-30px"
+                id="deckTag"
+                name="decktag"
+                placeholder="Deck Tag e.g. Sem 1"
+                type="text"
+                required
+            />
+          </div>
+          <div class="overlap-group-txtareaCreateDeck border-1px-quick-silver">
+            <textarea class="deck-description" id="description" name="deckdescription" placeholder="Deck Description" type="text"></textarea>
+          </div>
+          <button class="add-student-createdeckbtn" v-on:click="save()">
+            <div class="frame-1-createdeck">
+              <h1 class="createdeck-titleBtn inter-semi-bold-white-28px">Create Deck</h1>
+            </div>
+          </button>
         </div>
-        <br/><br/>
-        <div class="flex-row-cards-inclassName						<div
-							class=" total-cards interclassName-bold-blue-25px
-        "
-        id="teacherName"
-        >
-        Teacher Name:
-      </div>
-      <div
-          class="uncertain-cards iclassNamesemi-bold-blue-25px"
-          id="teacherEmail"
-      >
-        Teacher's Email:
       </div>
     </div>
-    <div
-        class="estimated-time inclassNameemi-bold-heavy-metal-25px"
-        id="noOfStudent"
-    >
-      Total Number of Students:
-    </div>
-    <br/><br/>
-  </div>
-  <button
-      class="deleteCardDeckbtnclassName		id=" deleteGroup
-  "
-  v-on:click="deleteGroup()"
-  >
-  <div class="frame-1-delanswerclassName					<h1
-							class=" studydeck-titleBtclassNameer-semi-bold-white-28px
-  "
-  >
-  Delete
-  </h1>
-  </div>
-  </button>
-  </div>
-  <div
-      class="view-card-descripclassNametitle inter-semi-bold-heavy-metal-36px"
-  >
-    Group Description
-  </div>
-  <div
-      class="view-card-descripclassNameinter-semi-bold-heavy-metal-25px"
-      id="groupDescription"
-  >
-    Group Description
-  </div>
-  <br/><br/>
-  <div class="viewCardDeckBtns" className
-  <button class="editBtn" v-on:cliclassNameditDeck()
-  ">
-  <div class="frame-1-editansweclassName						<h1
-							class=" studydeck-titleBtclassNameer-semi-bold-white-28px
-  "
-  >
-  Edit Group
-  </h1>
-  </div>
-  </button>
-  </div>
-  <div
-      class="view-card-descripclassNametitle inter-semi-bold-heavy-metal-36px"
-  >
-    Decks
-  </div>
-  <GroupDeck/>
-  <br/><br/>
-  <div
-      class="view-card-descripclassNametitle inter-semi-bold-heavy-metal-36px"
-  >
-    Students
-  </div>
-  <GroupStudentView/>
-  <br/><br/>
-  </div>
   </div>
 </template>
 
 <script>
+import SideNav from "../components/SideNav.vue"
+import Header2 from "../components/Header2.vue"
 import firebaseApp from "@/firebaseDetails";
-import {
-  // collection,
-  doc,
-  // getDoc,
-  // getDocs,
-  deleteDoc,
-  getFirestore,
-} from "firebase/firestore";
-import router from "../../router/router";
-import SideNav from "../components/SideNav.vue";
-import StudentsPageHeader from "../components/StudentsPageHeader.vue";
-import GroupDeck from "../components/GroupDeck.vue";
-import GroupStudentView from "../components/GroupStudentView.vue";
+import {collection,addDoc,getFirestore} from "firebase/firestore";
+import VueSimpleAlert from "vue-simple-alert";
 
 const db = getFirestore(firebaseApp);
-
-async function displayDetails() {
-  const groupObj = JSON.parse(sessionStorage.getItem("groupObj"));
-  // console.log('DOC ID: ' + grpID);
-
-  // Display Group Details
-  // const groupObj = await getDoc(doc(db, 'groups', String(grpID)));
-
-  // const groupDetails = groupObj.data();
-
-  document.getElementById("groupTitle").innerHTML =
-      groupObj["groupID"] + " " + groupObj["longName"];
-  document.getElementById("noOfStudent").innerHTML =
-      "Total Number of Students: " + groupObj["noOfStudent"];
-  document.getElementById("teacherName").innerHTML =
-      "Teacher Name: " + groupObj["teacherName"];
-  document.getElementById("teacherEmail").innerHTML =
-      "Teacher's Email: " + groupObj["teacherEmail"];
-  document.getElementById("groupDescription").innerHTML =
-      groupObj["description"];
-}
-
 export default {
-  name: "View Group Deck",
+
+  name: "CreateDeck",
   components: {
-    SideNav,
-    StudentsPageHeader,
-    GroupDeck,
-    GroupStudentView,
+    Header2,
+    SideNav
   },
-  mounted() {
-    displayDetails();
+  mounted(){
+    this.pressed = false
+  },
+  data(){
+    return{
+      pressed:false,
+    }
   },
   methods: {
-    async deleteGroup() {
-      try {
-        const groupObj = JSON.parse(
-            sessionStorage.getItem("groupObj")
-        );
-        alert("You are going to delete " + groupObj["groupID"]);
-        await deleteDoc(doc(db, "groups", groupObj["groupID"]));
-        console.log("Group Deleted Successfully");
-        await this.$router.push({name: "Groups"});
-      } catch (error) {
-        console.log("Group Deletion Error");
-        console.log(error);
+    async save(){
+      try{
+        const groupObj = JSON.parse(sessionStorage.getItem("groupObj"));
+
+        if (!this.pressed){
+          const groupId = String(groupObj["groupID"])
+          const title = document.getElementById("deckName").value;
+          const Title = title.charAt(0).toUpperCase() + title.slice(1);
+          const tag = document.getElementById("deckTag").value;
+          const Tag = tag.charAt(0).toUpperCase() + tag.slice(1);
+          const descrip = document.getElementById("description").value
+
+          if (title === '' || tag ==='' || descrip === ''){
+            VueSimpleAlert.fire({
+              type: 'info',
+              title: 'There are empty fields, please fill them up',
+              timer: 3000,
+            })
+          } else {
+            await addDoc(collection(db,"groups",groupId,"decks"),
+                {
+                  title: Title,
+                  tag: Tag,
+                  description: descrip,
+                  estimatedTime: 0,
+                  needsRecapping: 0,
+                  totalCards: 0,
+                  uncertainCards: 0,
+                })
+            document.getElementById("deckName").value = "";
+            document.getElementById("deckTag").value = "";
+            document.getElementById("description").value="";
+            VueSimpleAlert.fire({
+              type: 'success',
+              title: 'Successfully Created '+ Title +' Card Deck',
+              // footer: '<a href>Why do I have this issue?</a>'
+            }).then(() => {
+              this.$router.push({name: "View Group Deck"})
+            });
+          }
+          this.pressed = true;
+        }
+      }catch(error){
+        console.log(error)
+        await VueSimpleAlert.fire({
+          type: 'error',
+          title: 'Create Deck Failed',
+          text: 'Refer to error message below',
+          footer: '<p>' + error + '</p>'
+        })
+        console.log("create deck failed")
       }
     },
-    async editDeck() {
-      try {
-        await router.push({name: "editGroup"});
-      } catch (error) {
-        console.log(error);
-      }
-    },
+    async back(){
+      await this.$router.push({name: "View Group Deck"})
+    }
   },
-  props: ["MyDashboard"],
+  props: [
+    "MyDashboard"
+  ]
 };
 </script>
 
-<style scoped>
-.students-screen {
-  margin-left: 290px;
-}
 
-.study-deck-inner {
-  display: flex;
-  justify-content: space-between;
-}
-
-.view-card-description {
-  margin-left: 32px;
-  margin-bottom: 20px;
-  width: 1350px;
-}
-
-.view-card-description-title {
-  margin-left: 32px;
-  margin-top: 20px;
-  margin-bottom: 20px;
-}
-
-.deck-cards-info {
+<style>
+.create-deck-overlap-group {
   align-items: flex-start;
-  align-self: flex-end;
+  display: flex;
+  height: 856px;
+  min-width: 1491px;
+}
+
+.overlap-group-createdeck {
+  align-items: flex-end;
+  background-color: var(--humming-bird);
+  border-radius: 40px;
+  box-shadow: 0px 2px 8px
+  #00000022;
   display: flex;
   flex-direction: column;
-  margin-left: 2em;
-  margin-top: 1em;
-  min-height: 153px;
-  width: 726px;
+  margin-left: -1px;
+  margin-top: 10px;
+  min-height: 858px;
+  padding: 31px 384.3px;
+  position: relative;
+  width: 1487px;
 }
 
-.card-title {
-  letter-spacing: 0;
-  line-height: 50.4px;
-  min-height: 50px;
-  white-space: nowrap;
-}
-
-.headerDashboardTitle {
-  margin-left: 2em;
-}
-
-.questions {
-  margin-top: 1em;
-}
-
-.flex-row-cards-info {
+.overlap-group-nameUrDeck {
   align-items: flex-start;
+  background-color: var(--white);
+  border-radius: 20px;
+  box-shadow: 0px 2px 8px
+  #00000022;
   display: flex;
-  height: 36px;
-  margin-top: 13px;
-  min-width: 716px;
-}
-
-.total-cards {
-  letter-spacing: 0;
-  line-height: 35px;
-  min-height: 35px;
-  min-width: 181px;
-  white-space: nowrap;
-}
-
-.needs-recaping {
-  letter-spacing: 0;
-  line-height: 35px;
-  margin-left: 41px;
-  min-height: 35px;
-  min-width: 226px;
-  white-space: nowrap;
-}
-
-.uncertain-cards {
-  align-self: flex-end;
-  letter-spacing: 0;
-  line-height: 35px;
-  margin-left: 41px;
-  min-height: 35px;
-  min-width: 227px;
-  white-space: nowrap;
-}
-
-.estimated-time {
-  letter-spacing: 0;
-  line-height: 35px;
-  margin-top: 19px;
-  min-height: 35px;
-  white-space: nowrap;
-}
-
-.deleteCardDeckbtn {
-  background-color: var(--red);
-  border-color: transparent;
-  border-radius: 25px;
   height: 74px;
-  width: 200px;
-  cursor: pointer;
-  align-items: flex-start;
-  box-shadow: 0px 2px 8px #00000022;
-  margin-top: 50px;
-  display: flex;
-  margin-left: 10em;
-}
-
-.frame-1-delanswers {
-  border-radius: 25px;
-  display: flex;
-  align-items: flex-start;
   margin-top: 29px;
-  margin-left: 4em;
-  margin-top: 21.7px;
+  min-width: 718px;
+  padding: 15px 20.2px;
 }
 
-.viewCardDeckBtns {
-  display: flex;
+.createDeck {
+  background-color: transparent;
+  border: 0;
+  height: 42px;
+  letter-spacing: 0;
+  line-height: 42px;
+  padding: 0;
+  white-space: nowrap;
+  font-family: var(--font-family-inter);
+  font-size: var(--font-size-l);
+  width: 418px;
 }
 
-.frame-1-editanswers {
-  border-radius: 25px;
-  display: flex;
+.createDeck::placeholder {
+  color:
+      #afafaf99;
+}
+
+.overlap-group-createdeckTag {
   align-items: flex-start;
-  margin-top: 29px;
-  margin-left: 85px;
-  margin-top: 20.7px;
-}
+  background-color: var(--white);
 
-.editBtn {
-  background-color: var(--navy-blue);
-  border-color: transparent;
-  border-radius: 25px;
+  border-radius: 20px;
+  box-shadow: 0px 2px 8px
+  #00000022;
+  display: flex;
   height: 74px;
-  width: 22em;
-  margin-left: 15em;
+  margin-top: 28px;
+  min-width: 718px;
+  padding: 15px 20.2px;
+}
+
+.overlap-group-txtareaCreateDeck {
+  align-items: flex-start;
+  background-color: var(--white);
+  border-radius: 20px;
+  box-shadow: 0px 2px 8px
+  #00000022;
+  display: flex;
+  height: 206px;
+  margin-top: 28px;
+  min-width: 718px;
+  padding: 13px 20.2px;
+}
+
+.deck-description {
+  background-color: transparent;
+  border: 0;
+  font-family: var(--font-family-inter);
+  font-size: var(--font-size-l);
+  height: 145px;
+  letter-spacing: 0;
+  line-height: 42px;
+  padding: 0;
+  width: 600px;
+}
+
+.deck-description::placeholder {
+  color: #afafaf7a;
+}
+
+.add-student-createdeckbtn {
+  background-color: var(--shamrock);
+  border-radius: 25px;
+  border: none;
+  height: 74px;
+  width: 312px;
   cursor: pointer;
   align-items: flex-start;
   box-shadow: 0px 2px 8px #00000022;
   margin-top: 29px;
+  /* min-width: 718px; */
+  margin-right: 16em;
+}
+
+.frame-1-createdeck {
+  border-radius: 25px;
   display: flex;
+  align-items: flex-start;
+  margin-top: 29px;
+  margin-left: 81.2px;
+  margin-top: 8.7px;
+  /* width: 155.43px; */
+
+}
+
+.createdeck-titleBtn {
+  height: 34px;
+  letter-spacing: 0;
+  /* margin-left: -5.8px;
+  margin-top: -1.7px; */
+  /* width: 167px; */
+}
+.illustration {
+  align-self: center;
+  background-position: 50% 50%;
+  background-size: cover;
+  height: 236px;
+  margin-left: 1px;
+  margin-top: 18px;
+  width: 236px;
 }
 </style>

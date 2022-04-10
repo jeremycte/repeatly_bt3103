@@ -3,7 +3,18 @@
 		<SideNav />
 
 		<div class="students-screen">
-			<StudentsPageHeader :dashboardTitle="MyDashboard" />
+			<div class="headerDashboardTitle">
+				<h1 class="dashboard-title inter-bold-heavy-metal-50px">
+					{{ MyDashboard }}
+				</h1>
+				<router-link to="/view-group-deck">
+					<img
+						class="crossBtnDashboard"
+						src="../../img/cross-arrow.png"
+					/>
+				</router-link>
+			</div>
+			<!-- <StudentsPageHeader :dashboardTitle="MyDashboard" /> -->
 			<div class="study-deck-inner">
 				<div class="deck-cards-info">
 					<div
@@ -49,13 +60,13 @@
 					</div>
 				</button>
 			</div>
-      <div
-          class="view-card-description-title inter-semi-bold-heavy-metal-36px"
-      >
-        Students
-      </div>
-      <GroupStudentView />
-      <br /><br />
+			<div
+				class="view-card-description-title inter-semi-bold-heavy-metal-36px"
+			>
+				Students
+			</div>
+			<GroupStudentView />
+			<br /><br />
 
 			<div
 				class="view-card-description-title inter-semi-bold-heavy-metal-36px"
@@ -111,19 +122,20 @@
 
 <script>
 	import firebaseApp from "@/firebaseDetails";
-  import {
-    // collection,
-    doc,
-    // getDoc,
-    // getDocs,
-    deleteDoc,
-    getFirestore,
-    updateDoc, getDoc,
-  } from "firebase/firestore";
+	import {
+		// collection,
+		doc,
+		// getDoc,
+		// getDocs,
+		deleteDoc,
+		getFirestore,
+		updateDoc,
+		getDoc,
+	} from "firebase/firestore";
 	import router from "../../router/router";
 	import SideNav from "../components/SideNav.vue";
-	import StudentsPageHeader from "../components/StudentsPageHeader.vue";
-  import GroupStudentView from "../components/GroupStudentView.vue";
+	// import StudentsPageHeader from "../components/StudentsPageHeader.vue";
+	import GroupStudentView from "../components/GroupStudentView.vue";
 	// import GroupDeck from "../components/GroupDeck.vue";
 	// import GroupStudentView from "../components/GroupStudentView.vue";
 
@@ -134,7 +146,9 @@
 		// console.log('DOC ID: ' + grpID);
 
 		// Display Group Details
-		const groupTemp = await getDoc(doc(db, 'groups', String(groupObj["groupID"])));
+		const groupTemp = await getDoc(
+			doc(db, "groups", String(groupObj["groupID"]))
+		);
 
 		const groupDetails = groupTemp.data();
 
@@ -154,7 +168,7 @@
 		name: "View Group Deck",
 		components: {
 			SideNav,
-			StudentsPageHeader,
+			// StudentsPageHeader,
 			// GroupDeck,
 			GroupStudentView,
 		},

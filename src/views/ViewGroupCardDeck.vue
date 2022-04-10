@@ -7,7 +7,7 @@
 				<h1 class="dashboard-title inter-bold-heavy-metal-50px">
 					{{ MyDashboard }}
 				</h1>
-				<router-link to="/home">
+				<router-link to="/view-group-deck">
 					<img
 						class="crossBtnDashboard"
 						src="../../img/cross-arrow.png"
@@ -412,15 +412,13 @@
 				if (user) {
 					authEmail = user.email;
 					console.log(authEmail);
-					const deckObj = JSON.parse(
-						sessionStorage.getItem("deckObj")
-					);
-					refDoc = [];
-					this.displayCards(deckObj);
 					const tempRole = await getRole(user.email);
 					this.role = tempRole;
 				}
 			});
+			const deckObj = JSON.parse(sessionStorage.getItem("deckObj"));
+			refDoc = [];
+			this.displayCards(deckObj);
 		},
 		data() {
 			return {
@@ -481,7 +479,7 @@
 			},
 			async copyDeck() {
 				const deckObj = JSON.parse(sessionStorage.getItem("deckObj"));
-        const groupObj = JSON.parse(sessionStorage.getItem("groupObj"));
+				const groupObj = JSON.parse(sessionStorage.getItem("groupObj"));
 				console.log("Copying: " + deckObj["deckId"]);
 				await copy(groupObj, deckObj);
 			},

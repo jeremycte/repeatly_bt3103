@@ -8,7 +8,7 @@
     </div>
   </div>
   <div class="container-center-horizontal-forgetpasswordmain">
-    <div class="forget-password-screen-forgetpasswordmain">
+    <div class="forget-password screen-forgetpasswordmain">
       <div class="overlap-group3-forgetpasswordmain">
         <div class="overlap-group2-forgetpasswordmain">
           <router-link to="/">
@@ -31,7 +31,7 @@
                     <input
                         class="placeholder-value-emailsubsection inter-normal-silver-chalice-28px"
                         name= "placeholdervalue"
-                        placeholder="Type your email or username"
+                        placeholder="Type your email"
                         type="email"
                         id="email"
                         v-model="email" 
@@ -114,6 +114,14 @@ export default {
 </script>
 
 <style>
+.forget-password {
+  align-items: flex-start;
+  background-color: var(--sauvignon);
+  display: flex;
+  height: 972px;
+  /* overflow: hidden; */
+  width: 1920px;
+}
 .login-registration-side-header, .repeatly-logo-header {
   position: absolute;
   display: flex;
@@ -149,15 +157,6 @@ export default {
   letter-spacing: 0;
   margin-top: 14px;
   width: 598px;
-}
-
-.forget-password {
-  align-items: flex-start;
-  background-color: var(--sauvignon);
-  display: flex;
-  height: 1024px;
-  overflow: hidden;
-  width: 1440px;
 }
 
 .logo-icon-login-header {

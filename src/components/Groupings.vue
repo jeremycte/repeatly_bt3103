@@ -272,6 +272,10 @@ export default {
   width: 726px;
 }
 
+div:hover, div:visited, div:hover, div:active {
+  text-decoration: none;
+}
+
 .GroupTitle {
   letter-spacing: 0;
   line-height: 50.4px;

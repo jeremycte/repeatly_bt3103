@@ -414,11 +414,15 @@
 					console.log(authEmail);
 					const tempRole = await getRole(user.email);
 					this.role = tempRole;
+					const deckObj = JSON.parse(sessionStorage.getItem("deckObj"));
+					refDoc = [];
+					this.displayCards(deckObj);
 				}
+				else {
+					router.push('/sign-in')
+				} 
 			});
-			const deckObj = JSON.parse(sessionStorage.getItem("deckObj"));
-			refDoc = [];
-			this.displayCards(deckObj);
+			
 		},
 		data() {
 			return {
@@ -626,7 +630,7 @@
 		display: flex;
 		align-items: flex-start;
 		margin-top: 29px;
-		margin-left: 71px;
+		margin-left: 84px;
 		margin-top: 20.7px;
 	}
 
@@ -664,7 +668,7 @@
 		border-radius: 25px;
 		height: 74px;
 		width: 22em;
-		margin-left: 15em;
+		margin-left: 29em;
 		cursor: pointer;
 		align-items: flex-start;
 		box-shadow: 0px 2px 8px #00000022;

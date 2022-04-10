@@ -350,6 +350,7 @@
     font-size: var(--font-size-xl2);
     font-style: normal;
     font-weight: 600;
+    text-decoration: none;
   }
 
   .inter-semi-bold-blue-25px {

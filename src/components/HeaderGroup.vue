@@ -14,10 +14,6 @@
         <img class="icon-image" src="../../img/search2.png" />
     </button> -->
     <!-- </button> -->
-    
-    <router-link to="/create-group">
-      <img class="addBtnDashboard" src="../../img/add.svg" />
-    </router-link>
   </div>
 </template>
 

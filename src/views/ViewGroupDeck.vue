@@ -89,11 +89,11 @@
 				</button>
 
 				<button
-					class="createBtn"
+					class="createDeckBtn"
 					v-if="role == 'teacher'"
 					v-on:click="createGroupDeck()"
 				>
-					<div class="frame-1-editanswers">
+					<div class="frame-2-editanswers">
 						<h1
 							class="studydeck-titleBtn inter-semi-bold-white-28px"
 						>
@@ -107,7 +107,7 @@
 					v-if="role == 'teacher'"
 					v-on:click="addStudents()"
 				>
-					<div class="frame-1-editanswers">
+					<div class="frame-3-editanswers">
 						<h1
 							class="studydeck-titleBtn inter-semi-bold-white-28px"
 						>
@@ -168,15 +168,19 @@
 			GroupDeck,
 		},
 		mounted() {
-			const groupObj = JSON.parse(sessionStorage.getItem("groupObj"));
-			this.groupId = String(groupObj["groupID"]);
-			this.displayDetails();
 			onAuthStateChanged(auth, async (user) => {
 				if (user) {
 					const tempRole = await getRole(user.email);
 					this.role = tempRole;
+					const groupObj = JSON.parse(sessionStorage.getItem("groupObj"));
+					this.groupId = String(groupObj["groupID"]);
+					this.displayDetails();
+				} else {
+					router.push('/sign-in')
 				}
 			});
+			
+			
 		},
 		methods: {
 			async displayDetails() {
@@ -191,7 +195,7 @@
 				const groupDetails = groupTemp.data();
 
 				document.getElementById("groupTitle").innerHTML =
-					groupObj["groupID"] + " " + groupObj["longName"];
+					"GroupID: " +groupObj["groupID"] + "  | \nGroup Name:" + groupObj["longName"];
 				document.getElementById("noOfStudent").innerHTML =
 					"Total Number of Students: " + groupDetails.noOfStudent;
 				document.getElementById("teacherName").innerHTML =
@@ -270,7 +274,7 @@
 
 	.view-card-description {
 		margin-left: 32px;
-		margin-bottom: 20px;
+		margin-bottom: 10px;
 		width: 1350px;
 	}
 	.view-card-description-title {
@@ -295,6 +299,8 @@
 		line-height: 50.4px;
 		min-height: 50px;
 		white-space: nowrap;
+		text-decoration: none;
+		text-decoration-line: none;
 	}
 
 	.headerDashboardTitle {
@@ -362,6 +368,51 @@
 		margin-left: 10em;
 	}
 
+	.createDeckBtn {
+		background-color: var(--shamrock);
+		border-color: transparent;
+		border-radius: 25px;
+		height: 74px;
+		width: 22em;
+		margin-left: 8em;
+		cursor: pointer;
+		align-items: flex-start;
+		box-shadow: 0px 2px 8px #00000022;
+		margin-top: 29px;
+		display: flex;
+	}
+
+	.frame-2-editanswers {
+		border-radius: 25px;
+		display: flex;
+		align-items: flex-start;
+		margin-left: 71px;
+		margin-top: 20.7px;
+
+	}
+
+	.frame-3-editanswers {
+		border-radius: 25px;
+		display: flex;
+		align-items: flex-start;
+		margin-left: 65px;
+		margin-top: 20.7px;
+	}
+
+	.createBtn {
+		background-color: var(--dull-lavender);
+		border-color: transparent;
+		border-radius: 25px;
+		height: 74px;
+		width: 22em;
+		margin-left: 11em;
+		cursor: pointer;
+		align-items: flex-start;
+		box-shadow: 0px 2px 8px #00000022;
+		margin-top: 29px;
+		display: flex;
+	}
+
 	.frame-1-delanswers {
 		border-radius: 25px;
 		display: flex;
@@ -390,7 +441,7 @@
 		border-radius: 25px;
 		height: 74px;
 		width: 22em;
-		margin-left: 15em;
+		margin-left: 2em;
 		cursor: pointer;
 		align-items: flex-start;
 		box-shadow: 0px 2px 8px #00000022;

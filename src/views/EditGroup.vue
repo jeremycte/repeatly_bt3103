@@ -90,11 +90,12 @@
 				</div>
 				<br /><br />
 				<textarea
-					class="textwrapper"
+					class="textwrapper deck-description inter-semi-bold-heavy-metal-25px"
 					name="groupDescription"
 					id="editedGroupDescription"
 					cols="40"
 					rows="5"
+					placeholder="Edit your deck description here"
 				></textarea>
 				<br /><br />
 			</div>
@@ -137,6 +138,7 @@
 	import SideNav from "../components/SideNav.vue";
 	// import StudentsPageHeader from "../components/StudentsPageHeader.vue";
 	import GroupStudentView from "../components/GroupStudentView.vue";
+	
 	// import GroupDeck from "../components/GroupDeck.vue";
 	// import GroupStudentView from "../components/GroupStudentView.vue";
 
@@ -154,7 +156,7 @@
 		const groupDetails = groupTemp.data();
 
 		document.getElementById("groupTitle").innerHTML =
-			groupObj["groupID"] + " " + groupObj["longName"];
+			"GroupID: " +groupObj["groupID"] + "  | \nGroup Name:" + groupObj["longName"];
 		document.getElementById("noOfStudent").innerHTML =
 			"Total Number of Students: " + groupDetails.noOfStudent;
 		document.getElementById("teacherName").innerHTML =
@@ -190,12 +192,22 @@
 					await updateDoc(updateRef, {
 						description: groupDescription,
 					});
-					document.getElementById("editedGroupDescription").value =
-						"";
-					await this.$router.push({ name: "ViewGroupDeck" });
+					document.getElementById("editedGroupDescription").value = "";
+					VueSimpleAlert.fire({
+						type: 'success',
+						title: 'Group Description Updated!',
+						text: 'Thanks for updating it!',
+					}).then(() => {
+						this.$router.push({ name: "ViewGroupDeck" });
+					})
+					
 				} catch (error) {
-					console.log("Edit group failed");
-					console.log(error);
+					VueSimpleAlert.fire({
+						type: 'error',
+						title: 'Edit Group Failed',
+						text: 'Please try again',
+						footer: '<p>' + error +'</p>',
+					})
 				}
 			},
 			async deleteGroup() {
@@ -237,6 +249,23 @@
 </script>
 
 <style scoped>
+
+	.deck-description {
+		background-color: transparent;
+		border: 0;
+		font-family: var(--font-family-inter);
+		font-size: var(--font-size-l);
+		height: 145px;
+		letter-spacing: 0;
+		line-height: 42px;
+		padding: 0;
+		width: 1026px;
+		border-radius: 20px;
+		box-shadow: 0px 2px 8px #00000022;  	
+	}
+	.student-container, .students {
+		margin-left: 1.2em;
+	}
 	.students-screen {
 		margin-left: 290px;
 	}
@@ -357,7 +386,7 @@
 		display: flex;
 		align-items: flex-start;
 		margin-top: 29px;
-		margin-left: 85px;
+		margin-left: 76px;
 		margin-top: 20.7px;
 	}
 
@@ -367,7 +396,7 @@
 		border-radius: 25px;
 		height: 74px;
 		width: 22em;
-		margin-left: 15em;
+		margin-left: 2em;
 		cursor: pointer;
 		align-items: flex-start;
 		box-shadow: 0px 2px 8px #00000022;
@@ -382,5 +411,6 @@
 		border: 1px solid #999999;
 		margin: 5px 0;
 		padding: 3px;
+		margin-left: 1em
 	}
 </style>

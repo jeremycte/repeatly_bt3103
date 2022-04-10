@@ -129,6 +129,6 @@
 		background-color: #d1f5ed;
 	}
 	.student-container:nth-child(odd) {
-		background-color: #a786f3;
+		background-color: var(--navy-blue);
 	}
 </style>

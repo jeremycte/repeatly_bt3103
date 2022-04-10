@@ -402,7 +402,7 @@
 	}
 
 	export default {
-		name: "ViewCardDeck",
+		name: "ViewGroupCardDeck",
 		components: {
 			SideNav,
 		},

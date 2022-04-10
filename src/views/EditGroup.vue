@@ -132,6 +132,7 @@
 		updateDoc,
 		getDoc,
 	} from "firebase/firestore";
+	import VueSimpleAlert from "vue-simple-alert";
 	import router from "../../router/router";
 	import SideNav from "../components/SideNav.vue";
 	// import StudentsPageHeader from "../components/StudentsPageHeader.vue";
@@ -165,7 +166,7 @@
 	}
 
 	export default {
-		name: "View Group Deck",
+		name: "EditGroup",
 		components: {
 			SideNav,
 			// StudentsPageHeader,
@@ -191,7 +192,7 @@
 					});
 					document.getElementById("editedGroupDescription").value =
 						"";
-					await this.$router.push({ name: "Groups" });
+					await this.$router.push({ name: "ViewGroupDeck" });
 				} catch (error) {
 					console.log("Edit group failed");
 					console.log(error);
@@ -202,11 +203,23 @@
 					const groupObj = JSON.parse(
 						sessionStorage.getItem("groupObj")
 					);
-					alert("You are going to delete " + groupObj["groupID"]);
-					await deleteDoc(doc(db, "groups", groupObj["groupID"]));
-					console.log("Group Deleted Successfully");
-					await this.$router.push({ name: "Groups" });
+					const grpId = groupObj["groupID"];
+					VueSimpleAlert.confirm(
+						"You are going to delete " +
+							grpId +
+							". Are you sure you want to proceed?"
+					).then(() => {
+						deleteDoc(doc(db, "groups", grpId));
+						console.log("Group Deleted Successfully");
+						this.$router.push({ name: "Groups" });
+					});
 				} catch (error) {
+					VueSimpleAlert.fire({
+						type: "error",
+						title: "Delete Group Error",
+						text: "Refer to error message below",
+						footer: "<p>" + error + "</p>",
+					});
 					console.log("Group Deletion Error");
 					console.log(error);
 				}

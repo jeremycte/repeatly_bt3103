@@ -2,9 +2,9 @@
 	<!-- <div class="student-dashboard-homepage screen"> -->
 	<div class="deck-card-group">
 		<div class="background-dashboard"></div>
-		<!-- <router-link to="/view-card-deck"> -->
-		<template v-if="loading">
-			<!-- <template v-if="checkTextPresence() && visibility">
+		<router-link to="/view-group-card-deck">
+			<template v-if="loading">
+				<!-- <template v-if="checkTextPresence() && visibility">
 					<div
 						class="purple-deck"
 						v-for="(item, index) in intemediateDoc"
@@ -65,69 +65,69 @@
 						</div>
 					</div>
 				</template> -->
-			<!-- <template v-else> -->
-			<div
-				class="purple-deck"
-				v-for="(item, index) in documents"
-				:key="item"
-				@click="displaySelectedItem(index, documents)"
-			>
+				<!-- <template v-else> -->
 				<div
-					class="illustration"
-					id="imageDeck"
-					:style="randomImage()"
-				/>
-				<div class="overlay-deck">
-					<div class="deck-cards-info">
-						<div
-							class="card-title inter-semi-bold-heavy-metal-36px"
-							id="Deck Title"
-						>
-							{{ item["title"] }}
-						</div>
-						<div class="flex-row-cards-info">
+					class="purple-deck"
+					v-for="(item, index) in documents"
+					:key="item"
+					@click="displaySelectedItem(index, documents)"
+				>
+					<div
+						class="illustration"
+						id="imageDeck"
+						:style="randomImage()"
+					/>
+					<div class="overlay-deck">
+						<div class="deck-cards-info">
 							<div
-								class="total-cards inter-semi-bold-heavy-metal-25px"
-								id="totalCards"
+								class="card-title inter-semi-bold-heavy-metal-36px"
+								id="Deck Title"
 							>
-								Total Cards: {{ item["totalCards"] }}
+								{{ item["title"] }}
+							</div>
+							<div class="flex-row-cards-info">
+								<div
+									class="total-cards inter-semi-bold-heavy-metal-25px"
+									id="totalCards"
+								>
+									Total Cards: {{ item["totalCards"] }}
+								</div>
+								<div
+									class="needs-recaping inter-semi-bold-mustard-25px"
+									id="needsRecapping"
+								>
+									Needs Recapping:
+									{{ item["needsRecapping"] }}
+								</div>
+								<div
+									class="uncertain-cards inter-semi-bold-mexican-red-25px"
+									id="uncertainCards"
+								>
+									Uncertain Cards:
+									{{ item["uncertainCards"] }}
+								</div>
 							</div>
 							<div
-								class="needs-recaping inter-semi-bold-mustard-25px"
-								id="needsRecapping"
+								class="estimated-time inter-semi-bold-heavy-metal-25px"
+								id="estimatedTime"
 							>
-								Needs Recapping:
-								{{ item["needsRecapping"] }}
+								Estimated Time (min):
+								{{ item["estimatedTime"] }}
 							</div>
+						</div>
+						<div class="overlay-tagName">
 							<div
-								class="uncertain-cards inter-semi-bold-mexican-red-25px"
-								id="uncertainCards"
+								class="tagName inter-semi-bold-heavy-metal-23px"
+								id="tagName"
 							>
-								Uncertain Cards:
-								{{ item["uncertainCards"] }}
+								{{ item["tag"] }}
 							</div>
-						</div>
-						<div
-							class="estimated-time inter-semi-bold-heavy-metal-25px"
-							id="estimatedTime"
-						>
-							Estimated Time (min):
-							{{ item["estimatedTime"] }}
-						</div>
-					</div>
-					<div class="overlay-tagName">
-						<div
-							class="tagName inter-semi-bold-heavy-metal-23px"
-							id="tagName"
-						>
-							{{ item["tag"] }}
 						</div>
 					</div>
 				</div>
-			</div>
-			<!-- </template> -->
-		</template>
-		<!-- </router-link> -->
+				<!-- </template> -->
+			</template>
+		</router-link>
 	</div>
 	<!-- </div> -->
 </template>
@@ -135,17 +135,8 @@
 <script>
 	import firebaseApp from "@/firebaseDetails";
 	import { getAuth, onAuthStateChanged } from "firebase/auth";
-	import {
-		addDoc,
-		collection,
-		doc,
-		getDoc,
-		getDocs,
-		getFirestore,
-		query,
-		// where,
-	} from "firebase/firestore";
-	import VueSimpleAlert from "vue-simple-alert";
+	import { collection, getDocs, getFirestore } from "firebase/firestore";
+	// import VueSimpleAlert from "vue-simple-alert";
 
 	const auth = getAuth();
 	const db = getFirestore(firebaseApp);
@@ -184,158 +175,158 @@
 		}
 	}
 
-	async function copyDeck(groupObj, deckObj) {
-		var cardDict = {};
-		const grpID = groupObj["groupID"];
-		console.log("GROUP ID RETRIEVED: " + grpID);
-		const deckSelected = deckObj;
-		console.log("DECK RETRIEVED: " + deckSelected.deckId);
-		try {
-			const deckRef = doc(
-				db,
-				"groups",
-				grpID,
-				"decks",
-				deckSelected.deckId
-			);
-			const selectedDeck = await getDoc(deckRef);
-			console.log("Got Deck Here to Copy: " + selectedDeck);
-			// console.log('Decks Exsits: ' + allDecks.exists());
+	// async function copyDeck(groupObj, deckObj) {
+	// 	var cardDict = {};
+	// 	const grpID = groupObj["groupID"];
+	// 	console.log("GROUP ID RETRIEVED: " + grpID);
+	// 	const deckSelected = deckObj;
+	// 	console.log("DECK RETRIEVED: " + deckSelected.deckId);
+	// 	try {
+	// 		const deckRef = doc(
+	// 			db,
+	// 			"groups",
+	// 			grpID,
+	// 			"decks",
+	// 			deckSelected.deckId
+	// 		);
+	// 		const selectedDeck = await getDoc(deckRef);
+	// 		console.log("Got Deck Here to Copy: " + selectedDeck);
+	// 		// console.log('Decks Exsits: ' + allDecks.exists());
 
-			var deckIndex = 1;
+	// 		var deckIndex = 1;
 
-			console.log("Checkpoint 1");
-			let currDeck = selectedDeck.data();
-			let deckKey = "d" + String(deckIndex);
-			cardDict[deckKey] = { data: currDeck, cards: {} };
-			console.log("Checkpoint 2");
-			// Get Cards in the Deck
-			const q2 = query(
-				collection(
-					db,
-					"groups",
-					grpID,
-					"decks",
-					deckSelected.deckId,
-					"cards"
-				)
-			);
-			const allCards = await getDocs(q2);
-			var cardIndex = 1;
-			for (const card of allCards.docs) {
-				console.log("Checkpoint 3");
-				let currCard = card.data();
-				let cardKey = "c" + String(cardIndex);
-				cardDict[deckKey]["cards"][cardKey] = currCard;
-				cardIndex++;
-			}
-			deckIndex++;
+	// 		console.log("Checkpoint 1");
+	// 		let currDeck = selectedDeck.data();
+	// 		let deckKey = "d" + String(deckIndex);
+	// 		cardDict[deckKey] = { data: currDeck, cards: {} };
+	// 		console.log("Checkpoint 2");
+	// 		// Get Cards in the Deck
+	// 		const q2 = query(
+	// 			collection(
+	// 				db,
+	// 				"groups",
+	// 				grpID,
+	// 				"decks",
+	// 				deckSelected.deckId,
+	// 				"cards"
+	// 			)
+	// 		);
+	// 		const allCards = await getDocs(q2);
+	// 		var cardIndex = 1;
+	// 		for (const card of allCards.docs) {
+	// 			console.log("Checkpoint 3");
+	// 			let currCard = card.data();
+	// 			let cardKey = "c" + String(cardIndex);
+	// 			cardDict[deckKey]["cards"][cardKey] = currCard;
+	// 			cardIndex++;
+	// 		}
+	// 		deckIndex++;
 
-			console.log(
-				"Deck copying from " + grpID + " completed successfully"
-			);
-			return cardDict;
-		} catch (error) {
-			console.log("Failed to copy " + grpID + " decks");
-			console.log(error);
-		}
-	}
+	// 		console.log(
+	// 			"Deck copying from " + grpID + " completed successfully"
+	// 		);
+	// 		return cardDict;
+	// 	} catch (error) {
+	// 		console.log("Failed to copy " + grpID + " decks");
+	// 		console.log(error);
+	// 	}
+	// }
 
-	async function copy(groupObj, deckObj) {
-		// Copy existing groups deck into users account
-		try {
-			const groupDecks = await copyDeck(groupObj, deckObj);
-			console.log("Copy Deck Done!");
-			let totalDecks = Object.keys(groupDecks).length;
-			for (let i = 1; i <= totalDecks; i++) {
-				var currDeck = "d" + String(i);
-				var deckData = groupDecks[currDeck]["data"];
-				console.log("Current Deck " + currDeck + " Done!");
+	// async function copy(groupObj, deckObj) {
+	// 	// Copy existing groups deck into users account
+	// 	try {
+	// 		const groupDecks = await copyDeck(groupObj, deckObj);
+	// 		console.log("Copy Deck Done!");
+	// 		let totalDecks = Object.keys(groupDecks).length;
+	// 		for (let i = 1; i <= totalDecks; i++) {
+	// 			var currDeck = "d" + String(i);
+	// 			var deckData = groupDecks[currDeck]["data"];
+	// 			console.log("Current Deck " + currDeck + " Done!");
 
-				// Add Deck
-				try {
-					let newDeckAdded = {};
-					const copyDeckRef = doc(
-						db,
-						"groups",
-						groupObj.groupID,
-						"decks",
-						deckObj.deckId
-					);
-					// const deckRef = query(
-					// 	collection(db, "groups", authEmail, "decks"),
-					// 	where("title", "==", deckObj.title)
-					// );
+	// 			// Add Deck
+	// 			try {
+	// 				let newDeckAdded = {};
+	// 				const copyDeckRef = doc(
+	// 					db,
+	// 					"groups",
+	// 					groupObj.groupID,
+	// 					"decks",
+	// 					deckObj.deckId
+	// 				);
+	// 				// const deckRef = query(
+	// 				// 	collection(db, "groups", authEmail, "decks"),
+	// 				// 	where("title", "==", deckObj.title)
+	// 				// );
 
-					// const groupSnap = await getDocs(deckRef);
-					// console.log("GET GET! : " + groupSnap.empty);
-					// console.log("REF! : " + JSON.stringify(groupSnap));
+	// 				// const groupSnap = await getDocs(deckRef);
+	// 				// console.log("GET GET! : " + groupSnap.empty);
+	// 				// console.log("REF! : " + JSON.stringify(groupSnap));
 
-					// if (groupSnap != null) {
-					// 	console.log("Deck exists: " + true);
-					// 	return;
-					// } else {
-					newDeckAdded = await addDoc(
-						collection(db, "users", authEmail, "decks"),
-						{
-							title: deckData.title,
-							tag: deckData.tag,
-							description: deckData.description,
-							estimatedTime: deckData.estimatedTime,
-							needsRecapping: 0,
-							totalCards: deckData.totalCards,
-							uncertainCards: 0,
-							isGroupDeck: true,
-							originalRef: copyDeckRef,
-						}
-					);
-					// Add Cards (if any)
-					if ("cards" in groupDecks[currDeck]) {
-						let totalCards = Object.keys(
-							groupDecks[currDeck]["cards"]
-						).length;
-						console.log("NEW DECK ID: " + newDeckAdded.id);
-						for (let j = 1; j <= totalCards; j++) {
-							var currCard = "c" + String(j);
-							var cardData =
-								groupDecks[currDeck]["cards"][currCard];
-							const newCardAdded = await addDoc(
-								collection(
-									db,
-									"users",
-									authEmail,
-									"decks",
-									newDeckAdded.id,
-									"cards"
-								),
-								{
-									question: cardData.question,
-									answer: cardData.answer,
-									title: cardData.title,
-									boxType: 1,
-									firstAnswered: false,
-									isWrong: false,
-								}
-							);
-							console.log("NEW CARD ID: " + newCardAdded.id);
-						}
-						// }
-					}
-					console.log("Deck Imported Successfully!");
-					VueSimpleAlert.fire({
-						type: "success",
-						title: "Deck Imported Successfully!",
-					});
-				} catch (error) {
-					console.log("Add Deck Error!");
-					console.log(error);
-				}
-			}
-		} catch (error) {
-			console.log("Import Deck Failed");
-			console.log(error);
-		}
-	}
+	// 				// if (groupSnap != null) {
+	// 				// 	console.log("Deck exists: " + true);
+	// 				// 	return;
+	// 				// } else {
+	// 				newDeckAdded = await addDoc(
+	// 					collection(db, "users", authEmail, "decks"),
+	// 					{
+	// 						title: deckData.title,
+	// 						tag: deckData.tag,
+	// 						description: deckData.description,
+	// 						estimatedTime: deckData.estimatedTime,
+	// 						needsRecapping: 0,
+	// 						totalCards: deckData.totalCards,
+	// 						uncertainCards: 0,
+	// 						isGroupDeck: true,
+	// 						originalRef: copyDeckRef,
+	// 					}
+	// 				);
+	// 				// Add Cards (if any)
+	// 				if ("cards" in groupDecks[currDeck]) {
+	// 					let totalCards = Object.keys(
+	// 						groupDecks[currDeck]["cards"]
+	// 					).length;
+	// 					console.log("NEW DECK ID: " + newDeckAdded.id);
+	// 					for (let j = 1; j <= totalCards; j++) {
+	// 						var currCard = "c" + String(j);
+	// 						var cardData =
+	// 							groupDecks[currDeck]["cards"][currCard];
+	// 						const newCardAdded = await addDoc(
+	// 							collection(
+	// 								db,
+	// 								"users",
+	// 								authEmail,
+	// 								"decks",
+	// 								newDeckAdded.id,
+	// 								"cards"
+	// 							),
+	// 							{
+	// 								question: cardData.question,
+	// 								answer: cardData.answer,
+	// 								title: cardData.title,
+	// 								boxType: 1,
+	// 								firstAnswered: false,
+	// 								isWrong: false,
+	// 							}
+	// 						);
+	// 						console.log("NEW CARD ID: " + newCardAdded.id);
+	// 					}
+	// 					// }
+	// 				}
+	// 				console.log("Deck Imported Successfully!");
+	// 				VueSimpleAlert.fire({
+	// 					type: "success",
+	// 					title: "Deck Imported Successfully!",
+	// 				});
+	// 			} catch (error) {
+	// 				console.log("Add Deck Error!");
+	// 				console.log(error);
+	// 			}
+	// 		}
+	// 	} catch (error) {
+	// 		console.log("Import Deck Failed");
+	// 		console.log(error);
+	// 	}
+	// }
 
 	export default {
 		name: "CardDeck",
@@ -365,7 +356,12 @@
 				console.log(
 					"refDeck RETRIEVED: " + refDeck[parseInt(selectedItemIndex)]
 				);
-				await copy(groupObj, refDeck[parseInt(selectedItemIndex)]);
+				sessionStorage.setItem(
+					"deckObj",
+					JSON.stringify(refDeck[parseInt(selectedItemIndex)])
+				);
+
+				// await copy(groupObj, refDeck[parseInt(selectedItemIndex)]);
 			},
 		},
 		mounted() {
@@ -413,7 +409,7 @@
 		transition: all 0.3s ease;
 		border-radius: 40px;
 		box-shadow: 0px 2px 8px #00000022;
-    cursor: pointer;
+		cursor: pointer;
 	}
 
 	.overlay-deck {
